@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+~ Copyright [2018] [Erivandoo Sena]
+~
+~ Licenciado sob a Licença Apache, Versão 2.0 (a "Licença");
+~ você não pode usar este arquivo, exceto em conformidade com a Licença.
+~ Você pode obter uma cópia da Licença em
+~
+~ http://www.apache.org/licenses/LICENSE-2.0
+~
+~ A menos que exigido pela lei aplicável ou acordado por escrito, o software
+~ distribuído sob a Licença é distribuído em uma base "COMO ESTÁ",
+~ SEM GARANTIAS OU CONDIÇÕES DE QUALQUER TIPO, expressas ou implícitas.
+~ Veja a Licença para o idioma específico que governa as permissões e
+~ limitações sob a licença.
+-->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/nav_item_about"
+            android:checked="true"
+            android:icon="@drawable/ic_info_24px"
+            android:title="@string/about" />
+        <item
+            android:id="@+id/nav_item_rate_us"
+            android:checked="true"
+            android:icon="@drawable/ic_star"
+            android:title="@string/rate_us" />
+        <item
+            android:id="@+id/nav_item_feed"
+            android:checked="true"
+            android:icon="@drawable/ic_rss_symbol"
+            android:title="@string/feed" />
+        <item
+            android:id="@+id/nav_item_logout"
+            android:checked="true"
+            android:icon="@drawable/ic_power_settings_new_24px"
+            android:title="@string/logout" />
+    </group>
+</menu>

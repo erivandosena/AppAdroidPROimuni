@@ -1,9 +1,30 @@
 <resources>
-    <string name="app_name">VacinasKIDs</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!-- Strings Padrões da Activity da gaveta de navegação(Navigation Drawer Activity). -->
+    <string name="app_name">Vacinas KIDs</string>
+    <string name="navigation_drawer_open">Abrir gaveta de navegação</string>
+    <string name="navigation_drawer_close">Fechar gaveta de navegação</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="nav_header_desc">Cabeçalho de navegação</string>
+    <string name="action_settings">Configurações</string>
+    <!-- Strings do Aplicativo. -->
+    <string name="hello_world">Olá Mundo!</string>
+    <string name="legenda_action_snackbar">Substitua por sua própria ação</string>
+    <string name="button_action_snackbar">Ação</string>
+    <string name="version">"Versão"</string>
+    <!-- Menus Drawer. -->
+    <string name="about">Sobre</string>
+    <string name="logout">Sair</string>
+    <string name="feed">Feed</string>
+    <string name="rate_us">Avaliação</string>
+    <!-- Drawer. -->
+    <string name="open_drawer">Drawer Open</string>
+    <string name="close_drawer">Drawer Close</string>
+    <!-- Menus Toolbar. -->
+    <string name="clear">Limpar</string>
+    <string name="cut">Opção 1</string>
+    <string name="copy">Opção 2</string>
+    <string name="paste">Opção 3</string>
+    <string name="delete">Opção 4</string>
+    <string name="share">Compartilhar</string>
 </resources>

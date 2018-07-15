@@ -6,9 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import javax.inject.Scope;
 
 /**
- * Projeto:     VacinasKIDs
+ * Projeto:     VacinasKIDS
  * Autor:       Erivando Sena
- * Data/Hora:   08 de Julho de 2018 as 16:16h
+ * Data/Hora:   14 de Julho de 2018 as 13:52
  * Local:       Fortaleza/CE
  * E-mail:      erivandoramos@bol.com.br
  */

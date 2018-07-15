@@ -3,13 +3,12 @@ package br.com.erivando.vacinaskids.di;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import javax.inject.Named;
 import javax.inject.Qualifier;
 
 /**
- * Projeto:     VacinasKIDs
+ * Projeto:     VacinasKIDS
  * Autor:       Erivando Sena
- * Data/Hora:   08 de Julho de 2018 as 16:01h
+ * Data/Hora:   14 de Julho de 2018 as 13:51
  * Local:       Fortaleza/CE
  * E-mail:      erivandoramos@bol.com.br
  */

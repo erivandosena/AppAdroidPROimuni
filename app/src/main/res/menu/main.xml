@@ -1,9 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+~ Copyright [2018] [Erivandoo Sena]
+~
+~ Licenciado sob a Licença Apache, Versão 2.0 (a "Licença");
+~ você não pode usar este arquivo, exceto em conformidade com a Licença.
+~ Você pode obter uma cópia da Licença em
+~
+~ http://www.apache.org/licenses/LICENSE-2.0
+~
+~ A menos que exigido pela lei aplicável ou acordado por escrito, o software
+~ distribuído sob a Licença é distribuído em uma base "COMO ESTÁ",
+~ SEM GARANTIAS OU CONDIÇÕES DE QUALQUER TIPO, expressas ou implícitas.
+~ Veja a Licença para o idioma específico que governa as permissões e
+~ limitações sob a licença.
+-->
+
+<!--
+android:showAsAction
+    ifRoom (se houver espaço)
+        Apenas coloque este item na barra de aplicativos, se houver espaço para isso. Se não houver
+        espaço para todos os itens marcados como "ifRoom", os itens com os menores valores
+        orderInCategory são exibidos como ações e os itens restantes são exibidos no menu flutuante.
+    withText (com texto)
+        Inclua também o texto do título (definido por android:title) com o item de ação. Você pode
+        inclir esse valor junto com um dos outros como um conjunto de sinalizadores, separando-os
+        com um pipe |.
+    never (Nunca)
+        Nunca coloque este item na barra de aplicativos. Em vez disso, liste o item no menu de
+        overflow da barra de aplicativos.
+    always (sempre)
+        Sempre coloque este item na barra de aplicativos. Evite usar isso, a menos que seja
+        essencial o item sempre aparece na barra de ação. Definindo vários itens para sempre
+        aparecer como itens de ação podem resultar em uma sobreposição com outra interface do
+        usuário na barra de aplicativos.
+    colapsoActionView (colapso)
+        A visão de ação associada a este item de ação (conforme declarado por android:actionLayout
+        ou android:actionViewClass) é colapsável. Introduzido na API nível 14.
+-->
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/action_cut"
+        android:title="@string/cut"
+        android:icon="@drawable/avd_cut"
+        app:showAsAction="never|withText"
+        android:orderInCategory="1"/>
+
+    <item
+        android:id="@+id/action_copy"
+        android:title="@string/copy"
+        android:icon="@drawable/avd_copy"
+        app:showAsAction="never|withText"
+        android:orderInCategory="2"/>
+
+    <item
+        android:id="@+id/action_delete"
+        android:title="@string/delete"
+        android:icon="@drawable/avd_delete"
+        app:showAsAction="never|withText"
+        android:orderInCategory="3"/>
+
+    <item
+        android:id="@+id/action_share"
+        android:title="@string/share"
+        android:icon="@drawable/avd_share"
+        app:showAsAction="ifRoom|withText"
+        android:orderInCategory="4"/>
+
 </menu>
