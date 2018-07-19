@@ -8,7 +8,7 @@ package br.com.erivando.vacinaskids.database;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public interface Manager {
+public interface IManager {
 
     enum LoggedInMode {
 

@@ -8,19 +8,46 @@ package br.com.erivando.vacinaskids.database.model;
  * E-mail:      erivandoramos@bol.com.br
  */
 
+
+import java.io.Serializable;
+
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
+
 /**
  * Classe POJO para mapeamento da tabela usuário.
  * POJO representing table usuario.
  */
-public class Usuario implements java.io.Serializable {
+
+public class Usuario extends RealmObject implements Serializable {
+
 
     static final long serialVerionUID = 640239297043882001L;
 
-    protected Integer usuaId;
-    protected String usuaNome;
-    protected String usuaLogin;
-    protected String usuaSenha;
-    protected String usuaEmail;
+    //@Id(autoincrement = true)
+    //@NotNull
+    //@Property(nameInDb = "usua_id")
+    @Required
+    @PrimaryKey
+    //@RealmField(name = "usua_id")
+    private Long usuaId;
+
+    //@Property(nameInDb = "usua_nome")
+    //@RealmField(name = "usua_nome")
+    private String usuaNome;
+
+    //@Property(nameInDb = "usua_login")
+    //@RealmField(name = "usua_login")
+    private String usuaLogin;
+
+    //@Property(nameInDb = "usua_senha")
+    //@RealmField(name = "usua_senha")
+    private String usuaSenha;
+
+    //@Property(nameInDb = "usua_email")
+    //@RealmField(name = "usua_email")
+    private String usuaEmail;
     /* Correspondente a interface DAO. */
     //public static final Class<UsuarioDAO> DAO_INTERFACE_CLASS = UsuarioDAO.class;
 
@@ -30,29 +57,21 @@ public class Usuario implements java.io.Serializable {
     public Usuario() {
     }
 
-    /**
-     * Método construtor de sobrecarga da classe.
-     *
-     * @param usuaId valor da coluna usua_id.
-     *                * @param usuaNome valor da coluna usua_nome.
-     *                * @param usuaLogin valor da coluna usua_login.
-     *                * @param usuaSenha valor da coluna usua_senha.
-     *                * @param usuaEmail valor da coluna usua_email.
-     */
-    public Usuario(Integer usuaId, String usuaNome, String usuaLogin, String usuaSenha, String usuaEmail) {
-        setUsuaId(usuaId);
-        setUsuaNome(usuaNome);
-        setUsuaLogin(usuaLogin);
-        setUsuaSenha(usuaSenha);
-        setUsuaEmail(usuaEmail);
+    //@Generated(hash = 1015687459)
+    public Usuario(Long usuaId, String usuaNome, String usuaLogin, String usuaSenha, String usuaEmail) {
+        this.usuaId = usuaId;
+        this.usuaNome = usuaNome;
+        this.usuaLogin = usuaLogin;
+        this.usuaSenha = usuaSenha;
+        this.usuaEmail = usuaEmail;
     }
 
     /* métodos Gets e Sets para encapsulamentos. */
-    public Integer getUsuaId() {
+    public Long getUsuaId() {
         return this.usuaId;
     }
 
-    public void setUsuaId(Integer usuaId) {
+    public void setUsuaId(Long usuaId) {
         this.usuaId = usuaId;
     }
 

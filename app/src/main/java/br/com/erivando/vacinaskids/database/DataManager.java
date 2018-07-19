@@ -20,42 +20,43 @@ import br.com.erivando.vacinaskids.di.ApplicationContext;
  */
 
 @Singleton
-public class DataManager implements Manager {
+public class DataManager implements IManager {
 
-    private final SqliteController controller;
-    private final SqlitePreferencesHelper preferencesHelper;
+    private RealmDataBase realmDataBase;
+    private final PreferencesHelper preferencesHelper;
     private final Context context;
 
     @Inject
-    public DataManager(@ApplicationContext Context context, SqliteController controller, SqlitePreferencesHelper preferencesHelper) {
+    public DataManager(@ApplicationContext Context context, PreferencesHelper preferencesHelper, RealmDataBase realmDataBase) {
         this.context = context;
-        this.controller = controller;
         this.preferencesHelper = preferencesHelper;
+        this.realmDataBase = realmDataBase;
+        this.realmDataBase.setup(context);
     }
 
     /* CONTROLLER */
     public boolean novoUsuario(Usuario usuario) throws Exception {
-        return controller.adicionaUsuario(usuario);
+        return realmDataBase.addOrUpdate(usuario);
     }
 
-    public int atualizaUsuario(Usuario usuario, Integer id) {
-        return controller.editaUsuario(usuario, id);
+    public boolean atualizaUsuario(Usuario usuario) {
+        return realmDataBase.addOrUpdate(usuario);
     }
 
-    public boolean eliminaUsuario(Integer id) {
-        return controller.excluiUsuario(id);
+    public boolean eliminaUsuario(Long id) {
+        return realmDataBase.remove(Usuario.class, "usua_id", id);
     }
 
-    public Usuario obtemUsuario(Integer id) throws Resources.NotFoundException, NullPointerException {
-        return controller.obtemDadosUsuario(id);
+    public Usuario obtemUsuario(Long id) throws Resources.NotFoundException, NullPointerException {
+        return realmDataBase.getObject(Usuario.class, "usua_id", id);
     }
 
-    public boolean validaUsuario(String email, String password) {
-        return controller.validaDadosUsuario(email, password);
+    public boolean validaUsuario(String login, String senha) {
+        return false;
     }
 
-    public List<Usuario> getAllUsers() {
-        return null;
+    public List<Usuario> obtemTodosUsuarios(String[] campo, String[] valor) {
+        return realmDataBase.findAll(campo, valor, Usuario.class);
     }
 
     /* PREFERENCES HELPER */

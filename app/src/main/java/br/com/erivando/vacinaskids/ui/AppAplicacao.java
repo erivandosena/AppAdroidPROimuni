@@ -40,10 +40,8 @@ public class AppAplicacao extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        applicationComponent = DaggerApplicationComponent
-                .builder()
-                .applicationModule(new ApplicationModule(this))
-                .build();
+
+        applicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
         applicationComponent.inject(this);
 
         AndroidNetworking.initialize(getApplicationContext());

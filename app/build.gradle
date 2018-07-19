@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+//apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 27
@@ -17,9 +19,29 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    /*
+    greendao {
+        schemaVersion 1
+        targetGenDir "src/main/java/"
+    }
+
+    realm {
+        syncEnabled = true;
+    }
+    */
 }
 
 dependencies {
+
+    /* Realm */
+   // implementation 'io.realm:realm-android:0.87.5'
+   // implementation 'io.realm:android-adapters:2.0.0'
+   // annotationProcessor 'io.realm:realm-android-processor:0.87.5'
+    implementation 'io.realm:android-adapters:2.1.1'
+
+    /* greenDAO 3 */
+    // implementation 'org.greenrobot:greendao:3.2.2'
+    //implementation 'org.greenrobot:greendao-generator:3.2.2'
 
     /* PlaceHolderView */
     implementation 'com.mindorks.android:placeholderview:1.0.3'

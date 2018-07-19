@@ -19,7 +19,7 @@ import br.com.erivando.vacinaskids.util.AppConstants;
  */
 
 @Singleton
-public class SqlitePreferencesHelper {
+public class PreferencesHelper {
 
     private final String NOME = "usua_nome";
     private final String LOGIN = "usua_login";
@@ -28,7 +28,7 @@ public class SqlitePreferencesHelper {
     private final SharedPreferences sharedPreferences;
 
     @Inject
-    public SqlitePreferencesHelper(@ApplicationContext Context contextApplication, @PreferenceInfo String prefFileName) {
+    public PreferencesHelper(@ApplicationContext Context contextApplication, @PreferenceInfo String prefFileName) {
         sharedPreferences = contextApplication.getSharedPreferences(prefFileName, Context.MODE_PRIVATE);
     }
 

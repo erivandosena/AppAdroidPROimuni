@@ -13,8 +13,10 @@ buildscript {
         // NOTA: Não coloque suas dependências de aplicativo aqui; eles pertencem
         // aos arquivos build.gradle do módulo individual.
 
-
-    }
+        // classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
+        //classpath 'io.realm:realm-gradle-plugin:5.3.1'
+        classpath 'io.realm:realm-gradle-plugin:4.3.1'
+      }
 }
 
 allprojects {
