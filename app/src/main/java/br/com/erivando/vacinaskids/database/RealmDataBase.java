@@ -1,16 +1,20 @@
 package br.com.erivando.vacinaskids.database;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import br.com.erivando.vacinaskids.database.model.Usuario;
 import br.com.erivando.vacinaskids.di.ApplicationContext;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
 
 /**
  * Projeto:     VacinasKIDS
@@ -45,6 +49,23 @@ public class RealmDataBase implements IRealm {
     @Override
     public void close() {
         getRealmInstance().close();
+    }
+
+    @Override
+    public <T extends RealmObject> boolean getLoginLocal(Class<T> clazz, String login, String senha) {
+        Realm realm = getRealmInstance();
+        try {
+            if (realm.where(clazz).equalTo("usuaLogin", login).and().equalTo("usuaSenha", senha).count() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        } finally {
+            realm.close();
+        }
     }
 
     @Override
@@ -97,8 +118,8 @@ public class RealmDataBase implements IRealm {
     }
 
     @Override
-    public <T extends RealmObject> T getObject(String[] fieldsObject, String[] valuesObject, Class<T> clazz) {
-        return getRealmInstance().where(clazz).equalTo(fieldsObject[0], valuesObject[0]).equalTo(fieldsObject[1], valuesObject[1]).findFirst();
+    public <T extends RealmObject> T getObject(String[] fieldValueA, String[] fieldValueB, Class<T> clazz) {
+        return getRealmInstance().where(clazz).equalTo(fieldValueA[0], fieldValueA[1]).equalTo(fieldValueB[0], fieldValueB[1]).findFirst();
     }
 
     @Override
@@ -109,6 +130,12 @@ public class RealmDataBase implements IRealm {
     @Override
     public <T extends RealmObject> List<T> findAll(String[] fieldsObject, String[] valuesObject, Class<T> clazz) {
         return getRealmInstance().where(clazz).equalTo(fieldsObject[0], valuesObject[0]).equalTo(fieldsObject[1], valuesObject[1]).findAll();
+    }
+
+    @Override
+    public <T extends RealmObject> AtomicInteger getIdByClassModel(Class<T> clazz) {
+        RealmResults<T> results = getRealmInstance().where(clazz).findAll();
+        return (results.size() > 0) ? new AtomicInteger(results.max("id").intValue()) : new AtomicInteger();
     }
 
 }

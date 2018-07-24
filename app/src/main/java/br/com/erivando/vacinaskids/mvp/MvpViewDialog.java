@@ -11,4 +11,5 @@ package br.com.erivando.vacinaskids.mvp;
 public interface MvpViewDialog extends MvpView {
 
     void dismissDialog(String tag);
+
 }

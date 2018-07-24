@@ -22,7 +22,7 @@
             android:id="@+id/nav_item_about"
             android:checked="true"
             android:icon="@drawable/ic_info_24px"
-            android:title="@string/about" />
+            android:title="@string/sobre" />
         <item
             android:id="@+id/nav_item_rate_us"
             android:checked="true"
@@ -31,7 +31,7 @@
         <item
             android:id="@+id/nav_item_feed"
             android:checked="true"
-            android:icon="@drawable/ic_rss_symbol"
+            android:icon="@drawable/ic_criancas_cadastro"
             android:title="@string/feed" />
         <item
             android:id="@+id/nav_item_logout"

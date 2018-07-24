@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.BuildConfig;
 import br.com.erivando.vacinaskids.database.DataManager;
+import br.com.erivando.vacinaskids.database.IDataManager;
 import br.com.erivando.vacinaskids.di.component.ApplicationComponent;
 import br.com.erivando.vacinaskids.di.component.DaggerApplicationComponent;
 import br.com.erivando.vacinaskids.di.module.ApplicationModule;
@@ -25,13 +26,13 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class AppAplicacao extends Application {
 
-    protected ApplicationComponent applicationComponent;
-
     @Inject
-    DataManager dataManager;
+    IDataManager iDataManager;
 
     @Inject
     CalligraphyConfig calligraphyConfig;
+
+    private ApplicationComponent applicationComponent;
 
     public static AppAplicacao get(Context context) {
         return (AppAplicacao) context.getApplicationContext();
@@ -58,6 +59,6 @@ public class AppAplicacao extends Application {
 
     // Necessário substituir o componente por um teste específico
     public void setComponent(ApplicationComponent applicationComponent) {
-        applicationComponent = applicationComponent;
+        this.applicationComponent = applicationComponent;
     }
 }

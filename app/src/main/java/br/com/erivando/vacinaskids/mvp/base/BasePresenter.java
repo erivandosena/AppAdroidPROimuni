@@ -8,44 +8,46 @@ package br.com.erivando.vacinaskids.mvp.base;
  * E-mail:      erivandoramos@bol.com.br
  */
 
+import android.util.Log;
+
+import com.androidnetworking.common.ANConstants;
 import com.androidnetworking.error.ANError;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 
 import javax.inject.Inject;
+import javax.net.ssl.HttpsURLConnection;
 
-import br.com.erivando.vacinaskids.database.DataManager;
+import br.com.erivando.vacinaskids.R;
+import br.com.erivando.vacinaskids.database.IDataManager;
+import br.com.erivando.vacinaskids.database.api.ApiError;
 import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 import br.com.erivando.vacinaskids.mvp.MvpView;
+import br.com.erivando.vacinaskids.util.AppConstants;
+import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- Classe base que implementa a interface do Presenter e fornece uma implementação básica para
- onAttach() e onDetach(). Ele também lida com uma referência ao mvpView que pode ser acessado
- a partir das classes filhas chamando getMvpView().
+ * Classe base que implementa a interface do Presenter e fornece uma implementação básica para
+ * onAttach() e onDetach(). Ele também lida com uma referência ao mvpView que pode ser acessado
+ * a partir das classes filhas chamando getMvpView().
  */
 public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     private static final String TAG = "BasePresenter";
 
-    private final DataManager mDataManager;
-   // private final SchedulerProvider mSchedulerProvider;
-    private final CompositeDisposable mCompositeDisposable;
+    private final IDataManager iDataManager;
+     private final SchedulerProvider schedulerProvider;
+    private final CompositeDisposable compositeDisposable;
 
     private V mMvpView;
 
     @Inject
-    public BasePresenter(DataManager dataManager,
-                         /*
-                         SchedulerProvider schedulerProvider,
-                         */
-                         CompositeDisposable compositeDisposable
-                         )
-    {
-        this.mDataManager = dataManager;
-        /*
-        this.mSchedulerProvider = schedulerProvider;
-        */
-        this.mCompositeDisposable = compositeDisposable;
-
+    public BasePresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
+        this.iDataManager = iDataManager;
+        this.schedulerProvider = schedulerProvider;
+        this.compositeDisposable = compositeDisposable;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     @Override
     public void onDetach() {
-        //mCompositeDisposable.dispose();
+        compositeDisposable.dispose();
         mMvpView = null;
     }
 
@@ -71,24 +73,22 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
         if (!isViewAttached()) throw new MvpViewNotAttachedException();
     }
 
-    public DataManager getDataManager() {
-        return mDataManager;
+    public IDataManager getIDataManager() {
+        return iDataManager;
     }
 
-    /*
     public SchedulerProvider getSchedulerProvider() {
-        return mSchedulerProvider;
+        return schedulerProvider;
     }
-    */
 
     public CompositeDisposable getCompositeDisposable() {
-        return mCompositeDisposable;
+        return compositeDisposable;
     }
 
     @Override
     public void handleApiError(ANError error) {
 
-        /*
+
         if (error == null || error.getErrorBody() == null) {
             getMvpView().onError(R.string.api_default_error);
             return;
@@ -105,6 +105,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
             getMvpView().onError(R.string.api_retry_error);
             return;
         }
+
 
         final GsonBuilder builder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation();
         final Gson gson = builder.create();
@@ -131,12 +132,12 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
             Log.e(TAG, "handleApiError", e);
             getMvpView().onError(R.string.api_default_error);
         }
-        */
+
     }
 
     @Override
     public void setUserAsLoggedOut() {
-       // getDataManager().setAccessToken(null);
+        getIDataManager().setAccessToken(null);
     }
 
     public static class MvpViewNotAttachedException extends RuntimeException {

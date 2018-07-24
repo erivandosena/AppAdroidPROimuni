@@ -5,9 +5,17 @@ import android.content.Context;
 
 import javax.inject.Singleton;
 
+import br.com.erivando.vacinaskids.BuildConfig;
 import br.com.erivando.vacinaskids.R;
+import br.com.erivando.vacinaskids.database.DataManager;
+import br.com.erivando.vacinaskids.database.IDataManager;
+import br.com.erivando.vacinaskids.database.IPreferencesHelper;
+import br.com.erivando.vacinaskids.database.PreferencesHelper;
+import br.com.erivando.vacinaskids.database.api.ApiHeader;
+import br.com.erivando.vacinaskids.database.api.ApiHelper;
+import br.com.erivando.vacinaskids.database.api.IApiHelper;
+import br.com.erivando.vacinaskids.di.ApiInfo;
 import br.com.erivando.vacinaskids.di.ApplicationContext;
-import br.com.erivando.vacinaskids.di.DatabaseInfo;
 import br.com.erivando.vacinaskids.di.PreferenceInfo;
 import br.com.erivando.vacinaskids.util.AppConstants;
 import dagger.Module;
@@ -43,21 +51,42 @@ public class ApplicationModule {
     }
 
     @Provides
-    @DatabaseInfo
-    String provideDatabaseName() {
-        return AppConstants.DB_NAME;
-    }
-
-    @Provides
-    @DatabaseInfo
-    Integer provideDatabaseVersion() {
-        return AppConstants.DB_VERSION;
+    @ApiInfo
+    String provideApiKey() {
+        return BuildConfig.API_KEY;
     }
 
     @Provides
     @PreferenceInfo
     String providePreferenceName() {
         return AppConstants.PREF_NAME;
+    }
+
+    @Provides
+    @Singleton
+    IDataManager provideIDataManager(DataManager dataManager) {
+        return dataManager;
+    }
+
+    @Provides
+    @Singleton
+    IPreferencesHelper provideIPreferencesHelper(PreferencesHelper preferencesHelper) {
+        return preferencesHelper;
+    }
+
+    @Provides
+    @Singleton
+    IApiHelper provideIApiHelper(ApiHelper apiHelper) {
+        return apiHelper;
+    }
+
+    @Provides
+    @Singleton
+    ApiHeader.ProtectedApiHeader provideProtectedApiHeader(@ApiInfo String apiKey, PreferencesHelper preferencesHelper) {
+        return new ApiHeader.ProtectedApiHeader(
+                apiKey,
+                preferencesHelper.getCurrentUserId(),
+                preferencesHelper.getAccessToken());
     }
 
     @Provides

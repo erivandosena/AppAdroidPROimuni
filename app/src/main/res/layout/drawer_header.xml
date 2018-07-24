@@ -24,26 +24,26 @@
     android:padding="16dp">
 
     <br.com.erivando.vacinaskids.custom.imagem.RoundedImageView
-        android:id="@+id/iv_profile_pic"
+        android:id="@+id/img_imagem_perfil"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginTop="40dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_app_logo" />
+        android:src="@drawable/ic_launcher_round" />
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/text_nome_perfil"
         style="@style/TextStyle.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Name" />
+        android:text="@string/perfil_nome" />
 
     <TextView
-        android:id="@+id/tv_email"
+        android:id="@+id/text_email_perfil"
         style="@style/TextStyle.Title.Sub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email" />
+        android:text="@string/perfil_email" />
 
 </LinearLayout>

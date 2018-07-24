@@ -11,20 +11,63 @@
     <string name="hello_world">Olá Mundo!</string>
     <string name="legenda_action_snackbar">Substitua por sua própria ação</string>
     <string name="button_action_snackbar">Ação</string>
-    <string name="version">"Versão"</string>
+    <string name="versao_app">Versão</string>
     <!-- Menus Drawer. -->
-    <string name="about">Sobre</string>
+    <string name="sobre">Sobre</string>
     <string name="logout">Sair</string>
-    <string name="feed">Feed</string>
+    <string name="feed">Vacinas / Idade</string>
     <string name="rate_us">Avaliação</string>
     <!-- Drawer. -->
     <string name="open_drawer">Drawer Open</string>
     <string name="close_drawer">Drawer Close</string>
     <!-- Menus Toolbar. -->
     <string name="clear">Limpar</string>
-    <string name="cut">Opção 1</string>
-    <string name="copy">Opção 2</string>
-    <string name="paste">Opção 3</string>
-    <string name="delete">Opção 4</string>
+    <string name="cut">Editar Usuário</string>
+    <string name="copy">Editar Criança</string>
+    <string name="paste">Editar Cartão</string>
+    <string name="delete">Localizar Postos</string>
     <string name="share">Compartilhar</string>
+    <!-- Login. -->
+    <string name="text_usua_login">Usuário</string>
+    <string name="text_usua_senha">Senha</string>
+    <string name="hint_usua_login">Nome do usuário</string>
+    <string name="hint_usua_senha">Senha do usuário</string>
+    <string name="btn_login_usuario">Entrar</string>
+    <string name="btn_cadastro_usuario">Cadastro</string>
+    <!-- Cadastro usuário -->
+    <string name="text_cad_nome">Nome</string>
+    <string name="text_cad_login">Login</string>
+    <string name="text_cad_email">E-mail</string>
+    <string name="text_cad_senha">Senha</string>
+    <string name="text_cad_repete_senha">Repita a Senha</string>
+    <string name="hint_cad_nome">Nome e sobrenome</string>
+    <string name="hint_cad_login">Nome de usuário</string>
+    <string name="hint_cad_email">E-mail</string>
+    <string name="hint_cad_senha">Senha</string>
+    <string name="hint_cad_repete_usenha">Repita a Senha</string>
+    <string name="btn_cadastrar">Cadastrar</string>
+    <string name="btn_voltar">Voltar</string>
+    <!-- Login Validação. -->
+    <string name="text_valida_login">Por favor, forneça um usuário.</string>
+    <string name="text_valida_senha">Por favor, forneça uma senha válida.</string>
+    <string name="text_valida_email">Por favor, forneça um e-mail válido.</string>
+    <string name="text_valida_usuario">Nome de usuário ou senha não confere!</string>
+    <!-- Cadastro Usuário Validação. -->
+    <string name="text_valida_cadastro">Não foi possível realizar o cadastro!</string>
+    <string name="text_cadastro_sucesso">Cadastrado com sucesso!</string>
+    <string name="text_cadastro_erro">Cadastro não realizado!</string>
+    <!-- App Message. -->
+    <string name="some_error">Algum erro ocorreu!</string>
+    <string name="api_retry_error"> Por favor, tente novamente!</string>
+    <string name="api_default_error">Algo errado aconteceu!</string>
+    <string name="connection_error">Conexão com a Internet perdida!</string>
+    <!--App perfil. -->
+    <string name="perfil_nome"></string>
+    <string name="perfil_email"></string>
+    <!-- Sobre. -->
+    <string name="proj_info">Este aplicativo possui desenvolvimento nativo da plataforma Android compatível a partir da versão 4.0.3 (API 15) a versão 8.1.0 (API 27). Implementa arquitetura MVP, utilizando tecnologias Dagger 2, Realm 3, RxJava, FastAndroidNetworking.</string>
+    <string name="proj_repo">Repositório: \n https://bitbucket.org/erivandoramos/vacinaskids/src/</string>
+    <string name="proj_participantes">Participantes: \n thaispaula73@gmail.com \n cunhacos@gmail.com \n nirlagomesg@gmail.co \n jhsfelix@gmail.com</string>
+    <string name="proj_autor">Desenvolvedor: \n erivandosena@gmail.com</string>
+
 </resources>

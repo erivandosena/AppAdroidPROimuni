@@ -95,7 +95,7 @@
             android:pivotY="0%"
             android:toDegrees="45">
             <shape android:shape="rectangle">
-                <solid android:color="@color/red_dark" />
+                <solid android:color="@color/facebook" />
             </shape>
         </rotate>
     </item>

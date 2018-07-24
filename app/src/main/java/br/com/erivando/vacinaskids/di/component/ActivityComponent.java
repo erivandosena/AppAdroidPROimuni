@@ -2,7 +2,11 @@ package br.com.erivando.vacinaskids.di.component;
 
 import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.di.module.ActivityModule;
+import br.com.erivando.vacinaskids.ui.cadastro.usuario.CadastroUsuarioActivity;
+import br.com.erivando.vacinaskids.ui.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.main.MainActivity;
+import br.com.erivando.vacinaskids.ui.sobre.SobreFragment;
+import br.com.erivando.vacinaskids.ui.splash.SplashActivity;
 import dagger.Component;
 
 /**
@@ -18,5 +22,13 @@ import dagger.Component;
 public interface ActivityComponent {
 
     void inject(MainActivity mainActivity);
+
+    void inject(LoginActivity loginActivity);
+
+    void inject(SplashActivity splashActivity);
+
+    void inject(CadastroUsuarioActivity cadastroUsuarioActivity);
+
+    void inject(SobreFragment sobreFragment);
 
 }

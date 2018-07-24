@@ -55,10 +55,13 @@
 
             </android.support.design.widget.AppBarLayout>
 
+            <!--
             <com.mindorks.placeholderview.SwipePlaceHolderView
                 android:id="@+id/cards_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+            -->
+            <include layout="@layout/content_main" />
 
         </LinearLayout>
     </android.support.design.widget.CoordinatorLayout>
@@ -77,7 +80,7 @@
         app:menu="@menu/drawer">
 
         <TextView
-            android:id="@+id/tv_app_version"
+            android:id="@+id/text_versao_app"
             style="@style/TextStyle.Title.Sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

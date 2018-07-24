@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -20,17 +19,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.mindorks.placeholderview.SwipeDecor;
-import com.mindorks.placeholderview.SwipePlaceHolderView;
-import com.mindorks.placeholderview.listeners.ItemRemovedListener;
-
 import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.BuildConfig;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.custom.imagem.RoundedImageView;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
-import br.com.erivando.vacinaskids.util.ScreenUtils;
+import br.com.erivando.vacinaskids.ui.login.LoginActivity;
+import br.com.erivando.vacinaskids.ui.sobre.SobreFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -56,17 +52,17 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @BindView(R.id.navigation_view)
     NavigationView navigationView;
 
-    @BindView(R.id.tv_app_version)
-    TextView appVersionTextView;
+    @BindView(R.id.text_versao_app)
+    TextView versaoAppTextView;
 
-    @BindView(R.id.cards_container)
-    SwipePlaceHolderView cardsContainerView;
+   // @BindView(R.id.cards_container)
+   // SwipePlaceHolderView cardsContainerView;
 
-    private TextView nameTextView;
+    private TextView nomeTextView;
 
     private TextView emailTextView;
 
-    private RoundedImageView profileImageView;
+    private RoundedImageView perfilImageView;
 
     private ActionBarDrawerToggle drawerToggle;
 
@@ -120,11 +116,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void onBackPressed() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag(null/*AboutFragment.TAG*/);
+        Fragment fragment = fragmentManager.findFragmentByTag(SobreFragment.TAG);
         if (fragment == null) {
             super.onBackPressed();
         } else {
-            //  onFragmentDetached(AboutFragment.TAG);
+              onFragmentDetached(SobreFragment.TAG);
         }
     }
 
@@ -174,9 +170,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void setupNavMenu() {
         View headerLayout = navigationView.getHeaderView(0);
-        profileImageView = (RoundedImageView) headerLayout.findViewById(R.id.iv_profile_pic);
-        nameTextView = (TextView) headerLayout.findViewById(R.id.tv_name);
-        emailTextView = (TextView) headerLayout.findViewById(R.id.tv_email);
+        perfilImageView = (RoundedImageView) headerLayout.findViewById(R.id.img_imagem_perfil);
+        nomeTextView = (TextView) headerLayout.findViewById(R.id.text_nome_perfil);
+        emailTextView = (TextView) headerLayout.findViewById(R.id.text_email_perfil);
 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -205,6 +201,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void setupCardContainerView() {
+        /*
         int screenWidth = ScreenUtils.getScreenWidth(this);
         int screenHeight = ScreenUtils.getScreenHeight(this);
 
@@ -223,7 +220,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             @Override
             public void onItemRemoved(int count) {
                 if (count == 0) {
-                    /* recarregue o conteúdo novamente após atraso de 1 segundo */
+                    // recarregue o conteúdo novamente após atraso de 1 segundo
                     new Handler(getMainLooper()).postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -233,30 +230,29 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                 }
             }
         });
+        */
     }
 
     @Override
     public void openLoginActivity() {
-        //  startActivity(LoginActivity.getStartIntent(this));
-        //  finish();
+          startActivity(LoginActivity.getStartIntent(this));
+          finish();
     }
 
     @Override
     public void showAboutFragment() {
-        /*
         lockDrawer();
         getSupportFragmentManager()
                 .beginTransaction()
                 .disallowAddToBackStack()
                 .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
-                .add(R.id.cl_root_view, AboutFragment.newInstance(), AboutFragment.TAG)
+                .add(R.id.cl_root_view, SobreFragment.newInstance(), SobreFragment.TAG)
                 .commit();
-        */
     }
 
     @Override
     public void updateUserName(String currentUserName) {
-        nameTextView.setText(currentUserName);
+        nomeTextView.setText(currentUserName);
     }
 
     @Override
@@ -271,13 +267,13 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void updateAppVersion() {
-        String version = getString(R.string.version) + " " + BuildConfig.VERSION_NAME;
-        appVersionTextView.setText(version);
+        String version = getString(R.string.versao_app) + " " + BuildConfig.VERSION_NAME;
+        versaoAppTextView.setText(version);
     }
 
     @Override
     public void showRateUsDialog() {
-        //  RateUsDialog.newInstance().show(getSupportFragmentManager());
+         /// RateUsDialog.newInstance().show(getSupportFragmentManager());
     }
 
     @Override

@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 
 import javax.inject.Inject;
 
-import br.com.erivando.vacinaskids.database.DataManager;
+import br.com.erivando.vacinaskids.database.IDataManager;
 import br.com.erivando.vacinaskids.di.component.DaggerServiceComponent;
 import br.com.erivando.vacinaskids.di.component.ServiceComponent;
 import br.com.erivando.vacinaskids.ui.AppAplicacao;
@@ -26,7 +26,7 @@ public class SyncService extends Service {
     private static final String TAG = "SyncService";
 
     @Inject
-    DataManager mDataManager;
+    IDataManager iDataManager;
 
     public static Intent getStartIntent(Context context) {
         return new Intent(context, SyncService.class);

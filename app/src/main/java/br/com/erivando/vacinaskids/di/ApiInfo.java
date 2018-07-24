@@ -8,13 +8,13 @@ import javax.inject.Qualifier;
 /**
  * Projeto:     VacinasKIDS
  * Autor:       Erivando Sena
- * Data/Hora:   14 de Julho de 2018 as 13:52
+ * Data/Hora:   22 de Julho de 2018 as 23:10
  * Local:       Fortaleza/CE
  * E-mail:      erivandoramos@bol.com.br
  */
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DatabaseInfo {
+public @interface ApiInfo {
 
 }

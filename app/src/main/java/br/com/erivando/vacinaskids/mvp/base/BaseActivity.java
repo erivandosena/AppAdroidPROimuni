@@ -22,6 +22,7 @@ import br.com.erivando.vacinaskids.di.component.DaggerActivityComponent;
 import br.com.erivando.vacinaskids.di.module.ActivityModule;
 import br.com.erivando.vacinaskids.mvp.MvpView;
 import br.com.erivando.vacinaskids.ui.AppAplicacao;
+import br.com.erivando.vacinaskids.ui.login.LoginActivity;
 import br.com.erivando.vacinaskids.util.CommonUtils;
 import br.com.erivando.vacinaskids.util.NetworkUtils;
 import butterknife.Unbinder;
@@ -152,7 +153,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 
     @Override
     public void openActivityOnTokenExpire() {
-       // startActivity(LoginActivity.getStartIntent(this));
+        startActivity(LoginActivity.getStartIntent(this));
         finish();
     }
 

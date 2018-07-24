@@ -1,10 +1,15 @@
 package br.com.erivando.vacinaskids.ui.main;
 
+import com.androidnetworking.error.ANError;
+
 import javax.inject.Inject;
 
-import br.com.erivando.vacinaskids.database.DataManager;
+import br.com.erivando.vacinaskids.database.IDataManager;
+import br.com.erivando.vacinaskids.database.api.LogoutResponse;
 import br.com.erivando.vacinaskids.mvp.base.BasePresenter;
+import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Projeto:     VacinasKIDS
@@ -19,14 +24,10 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
     private static final String TAG = "MainPresenter";
 
     @Inject
-    public MainPresenter(DataManager dataManager,
-                         /*
-                         SchedulerProvider schedulerProvider,
-                         */
-                         CompositeDisposable compositeDisposable
-    ) {
-        super(dataManager, /* schedulerProvider,*/ compositeDisposable);
+    public MainPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
+        super(iDataManager, schedulerProvider, compositeDisposable);
     }
+
 
     @Override
     public void onDrawerOptionAboutClick() {
@@ -38,8 +39,12 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
     public void onDrawerOptionLogoutClick() {
         getMvpView().showLoading();
 
+        getIDataManager().setUserAsLoggedOut();
+        getMvpView().openLoginActivity();
+
+        getMvpView().hideLoading();
         /*
-        getCompositeDisposable().add(getDataManager().doLogoutApiCall()
+        getCompositeDisposable().add(getIDataManager().doLogoutApiCall()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(new Consumer<LogoutResponse>() {
@@ -49,7 +54,7 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
                             return;
                         }
 
-                        getDataManager().setUserAsLoggedOut();
+                        getIDataManager().setUserAsLoggedOut();
                         getMvpView().hideLoading();
                         getMvpView().openLoginActivity();
                     }
@@ -69,13 +74,13 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
                         }
                     }
                 }));
-        */
+                */
     }
 
     @Override
     public void onViewInitialized() {
         /*
-        getCompositeDisposable().add(getDataManager()
+        getCompositeDisposable().add(getIDataManager()
                 .getAllQuestions()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
@@ -97,7 +102,7 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
     @Override
     public void onCardExhausted() {
         /*
-        getCompositeDisposable().add(getDataManager()
+        getCompositeDisposable().add(getIDataManager()
                 .getAllQuestions()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
@@ -123,17 +128,17 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
         }
         getMvpView().updateAppVersion();
 
-        final String currentUserName = getDataManager().getCurrentUserName();
+        final String currentUserName = getIDataManager().getCurrentUserName();
         if (currentUserName != null && !currentUserName.isEmpty()) {
             getMvpView().updateUserName(currentUserName);
         }
 
-        final String currentUserEmail = getDataManager().getCurrentUserEmail();
+        final String currentUserEmail = getIDataManager().getCurrentUserEmail();
         if (currentUserEmail != null && !currentUserEmail.isEmpty()) {
             getMvpView().updateUserEmail(currentUserEmail);
         }
 
-        final String profilePicUrl = getDataManager().getCurrentUserProfilePicUrl();
+        final String profilePicUrl = getIDataManager().getCurrentUserProfilePicUrl();
         if (profilePicUrl != null && !profilePicUrl.isEmpty()) {
             getMvpView().updateUserProfilePic(profilePicUrl);
         }

@@ -3,6 +3,7 @@ package br.com.erivando.vacinaskids.database;
 import android.content.Context;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import io.realm.Realm;
 import io.realm.RealmObject;
@@ -31,12 +32,15 @@ public interface IRealm {
 
     <T extends RealmObject> T getObject(Class<T> clazz, String field, Long value);
 
-    <T extends RealmObject> T getObject(String[] fieldsObject, String[] valuesObject, Class<T> clazz);
+    <T extends RealmObject> T getObject(String[] fieldValueA, String[] fieldValueB, Class<T> clazz);
 
     <T extends RealmObject> List<T> findAll(Class<T> clazz);
 
     <T extends RealmObject> List<T> findAll(String[] fieldsObject, String[] valuesObject, Class<T> clazz);
 
+    <T extends RealmObject> AtomicInteger getIdByClassModel( Class<T> clazz);
+
     void close();
 
+    <T extends RealmObject> boolean getLoginLocal(Class<T> clazz, String login, String senha);
 }

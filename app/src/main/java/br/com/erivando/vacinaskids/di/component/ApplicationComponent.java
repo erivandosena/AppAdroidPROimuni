@@ -4,7 +4,7 @@ import android.content.Context;
 
 import javax.inject.Singleton;
 
-import br.com.erivando.vacinaskids.database.DataManager;
+import br.com.erivando.vacinaskids.database.IDataManager;
 import br.com.erivando.vacinaskids.di.ApplicationContext;
 import br.com.erivando.vacinaskids.di.module.ApplicationModule;
 import br.com.erivando.vacinaskids.service.SyncService;
@@ -30,5 +30,5 @@ public interface ApplicationComponent {
     @ApplicationContext
     Context getContext();
 
-    DataManager getDataManager();
+    IDataManager getIDataManager();
 }

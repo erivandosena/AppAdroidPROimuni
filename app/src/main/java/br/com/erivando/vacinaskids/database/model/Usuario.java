@@ -1,5 +1,9 @@
 package br.com.erivando.vacinaskids.database.model;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
+
 /**
  * Projeto:     VacinasKIDs
  * Autor:       Erivando Sena
@@ -9,45 +13,20 @@ package br.com.erivando.vacinaskids.database.model;
  */
 
 
-import java.io.Serializable;
-
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
-
 /**
  * Classe POJO para mapeamento da tabela usuário.
- * POJO representing table usuario.
+ * POJO representing table usuário.
  */
+public class Usuario extends RealmObject {
 
-public class Usuario extends RealmObject implements Serializable {
-
-
-    static final long serialVerionUID = 640239297043882001L;
-
-    //@Id(autoincrement = true)
-    //@NotNull
-    //@Property(nameInDb = "usua_id")
     @Required
     @PrimaryKey
-    //@RealmField(name = "usua_id")
-    private Long usuaId;
-
-    //@Property(nameInDb = "usua_nome")
-    //@RealmField(name = "usua_nome")
+    private Integer id;
     private String usuaNome;
-
-    //@Property(nameInDb = "usua_login")
-    //@RealmField(name = "usua_login")
     private String usuaLogin;
-
-    //@Property(nameInDb = "usua_senha")
-    //@RealmField(name = "usua_senha")
     private String usuaSenha;
-
-    //@Property(nameInDb = "usua_email")
-    //@RealmField(name = "usua_email")
     private String usuaEmail;
+
     /* Correspondente a interface DAO. */
     //public static final Class<UsuarioDAO> DAO_INTERFACE_CLASS = UsuarioDAO.class;
 
@@ -58,8 +37,8 @@ public class Usuario extends RealmObject implements Serializable {
     }
 
     //@Generated(hash = 1015687459)
-    public Usuario(Long usuaId, String usuaNome, String usuaLogin, String usuaSenha, String usuaEmail) {
-        this.usuaId = usuaId;
+    public Usuario(Integer id, String usuaNome, String usuaLogin, String usuaSenha, String usuaEmail) {
+        this.id = id;
         this.usuaNome = usuaNome;
         this.usuaLogin = usuaLogin;
         this.usuaSenha = usuaSenha;
@@ -67,12 +46,12 @@ public class Usuario extends RealmObject implements Serializable {
     }
 
     /* métodos Gets e Sets para encapsulamentos. */
-    public Long getUsuaId() {
-        return this.usuaId;
+    public Integer getId() {
+        return this.id;
     }
 
-    public void setUsuaId(Long usuaId) {
-        this.usuaId = usuaId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsuaNome() {
@@ -117,7 +96,7 @@ public class Usuario extends RealmObject implements Serializable {
         }
         Usuario usuario = (Usuario) o;
 
-        if (usuaId != null ? !usuaId.equals(usuario.usuaId) : usuario.usuaId != null) {
+        if (id != null ? !id.equals(usuario.id) : usuario.id != null) {
             return false;
         }
         if (usuaNome != null ? !usuaNome.equals(usuario.usuaNome) : usuario.usuaNome != null) {
@@ -138,7 +117,7 @@ public class Usuario extends RealmObject implements Serializable {
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + (usuaId != null ? usuaId.hashCode() : 0);
+        result = 31 * result + (id != null ? id.hashCode() : 0);
         result = 31 * result + (usuaNome != null ? usuaNome.hashCode() : 0);
         result = 31 * result + (usuaLogin != null ? usuaLogin.hashCode() : 0);
         result = 31 * result + (usuaSenha != null ? usuaSenha.hashCode() : 0);
@@ -149,7 +128,7 @@ public class Usuario extends RealmObject implements Serializable {
     @Override
     public String toString() {
         return "Usuario{"
-                + "Código: '" + usuaId + '\''
+                + "Código: '" + id + '\''
                 + ", Nome: '" + usuaNome + '\''
                 + ", Login: '" + usuaLogin + '\''
                 + ", Senha: '" + usuaSenha + '\''
