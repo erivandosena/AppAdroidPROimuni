@@ -170,9 +170,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void setupNavMenu() {
         View headerLayout = navigationView.getHeaderView(0);
-        perfilImageView = (RoundedImageView) headerLayout.findViewById(R.id.img_imagem_perfil);
-        nomeTextView = (TextView) headerLayout.findViewById(R.id.text_nome_perfil);
-        emailTextView = (TextView) headerLayout.findViewById(R.id.text_email_perfil);
+        perfilImageView = headerLayout.findViewById(R.id.img_imagem_perfil);
+        nomeTextView = headerLayout.findViewById(R.id.text_nome_perfil);
+        emailTextView = headerLayout.findViewById(R.id.text_email_perfil);
 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -201,36 +201,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void setupCardContainerView() {
-        /*
-        int screenWidth = ScreenUtils.getScreenWidth(this);
-        int screenHeight = ScreenUtils.getScreenHeight(this);
 
-        cardsContainerView.getBuilder()
-                .setDisplayViewCount(3)
-                .setHeightSwipeDistFactor(10)
-                .setWidthSwipeDistFactor(5)
-                .setSwipeDecor(new SwipeDecor()
-                        .setViewWidth((int) (0.90 * screenWidth))
-                        .setViewHeight((int) (0.75 * screenHeight))
-                        .setPaddingTop(20)
-                        .setSwipeRotationAngle(10)
-                        .setRelativeScale(0.01f));
-
-        cardsContainerView.addItemRemoveListener(new ItemRemovedListener() {
-            @Override
-            public void onItemRemoved(int count) {
-                if (count == 0) {
-                    // recarregue o conteúdo novamente após atraso de 1 segundo
-                    new Handler(getMainLooper()).postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            presenter.onCardExhausted();
-                        }
-                    }, 800);
-                }
-            }
-        });
-        */
     }
 
     @Override

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-~ Copyright [2018] [Erivandoo Sena]
+~ Copyright [2018] [Erivando Sena]
 ~
 ~ Licenciado sob a Licença Apache, Versão 2.0 (a "Licença");
 ~ você não pode usar este arquivo, exceto em conformidade com a Licença.
@@ -42,7 +42,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_cartao"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@null" />
 
                 <TextView
                     android:id="@+id/textView1"
@@ -51,7 +52,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
-                    android:text="Cartão Vacinal" />
+                    android:text="@string/menu_item1" />
 
             </RelativeLayout>
             <RelativeLayout
@@ -63,7 +64,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_gerenciar"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@null" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -72,7 +74,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
-                    android:text="Gerenciar cartões" />
+                    android:text="@string/menu_item2" />
 
             </RelativeLayout>
         </TableRow>
@@ -91,7 +93,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_vacina"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@null" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -100,7 +103,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
-                    android:text="Informações de vacinas" />
+                    android:text="@string/menu_item3" />
 
             </RelativeLayout>
             <RelativeLayout
@@ -112,7 +115,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_idades"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@null" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -121,7 +125,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
-                    android:text="Vacina x Idade" />
+                    android:text="@string/menu_item4" />
 
             </RelativeLayout>
         </TableRow>
@@ -140,7 +144,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_mapa"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@null" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -149,7 +154,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
-                    android:text="Encontrar postos" />
+                    android:text="@string/menu_item5" />
 
             </RelativeLayout>
             <RelativeLayout
@@ -161,7 +166,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_curiosidades"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@null" />
 
                 <TextView
                     android:id="@+id/textView6"
@@ -170,7 +176,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
-                    android:text="Curiosidades" />
+                    android:text="@string/menu_item6" />
 
             </RelativeLayout>
         </TableRow>

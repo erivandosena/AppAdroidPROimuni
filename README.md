@@ -32,7 +32,7 @@ https://pt.wikipedia.org/wiki/Android_Studio
 * Requer autorização obrigatória da câmera e acesso a memória interna, armazenamento externo do dispositivo e de localização(GPS).
 * Banco de dados SQLite com informações criptografadas.
 * Testes não realizados em dispositivos com Android P.
-* Instalação não gerenciada para testes através do endereço: https://goo.gl/XXXXXX (a definir)
+* Instalação não gerenciada para testes através do endereço: https://goo.gl/MMoyHG
 
 ### Diretrizes de contribuição ###
 

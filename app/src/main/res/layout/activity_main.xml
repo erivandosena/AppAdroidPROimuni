@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-~ Copyright [2018] [Erivandoo Sena]
+~ Copyright [2018] [Erivando Sena]
 ~
 ~ Licenciado sob a Licença Apache, Versão 2.0 (a "Licença");
 ~ você não pode usar este arquivo, exceto em conformidade com a Licença.
@@ -55,12 +55,6 @@
 
             </android.support.design.widget.AppBarLayout>
 
-            <!--
-            <com.mindorks.placeholderview.SwipePlaceHolderView
-                android:id="@+id/cards_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            -->
             <include layout="@layout/content_main" />
 
         </LinearLayout>

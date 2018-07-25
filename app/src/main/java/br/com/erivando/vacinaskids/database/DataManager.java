@@ -1,7 +1,6 @@
 package br.com.erivando.vacinaskids.database;
 
 import android.content.Context;
-import android.content.res.Resources;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -17,9 +16,6 @@ import br.com.erivando.vacinaskids.database.api.LogoutResponse;
 import br.com.erivando.vacinaskids.database.model.Usuario;
 import br.com.erivando.vacinaskids.di.ApplicationContext;
 import io.reactivex.Single;
-import io.realm.Realm;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * Projeto:     VacinasKIDS
