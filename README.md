@@ -15,6 +15,11 @@ NOTAS:
 Android é um sistema operacional (SO) baseado no núcleo Linux e atualmente desenvolvido pela empresa de tecnologia Google. Com uma interface de usuário baseada na manipulação direta, o Android é projetado principalmente para dispositivos móveis com tela sensível ao toque como smartphones e tablets; com interface específica para TV (Android TV), carro (Android Auto) e relógio de pulso (Android Wear).
 Android Studio é um ambiente de desenvolvimento integrado (IDE) para desenvolver para a plataforma Android. Foi anunciado em 16 de Maio de 2013 na conferência Google I/O. Android Studio é disponibilizado gratuitamente sob a Licença Apache 2.0.  
   
+RESPONSABILIDADE SOBRE À CONFIDENCIALIDADE DO CÓDIGO FONTE DO APLICATIVO
+O direito de uso do código fonte está restrito ao time de desenvolvedores e designers na condição de edição para uso esclusivo durante o desenvolvimento do projeto VacinasKIds, não podendo o mesmo ser copiado para uso pessoal, compartilhado em repositório público, ter todo ou partes copiadas para outras mídias ou repassado a terceiros, o código fonte é de propriedade do desenvolvedor autor do mesmo.
+O programador/designer assume que manterá sigilo com relação ao conteúdo do código fonte, manter e mencionar os direitos autorais de outros autores que o projeto do aplicativo possa conter seja partes de código fontes ou bibliotecas.
+Ao arealizar clone da branch master do código ou outras branches o programador/designer estará automaticamente assumindo os termos de RESPONSABILIDADE de CONFIDENCIALIDADE do CÓDIGO FONTE.
+
 Referências:  
 https://pt.wikipedia.org/wiki/Android  
 https://pt.wikipedia.org/wiki/Android_Studio  
