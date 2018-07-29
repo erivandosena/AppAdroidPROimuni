@@ -23,9 +23,9 @@ import butterknife.Unbinder;
 
 public abstract class BaseFragment extends Fragment implements MvpView {
 
-    private BaseActivity mActivity;
-    private Unbinder mUnBinder;
-    private ProgressDialog mProgressDialog;
+    private BaseActivity baseActivity;
+    private Unbinder unBinder;
+    private ProgressDialog progressDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         super.onAttach(context);
         if (context instanceof BaseActivity) {
             BaseActivity activity = (BaseActivity) context;
-            this.mActivity = activity;
+            this.baseActivity = activity;
             activity.onFragmentAttached();
         }
     }
@@ -52,93 +52,93 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     @Override
     public void showLoading() {
         hideLoading();
-        mProgressDialog = CommonUtils.showLoadingDialog(this.getContext());
+        progressDialog = CommonUtils.showLoadingDialog(this.getContext());
     }
 
     @Override
     public void hideLoading() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.cancel();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.cancel();
         }
     }
 
     @Override
     public void onError(String message) {
-        if (mActivity != null) {
-            mActivity.onError(message);
+        if (baseActivity != null) {
+            baseActivity.onError(message);
         }
     }
 
     @Override
     public void onError(@StringRes int resId) {
-        if (mActivity != null) {
-            mActivity.onError(resId);
+        if (baseActivity != null) {
+            baseActivity.onError(resId);
         }
     }
 
     @Override
     public void showMessage(String message) {
-        if (mActivity != null) {
-            mActivity.showMessage(message);
+        if (baseActivity != null) {
+            baseActivity.showMessage(message);
         }
     }
 
     @Override
     public void showMessage(@StringRes int resId) {
-        if (mActivity != null) {
-            mActivity.showMessage(resId);
+        if (baseActivity != null) {
+            baseActivity.showMessage(resId);
         }
     }
 
     @Override
     public boolean isNetworkConnected() {
-        if (mActivity != null) {
-            return mActivity.isNetworkConnected();
+        if (baseActivity != null) {
+            return baseActivity.isNetworkConnected();
         }
         return false;
     }
 
     @Override
     public void onDetach() {
-        mActivity = null;
+        baseActivity = null;
         super.onDetach();
     }
 
     @Override
     public void hideKeyboard() {
-        if (mActivity != null) {
-            mActivity.hideKeyboard();
+        if (baseActivity != null) {
+            baseActivity.hideKeyboard();
         }
     }
 
     @Override
     public void openActivityOnTokenExpire() {
-        if (mActivity != null) {
-            mActivity.openActivityOnTokenExpire();
+        if (baseActivity != null) {
+            baseActivity.openActivityOnTokenExpire();
         }
     }
 
     public ActivityComponent getActivityComponent() {
-        if (mActivity != null) {
-            return mActivity.getActivityComponent();
+        if (baseActivity != null) {
+            return baseActivity.getActivityComponent();
         }
         return null;
     }
 
     public BaseActivity getBaseActivity() {
-        return mActivity;
+        return baseActivity;
     }
 
     public void setUnBinder(Unbinder unBinder) {
-        mUnBinder = unBinder;
+        this.unBinder = unBinder;
     }
 
     protected abstract void setUp(View view);
 
     @Override
     public void onDestroy() {
-        if (mUnBinder != null) {
-            mUnBinder.unbind();
+        if (unBinder != null) {
+            unBinder.unbind();
         }
         super.onDestroy();
     }

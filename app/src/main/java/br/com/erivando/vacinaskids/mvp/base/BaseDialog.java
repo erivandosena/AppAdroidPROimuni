@@ -31,102 +31,102 @@ import butterknife.Unbinder;
 
 public abstract class BaseDialog extends DialogFragment implements MvpViewDialog {
 
-    private BaseActivity mActivity;
-    private Unbinder mUnBinder;
+    private BaseActivity baseActivity;
+    private Unbinder unBinder;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof BaseActivity) {
             BaseActivity mActivity = (BaseActivity) context;
-            this.mActivity = mActivity;
+            this.baseActivity = mActivity;
             mActivity.onFragmentAttached();
         }
     }
 
     @Override
     public void showLoading() {
-        if (mActivity != null) {
-            mActivity.showLoading();
+        if (baseActivity != null) {
+            baseActivity.showLoading();
         }
     }
 
     @Override
     public void hideLoading() {
-        if (mActivity != null) {
-            mActivity.hideLoading();
+        if (baseActivity != null) {
+            baseActivity.hideLoading();
         }
     }
 
     @Override
     public void onError(String message) {
-        if (mActivity != null) {
-            mActivity.onError(message);
+        if (baseActivity != null) {
+            baseActivity.onError(message);
         }
     }
 
     @Override
     public void onError(@StringRes int resId) {
-        if (mActivity != null) {
-            mActivity.onError(resId);
+        if (baseActivity != null) {
+            baseActivity.onError(resId);
         }
     }
 
     @Override
     public void showMessage(String message) {
-        if (mActivity != null) {
-            mActivity.showMessage(message);
+        if (baseActivity != null) {
+            baseActivity.showMessage(message);
         }
     }
 
     @Override
     public void showMessage(@StringRes int resId) {
-        if (mActivity != null) {
-            mActivity.showMessage(resId);
+        if (baseActivity != null) {
+            baseActivity.showMessage(resId);
         }
     }
 
     @Override
     public boolean isNetworkConnected() {
-        if (mActivity != null) {
-            return mActivity.isNetworkConnected();
+        if (baseActivity != null) {
+            return baseActivity.isNetworkConnected();
         }
         return false;
     }
 
     @Override
     public void onDetach() {
-        mActivity = null;
+        baseActivity = null;
         super.onDetach();
     }
 
     @Override
     public void hideKeyboard() {
-        if (mActivity != null) {
-            mActivity.hideKeyboard();
+        if (baseActivity != null) {
+            baseActivity.hideKeyboard();
         }
     }
 
     @Override
     public void openActivityOnTokenExpire() {
-        if (mActivity != null) {
-            mActivity.openActivityOnTokenExpire();
+        if (baseActivity != null) {
+            baseActivity.openActivityOnTokenExpire();
         }
     }
 
     public BaseActivity getBaseActivity() {
-        return mActivity;
+        return baseActivity;
     }
 
     public ActivityComponent getActivityComponent() {
-        if (mActivity != null) {
-            return mActivity.getActivityComponent();
+        if (baseActivity != null) {
+            return baseActivity.getActivityComponent();
         }
         return null;
     }
 
     public void setUnBinder(Unbinder unBinder) {
-        mUnBinder = unBinder;
+        this.unBinder = unBinder;
     }
 
     protected abstract void setUp(View view);
@@ -179,8 +179,8 @@ public abstract class BaseDialog extends DialogFragment implements MvpViewDialog
 
     @Override
     public void onDestroy() {
-        if (mUnBinder != null) {
-            mUnBinder.unbind();
+        if (unBinder != null) {
+            unBinder.unbind();
         }
         super.onDestroy();
     }

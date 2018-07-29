@@ -32,7 +32,7 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
         getMvpView().showLoading();
 
         Usuario usuario = new Usuario();
-        usuario.setId(getIDataManager().getUsuarioID().incrementAndGet());
+        usuario.setId((long) getIDataManager().getUsuarioID().incrementAndGet());
         usuario.setUsuaNome(nome);
         usuario.setUsuaLogin(login);
         usuario.setUsuaSenha(senha);

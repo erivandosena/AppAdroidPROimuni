@@ -6,6 +6,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.3'
@@ -14,6 +15,7 @@ buildscript {
         // aos arquivos build.gradle do módulo individual.
 
         classpath 'io.realm:realm-gradle-plugin:4.3.1'
+        classpath 'com.google.gms:google-services:4.0.0'
       }
 }
 
@@ -21,6 +23,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 }
 

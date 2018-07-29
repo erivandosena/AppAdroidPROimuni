@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "11302437979",
+    "firebase_url": "https://cartaovacinalapp.firebaseio.com",
+    "project_id": "cartaovacinalapp",
+    "storage_bucket": "cartaovacinalapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11302437979:android:be0ce06f95dd9cf5",
+        "android_client_info": {
+          "package_name": "br.com.erivando.vacinaskids"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "11302437979-l92m1mrg804su7uhfl4da932780i9huk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.erivando.vacinaskids",
+            "certificate_hash": "1e5b9c058a7c01ebd4bebabe02c0499a943d8336"
+          }
+        },
+        {
+          "client_id": "11302437979-3v9n3okl64uhdpc5vcikgalluo0uqi2a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWgwgl7wv3ZKyFkAaN_Wx-GgA-bAj5hUY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11302437979-3v9n3okl64uhdpc5vcikgalluo0uqi2a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

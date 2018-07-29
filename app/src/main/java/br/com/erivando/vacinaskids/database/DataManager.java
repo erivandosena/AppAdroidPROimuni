@@ -101,7 +101,7 @@ public class DataManager implements IDataManager {
         updateUserInfo(
                 null,
                 null,
-                DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT,
+                IDataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT,
                 null,
                 null,
                 null);
@@ -149,12 +149,12 @@ public class DataManager implements IDataManager {
 
     @Override
     public String getCurrentUserProfilePicUrl() {
-        return null;
+        return preferencesHelper.getCurrentUserProfilePicUrl();
     }
 
     @Override
     public void setCurrentUserProfilePicUrl(String profilePicUrl) {
-
+        preferencesHelper.setCurrentUserProfilePicUrl(profilePicUrl);
     }
 
     @Override

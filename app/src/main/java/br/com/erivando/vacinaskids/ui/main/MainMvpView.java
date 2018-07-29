@@ -43,5 +43,11 @@ public interface MainMvpView extends MvpView {
     void setupNavMenu();
 
     void setupCardContainerView();
+
+    void onFacebookSignOut();
+
+    void onGooleSignOut();
+
+    void onCompartilhaApp();
 }
 

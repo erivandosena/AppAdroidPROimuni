@@ -1,6 +1,7 @@
 package br.com.erivando.vacinaskids.ui.splash;
 
 import android.os.Handler;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -69,6 +70,8 @@ public class SplashPresenter<V extends SplashMvpView> extends BasePresenter<V> i
     }
 
     private void decideNextActivity() {
+        Log.d("UserLoggedInMode", String. valueOf(getIDataManager().getCurrentUserLoggedInMode()));
+        Log.d("LOGGED_IN_MODE", String. valueOf(IDataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()));
         if (getIDataManager().getCurrentUserLoggedInMode() == IDataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
             getMvpView().openLoginActivity();
         } else {

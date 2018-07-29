@@ -11,10 +11,17 @@ Na fase de testes do aplicativo serão utilizados dispositivos virtuais através d
 Após compilação do código fonte é gerado um arquivo com extensão APK(Android Package) em formato padrão para publicação no Google Play Store.  
 
 -
-NOTAS:  
+NOTAS: 
 Android é um sistema operacional (SO) baseado no núcleo Linux e atualmente desenvolvido pela empresa de tecnologia Google. Com uma interface de usuário baseada na manipulação direta, o Android é projetado principalmente para dispositivos móveis com tela sensível ao toque como smartphones e tablets; com interface específica para TV (Android TV), carro (Android Auto) e relógio de pulso (Android Wear).
 Android Studio é um ambiente de desenvolvimento integrado (IDE) para desenvolver para a plataforma Android. Foi anunciado em 16 de Maio de 2013 na conferência Google I/O. Android Studio é disponibilizado gratuitamente sob a Licença Apache 2.0.  
-  
+
+### Responsabilidade Sobre A Confidencialidade Do Código Fonte ### 
+
+* RESPONSABILIDADE SOBRE A CONFIDENCIALIDADE DO CÓDIGO FONTE DO APLICATIVO: 
+* O direito de uso do código fonte está restrito ao time de desenvolvedores e designers na condição de edição para uso exclusivo durante o desenvolvimento do projeto VacinasKIds, não podendo o mesmo ser copiado para uso pessoal, compartilhado em repositório público, ter todo ou partes copiadas para outras mídias ou repassado a terceiros, o código fonte é de propriedade do desenvolvedor autor do mesmo.
+* O programador/designer assume que manterá sigilo com relação ao conteúdo do código fonte, manter e mencionar os direitos autorais de outros autores que o projeto do aplicativo possa conter seja partes de código fontes ou bibliotecas.
+* Ao realizar clone do código a partir da branch master ou de outras branches o programador/designer estará automaticamente assumindo os termos de RESPONSABILIDADE de CONFIDENCIALIDADE do CÓDIGO FONTE.
+
 Referências:  
 https://pt.wikipedia.org/wiki/Android  
 https://pt.wikipedia.org/wiki/Android_Studio  
@@ -42,5 +49,11 @@ https://pt.wikipedia.org/wiki/Android_Studio
 
 ### Com quem eu falo? ###
 
-* Proprietário do repositório ou administrador: Erivando Sena, E-mail: erivandoramos@bol.com.br
-* Outros contatos da comunidade ou da equipe: profª. Nirla, Thaís, prof. John
+* Proprietário do repositório ou administrador: 
+	Erivando Sena, E-mail: erivandoramos@bol.com.br
+* Outros contatos da comunidade ou da equipe: 
+	Thaís, ThaisPaula73@gmail.com
+	Profª. Nirla, nirlagomes@hotmail.com
+	Prof. John, jhsfelix@gmail.com 
+	Alexandre, cunhacos@gmail.com 
+	Agnaldo, agnaldo.jnr1995@gmail.com

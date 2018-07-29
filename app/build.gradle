@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 27
@@ -28,6 +29,18 @@ android {
 }
 
 dependencies {
+    /* Dynamic Links */
+   // implementation 'com.google.firebase:firebase-invites:16.0.0'
+
+    /* Google Login */
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+
+    /* Facebook Login */
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    /* Firebase */
+    implementation 'com.google.firebase:firebase-core:16.0.0'
+    implementation 'com.google.firebase:firebase-auth:15.0.0'
 
     /* Fast Android Networking with RxJava2 */
     implementation 'com.amitshekhar.android:rx2-android-networking:1.0.2'
@@ -58,6 +71,7 @@ dependencies {
     /* Outras Dependencias Android */
     implementation 'com.android.support:support-vector-drawable:27.1.1'
     implementation 'com.android.support:animated-vector-drawable:27.1.1'
+    implementation 'com.android.support:customtabs:27.1.1'
    // implementation 'com.android.support:cardview-v7:27.0.0'
    // implementation 'com.android.support:recyclerview-v7:27.0.0'
     implementation 'com.android.support:cardview-v7:27.1.1'

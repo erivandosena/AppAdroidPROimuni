@@ -1,15 +1,11 @@
 package br.com.erivando.vacinaskids.ui.main;
 
-import com.androidnetworking.error.ANError;
-
 import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.database.IDataManager;
-import br.com.erivando.vacinaskids.database.api.LogoutResponse;
 import br.com.erivando.vacinaskids.mvp.base.BasePresenter;
 import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 
 /**
  * Projeto:     VacinasKIDS
@@ -40,9 +36,14 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
         getMvpView().showLoading();
 
         getIDataManager().setUserAsLoggedOut();
-        getMvpView().openLoginActivity();
+
+        getMvpView().onFacebookSignOut();
+
+        getMvpView().onGooleSignOut();
 
         getMvpView().hideLoading();
+
+        getMvpView().openLoginActivity();
         /*
         getCompositeDisposable().add(getIDataManager().doLogoutApiCall()
                 .subscribeOn(getSchedulerProvider().io())

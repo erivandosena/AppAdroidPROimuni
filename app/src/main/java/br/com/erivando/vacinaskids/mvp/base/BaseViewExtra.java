@@ -19,7 +19,7 @@ import br.com.erivando.vacinaskids.mvp.MvpViewExtra;
 
 public abstract class BaseViewExtra extends ViewGroup implements MvpViewExtra {
 
-    private MvpView mParentMvpView;
+    private MvpView parentMvpView;
 
     public BaseViewExtra(Context context) {
         super(context);
@@ -40,70 +40,70 @@ public abstract class BaseViewExtra extends ViewGroup implements MvpViewExtra {
 
     @Override
     public void attachParentMvpView(MvpView mvpView) {
-        mParentMvpView = mvpView;
+        parentMvpView = mvpView;
     }
 
     @Override
     public void showLoading() {
-        if (mParentMvpView != null) {
-            mParentMvpView.showLoading();
+        if (parentMvpView != null) {
+            parentMvpView.showLoading();
         }
     }
 
     @Override
     public void hideLoading() {
-        if (mParentMvpView != null) {
-            mParentMvpView.hideLoading();
+        if (parentMvpView != null) {
+            parentMvpView.hideLoading();
         }
     }
 
     @Override
     public void onError(@StringRes int resId) {
-        if (mParentMvpView != null) {
-            mParentMvpView.onError(resId);
+        if (parentMvpView != null) {
+            parentMvpView.onError(resId);
         }
     }
 
     @Override
     public void onError(String message) {
-        if (mParentMvpView != null) {
-            mParentMvpView.onError(message);
+        if (parentMvpView != null) {
+            parentMvpView.onError(message);
         }
     }
 
     @Override
     public void showMessage(String message) {
-        if (mParentMvpView != null) {
-            mParentMvpView.showMessage(message);
+        if (parentMvpView != null) {
+            parentMvpView.showMessage(message);
         }
     }
 
     @Override
     public void showMessage(@StringRes int resId) {
-        if (mParentMvpView != null) {
-            mParentMvpView.showMessage(resId);
+        if (parentMvpView != null) {
+            parentMvpView.showMessage(resId);
         }
     }
 
     @Override
     public void hideKeyboard() {
-        if (mParentMvpView != null) {
-            mParentMvpView.hideKeyboard();
+        if (parentMvpView != null) {
+            parentMvpView.hideKeyboard();
         }
     }
 
     @Override
     public boolean isNetworkConnected() {
-        if (mParentMvpView != null) {
-            return mParentMvpView.isNetworkConnected();
+        if (parentMvpView != null) {
+            return parentMvpView.isNetworkConnected();
         }
         return false;
     }
 
     @Override
     public void openActivityOnTokenExpire() {
-        if (mParentMvpView != null) {
-            mParentMvpView.openActivityOnTokenExpire();
+        if (parentMvpView != null) {
+            parentMvpView.openActivityOnTokenExpire();
         }
     }
 

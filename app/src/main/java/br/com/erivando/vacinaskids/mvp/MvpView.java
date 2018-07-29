@@ -2,6 +2,8 @@ package br.com.erivando.vacinaskids.mvp;
 
 import android.support.annotation.StringRes;
 
+import com.facebook.CallbackManager;
+
 /**
  * Projeto:     VacinasKIDS
  * Autor:       Erivando Sena

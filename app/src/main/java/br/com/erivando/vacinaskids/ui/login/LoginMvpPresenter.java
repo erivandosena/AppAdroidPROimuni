@@ -1,5 +1,17 @@
 package br.com.erivando.vacinaskids.ui.login;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
+import com.facebook.AccessTokenTracker;
+import com.facebook.CallbackManager;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.json.JSONObject;
+
+import br.com.erivando.vacinaskids.database.IDataManager;
 import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 
@@ -14,12 +26,23 @@ import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 @PerActivity
 public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<V> {
 
-    void onLoginClick(String email, String password);
+    void onCreateLocalLogin(String login, String senha);
 
-    void onGoogleLoginClick();
+    void onCreateFacebookLogin();
 
-    void onFacebookLoginClick();
+    void onCreateGoogleLogin();
 
-    void onCadstroUsuarioClick();
+    CallbackManager getCallbackManager();
 
+    AccessTokenTracker getAccessTokenTracker();
+
+    Bundle getParametrosFacebook(JSONObject jsonObject);
+
+    GoogleApiClient getGoogleApiClient();
+
+    void getHandleActivityResult(int requestCode, int resultCode, Intent data);
+
+    void handleSignInResult(GoogleSignInResult result);
+
+    void onGooleSignOut();
 }

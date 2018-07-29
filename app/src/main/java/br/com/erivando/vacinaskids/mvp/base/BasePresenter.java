@@ -38,10 +38,10 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
     private static final String TAG = "BasePresenter";
 
     private final IDataManager iDataManager;
-     private final SchedulerProvider schedulerProvider;
+    private final SchedulerProvider schedulerProvider;
     private final CompositeDisposable compositeDisposable;
 
-    private V mMvpView;
+    private V mvpView;
 
     @Inject
     public BasePresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
@@ -52,21 +52,21 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     @Override
     public void onAttach(V mvpView) {
-        mMvpView = mvpView;
+        this.mvpView = mvpView;
     }
 
     @Override
     public void onDetach() {
         compositeDisposable.dispose();
-        mMvpView = null;
+        mvpView = null;
     }
 
     public boolean isViewAttached() {
-        return mMvpView != null;
+        return mvpView != null;
     }
 
     public V getMvpView() {
-        return mMvpView;
+        return mvpView;
     }
 
     public void checkViewAttached() {

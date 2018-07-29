@@ -38,16 +38,16 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public abstract class BaseActivity extends AppCompatActivity implements MvpView, BaseFragment.Callback {
 
-    private ProgressDialog mProgressDialog;
+    private ProgressDialog progressDialog;
 
-    private ActivityComponent mActivityComponent;
+    private ActivityComponent activityComponent;
 
-    private Unbinder mUnBinder;
+    private Unbinder unBinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivityComponent = DaggerActivityComponent.builder()
+        activityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((AppAplicacao) getApplication()).getComponent())
                 .build();
@@ -55,7 +55,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
     }
 
     public ActivityComponent getActivityComponent() {
-        return mActivityComponent;
+        return activityComponent;
     }
 
     @Override
@@ -79,13 +79,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
     @Override
     public void showLoading() {
         hideLoading();
-        mProgressDialog = CommonUtils.showLoadingDialog(this);
+        progressDialog = CommonUtils.showLoadingDialog(this);
     }
 
     @Override
     public void hideLoading() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.cancel();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.cancel();
         }
     }
 
@@ -158,14 +158,14 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
     }
 
     public void setUnBinder(Unbinder unBinder) {
-        mUnBinder = unBinder;
+        this.unBinder = unBinder;
     }
 
     @Override
     protected void onDestroy() {
 
-        if (mUnBinder != null) {
-            mUnBinder.unbind();
+        if (unBinder != null) {
+            unBinder.unbind();
         }
         super.onDestroy();
     }

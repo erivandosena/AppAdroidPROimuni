@@ -2,6 +2,8 @@ package br.com.erivando.vacinaskids.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,6 +21,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.inject.Inject;
 
@@ -26,6 +40,8 @@ import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.custom.imagem.RoundedImageView;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.login.LoginActivity;
+import br.com.erivando.vacinaskids.ui.login.LoginMvpPresenter;
+import br.com.erivando.vacinaskids.ui.login.LoginMvpView;
 import br.com.erivando.vacinaskids.ui.sobre.SobreFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,8 +56,13 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements MainMvpView {
 
+    private static final String TAG = "LoginActivity";
+
     @Inject
     MainMvpPresenter<MainMvpView> presenter;
+
+    @Inject
+    LoginMvpPresenter<LoginMvpView> loginPresenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -54,9 +75,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @BindView(R.id.text_versao_app)
     TextView versaoAppTextView;
-
-   // @BindView(R.id.cards_container)
-   // SwipePlaceHolderView cardsContainerView;
 
     private TextView nomeTextView;
 
@@ -146,13 +164,22 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             case R.id.action_copy:
                 return true;
             case R.id.action_share:
-                return true;
+                onCompartilhaApp();
+                //return true;
             case R.id.action_delete:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loginPresenter.getGoogleApiClient().connect();
+    }
+
 
     @Override
     protected void onResume() {
@@ -169,6 +196,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void setupNavMenu() {
+
         View headerLayout = navigationView.getHeaderView(0);
         perfilImageView = headerLayout.findViewById(R.id.img_imagem_perfil);
         nomeTextView = headerLayout.findViewById(R.id.text_nome_perfil);
@@ -205,6 +233,39 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     @Override
+    public void onFacebookSignOut() {
+        LoginManager.getInstance().logOut();
+    }
+
+    @Override
+    public void onGooleSignOut() {
+        Auth.GoogleSignInApi.signOut(loginPresenter.getGoogleApiClient()).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+                if (!status.isSuccess()) {
+                    Toast.makeText(getApplicationContext(), R.string.google_notlogout, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onCompartilhaApp() {
+        Intent shareIntent = ShareCompat.IntentBuilder.from(this)
+                .setType("text/html")
+                .setSubject(getResources().getString(R.string.app_name))
+                .setText(getResources().getString(R.string.app_mensagem_indicacao))
+                .setChooserTitle(getResources().getString(R.string.app_slogan))
+                .setText(getResources().getString(R.string.app_link_download))
+                .createChooserIntent()
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        if (shareIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(shareIntent);
+        }
+    }
+
+    @Override
     public void openLoginActivity() {
           startActivity(LoginActivity.getStartIntent(this));
           finish();
@@ -233,7 +294,16 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void updateUserProfilePic(String currentUserProfilePicUrl) {
-        //carregar URL de imagem do perfil em ANImageView
+        try {
+            URL imageURL = new URL(currentUserProfilePicUrl);
+            InputStream in = (InputStream) imageURL.getContent();
+            Bitmap bitmap = BitmapFactory.decodeStream(in);
+            perfilImageView.setImageBitmap(bitmap);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

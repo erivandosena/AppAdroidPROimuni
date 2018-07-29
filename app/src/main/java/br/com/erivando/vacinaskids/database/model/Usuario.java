@@ -21,7 +21,7 @@ public class Usuario extends RealmObject {
 
     @Required
     @PrimaryKey
-    private Integer id;
+    private Long id;
     private String usuaNome;
     private String usuaLogin;
     private String usuaSenha;
@@ -37,7 +37,7 @@ public class Usuario extends RealmObject {
     }
 
     //@Generated(hash = 1015687459)
-    public Usuario(Integer id, String usuaNome, String usuaLogin, String usuaSenha, String usuaEmail) {
+    public Usuario(Long id, String usuaNome, String usuaLogin, String usuaSenha, String usuaEmail) {
         this.id = id;
         this.usuaNome = usuaNome;
         this.usuaLogin = usuaLogin;
@@ -46,11 +46,11 @@ public class Usuario extends RealmObject {
     }
 
     /* métodos Gets e Sets para encapsulamentos. */
-    public Integer getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
