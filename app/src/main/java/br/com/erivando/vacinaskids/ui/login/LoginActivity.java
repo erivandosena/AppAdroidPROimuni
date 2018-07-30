@@ -26,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static br.com.erivando.vacinaskids.ui.login.LoginPresenter.RC_SIGN_IN;
 import static br.com.erivando.vacinaskids.ui.login.LoginPresenter.SIGN_IN_CODE;
 import static br.com.erivando.vacinaskids.util.Uteis.habilitaTelaCheia;
 
@@ -85,8 +86,11 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         showLoading();
         if (v == googleLogin) {
            // presenter.onCreateGoogleLogin();
-            Intent intent = Auth.GoogleSignInApi.getSignInIntent(presenter.getGoogleApiClient());
-            startActivityForResult(intent, SIGN_IN_CODE);
+          //  Intent intent = Auth.GoogleSignInApi.getSignInIntent(presenter.getGoogleApiClient());
+           // startActivityForResult(intent, SIGN_IN_CODE);
+
+            Intent signInIntent = presenter.getGoogleSignInClient().getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
         }
     }
 

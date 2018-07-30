@@ -13,9 +13,8 @@ buildscript {
 
         // NOTA: Não coloque suas dependências de aplicativo aqui; eles pertencem
         // aos arquivos build.gradle do módulo individual.
-
         classpath 'io.realm:realm-gradle-plugin:4.3.1'
-        classpath 'com.google.gms:google-services:4.0.0'
+        classpath 'com.google.gms:google-services:4.0.1'
       }
 }
 
@@ -24,6 +23,10 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+        maven {
+            // Google's Maven repository
+            url "https://maven.google.com"
+        }
     }
 }
 

@@ -1,17 +1,19 @@
 package br.com.erivando.vacinaskids.ui.login;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.Task;
 
 import org.json.JSONObject;
 
-import br.com.erivando.vacinaskids.database.IDataManager;
 import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 
@@ -42,7 +44,12 @@ public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<
 
     void getHandleActivityResult(int requestCode, int resultCode, Intent data);
 
-    void handleSignInResult(GoogleSignInResult result);
+    //void handleSignInResult(GoogleSignInResult result);
+    void handleSignInResult(Task<GoogleSignInAccount> completedTask);
 
-    void onGooleSignOut();
+    void onGooleSignOut(Activity activity);
+
+    void onVerificaLoginGoogle();
+
+    GoogleSignInClient getGoogleSignInClient();
 }

@@ -85,6 +85,7 @@
     <string name="facebook_error_fabebook_login">Ocorreu um erro ao entrar</string>
     <string name="firebase_logout">Fechar Sessão</string>
     <!--  Google Login. -->
+    <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
     <string name="google_cancel_login">A operação login Google foi cancelada</string>
     <string name="google_falha_conexao">Conexão falhou!</string>
     <string name="google_error_login">Ocorreu um erro ao entrar</string>

@@ -1,21 +1,29 @@
 {
   "project_info": {
-    "project_number": "11302437979",
-    "firebase_url": "https://cartaovacinalapp.firebaseio.com",
-    "project_id": "cartaovacinalapp",
-    "storage_bucket": "cartaovacinalapp.appspot.com"
+    "project_number": "1059359173737",
+    "firebase_url": "https://vacinas-kids.firebaseio.com",
+    "project_id": "vacinas-kids",
+    "storage_bucket": "vacinas-kids.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:11302437979:android:be0ce06f95dd9cf5",
+        "mobilesdk_app_id": "1:1059359173737:android:be0ce06f95dd9cf5",
         "android_client_info": {
           "package_name": "br.com.erivando.vacinaskids"
         }
       },
       "oauth_client": [
         {
-          "client_id": "11302437979-l92m1mrg804su7uhfl4da932780i9huk.apps.googleusercontent.com",
+          "client_id": "1059359173737-v6avolfo7sornitotvqv6d1a7r9sohd4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.erivando.vacinaskids",
+            "certificate_hash": "f4bd76332ff4db5a077a8cc803ddfcd3b26a2677"
+          }
+        },
+        {
+          "client_id": "1059359173737-luigqpcrism843l6dt5d89ufute87msm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "br.com.erivando.vacinaskids",
@@ -23,13 +31,13 @@
           }
         },
         {
-          "client_id": "11302437979-3v9n3okl64uhdpc5vcikgalluo0uqi2a.apps.googleusercontent.com",
+          "client_id": "1059359173737-510bnpsu2m7ja43afbn4rjr9j6bfkdmt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCWgwgl7wv3ZKyFkAaN_Wx-GgA-bAj5hUY"
+          "current_key": "AIzaSyDL6QJ2bIdajnGjaGWzdCTlCFNbEMx0BRY"
         }
       ],
       "services": {
@@ -40,7 +48,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "11302437979-3v9n3okl64uhdpc5vcikgalluo0uqi2a.apps.googleusercontent.com",
+              "client_id": "1059359173737-aebv5pkorffveesobrb75qnsvr0snr6u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,5 +1,6 @@
 package br.com.erivando.vacinaskids.ui.main;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -27,6 +28,8 @@ import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -177,7 +180,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     protected void onStart() {
         super.onStart();
-        loginPresenter.getGoogleApiClient().connect();
+        //loginPresenter.getGoogleApiClient().connect();
+        loginPresenter.getGoogleSignInClient().getInstanceId();
     }
 
 
@@ -239,6 +243,10 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void onGooleSignOut() {
+        loginPresenter.onGooleSignOut(MainActivity.this);
+
+
+        /*
         Auth.GoogleSignInApi.signOut(loginPresenter.getGoogleApiClient()).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
@@ -247,6 +255,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                 }
             }
         });
+        */
     }
 
     @Override
