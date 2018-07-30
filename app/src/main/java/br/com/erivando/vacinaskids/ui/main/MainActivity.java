@@ -1,6 +1,5 @@
 package br.com.erivando.vacinaskids.ui.main;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,14 +21,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -244,18 +237,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void onGooleSignOut() {
         loginPresenter.onGooleSignOut(MainActivity.this);
-
-
-        /*
-        Auth.GoogleSignInApi.signOut(loginPresenter.getGoogleApiClient()).setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                if (!status.isSuccess()) {
-                    Toast.makeText(getApplicationContext(), R.string.google_notlogout, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        */
     }
 
     @Override
@@ -323,12 +304,12 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void showRateUsDialog() {
-         /// RateUsDialog.newInstance().show(getSupportFragmentManager());
+
     }
 
     @Override
     public void openMyFeedActivity() {
-        //   startActivity(FeedActivity.getStartIntent(this));
+
     }
 
     @Override

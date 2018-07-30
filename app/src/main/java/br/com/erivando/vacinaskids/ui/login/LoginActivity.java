@@ -3,16 +3,11 @@ package br.com.erivando.vacinaskids.ui.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 
 import java.util.Arrays;
 
@@ -27,7 +22,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static br.com.erivando.vacinaskids.ui.login.LoginPresenter.RC_SIGN_IN;
-import static br.com.erivando.vacinaskids.ui.login.LoginPresenter.SIGN_IN_CODE;
 import static br.com.erivando.vacinaskids.util.Uteis.habilitaTelaCheia;
 
 /**

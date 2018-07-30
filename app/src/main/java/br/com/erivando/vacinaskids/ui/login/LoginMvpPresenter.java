@@ -36,15 +36,10 @@ public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<
 
     CallbackManager getCallbackManager();
 
-    AccessTokenTracker getAccessTokenTracker();
-
     Bundle getParametrosFacebook(JSONObject jsonObject);
-
-    GoogleApiClient getGoogleApiClient();
 
     void getHandleActivityResult(int requestCode, int resultCode, Intent data);
 
-    //void handleSignInResult(GoogleSignInResult result);
     void handleSignInResult(Task<GoogleSignInAccount> completedTask);
 
     void onGooleSignOut(Activity activity);

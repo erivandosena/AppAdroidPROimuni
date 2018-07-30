@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -17,17 +16,13 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -36,7 +31,6 @@ import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 
@@ -68,17 +62,14 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
     private AccessTokenTracker accessTokenTracker;
     private AccessToken accessToken;
     private boolean isLoggedIn;
-
     /* Login google */
-    private GoogleApiClient googleApiClient;
-    public static final int SIGN_IN_CODE = 777;
-    public static final int RC_SIGN_IN = 777;
     private GoogleSignInClient googleSignInClient;
+    public static final int RC_SIGN_IN = 777;
+
 
     @Inject
     public LoginPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(iDataManager, schedulerProvider, compositeDisposable);
-
     }
 
     @Override
@@ -104,7 +95,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             if (getIDataManager().validaLoginUsuario(login, senha)) {
 
                 Usuario usuario = new Usuario();
-                usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin",login}, new String[]{"usuaSenha",senha});
+                usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login}, new String[]{"usuaSenha", senha});
                 usuario.getId();
                 usuario.getUsuaNome();
                 usuario.getUsuaLogin();
@@ -118,7 +109,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                         usuario.getUsuaNome(),
                         usuario.getUsuaEmail(),
                         null
-                        );
+                );
                 if (!isViewAttached()) {
                     return;
                 }
@@ -158,14 +149,11 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                         accessToken = loginResult.getAccessToken();
                         accessToken.getPermissions();
 
-                        //Toast.makeText(getApplicationContext(), "TOKEN:\n" + loginResult.getAccessToken().getToken().toString(), Toast.LENGTH_SHORT).show();
-
                         GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
                                 if (graphResponse.getError() == null) {
                                     final Bundle bundleData = getParametrosFacebook(jsonObject);
-                                    // getDadosPerfilFacebook(accessToken, bundleJsonObject);
                                     GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
                                         @Override
                                         public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
@@ -204,9 +192,9 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                             }
                         });
                         Bundle parameters = new Bundle();
-                    /* obrigatório solicitar parametros extras ao Facebook
-                    parameters.putString("fields", "id, email, name, first_name, last_name, user_gender, user_photos, user_birthday, user_location");
-                    */
+                        /* obrigatório solicitar parametros extras ao Facebook
+                        parameters.putString("fields", "id, email, name, first_name, last_name, user_gender, user_photos, user_birthday, user_location");
+                        */
                         parameters.putString("fields", "id, email, name, first_name, last_name");
                         request.setParameters(parameters);
                         request.executeAsync();
@@ -266,17 +254,11 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
     @Override
     public void onCreateGoogleLogin() {
-       // GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-       // this.googleApiClient = new GoogleApiClient.Builder(getApplicationContext()).enableAutoManage(new FragmentActivity(), this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
-      //  setGoogleApiClient(new GoogleApiClient.Builder(getApplicationContext()).enableAutoManage(new FragmentActivity(), this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build());
-
-
         // Configure o login para solicitar o ID do usuário, o endereço de e-mail e o perfil básico.
         // O ID e o perfil básico estão incluídos em DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         // Construa um GoogleSignInClient com as opções especificadas pelo gso.
         googleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
-
     }
 
     @Override
@@ -286,25 +268,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         return googleSignInClient;
     }
 
-    public void setGoogleSignInClient(GoogleSignInClient googleSignInClient) {
-        this.googleSignInClient = googleSignInClient;
-    }
-
-    @Override
-    public AccessTokenTracker getAccessTokenTracker() {
-        return accessTokenTracker;
-    }
-
-    public GoogleApiClient getGoogleApiClient() {
-        if (googleApiClient == null)
-            onCreateGoogleLogin();
-        return googleApiClient;
-    }
-
-    public void setGoogleApiClient(GoogleApiClient googleApiClient) {
-        this.googleApiClient = googleApiClient;
-    }
-
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Toast.makeText(getApplicationContext(), R.string.google_falha_conexao, Toast.LENGTH_SHORT).show();
@@ -312,19 +275,12 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
     @Override
     public void getHandleActivityResult(int requestCode, int resultCode, Intent data) {
-       // if (requestCode == SIGN_IN_CODE) {
-        //    GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-        //    handleSignInResult(result);
-        //}
-
         // Resultado retornado do lançamento do Intent do GoogleSignInClient.getSignInIntent (...);
         if (requestCode == RC_SIGN_IN) {
-            // A tarefa retornada dessa chamada está sempre concluída, não é necessário anexar um
-            // listener (ouvinte).
+            // A tarefa retornada dessa chamada está sempre concluída, não é necessário anexar um listener (ouvinte).
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
-
     }
 
     @Override
@@ -338,43 +294,18 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                     IDataManager.LoggedInMode.LOGGED_IN_MODE_GOOGLE,
                     account.getDisplayName(),
                     account.getEmail(),
-                    (account.getPhotoUrl() != null) ?  account.getPhotoUrl().toString() : null
+                    (account.getPhotoUrl() != null) ? account.getPhotoUrl().toString() : null
             );
             getMvpView().openMainActivity();
-
         } catch (ApiException e) {
-            getMvpView().hideLoading();
             // O código de status ApiException indica o motivo detalhado da falha.
             // Por favor, consulte a referência da classe GoogleSignInStatusCodes para
             // mais informações. e.getStatusCode()
             Toast.makeText(getApplicationContext(), R.string.google_cancel_login, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    /*
-    @Override
-    public void handleSignInResult(GoogleSignInResult result) {
-
-        Log.d("result",result.toString());
-        Log.d("result.getStatus()",result.getStatus().toString());
-
-        if (result.isSuccess()) {
-            GoogleSignInAccount account = result.getSignInAccount();
-            getIDataManager().updateUserInfo(
-                    account.getIdToken(),
-                    Double.valueOf(account.getId()).longValue(),
-                    IDataManager.LoggedInMode.LOGGED_IN_MODE_GOOGLE,
-                    account.getDisplayName(),
-                    account.getEmail(),
-                    account.getPhotoUrl().toString()
-            );
-            getMvpView().openMainActivity();
-        } else {
+        } finally {
             getMvpView().hideLoading();
-            Toast.makeText(getApplicationContext(), R.string.google_cancel_login, Toast.LENGTH_SHORT).show();
         }
     }
-    */
 
     @Override
     public void onGooleSignOut(Activity activity) {
@@ -383,18 +314,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             public void onComplete(@NonNull Task<Void> task) {
             }
         });
-
-        /*
-        Auth.GoogleSignInApi.signOut(getGoogleApiClient()).setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                if (!status.isSuccess()) {
-                    Toast.makeText(getApplicationContext(), R.string.google_notlogout, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-       */
     }
 
     @Override
