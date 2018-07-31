@@ -79,12 +79,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             getMvpView().onError(R.string.text_valida_login);
             return;
         }
-        /*
-        if (!CommonUtils.isEmailValid(email)) {
-            getMvpView().onError(R.string.invalid_email);
-            return;
-        }
-        */
         if (senha == null || senha.isEmpty()) {
             getMvpView().onError(R.string.text_valida_senha);
             return;
@@ -94,8 +88,8 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         try {
             if (getIDataManager().validaLoginUsuario(login, senha)) {
 
-                Usuario usuario = new Usuario();
-                usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login}, new String[]{"usuaSenha", senha});
+                //Usuario usuario = new Usuario();
+                Usuario usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login}, new String[]{"usuaSenha", senha});
                 usuario.getId();
                 usuario.getUsuaNome();
                 usuario.getUsuaLogin();

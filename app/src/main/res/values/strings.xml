@@ -17,7 +17,7 @@
     <!-- Menus Drawer. -->
     <string name="sobre">Sobre</string>
     <string name="logout">Sair</string>
-    <string name="feed">Vacinas / Idade</string>
+    <string name="feed">Idades</string>
     <string name="rate_us">Avaliação</string>
     <!-- Drawer. -->
     <string name="open_drawer">Drawer Open</string>
@@ -29,35 +29,30 @@
     <string name="paste">Editar Cartão</string>
     <string name="delete">Postos de Saúde</string>
     <string name="share">Compartilhar</string>
-    <!-- Login. -->
-    <string name="text_usua_login">Usuário</string>
-    <string name="text_usua_senha">Senha</string>
-    <string name="hint_usua_login">Nome do usuário</string>
-    <string name="hint_usua_senha">Senha do usuário</string>
-    <string name="btn_login_usuario">Entrar</string>
-    <string name="btn_cadastro_usuario">Cadastro</string>
-    <!-- Cadastro usuário -->
-    <string name="text_cad_nome">Nome</string>
-    <string name="text_cad_login">Login</string>
-    <string name="text_cad_email">E-mail</string>
-    <string name="text_cad_senha">Senha</string>
-    <string name="text_cad_repete_senha">Repita a Senha</string>
-    <string name="hint_cad_nome">Nome e sobrenome</string>
-    <string name="hint_cad_login">Nome de usuário</string>
-    <string name="hint_cad_email">E-mail</string>
-    <string name="hint_cad_senha">Senha</string>
-    <string name="hint_cad_repete_usenha">Repita a Senha</string>
+    <!-- Usuário -->
+    <string name="text_nome_completo">Nome completo</string>
+    <string name="text_usuario_nome">Nome de usuário</string>
+    <string name="text_usuario_email">E-mail</string>
+    <string name="text_usuario_senha">Senha</string>
+    <string name="text_usuario_repete_senha">Repita a senha</string>
     <string name="btn_cadastrar">Cadastrar</string>
     <string name="btn_voltar">Voltar</string>
-    <!-- Login Validação. -->
-    <string name="text_valida_login">Por favor, forneça um usuário.</string>
-    <string name="text_valida_senha">Por favor, forneça uma senha válida.</string>
-    <string name="text_valida_email">Por favor, forneça um e-mail válido.</string>
-    <string name="text_valida_usuario">Nome de usuário ou senha não confere!</string>
-    <!-- Cadastro Usuário Validação. -->
     <string name="text_valida_cadastro">Não foi possível realizar o cadastro!</string>
     <string name="text_cadastro_sucesso">Cadastrado com sucesso!</string>
-    <string name="text_cadastro_erro">Cadastro não realizado!</string>
+    <string name="erro_text_cadastro">Cadastro não realizado!</string>
+    <string name="erro_text_nome_completo">Informe o nome completo</string>
+    <string name="erro_text_usuario">Informe um nome de usuário válido</string>
+    <string name="erro_text_email_invalido">Informe um e-mail válido</string>
+    <string name="erro_text_senha">Informe a senha</string>
+    <string name="erro_text_repeteSenha">Repita a senha</string>
+    <string name="erro_text_senhaInvalida">Senhas não coincidem</string>
+    <string name="text_usuario_login">Usuário</string>
+    <string name="btn_login_usuario">Entrar</string>
+    <string name="btn_cadastro_usuario">Cadastro</string>
+    <string name="text_valida_login">Informe o usuário</string>
+    <string name="text_valida_senha">Informe a senha</string>
+    <string name="text_valida_email">Informe um e-mail válido</string>
+    <string name="text_valida_usuario">Nome de usuário ou senha não conferem</string>
     <!-- App Message. -->
     <string name="some_error">Algum erro ocorreu!</string>
     <string name="api_retry_error"> Por favor, tente novamente!</string>

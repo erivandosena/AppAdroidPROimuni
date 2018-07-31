@@ -15,7 +15,7 @@ import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 @PerActivity
 public interface CadastroUsuarioMvpPresenter<V extends CadastroUsuarioMvpView> extends MvpPresenter<V> {
 
-    void onCadasrarClick(String nome, String login, String senha, String email);
+    void onCadasrarClick(String nome, String login, String email, String senha, String repeteSenha);
 
     void onLoginClick();
 }

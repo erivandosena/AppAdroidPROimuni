@@ -6,6 +6,10 @@ import android.os.Build;
 import android.view.View;
 import android.view.WindowManager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Projeto:     VacinasKIDs
  * Autor:       Erivando Sena
@@ -17,6 +21,7 @@ import android.view.WindowManager;
 public class Uteis {
 
     /**
+     *
      * @return
      */
     public static String getCurrentTimeStamp() {
@@ -37,7 +42,38 @@ public class Uteis {
         }
     }
 
+    /**
+     *
+     * @param context
+     */
     public static void habilitaTelaCheia(Context context) {
         ((Activity) context).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    /**
+     *
+     * @param nomeCompleto
+     * @return
+     */
+    public static String capitalizeNome(final String nomeCompleto) {
+        String[] palavras = nomeCompleto.split(" ");
+        StringBuilder sb = new StringBuilder();
+        List<String> excessoes = new ArrayList<String>(Arrays.asList("de", "da", "das", "do", "dos", "na", "nas", "no", "nos", "a", "e", "o", "em", "com"));
+        for (String palavra : palavras) {
+            if (excessoes.contains(palavra.toLowerCase()))
+                sb.append(palavra.toLowerCase()).append(" ");
+            else
+                sb.append(Character.toUpperCase(palavra.charAt(0))).append(palavra.substring(1).toLowerCase()).append(" ");
+        }
+        return sb.toString().trim();
+    }
+
+    /**
+     *
+     * @param nomes
+     * @return
+     */
+    public static boolean validaFrases(String nomes){
+        return (nomes != null) && (!nomes.isEmpty()) && (nomes.split(" ").length >= 2);
     }
 }

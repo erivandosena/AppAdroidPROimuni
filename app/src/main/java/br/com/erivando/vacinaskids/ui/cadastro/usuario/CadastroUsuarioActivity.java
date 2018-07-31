@@ -73,7 +73,7 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
 
     @OnClick(R.id.btn_cadadastar_usuario)
     void onCadasrarClick(View v) {
-        presenter.onCadasrarClick(nomeEditText.getText().toString(), loginEditText.getText().toString(), senhaEditText.getText().toString(), emailEditText.getText().toString());
+        presenter.onCadasrarClick(nomeEditText.getText().toString(), loginEditText.getText().toString(), emailEditText.getText().toString(), senhaEditText.getText().toString(), repSenhaEditText.getText().toString());
     }
 
     @Override
