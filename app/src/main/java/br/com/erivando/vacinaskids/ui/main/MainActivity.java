@@ -35,6 +35,7 @@ import br.com.erivando.vacinaskids.BuildConfig;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.custom.imagem.RoundedImageView;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
+import br.com.erivando.vacinaskids.ui.cadastro.usuario.CadastroUsuarioActivity;
 import br.com.erivando.vacinaskids.ui.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.login.LoginMvpPresenter;
 import br.com.erivando.vacinaskids.ui.login.LoginMvpView;
@@ -155,15 +156,16 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             ((Animatable) drawable).start();
         }
         switch (item.getItemId()) {
-            case R.id.action_cut:
+            case R.id.action_edita_usuario:
+                openCadastroUsuarioActivity();
+                //return true;
+            case R.id.action_edita_crianca:
                 return true;
-            case R.id.action_copy:
+            case R.id.action_postos:
                 return true;
             case R.id.action_share:
                 onCompartilhaApp();
                 //return true;
-            case R.id.action_delete:
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -210,9 +212,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                                 return true;
                             case R.id.nav_item_rate_us:
                                 presenter.onDrawerRateUsClick();
-                                return true;
-                            case R.id.nav_item_feed:
-                                presenter.onDrawerMyFeedClick();
                                 return true;
                             case R.id.nav_item_logout:
                                 presenter.onDrawerOptionLogoutClick();
@@ -270,6 +269,12 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                 .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
                 .add(R.id.cl_root_view, SobreFragment.newInstance(), SobreFragment.TAG)
                 .commit();
+    }
+
+    @Override
+    public void openCadastroUsuarioActivity() {
+        startActivity(CadastroUsuarioActivity.getStartIntent(this));
+        finish();
     }
 
     @Override

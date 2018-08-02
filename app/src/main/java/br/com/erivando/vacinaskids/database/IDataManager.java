@@ -1,5 +1,6 @@
 package br.com.erivando.vacinaskids.database;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import br.com.erivando.vacinaskids.database.api.IApiHelper;
@@ -47,10 +48,17 @@ public interface IDataManager extends IPreferencesHelper, IApiHelper {
 
     void setUserAsLoggedOut();
 
-    boolean novoUsuario(Usuario usuario);
+    boolean novoAtualizaUsuario(Usuario usuario);
 
-    boolean validaLoginUsuario(String login, String senha);
+    boolean eliminaUsuario(Long id);
+
+    Usuario obtemUsuario(Long id);
+
+    Usuario obtemUsuario();
 
     Usuario obtemUsuario(String[] valoresA, String[] valoresB);
 
+    List<Usuario> obtemTodosUsuarios(String[] campo, String[] valor);
+
+    boolean validaLoginUsuario(String login, String senha);
 }

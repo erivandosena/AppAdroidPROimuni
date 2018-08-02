@@ -1,5 +1,6 @@
 package br.com.erivando.vacinaskids.mvp;
 
+import android.content.Intent;
 import android.support.annotation.StringRes;
 
 import com.facebook.CallbackManager;

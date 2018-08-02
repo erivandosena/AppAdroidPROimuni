@@ -15,44 +15,56 @@
     <string name="button_action_snackbar">Ação</string>
     <string name="versao_app">Versão</string>
     <!-- Menus Drawer. -->
-    <string name="sobre">Sobre</string>
+    <string name="sobre">Sobre o App</string>
+    <string name="avaliacao">Avaliação do App</string>
     <string name="logout">Sair</string>
-    <string name="feed">Idades</string>
-    <string name="rate_us">Avaliação</string>
     <!-- Drawer. -->
     <string name="open_drawer">Drawer Open</string>
     <string name="close_drawer">Drawer Close</string>
     <!-- Menus Toolbar. -->
     <string name="clear">Limpar</string>
-    <string name="cut">Editar Usuário</string>
+    <string name="edita_usuario">Editar Usuário</string>
     <string name="copy">Editar Criança</string>
     <string name="paste">Editar Cartão</string>
-    <string name="delete">Postos de Saúde</string>
+    <string name="local_mapa">Postos de Saúde</string>
     <string name="share">Compartilhar</string>
     <!-- Usuário -->
-    <string name="text_nome_completo">Nome completo</string>
-    <string name="text_usuario_nome">Nome de usuário</string>
+    <string name="text_usuario_titulo">Dados do Usuário</string>
+    <string name="text_usuario_nome_completo">Nome completo do usuário</string>
+    <string name="text_usuario_login">Nome único do usuário</string>
+    <string name="text_usuario_nome">Usuário</string>
     <string name="text_usuario_email">E-mail</string>
     <string name="text_usuario_senha">Senha</string>
     <string name="text_usuario_repete_senha">Repita a senha</string>
-    <string name="btn_cadastrar">Cadastrar</string>
+    <string name="btn_salvar">Salvar</string>
     <string name="btn_voltar">Voltar</string>
-    <string name="text_valida_cadastro">Não foi possível realizar o cadastro!</string>
-    <string name="text_cadastro_sucesso">Cadastrado com sucesso!</string>
-    <string name="erro_text_cadastro">Cadastro não realizado!</string>
+    <string name="text_valida_cadastro">Não foi possível salvar!</string>
+    <string name="text_cadastro_sucesso">Salvo com sucesso!</string>
+    <string name="erro_text_usuario_existente">Usuário já cadastrado!</string>
+    <string name="erro_text_cadastro">Ocorreu um erro ao salvar!</string>
     <string name="erro_text_nome_completo">Informe o nome completo</string>
     <string name="erro_text_usuario">Informe um nome de usuário válido</string>
     <string name="erro_text_email_invalido">Informe um e-mail válido</string>
     <string name="erro_text_senha">Informe a senha</string>
     <string name="erro_text_repeteSenha">Repita a senha</string>
     <string name="erro_text_senhaInvalida">Senhas não coincidem</string>
-    <string name="text_usuario_login">Usuário</string>
     <string name="btn_login_usuario">Entrar</string>
     <string name="btn_cadastro_usuario">Cadastro</string>
     <string name="text_valida_login">Informe o usuário</string>
     <string name="text_valida_senha">Informe a senha</string>
     <string name="text_valida_email">Informe um e-mail válido</string>
     <string name="text_valida_usuario">Nome de usuário ou senha não conferem</string>
+    <!-- Cadastro foto. -->
+    <string name="texto_aviso_cadastro_foto">Adicione uma imagem</string>
+    <string name="texto_cadastro_opcao_camera">Obter da Câmera</string>
+    <string name="texto_cadastro_opcao_imagens">Obter da Galeria</string>
+    <string name="texto_botao_dialogo_cancela">Cancelar</string>
+    <string name="texto_botao_dialogo_titulo">Opções de Imagem</string>
+    <string name="texto_aviso_permissao_camera">Erro de permissão da câmera</string>
+    <string name="texto_aviso_camera_ausente">Nenhuma câmera encontrada neste dispositivo!</string>
+    <string name="texto_aviso_erro_processo_imagem">Erro ao carregar imagem, selecione uma imagem menor.</string>
+    <string name="texto_aviso_erro_aquisicao_imagem">Nenhuma imagem adquirida.</string>
+    <string name="texto_aviso_erro_sistema_desatualizado">Impossível obter imagem, atualize o sistema!</string>
     <!-- App Message. -->
     <string name="some_error">Algum erro ocorreu!</string>
     <string name="api_retry_error"> Por favor, tente novamente!</string>
@@ -64,13 +76,13 @@
     <!-- Sobre. -->
     <string name="proj_info">Este aplicativo possui desenvolvimento nativo da plataforma Android compatível a partir da versão 4.0.3 (API 15) a versão 8.1.0 (API 27). Implementa arquitetura MVP, utilizando tecnologias Dagger 2, Realm 3, RxJava, FastAndroidNetworking.</string>
     <string name="proj_repo">Repositório: \n https://bitbucket.org/erivandoramos/vacinaskids/src/</string>
-    <string name="proj_participantes">Participantes: \n thaispaula73@gmail.com \n cunhacos@gmail.com \n nirlagomesg@gmail.co \n jhsfelix@gmail.com</string>
+    <string name="proj_participantes">Participantes: \n thaispaula73@gmail.com \n cunhacos@gmail.com \n nirlagomesg@gmail.com \n jhsfelix@gmail.com</string>
     <string name="proj_autor">Desenvolvedor: \n erivandosena@gmail.com</string>
     <!-- Menu principal. -->
     <string name="menu_item1">Cartão Vacinal</string>
-    <string name="menu_item2">Gerenciar</string>
+    <string name="menu_item2">Adicionar Cartão</string>
     <string name="menu_item3">Vacinas</string>
-    <string name="menu_item4">Idades</string>
+    <string name="menu_item4">Calendário Vacinal</string>
     <string name="menu_item5">Localizar Postos</string>
     <string name="menu_item6">Curiosidades</string>
     <!--  facebook Login. -->
@@ -80,7 +92,6 @@
     <string name="facebook_error_fabebook_login">Ocorreu um erro ao entrar</string>
     <string name="firebase_logout">Fechar Sessão</string>
     <!--  Google Login. -->
-    <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
     <string name="google_cancel_login">A operação login Google foi cancelada</string>
     <string name="google_falha_conexao">Conexão falhou!</string>
     <string name="google_error_login">Ocorreu um erro ao entrar</string>

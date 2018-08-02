@@ -110,4 +110,5 @@ public abstract class BaseViewExtra extends ViewGroup implements MvpViewExtra {
     protected abstract void bindViewsAndSetOnClickListeners();
 
     protected abstract void setUp();
+
 }

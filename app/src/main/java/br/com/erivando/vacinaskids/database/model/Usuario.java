@@ -26,26 +26,20 @@ public class Usuario extends RealmObject {
     private String usuaLogin;
     private String usuaSenha;
     private String usuaEmail;
+    private String usuaFoto;
 
-    /* Correspondente a interface DAO. */
-    //public static final Class<UsuarioDAO> DAO_INTERFACE_CLASS = UsuarioDAO.class;
-
-    /**
-     * Método default construtor da classe.
-     */
     public Usuario() {
     }
 
-    //@Generated(hash = 1015687459)
-    public Usuario(Long id, String usuaNome, String usuaLogin, String usuaSenha, String usuaEmail) {
+    public Usuario(Long id, String usuaNome, String usuaLogin, String usuaSenha, String usuaEmail, String usuaFoto) {
         this.id = id;
         this.usuaNome = usuaNome;
         this.usuaLogin = usuaLogin;
         this.usuaSenha = usuaSenha;
         this.usuaEmail = usuaEmail;
+        this.usuaFoto = usuaFoto;
     }
 
-    /* métodos Gets e Sets para encapsulamentos. */
     public Long getId() {
         return this.id;
     }
@@ -86,6 +80,14 @@ public class Usuario extends RealmObject {
         this.usuaEmail = usuaEmail;
     }
 
+    public String getUsuaFoto() {
+        return usuaFoto;
+    }
+
+    public void setUsuaFoto(String usuaFoto) {
+        this.usuaFoto = usuaFoto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -111,6 +113,9 @@ public class Usuario extends RealmObject {
         if (usuaEmail != null ? !usuaEmail.equals(usuario.usuaEmail) : usuario.usuaEmail != null) {
             return false;
         }
+        if (usuaFoto != null ? !usuaFoto.equals(usuario.usuaFoto) : usuario.usuaFoto != null) {
+            return false;
+        }
         return true;
     }
 
@@ -122,6 +127,7 @@ public class Usuario extends RealmObject {
         result = 31 * result + (usuaLogin != null ? usuaLogin.hashCode() : 0);
         result = 31 * result + (usuaSenha != null ? usuaSenha.hashCode() : 0);
         result = 31 * result + (usuaEmail != null ? usuaEmail.hashCode() : 0);
+        result = 31 * result + (usuaFoto != null ? usuaFoto.hashCode() : 0);
         return result;
     }
 
@@ -133,6 +139,7 @@ public class Usuario extends RealmObject {
                 + ", Login: '" + usuaLogin + '\''
                 + ", Senha: '" + usuaSenha + '\''
                 + ", E-mail: '" + usuaEmail + '\''
+                + ", Foto: '" + usuaFoto + '\''
                 + '}';
     }
 

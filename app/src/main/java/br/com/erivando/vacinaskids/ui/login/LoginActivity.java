@@ -79,10 +79,6 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     void onGoogleLoginClick(View v) {
         showLoading();
         if (v == googleLogin) {
-           // presenter.onCreateGoogleLogin();
-          //  Intent intent = Auth.GoogleSignInApi.getSignInIntent(presenter.getGoogleApiClient());
-           // startActivityForResult(intent, SIGN_IN_CODE);
-
             Intent signInIntent = presenter.getGoogleSignInClient().getSignInIntent();
             startActivityForResult(signInIntent, RC_SIGN_IN);
         }
@@ -105,16 +101,19 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
     @OnClick(R.id.btn_cadastro_usuario)
     public void openCadastroUsuarioActivity() {
-        Intent intent = CadastroUsuarioActivity.getStartIntent(LoginActivity.this);
-        startActivity(intent);
-        finish();
+        if (presenter.onVerificaUsuarioCadastrado()) {
+            Intent intent = CadastroUsuarioActivity.getStartIntent(LoginActivity.this);
+            startActivity(intent);
+            finish();
+        } else {
+            onError(R.string.erro_text_usuario_existente);
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         presenter.onDetach();
-       // presenter.getAccessTokenTracker().stopTracking();
     }
 
     @Override
@@ -130,6 +129,5 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         presenter.getHandleActivityResult(requestCode, resultCode, data);
         presenter.getCallbackManager().onActivityResult(requestCode, resultCode, data);
     }
-
 
 }

@@ -46,5 +46,7 @@ public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<
 
     void onVerificaLoginGoogle();
 
+    boolean onVerificaUsuarioCadastrado();
+
     GoogleSignInClient getGoogleSignInClient();
 }

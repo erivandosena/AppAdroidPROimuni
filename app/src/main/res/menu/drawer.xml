@@ -27,12 +27,7 @@
             android:id="@+id/nav_item_rate_us"
             android:checked="true"
             android:icon="@drawable/ic_star"
-            android:title="@string/rate_us" />
-        <item
-            android:id="@+id/nav_item_feed"
-            android:checked="true"
-            android:icon="@drawable/ic_criancas_cadastro"
-            android:title="@string/feed" />
+            android:title="@string/avaliacao" />
         <item
             android:id="@+id/nav_item_logout"
             android:checked="true"

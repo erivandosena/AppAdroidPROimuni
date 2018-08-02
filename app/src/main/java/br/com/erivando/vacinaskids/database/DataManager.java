@@ -54,20 +54,23 @@ public class DataManager implements IDataManager {
     }
 
     @Override
-    public boolean novoUsuario(Usuario usuario) {
+    public boolean novoAtualizaUsuario(Usuario usuario) {
         return realmDataBase.addOrUpdate(usuario);
     }
 
-    public boolean atualizaUsuario(Usuario usuario) {
-        return realmDataBase.addOrUpdate(usuario);
-    }
-
+    @Override
     public boolean eliminaUsuario(Long id) {
         return realmDataBase.remove(Usuario.class, "id", id);
     }
 
+    @Override
     public Usuario obtemUsuario(Long id) {
         return realmDataBase.getObject(Usuario.class, "id", id);
+    }
+
+    @Override
+    public Usuario obtemUsuario() {
+        return realmDataBase.getObject(Usuario.class);
     }
 
     @Override
@@ -75,6 +78,7 @@ public class DataManager implements IDataManager {
         return realmDataBase.getObject(valoresA, valoresB, Usuario.class);
     }
 
+    @Override
     public List<Usuario> obtemTodosUsuarios(String[] campo, String[] valor) {
         return realmDataBase.findAll(campo, valor, Usuario.class);
     }

@@ -1,7 +1,5 @@
 package br.com.erivando.vacinaskids.mvp;
 
-import br.com.erivando.vacinaskids.mvp.MvpView;
-
 /**
  * Projeto:     VacinasKIDS
  * Autor:       Erivando Sena

@@ -3,6 +3,7 @@ package br.com.erivando.vacinaskids.mvp.base;
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ import br.com.erivando.vacinaskids.util.CommonUtils;
 import br.com.erivando.vacinaskids.util.NetworkUtils;
 import butterknife.Unbinder;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
 /**
  * Projeto:     VacinasKIDS
@@ -171,4 +174,5 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
     }
 
     protected abstract void setUp();
+
 }

@@ -3,7 +3,9 @@ package br.com.erivando.vacinaskids.ui.login;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -31,9 +33,11 @@ import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
+import br.com.erivando.vacinaskids.BuildConfig;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.database.DataManager;
 import br.com.erivando.vacinaskids.database.IDataManager;
@@ -42,6 +46,10 @@ import br.com.erivando.vacinaskids.mvp.base.BasePresenter;
 import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
 
+import static android.provider.MediaStore.Images.Media.getContentUri;
+import static br.com.erivando.vacinaskids.util.Uteis.base64ParaBitmap;
+import static br.com.erivando.vacinaskids.util.Uteis.bitmapParaUri;
+import static br.com.erivando.vacinaskids.util.Uteis.getPathFromUri;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
@@ -87,22 +95,14 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
         try {
             if (getIDataManager().validaLoginUsuario(login, senha)) {
-
-                //Usuario usuario = new Usuario();
                 Usuario usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login}, new String[]{"usuaSenha", senha});
-                usuario.getId();
-                usuario.getUsuaNome();
-                usuario.getUsuaLogin();
-                usuario.getUsuaSenha();
-                usuario.getUsuaEmail();
-
                 getIDataManager().updateUserInfo(
-                        null,
+                        UUID.randomUUID().toString().replace("-",""),
                         Long.valueOf(usuario.getId()),
                         DataManager.LoggedInMode.LOGGED_IN_MODE_LOCAL,
                         usuario.getUsuaNome(),
                         usuario.getUsuaEmail(),
-                        null
+                        (usuario.getUsuaFoto() != null) ? "file://"+getPathFromUri(getApplicationContext(), bitmapParaUri(getApplicationContext(),base64ParaBitmap(usuario.getUsuaFoto()))) : null
                 );
                 if (!isViewAttached()) {
                     return;
@@ -315,6 +315,14 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         // Verifique a conta existente de login do Google, se o usuário já estiver conectado
         // o GoogleSignInAccount não será nulo.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+    }
+
+    @Override
+    public boolean onVerificaUsuarioCadastrado() {
+        if(getIDataManager().getUsuarioID().get() == 0)
+            return true;
+        else
+            return false;
     }
 
 }

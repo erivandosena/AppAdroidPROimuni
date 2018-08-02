@@ -17,6 +17,9 @@ import br.com.erivando.vacinaskids.mvp.MvpView;
 
 public interface CadastroUsuarioMvpView extends MvpView {
 
-    void openLoginActivity();
+    void openLoginOuMainActivity();
 
+    void onIncluiFotoUsuario();
+
+    void getStartActivityForResult(Intent intentImagem, int requestImgCamera);
 }

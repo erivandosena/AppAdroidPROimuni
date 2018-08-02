@@ -16,6 +16,8 @@ public interface MainMvpView extends MvpView {
 
     void showAboutFragment();
 
+    void openCadastroUsuarioActivity();
+
     /*
     void refreshQuestionnaire(List<Question> questionList);
 
