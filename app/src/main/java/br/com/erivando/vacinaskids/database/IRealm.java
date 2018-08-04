@@ -32,7 +32,9 @@ public interface IRealm {
 
     <T extends RealmObject> T getObject(Class<T> clazz, String field, Long value);
 
-    <T extends RealmObject> T getObject(String[] fieldValueA, String[] fieldValueB, Class<T> clazz);
+    <T extends RealmObject> T getObject(Class<T> clazz, String[] fieldValues);
+
+    <T extends RealmObject> T getObject(Class<T> clazz, String[] fieldValueA, String[] fieldValueB);
 
     <T extends RealmObject> List<T> findAll(Class<T> clazz);
 

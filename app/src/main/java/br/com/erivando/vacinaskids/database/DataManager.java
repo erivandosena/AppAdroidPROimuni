@@ -74,8 +74,13 @@ public class DataManager implements IDataManager {
     }
 
     @Override
+    public Usuario obtemUsuario(String[] valores) {
+        return realmDataBase.getObject(Usuario.class, valores);
+    }
+
+    @Override
     public Usuario obtemUsuario(String[] valoresA, String[] valoresB) {
-        return realmDataBase.getObject(valoresA, valoresB, Usuario.class);
+        return realmDataBase.getObject(Usuario.class, valoresA, valoresB);
     }
 
     @Override

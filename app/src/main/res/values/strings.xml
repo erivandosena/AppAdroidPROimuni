@@ -28,6 +28,9 @@
     <string name="paste">Editar Cartão</string>
     <string name="local_mapa">Postos de Saúde</string>
     <string name="share">Compartilhar</string>
+    <string name="mensagen_avaliacao_app">Por favor, avalie este aplicativo na Play Store.</string>
+    <string name="botao_ok_avaliacao_app"><Data><![CDATA[ <strong>Sim, eu quero!</strong> ]]></Data></string>
+    <string name="botao_cancel_avaliacao_app">Depois</string>
     <!-- Usuário -->
     <string name="text_usuario_titulo">Dados do Usuário</string>
     <string name="text_usuario_nome_completo">Nome completo do usuário</string>
@@ -49,6 +52,7 @@
     <string name="erro_text_repeteSenha">Repita a senha</string>
     <string name="erro_text_senhaInvalida">Senhas não coincidem</string>
     <string name="btn_login_usuario">Entrar</string>
+    <string name="btn_login_lembrar_senha">Esqueci minha senha</string>
     <string name="btn_cadastro_usuario">Cadastro</string>
     <string name="text_valida_login">Informe o usuário</string>
     <string name="text_valida_senha">Informe a senha</string>

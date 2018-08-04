@@ -81,13 +81,13 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
 
     @Override
     public void onDrawerRateUsClick() {
-       // getMvpView().closeNavigationDrawer();
-      //  getMvpView().showRateUsDialog();
+        getMvpView().closeNavigationDrawer();
+        getMvpView().showRateUsDialog();
     }
 
     @Override
     public void onDrawerMyFeedClick() {
-       // getMvpView().closeNavigationDrawer();
-       // getMvpView().openMyFeedActivity();
+        getMvpView().closeNavigationDrawer();
+        getMvpView().openMyFeedActivity();
     }
 }

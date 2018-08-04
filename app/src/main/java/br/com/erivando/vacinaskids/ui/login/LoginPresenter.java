@@ -1,11 +1,11 @@
 package br.com.erivando.vacinaskids.ui.login;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.telephony.TelephonyManager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -33,11 +33,11 @@ import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.UUID;
 
 import javax.inject.Inject;
 
-import br.com.erivando.vacinaskids.BuildConfig;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.database.DataManager;
 import br.com.erivando.vacinaskids.database.IDataManager;
@@ -46,9 +46,9 @@ import br.com.erivando.vacinaskids.mvp.base.BasePresenter;
 import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
 
-import static android.provider.MediaStore.Images.Media.getContentUri;
 import static br.com.erivando.vacinaskids.util.Uteis.base64ParaBitmap;
 import static br.com.erivando.vacinaskids.util.Uteis.bitmapParaUri;
+import static br.com.erivando.vacinaskids.util.Uteis.enviarMensagem;
 import static br.com.erivando.vacinaskids.util.Uteis.getPathFromUri;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -325,4 +325,57 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             return false;
     }
 
+    @Override
+    public void enviaSenhaEmail(Context context, String login) {
+        if (login == null || login.isEmpty() || login.length() < 4 || login.length() > 20 || login.matches("^[a-zA-Z]+ [a-zA-Z]+.*")) {
+            getMvpView().onError(R.string.text_valida_login);
+            return;
+        }
+        Usuario usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin",login});
+        if (usuario == null) {
+            getMvpView().onError(R.string.erro_text_usuario);
+            return;
+        }
+
+        getMvpView().showLoading();
+        try {
+            String mensagem = "Prezado(a) "+usuario.getUsuaNome()+"\n\nSegue a senha solicitada: "+usuario.getUsuaSenha()+"\n\n© "+ Calendar.getInstance().get(Calendar.YEAR)+" "+context.getResources().getString(R.string.app_name)+"\n"+context.getResources().getString(R.string.app_slogan);
+            if (enviarMensagem(context, "erivandosena@gmail.com", usuario.getUsuaEmail(), "Senha do app", mensagem)) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle(R.string.app_name);
+                builder.setMessage("Senha enviada para o e-mail: "+usuario.getUsuaEmail());
+                builder.setNegativeButton("Ok", null);
+                builder.setCancelable(false);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            } else {
+                getMvpView().onError("Não foi possível enviar a senha!");
+            }
+        } finally {
+            getMvpView().hideLoading();
+        }
+
+        /*
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        try {
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_EMAIL , new String[]{usuario.getUsuaEmail()});
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Senha do app");
+            intent.putExtra(Intent.EXTRA_TEXT , "Prezado(a) "+usuario.getUsuaNome()+"\n\nSegue a senha solicitada: "+usuario.getUsuaSenha()+"\n\n© "+ Calendar.getInstance().get(Calendar.YEAR)+" "+context.getResources().getString(R.string.app_name)+"\n"+context.getResources().getString(R.string.app_slogan));
+
+            getMvpView().getStartActivity(Intent.createChooser(intent, "Enviando senha para o e-mail: "+usuario.getUsuaEmail()));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(context, "Instale um aplicativo cliente de e-mail!", Toast.LENGTH_SHORT).show();
+        } finally {
+            getMvpView().hideLoading();
+        }
+        */
+    }
+
+    @Override
+    public Usuario onObtemUsuario(String[] values) {
+        return getIDataManager().obtemUsuario(values);
+    }
+
 }
+

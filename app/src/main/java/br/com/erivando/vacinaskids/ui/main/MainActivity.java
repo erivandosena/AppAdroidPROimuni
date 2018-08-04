@@ -1,11 +1,15 @@
 package br.com.erivando.vacinaskids.ui.main;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -15,6 +19,7 @@ import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -42,6 +47,8 @@ import br.com.erivando.vacinaskids.ui.login.LoginMvpView;
 import br.com.erivando.vacinaskids.ui.sobre.SobreFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static br.com.erivando.vacinaskids.util.Uteis.exibeAvaliacaoDialog;
 
 /**
  * Projeto:     VacinasKIDs
@@ -310,6 +317,20 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void showRateUsDialog() {
 
+        exibeAvaliacaoDialog(this);
+
+        /*
+        Uri uri = Uri.parse("market://details?id="+ getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        // Para contar com o backstack da Play Store, depois de pressionar o botão Voltar,
+        // para voltar ao aplicativo, precisamos adicionar os seguintes sinalizadores à intent.
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
+        }
+        */
     }
 
     @Override

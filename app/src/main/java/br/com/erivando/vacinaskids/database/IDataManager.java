@@ -56,6 +56,8 @@ public interface IDataManager extends IPreferencesHelper, IApiHelper {
 
     Usuario obtemUsuario();
 
+    Usuario obtemUsuario(String[] valores);
+
     Usuario obtemUsuario(String[] valoresA, String[] valoresB);
 
     List<Usuario> obtemTodosUsuarios(String[] campo, String[] valor);

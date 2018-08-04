@@ -25,12 +25,34 @@ android {
             buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
         }
     }
-
+    packagingOptions {
+        exclude 'META-INF/mailcap.default'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/mimetypes.default'
+        pickFirst 'META-INF/INDEX.LIST'
+        pickFirst 'META-INF/io.netty.versions.properties'
+    }
 }
 
 dependencies {
-    /* Facebook Login */
-    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    /* GMail/Google APIs/OAuth */
+    implementation 'com.google.api-client:google-api-client-android:1.23.0'
+    //implementation 'com.google.android.gms:play-services-identity:15.0.1'
+    implementation 'com.google.apis:google-api-services-gmail:v1-rev92-1.24.1'
+
+    /* JavaMail for Android */
+    //implementation 'com.sun.mail:android-mail:1.6.1'
+    //implementation 'com.sun.mail:android-activation:1.6.1'
+    //implementation 'com.sun.mail:android-additionnal:1.6.1'
+
+    implementation files('libs/mail.jar')
+    implementation files('libs/activation.jar')
+    implementation files('libs/additionnal.jar')
 
     /* Google Login */
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
@@ -38,6 +60,9 @@ dependencies {
     /* Firebase */
     implementation 'com.google.firebase:firebase-auth:16.0.2'
     implementation 'com.google.firebase:firebase-core:16.0.0'
+
+    /* Facebook Login */
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     /* Fast Android Networking with RxJava2 */
     implementation 'com.amitshekhar.android:rx2-android-networking:1.0.2'

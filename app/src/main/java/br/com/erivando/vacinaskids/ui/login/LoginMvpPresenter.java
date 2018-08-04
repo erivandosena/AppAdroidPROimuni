@@ -1,19 +1,18 @@
 package br.com.erivando.vacinaskids.ui.login;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.Task;
 
 import org.json.JSONObject;
 
+import br.com.erivando.vacinaskids.database.model.Usuario;
 import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 
@@ -49,4 +48,8 @@ public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<
     boolean onVerificaUsuarioCadastrado();
 
     GoogleSignInClient getGoogleSignInClient();
+
+    void enviaSenhaEmail(Context context, String login);
+
+    Usuario onObtemUsuario(String[] values);
 }

@@ -142,6 +142,7 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
         return getIDataManager().novoAtualizaUsuario(usuario);
     }
 
+    /*
     @Override
     public boolean hasPermissoes(Context context, String... permissions) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
@@ -153,6 +154,7 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
         }
         return true;
     }
+    */
 
     @Override
     public void selecionarImagem(final Context context) {

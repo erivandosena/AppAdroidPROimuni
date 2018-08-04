@@ -1,7 +1,13 @@
 package br.com.erivando.vacinaskids.util;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +17,9 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
+import android.text.Html;
 import android.util.Base64;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,6 +32,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import br.com.erivando.vacinaskids.R;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -190,5 +201,103 @@ public class Uteis {
                 cursor.close();
             }
         }
+    }
+
+    /**
+     *
+     * @param context
+     */
+    public static void exibeAvaliacaoDialog(final Context context) {
+        Resources res = context.getResources();
+        AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                .setIcon(R.drawable.ic_star)
+                .setTitle(R.string.app_name)
+                .setMessage(R.string.mensagen_avaliacao_app)
+                .setCancelable(false)
+                .setPositiveButton(Html.fromHtml(res.getString(R.string.botao_ok_avaliacao_app)), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (context != null) {
+                            Uri uri = Uri.parse("market://details?id="+ context.getPackageName());
+                            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                            // Para contar com o backstack da Play Store, depois de pressionar o botão Voltar,
+                            // para voltar ao aplicativo, precisamos adicionar os seguintes sinalizadores à intent.
+                            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                            try {
+                                context.startActivity(goToMarket);
+                            } catch (ActivityNotFoundException e) {
+                                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+                            }
+                        }
+                    }
+                }).setNegativeButton(R.string.botao_cancel_avaliacao_app, null);
+        builder.show();
+    }
+
+    /**
+     * Método enviarMensagem
+     *
+     * @param context       O contexto da aplicação
+     * @param de            Remetente da mensagem
+     * @param para          Destinatário da mensagem
+     * @param assunto       O assunto da mensagem
+     * @param corpoMensagem O texto com o conteúdo da mensagem
+     * @return boolean
+     */
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+    public static boolean enviarMensagem(Context context, String de, String para, String assunto, String corpoMensagem) {
+        String[] DE={de};
+        String[] PARA={para};
+
+        try {
+            Intent emailSI=new Intent(Intent.ACTION_SENDTO);
+            emailSI.setData(Uri.parse("mailto:"));
+            final Intent email=new Intent(Intent.ACTION_SEND);
+            email.putExtra(Intent.EXTRA_EMAIL, PARA);
+            email.putExtra(Intent.EXTRA_CC, DE);
+            email.putExtra(Intent.EXTRA_SUBJECT, assunto);
+            email.putExtra(Intent.EXTRA_TEXT, corpoMensagem);
+            email.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            email.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+                email.setSelector(emailSI);
+            }
+
+            if (email.resolveActivity(context.getPackageManager()) != null) {
+                context.startActivity(email);
+            } else {
+                return false;
+            }
+        } catch (android.content.ActivityNotFoundException ex) {
+            ex.fillInStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     *
+     * @param context
+     * @param permissions
+     * @return
+     */
+    public static boolean hasPermissoes(Context context, String... permissions) {
+        if (isMarshmallow()) {
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+                for (String permission : permissions) {
+                    if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean isMarshmallow() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
     }
 }

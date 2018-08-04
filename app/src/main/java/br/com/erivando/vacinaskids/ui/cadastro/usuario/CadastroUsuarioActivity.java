@@ -24,6 +24,7 @@ import static br.com.erivando.vacinaskids.ui.cadastro.usuario.CadastroUsuarioPre
 import static br.com.erivando.vacinaskids.ui.cadastro.usuario.CadastroUsuarioPresenter.TODAS_PERMISSOES;
 import static br.com.erivando.vacinaskids.util.Uteis.base64ParaBitmap;
 import static br.com.erivando.vacinaskids.util.Uteis.habilitaTelaCheia;
+import static br.com.erivando.vacinaskids.util.Uteis.hasPermissoes;
 
 /**
  * Projeto:     VacinasKIDS
@@ -102,7 +103,7 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     @OnClick(R.id.img_usuario_foto)
     @Override
     public void onIncluiFotoUsuario() {
-        if (!presenter.hasPermissoes(this, PERMISSOES)) {
+        if (!hasPermissoes(this, PERMISSOES)) {
             ActivityCompat.requestPermissions(this, PERMISSOES, TODAS_PERMISSOES);
         } else {
             presenter.selecionarImagem(this);
