@@ -3,7 +3,10 @@ package br.com.erivando.vacinaskids.ui.login;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.view.View;
 
 import com.facebook.CallbackManager;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -37,7 +40,7 @@ public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<
 
     Bundle getParametrosFacebook(JSONObject jsonObject);
 
-    void getHandleActivityResult(int requestCode, int resultCode, Intent data);
+    void getActivityResult(int requestCode, int resultCode, Intent data);
 
     void handleSignInResult(Task<GoogleSignInAccount> completedTask);
 
@@ -49,7 +52,21 @@ public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<
 
     GoogleSignInClient getGoogleSignInClient();
 
-    void enviaSenhaEmail(Context context, String login);
+    void enviaSenhaPorEmail(View view, String login);
 
-    Usuario onObtemUsuario(String[] values);
+    void getRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults);
+
+    String getPathFromURI(Uri contentUri);
+
+    void chooseAccount(View view);
+
+    void showGooglePlayServicesAvailabilityErrorDialog(final int connectionStatusCode);
+
+    void acquireGooglePlayServices();
+
+    boolean isGooglePlayServicesAvailable();
+
+    void getResultsFromApi(View view);
+
+    void onCreateGoogleAccountCredential();
 }

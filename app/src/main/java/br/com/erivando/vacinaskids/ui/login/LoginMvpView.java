@@ -1,8 +1,8 @@
 package br.com.erivando.vacinaskids.ui.login;
 
+import android.app.Activity;
 import android.content.Intent;
 
-import br.com.erivando.vacinaskids.database.model.Usuario;
 import br.com.erivando.vacinaskids.mvp.MvpView;
 
 /**
@@ -21,4 +21,7 @@ public interface LoginMvpView extends MvpView {
 
     void getStartActivity(Intent intent);
 
+    void getStartActivityForResult(Intent intent, int i);
+
+    Activity getContextActivity();
 }

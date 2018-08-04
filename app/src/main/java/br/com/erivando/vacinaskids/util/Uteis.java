@@ -1,6 +1,5 @@
 package br.com.erivando.vacinaskids.util;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -233,48 +232,6 @@ public class Uteis {
                 }).setNegativeButton(R.string.botao_cancel_avaliacao_app, null);
         builder.show();
     }
-
-    /**
-     * Método enviarMensagem
-     *
-     * @param context       O contexto da aplicação
-     * @param de            Remetente da mensagem
-     * @param para          Destinatário da mensagem
-     * @param assunto       O assunto da mensagem
-     * @param corpoMensagem O texto com o conteúdo da mensagem
-     * @return boolean
-     */
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
-    public static boolean enviarMensagem(Context context, String de, String para, String assunto, String corpoMensagem) {
-        String[] DE={de};
-        String[] PARA={para};
-
-        try {
-            Intent emailSI=new Intent(Intent.ACTION_SENDTO);
-            emailSI.setData(Uri.parse("mailto:"));
-            final Intent email=new Intent(Intent.ACTION_SEND);
-            email.putExtra(Intent.EXTRA_EMAIL, PARA);
-            email.putExtra(Intent.EXTRA_CC, DE);
-            email.putExtra(Intent.EXTRA_SUBJECT, assunto);
-            email.putExtra(Intent.EXTRA_TEXT, corpoMensagem);
-            email.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            email.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-                email.setSelector(emailSI);
-            }
-
-            if (email.resolveActivity(context.getPackageManager()) != null) {
-                context.startActivity(email);
-            } else {
-                return false;
-            }
-        } catch (android.content.ActivityNotFoundException ex) {
-            ex.fillInStackTrace();
-            return false;
-        }
-        return true;
-    }
-
 
     /**
      *

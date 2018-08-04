@@ -34,8 +34,6 @@ public interface CadastroUsuarioMvpPresenter<V extends CadastroUsuarioMvpView> e
 
     boolean onNovoAtualizaUsuario(Usuario usuario);
 
-    //boolean hasPermissoes(Context context, String... permissions);
-
     void selecionarImagem(@ApplicationContext final Context context);
 
     void imagemIntentCamera(@ApplicationContext final Context context);

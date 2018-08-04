@@ -104,12 +104,18 @@
                 android:id="@+id/tv_btn_lembrar_senha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-10dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginTop="-10dp"
                 android:text="@string/btn_login_lembrar_senha"
-                android:textAppearance="@style/Base.Widget.AppCompat.Light.ActionBar.TabText.Inverse" />
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:clickable="true"
+                android:linksClickable="true"
+                android:textColorLink="@color/red_dark"
+                android:textColorHighlight="@color/red_dark2"
+                android:autoLink="web"
+                android:textColor="@color/navy_blue" />
 
             <Button
                 android:id="@+id/btn_login_usuario"
