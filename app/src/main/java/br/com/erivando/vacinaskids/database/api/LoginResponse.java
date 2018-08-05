@@ -142,10 +142,7 @@ public class LoginResponse {
         if (fbProfilePicUrl != null ? !fbProfilePicUrl.equals(that.fbProfilePicUrl)
                 : that.fbProfilePicUrl != null)
             return false;
-        if (googleProfilePicUrl != null ? !googleProfilePicUrl.equals(that.googleProfilePicUrl)
-                : that.googleProfilePicUrl != null)
-            return false;
-        return message != null ? message.equals(that.message) : that.message == null;
+        return (googleProfilePicUrl != null ? googleProfilePicUrl.equals(that.googleProfilePicUrl) : that.googleProfilePicUrl == null) && (message != null ? message.equals(that.message) : that.message == null);
 
     }
 

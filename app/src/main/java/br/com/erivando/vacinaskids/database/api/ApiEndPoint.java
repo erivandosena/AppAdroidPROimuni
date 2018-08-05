@@ -11,7 +11,7 @@ import br.com.erivando.vacinaskids.BuildConfig;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public final class ApiEndPoint {
+final class ApiEndPoint {
 
     public static final String ENDPOINT_GOOGLE_LOGIN = BuildConfig.BASE_URL
             + "/588d14f4100000a9072d2943";

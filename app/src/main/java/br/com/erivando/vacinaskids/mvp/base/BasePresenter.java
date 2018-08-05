@@ -61,11 +61,11 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
         mvpView = null;
     }
 
-    public boolean isViewAttached() {
+    protected boolean isViewAttached() {
         return mvpView != null;
     }
 
-    public V getMvpView() {
+    protected V getMvpView() {
         return mvpView;
     }
 
@@ -73,7 +73,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
         if (!isViewAttached()) throw new MvpViewNotAttachedException();
     }
 
-    public IDataManager getIDataManager() {
+    protected IDataManager getIDataManager() {
         return iDataManager;
     }
 
@@ -140,8 +140,8 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
         getIDataManager().setAccessToken(null);
     }
 
-    public static class MvpViewNotAttachedException extends RuntimeException {
-        public MvpViewNotAttachedException() {
+    static class MvpViewNotAttachedException extends RuntimeException {
+        MvpViewNotAttachedException() {
             super("Por favor, ligue ao Presenter.onAttach (MvpView) antes de" +
                     "solicitar dados ao apresentador");
         }

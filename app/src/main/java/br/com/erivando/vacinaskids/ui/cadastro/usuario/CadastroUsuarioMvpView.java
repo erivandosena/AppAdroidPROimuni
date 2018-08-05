@@ -1,8 +1,6 @@
 package br.com.erivando.vacinaskids.ui.cadastro.usuario;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 
 import br.com.erivando.vacinaskids.mvp.MvpView;
 
@@ -18,8 +16,6 @@ import br.com.erivando.vacinaskids.mvp.MvpView;
 public interface CadastroUsuarioMvpView extends MvpView {
 
     void openLoginOuMainActivity();
-
-    void onIncluiFotoUsuario();
 
     void getStartActivityForResult(Intent intentImagem, int requestImgCamera);
 }

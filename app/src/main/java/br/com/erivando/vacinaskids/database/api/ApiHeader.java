@@ -18,8 +18,8 @@ import br.com.erivando.vacinaskids.di.ApiInfo;
 
 @Singleton
 public class ApiHeader {
-    private ProtectedApiHeader mProtectedApiHeader;
-    private PublicApiHeader mPublicApiHeader;
+    private final ProtectedApiHeader mProtectedApiHeader;
+    private final PublicApiHeader mPublicApiHeader;
 
     @Inject
     public ApiHeader(PublicApiHeader publicApiHeader, ProtectedApiHeader protectedApiHeader) {

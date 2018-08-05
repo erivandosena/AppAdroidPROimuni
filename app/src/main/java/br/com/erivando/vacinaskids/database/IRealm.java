@@ -16,7 +16,7 @@ import io.realm.RealmObject;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public interface IRealm {
+interface IRealm {
 
     void setup(Context context);
 
@@ -32,7 +32,7 @@ public interface IRealm {
 
     <T extends RealmObject> T getObject(Class<T> clazz, String field, Long value);
 
-    <T extends RealmObject> T getObject(Class<T> clazz, String[] fieldValues);
+    <T extends RealmObject> RealmObject getObject(Class<T> clazz, String[] fieldValues);
 
     <T extends RealmObject> T getObject(Class<T> clazz, String[] fieldValueA, String[] fieldValueB);
 

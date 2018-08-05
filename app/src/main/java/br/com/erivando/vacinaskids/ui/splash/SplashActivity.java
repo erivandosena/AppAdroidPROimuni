@@ -9,11 +9,11 @@ import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
+import br.com.erivando.vacinaskids.service.SyncService;
 import br.com.erivando.vacinaskids.ui.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.main.MainActivity;
 import butterknife.ButterKnife;
 
-import static br.com.erivando.vacinaskids.util.Uteis.habilitaImmersiveMode;
 import static br.com.erivando.vacinaskids.util.Uteis.habilitaTelaCheia;
 
 /**
@@ -66,7 +66,7 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
     @Override
     public void startSyncService() {
-//        SyncService.start(this);
+        SyncService.start(this);
     }
 
     @Override

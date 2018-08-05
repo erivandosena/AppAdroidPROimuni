@@ -1,7 +1,6 @@
 package br.com.erivando.vacinaskids.database;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -9,7 +8,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import br.com.erivando.vacinaskids.database.model.Usuario;
 import br.com.erivando.vacinaskids.di.ApplicationContext;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -55,11 +53,7 @@ public class RealmDataBase implements IRealm {
     public <T extends RealmObject> boolean getLoginLocal(Class<T> clazz, String login, String senha) {
         Realm realm = getRealmInstance();
         try {
-            if (realm.where(clazz).equalTo("usuaLogin", login).and().equalTo("usuaSenha", senha).count() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return realm.where(clazz).equalTo("usuaLogin", login).and().equalTo("usuaSenha", senha).count() > 0;
         }catch (Exception e){
             e.printStackTrace();
             return false;
@@ -119,7 +113,12 @@ public class RealmDataBase implements IRealm {
 
     @Override
     public <T extends RealmObject> T getObject(Class<T> clazz, String[] fieldValues) {
-        return getRealmInstance().copyFromRealm(getRealmInstance().where(clazz).equalTo(fieldValues[0], fieldValues[1]).findFirst());
+        Realm instance = getRealmInstance();
+        T realmObject = instance.where(clazz).equalTo(fieldValues[0], fieldValues[1]).findFirst();
+        if(realmObject != null)
+            return instance.copyFromRealm(realmObject);
+        else
+            return realmObject;
     }
 
     @Override

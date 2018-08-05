@@ -101,7 +101,7 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     }
 
     @OnClick(R.id.img_usuario_foto)
-    @Override
+    //@Override
     public void onIncluiFotoUsuario() {
         if (!hasPermissoes(this, PERMISSOES)) {
             ActivityCompat.requestPermissions(this, PERMISSOES, TODAS_PERMISSOES);
@@ -116,7 +116,7 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     }
 
     @OnClick(R.id.btn_cadadastar_usuario)
-    void onCadasrarClick(View v) {
+    public void onCadasrarClick(View v) {
         presenter.onCadasrarClick(id, nomeEditText.getText().toString(), loginEditText.getText().toString(), emailEditText.getText().toString(), senhaEditText.getText().toString(), repSenhaEditText.getText().toString(), imagemBitmapFoto);
     }
 

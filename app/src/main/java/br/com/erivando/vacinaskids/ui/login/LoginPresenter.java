@@ -7,16 +7,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -80,6 +76,7 @@ import br.com.erivando.vacinaskids.database.DataManager;
 import br.com.erivando.vacinaskids.database.IDataManager;
 import br.com.erivando.vacinaskids.database.model.Usuario;
 import br.com.erivando.vacinaskids.mvp.base.BasePresenter;
+import br.com.erivando.vacinaskids.ui.AppAplicacao;
 import br.com.erivando.vacinaskids.util.InternetDetector;
 import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
@@ -89,8 +86,6 @@ import static br.com.erivando.vacinaskids.util.Uteis.base64ParaBitmap;
 import static br.com.erivando.vacinaskids.util.Uteis.bitmapParaUri;
 import static br.com.erivando.vacinaskids.util.Uteis.getPathFromUri;
 import static br.com.erivando.vacinaskids.util.Uteis.hasPermissoes;
-
-
 
 /**
  * Projeto:     VacinasKIDS
@@ -112,16 +107,15 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
     private GoogleSignInClient googleSignInClient;
     public static final int RC_SIGN_IN = 777;
     /* GMail API OAuth 2.0 */
-    public static final int REQUEST_ACCOUNT_PICKER = 1000;
-    public static final int REQUEST_AUTHORIZATION = 1001;
-    public static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
-    public static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
+    private static final int REQUEST_ACCOUNT_PICKER = 1000;
+    private static final int REQUEST_AUTHORIZATION = 1001;
+    private static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
+    private static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final List<String> SCOPES = Arrays.asList(GmailScopes.GMAIL_LABELS,GmailScopes.GMAIL_COMPOSE,GmailScopes.GMAIL_INSERT,GmailScopes.MAIL_GOOGLE_COM);
     private GoogleAccountCredential googleAccountCredential;
     private InternetDetector internetDetector;
     private FloatingActionButton floatingActionButton;
-    //public String fileName = "";
     private Usuario usuario;
     private AlertDialog.Builder alertDialogBuilder;
 
@@ -148,11 +142,11 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                 Usuario usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login}, new String[]{"usuaSenha", senha});
                 getIDataManager().updateUserInfo(
                         UUID.randomUUID().toString().replace("-",""),
-                        Long.valueOf(usuario.getId()),
+                        usuario.getId(),
                         DataManager.LoggedInMode.LOGGED_IN_MODE_LOCAL,
                         usuario.getUsuaNome(),
                         usuario.getUsuaEmail(),
-                        (usuario.getUsuaFoto() != null) ? "file://"+getPathFromUri(getMvpView().getContextActivity(), bitmapParaUri(getMvpView().getContextActivity(),base64ParaBitmap(usuario.getUsuaFoto()))) : null
+                        (usuario.getUsuaFoto() != null) ? "file://"+getPathFromUri(AppAplicacao.contextApp, bitmapParaUri(AppAplicacao.contextApp,base64ParaBitmap(usuario.getUsuaFoto()))) : null
                 );
                 if (!isViewAttached()) {
                     return;
@@ -203,13 +197,13 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                                         public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
                                             try {
                                                 if (graphResponse.getError() == null && bundleData != null) {
-                                                    Log.d("Dados BÁSICOS", graphResponse.toString());
+
                                                     String id = bundleData.getString("id");
                                                     String nome = bundleData.getString("name");
                                                     String email = bundleData.getString("email");
                                                     String primeiroNome = bundleData.getString("first_name");
                                                     String segundoNome = bundleData.getString("last_name");
-                                                    Log.d("Dados EXTRAS", bundleData.toString());
+
                                                     String genero = bundleData.getString("user_gender");
                                                     String aniversario = bundleData.getString("user_birthday");
                                                     String fotos = bundleData.getString("user_photos");
@@ -247,13 +241,13 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                     @Override
                     public void onCancel() {
                         getMvpView().hideLoading();
-                        Toast.makeText(getMvpView().getContextActivity(), R.string.facebook_cancel_login, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AppAplicacao.contextApp, R.string.facebook_cancel_login, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
                         getMvpView().hideLoading();
-                        Toast.makeText(getMvpView().getContextActivity(), R.string.facebook_error_fabebook_login, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AppAplicacao.contextApp, R.string.facebook_error_fabebook_login, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -302,7 +296,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         // O ID e o perfil básico estão incluídos em DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         // Construa um GoogleSignInClient com as opções especificadas pelo gso.
-        googleSignInClient = GoogleSignIn.getClient(getMvpView().getContextActivity(), gso);
+        googleSignInClient = GoogleSignIn.getClient(AppAplicacao.contextApp, gso);
     }
 
     @Override
@@ -314,7 +308,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(getMvpView().getContextActivity(), R.string.google_falha_conexao, Toast.LENGTH_SHORT).show();
+        Toast.makeText(AppAplicacao.contextApp, R.string.google_falha_conexao, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -329,8 +323,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         switch (requestCode) {
             case REQUEST_GOOGLE_PLAY_SERVICES:
                 if (resultCode != RESULT_OK) {
-                    showMessage(floatingActionButton, "Este aplicativo requer o Google Play Services. Por favor instale " +
-                            "Google Play Services no seu dispositivo e tente novamente.");
+                    showMessage(floatingActionButton, AppAplicacao.contextApp.getResources().getString(R.string.aviso_play_services_install));
                 } else {
                     getResultsFromApi(floatingActionButton);
                 }
@@ -374,7 +367,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             // O código de status ApiException indica o motivo detalhado da falha.
             // Por favor, consulte a referência da classe GoogleSignInStatusCodes para
             // mais informações. e.getStatusCode()
-            Toast.makeText(getMvpView().getContextActivity(), R.string.google_cancel_login, Toast.LENGTH_SHORT).show();
+            Toast.makeText(AppAplicacao.contextApp, R.string.google_cancel_login, Toast.LENGTH_SHORT).show();
         } finally {
             getMvpView().hideLoading();
         }
@@ -390,13 +383,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
     }
 
     @Override
-    public void onVerificaLoginGoogle() {
-        // Verifique a conta existente de login do Google, se o usuário já estiver conectado
-        // o GoogleSignInAccount não será nulo.
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getMvpView().getContextActivity());
-    }
-
-    @Override
     public boolean onVerificaUsuarioCadastrado() {
         if(getIDataManager().getUsuarioID().get() == 0)
             return true;
@@ -406,18 +392,21 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
     @Override
     public void enviaSenhaPorEmail(View view, String login) {
-
-        if (login == null || login.isEmpty() || login.length() < 4 || login.length() > 20 || login.matches("^[a-zA-Z]+ [a-zA-Z]+.*")) {
-            getMvpView().onError(R.string.text_valida_login);
+        try {
+            if (login == null || login.isEmpty() || login.length() < 4 || login.length() > 20 || login.matches("^[a-zA-Z]+ [a-zA-Z]+.*")) {
+                getMvpView().onError(R.string.text_valida_login);
+                return;
+            }
+            usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login});
+            if (usuario == null) {
+                getMvpView().onError(R.string.erro_text_usuario);
+                return;
+            }
+            getResultsFromApi(view);
+        } catch (Exception e) {
+            e.printStackTrace();
             return;
         }
-        usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin",login});
-        if (usuario == null) {
-            getMvpView().onError(R.string.erro_text_usuario);
-            return;
-        }
-
-        getResultsFromApi(view);
     }
 
     private void showMessage(View view, String message) {
@@ -439,27 +428,13 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         }
     }
 
-    @Override
-    public String getPathFromURI(Uri contentUri) {
-        String res = null;
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getMvpView().getContextActivity().getContentResolver().query(contentUri, proj, "", null, "");
-        assert cursor != null;
-        if (cursor.moveToFirst()) {
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            res = cursor.getString(column_index);
-        }
-        cursor.close();
-        return res;
-    }
-
     /**
      * Armazenando o ID do Mail usando Shared Preferences
      * @param view
      */
     @Override
     public void chooseAccount(View view) {
-        if (hasPermissoes(getMvpView().getContextActivity(), Manifest.permission.GET_ACCOUNTS)) {
+        if (hasPermissoes(AppAplicacao.contextApp, Manifest.permission.GET_ACCOUNTS)) {
             String accountName = getMvpView().getContextActivity().getPreferences(Context.MODE_PRIVATE).getString(PREF_ACCOUNT_NAME, null);
             if (accountName != null) {
                 googleAccountCredential.setSelectedAccountName(accountName);
@@ -490,7 +465,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
     @Override
     public void acquireGooglePlayServices() {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        int connectionStatusCode = apiAvailability.isGooglePlayServicesAvailable(getMvpView().getContextActivity());
+        int connectionStatusCode = apiAvailability.isGooglePlayServicesAvailable(AppAplicacao.contextApp);
         if (apiAvailability.isUserResolvableError(connectionStatusCode)) {
             showGooglePlayServicesAvailabilityErrorDialog(connectionStatusCode);
         }
@@ -503,7 +478,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
     @Override
     public boolean isGooglePlayServicesAvailable() {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        int connectionStatusCode = apiAvailability.isGooglePlayServicesAvailable(getMvpView().getContextActivity());
+        int connectionStatusCode = apiAvailability.isGooglePlayServicesAvailable(AppAplicacao.contextApp);
         return connectionStatusCode == ConnectionResult.SUCCESS;
     }
 
@@ -514,7 +489,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         } else if (googleAccountCredential.getSelectedAccountName() == null) {
             chooseAccount(view);
         } else if (!internetDetector.checkMobileInternetConn()) {
-            showMessage(view, "Sem conexão com à Internet!");
+            showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.aviso_sem_internet));
         } else {
             new CredentialRequestTask(this, googleAccountCredential).execute();
         }
@@ -523,29 +498,32 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
     @Override
     public void onCreateGoogleAccountCredential() {
         // Inicializa Internet Checker
-        internetDetector = new InternetDetector(getMvpView().getContextActivity());
+        internetDetector = new InternetDetector(AppAplicacao.contextApp);
         //Inicializa credenciais e objeto de serviço.
-        googleAccountCredential = GoogleAccountCredential.usingOAuth2(getMvpView().getContextActivity(), SCOPES).setBackOff(new ExponentialBackOff());
+        googleAccountCredential = GoogleAccountCredential.usingOAuth2(AppAplicacao.contextApp, SCOPES).setBackOff(new ExponentialBackOff());
 
         alertDialogBuilder = new AlertDialog.Builder(getMvpView().getContextActivity());
+        alertDialogBuilder.setIcon(R.drawable.ic_launcher_round);
         alertDialogBuilder.setTitle(R.string.app_name);
-        alertDialogBuilder.setNegativeButton("Ok", null);
+        alertDialogBuilder.setNegativeButton(R.string.text_btn_ok, null);
         alertDialogBuilder.setCancelable(false);
     }
 
-    // Async Task para enviar e-mails usando o OAuth do GMail
-    private class CredentialRequestTask extends AsyncTask<Void, Void, String> {
+    /**
+     * Classe Interna(Inner Class) Async Task para enviar e-mails usando o OAuth do GMail
+     */
+    class CredentialRequestTask extends AsyncTask<Void, Void, String> {
 
         private Gmail service = null;
         private Exception lastError = null;
-        private View view = floatingActionButton;
+        private final View view = floatingActionButton;
         private LoginActivity activity;
 
-        public CredentialRequestTask(LoginPresenter<V> vLoginPresenter, GoogleAccountCredential googleAccountCredential) {
+        CredentialRequestTask(LoginPresenter<V> vLoginPresenter, GoogleAccountCredential googleAccountCredential) {
             HttpTransport transport = AndroidHttp.newCompatibleTransport();
             JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
             service = new Gmail.Builder(transport, jsonFactory, googleAccountCredential)
-                    .setApplicationName(getMvpView().getContextActivity().getResources().getString(R.string.app_name))
+                    .setApplicationName(AppAplicacao.contextApp.getResources().getString(R.string.app_name))
                     .build();
             this.activity = activity;
         }
@@ -555,8 +533,8 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             String user = "me";
             String to = usuario.getUsuaEmail();
             String from = googleAccountCredential.getSelectedAccountName();
-            String subject = "Senha do app";
-            String body =  "Prezado(a) "+usuario.getUsuaNome()+"\n\nSegue a senha solicitada: "+usuario.getUsuaSenha()+"\n\n© "+ Calendar.getInstance().get(Calendar.YEAR)+" "+getMvpView().getContextActivity().getResources().getString(R.string.app_name)+"\n"+getMvpView().getContextActivity().getResources().getString(R.string.app_slogan);
+            String subject = AppAplicacao.contextApp.getResources().getString(R.string.texto_email_assunto);
+            String body =  AppAplicacao.contextApp.getResources().getString(R.string.texto_email_senha)+" "+usuario.getUsuaNome()+"\n\n"+AppAplicacao.contextApp.getResources().getString(R.string.texto_envio_senha)+" "+usuario.getUsuaSenha()+"\n\n© "+ Calendar.getInstance().get(Calendar.YEAR)+" "+AppAplicacao.contextApp.getResources().getString(R.string.app_name)+"\n"+AppAplicacao.contextApp.getResources().getString(R.string.app_slogan);
             MimeMessage mimeMessage;
             String response = "";
             try {
@@ -573,8 +551,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             Message message = createMessageWithEmail(email);
             // Método oficial do GMail para enviar e-mail com OAuth 2.0
             message = service.users().messages().send(userId, message).execute();
-            //System.out.println("Message id: " + message.getId());
-            //System.out.println(message.toPrettyString());
             return message.getId();
         }
 
@@ -598,18 +574,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             textBody.setText(bodyText);
             multipart.addBodyPart(textBody);
 
-            /*
-            if (!(activity.fileName.equals(""))) {
-                // Crie um novo objeto MimeBodyPart e defina o objeto DataHandler para este objeto
-                MimeBodyPart attachmentBody = new MimeBodyPart();
-                String filename = activity.fileName; // change accordingly
-                DataSource source = new FileDataSource(filename);
-                attachmentBody.setDataHandler(new DataHandler(source));
-                attachmentBody.setFileName(filename);
-                multipart.addBodyPart(attachmentBody);
-            }
-            */
-
             //Definir o objeto multipart para o objeto de mensagem
             email.setContent(multipart);
 
@@ -625,20 +589,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             return message;
         }
 
-        /**
-         * Override this method to perform a computation on a background thread. The
-         * specified parameters are the parameters passed to {@link #execute}
-         * by the caller of this task.
-         * <p>
-         * This method can call {@link #publishProgress} to publish updates
-         * on the UI thread.
-         *
-         * @param voids The parameters of the task.
-         * @return A result, defined by the subclass of this task.
-         * @see #onPreExecute()
-         * @see #onPostExecute
-         * @see #publishProgress
-         */
         @Override
         protected String doInBackground(Void... voids) {
             try {
@@ -659,9 +609,9 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         protected void onPostExecute(String output) {
             getMvpView(). hideLoading();
             if (output == null || output.length() == 0) {
-                showMessage(view, "Nenhum resultado retornado.");
+                showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.resultado_google_oauth));
             } else {
-                alertDialogBuilder.setMessage("Senha enviada para a conta do e-mail:\n"+usuario.getUsuaEmail()+" \n\nVerifique sua caixa de entrada.");
+                alertDialogBuilder.setMessage(AppAplicacao.contextApp.getResources().getString(R.string.envio_senha)+"\n"+usuario.getUsuaEmail()+" \n\n"+AppAplicacao.contextApp.getResources().getString(R.string.envio_senha_email));
                 AlertDialog dialog = alertDialogBuilder.create();
                 dialog.show();
             }
@@ -676,12 +626,11 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                 } else if (lastError instanceof UserRecoverableAuthIOException) {
                     getMvpView().getStartActivityForResult(((UserRecoverableAuthIOException) lastError).getIntent(), REQUEST_AUTHORIZATION);
                 } else {
-                    showMessage(view, "Erro ao processar informações:\n" + lastError);
+                    showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_google_oauth)+"\n" + lastError);
                 }
             } else {
-                showMessage(view, "Requisição cancelada.");
+                showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_request));
             }
         }
     }
 }
-

@@ -94,10 +94,7 @@ public abstract class BaseViewExtra extends ViewGroup implements MvpViewExtra {
 
     @Override
     public boolean isNetworkConnected() {
-        if (parentMvpView != null) {
-            return parentMvpView.isNetworkConnected();
-        }
-        return false;
+        return parentMvpView != null && parentMvpView.isNetworkConnected();
     }
 
     @Override

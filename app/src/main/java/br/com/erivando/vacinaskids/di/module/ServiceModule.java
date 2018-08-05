@@ -14,9 +14,9 @@ import dagger.Module;
 @Module
 public class ServiceModule {
 
-    private final Service mService;
+    private final Service service;
 
     public ServiceModule(Service service) {
-        mService = service;
+        this.service = service;
     }
 }

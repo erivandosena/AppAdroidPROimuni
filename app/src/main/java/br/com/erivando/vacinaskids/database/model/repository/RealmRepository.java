@@ -17,7 +17,7 @@ import io.realm.RealmResults;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public interface RealmRepository<T extends RealmObject, ID extends Serializable> {
+interface RealmRepository<T extends RealmObject, ID extends Serializable> {
 
     T findOne(Realm realm, ID id);
 

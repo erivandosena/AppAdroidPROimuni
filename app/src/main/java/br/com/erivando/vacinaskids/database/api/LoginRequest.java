@@ -54,8 +54,7 @@ public class LoginRequest {
 
             ServerLoginRequest that = (ServerLoginRequest) object;
 
-            if (email != null ? !email.equals(that.email) : that.email != null) return false;
-            return password != null ? password.equals(that.password) : that.password == null;
+            return (email != null ? email.equals(that.email) : that.email == null) && (password != null ? password.equals(that.password) : that.password == null);
 
         }
 
@@ -104,9 +103,7 @@ public class LoginRequest {
 
             GoogleLoginRequest that = (GoogleLoginRequest) object;
 
-            if (googleUserId != null ? !googleUserId.equals(that.googleUserId) : that.googleUserId != null)
-                return false;
-            return idToken != null ? idToken.equals(that.idToken) : that.idToken == null;
+            return (googleUserId != null ? googleUserId.equals(that.googleUserId) : that.googleUserId == null) && (idToken != null ? idToken.equals(that.idToken) : that.idToken == null);
 
         }
 
@@ -155,10 +152,7 @@ public class LoginRequest {
 
             FacebookLoginRequest that = (FacebookLoginRequest) object;
 
-            if (fbUserId != null ? !fbUserId.equals(that.fbUserId) : that.fbUserId != null)
-                return false;
-            return fbAccessToken != null ? fbAccessToken.equals(that.fbAccessToken)
-                    : that.fbAccessToken == null;
+            return (fbUserId != null ? fbUserId.equals(that.fbUserId) : that.fbUserId == null) && (fbAccessToken != null ? fbAccessToken.equals(that.fbAccessToken) : that.fbAccessToken == null);
 
         }
 

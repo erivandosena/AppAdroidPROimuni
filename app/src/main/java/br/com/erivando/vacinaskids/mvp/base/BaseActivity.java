@@ -3,7 +3,6 @@ package br.com.erivando.vacinaskids.mvp.base;
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,8 +27,6 @@ import br.com.erivando.vacinaskids.util.CommonUtils;
 import br.com.erivando.vacinaskids.util.NetworkUtils;
 import butterknife.Unbinder;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
-
-import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
 /**
  * Projeto:     VacinasKIDS
@@ -96,7 +93,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                 message, Snackbar.LENGTH_SHORT);
         View sbView = snackbar.getView();
-        TextView textView = (TextView) sbView
+        TextView textView = sbView
                 .findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(this, R.color.white));
         snackbar.show();
@@ -160,7 +157,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         finish();
     }
 
-    public void setUnBinder(Unbinder unBinder) {
+    protected void setUnBinder(Unbinder unBinder) {
         this.unBinder = unBinder;
     }
 

@@ -115,7 +115,8 @@
                 android:textColorLink="@color/red_dark"
                 android:textColorHighlight="@color/red_dark2"
                 android:autoLink="web"
-                android:textColor="@color/navy_blue" />
+                android:textColor="@color/navy_blue"
+                android:focusable="true" />
 
             <Button
                 android:id="@+id/btn_login_usuario"

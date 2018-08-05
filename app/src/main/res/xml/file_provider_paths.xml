@@ -17,6 +17,7 @@
 -->
 
 <paths>
+    <!--suppress AndroidElementNotAllowed -->
     <obb-path
         name="obb"
         path="." />

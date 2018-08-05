@@ -43,9 +43,7 @@ public class LogoutResponse {
 
         LogoutResponse that = (LogoutResponse) object;
 
-        if (statusCode != null ? !statusCode.equals(that.statusCode) : that.statusCode != null)
-            return false;
-        return message != null ? message.equals(that.message) : that.message == null;
+        return (statusCode != null ? statusCode.equals(that.statusCode) : that.statusCode == null) && (message != null ? message.equals(that.message) : that.message == null);
 
     }
 

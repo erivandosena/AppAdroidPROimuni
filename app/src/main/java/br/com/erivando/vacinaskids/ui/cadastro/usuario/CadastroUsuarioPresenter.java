@@ -10,9 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -27,6 +25,7 @@ import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.database.IDataManager;
 import br.com.erivando.vacinaskids.database.model.Usuario;
 import br.com.erivando.vacinaskids.mvp.base.BasePresenter;
+import br.com.erivando.vacinaskids.ui.AppAplicacao;
 import br.com.erivando.vacinaskids.util.CommonUtils;
 import br.com.erivando.vacinaskids.util.ConverteBase64Task;
 import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;
@@ -36,7 +35,6 @@ import static android.app.Activity.RESULT_OK;
 import static br.com.erivando.vacinaskids.util.Uteis.bitmapParaBase64;
 import static br.com.erivando.vacinaskids.util.Uteis.capitalizeNome;
 import static br.com.erivando.vacinaskids.util.Uteis.criaArquivoImagem;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Projeto:     VacinasKIDS
@@ -46,11 +44,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-
 public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends BasePresenter<V> implements CadastroUsuarioMvpPresenter<V> {
-
-   // private Bitmap imagemBitmapFoto;
-    private File arquivoImagem;
 
     private static final int REQUEST_IMG_CAMERA = 1;
     private static final int REQUEST_IMG_GALERIA = 2;
@@ -60,6 +54,7 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA
     };
+    private File arquivoImagem;
 
     @Inject
     public CadastroUsuarioPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
@@ -128,11 +123,6 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
     }
 
     @Override
-    public void onLoginClick() {
-        getMvpView().openLoginOuMainActivity();
-    }
-
-    @Override
     public Usuario onUsuarioCadastrado() {
         return getIDataManager().obtemUsuario();
     }
@@ -142,25 +132,11 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
         return getIDataManager().novoAtualizaUsuario(usuario);
     }
 
-    /*
-    @Override
-    public boolean hasPermissoes(Context context, String... permissions) {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    */
-
     @Override
     public void selecionarImagem(final Context context) {
         try {
             PackageManager pm = context.getPackageManager();
-            int hasPerm = pm.checkPermission(Manifest.permission.CAMERA, getApplicationContext().getPackageName());
+            int hasPerm = pm.checkPermission(Manifest.permission.CAMERA, AppAplicacao.contextApp.getPackageName());
             if (hasPerm == PackageManager.PERMISSION_GRANTED) {
                 final CharSequence[] options = {context.getString(R.string.texto_cadastro_opcao_camera), context.getString(R.string.texto_cadastro_opcao_imagens), context.getString(R.string.texto_botao_dialogo_cancela)};
                 android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
@@ -186,9 +162,9 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
                 });
                 builder.show();
             } else
-                Toast.makeText(getApplicationContext(), context.getString(R.string.texto_aviso_permissao_camera), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AppAplicacao.contextApp, context.getString(R.string.texto_aviso_permissao_camera), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), context.getString(R.string.texto_aviso_permissao_camera), Toast.LENGTH_SHORT).show();
+            Toast.makeText(AppAplicacao.contextApp, context.getString(R.string.texto_aviso_permissao_camera), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
@@ -199,24 +175,23 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
         intentImagem.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         intentImagem.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-        if (getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            if (intentImagem.resolveActivity(getApplicationContext().getPackageManager()) != null) {
-                File arquivo = new File(getApplicationContext().getObbDir(), context.getString(R.string.app_name));
+        if (AppAplicacao.contextApp.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+            if (intentImagem.resolveActivity(AppAplicacao.contextApp.getPackageManager()) != null) {
+                File arquivo = new File(AppAplicacao.contextApp.getObbDir(), context.getString(R.string.app_name));
                 arquivoImagem = criaArquivoImagem(arquivo);
                 if (arquivoImagem != null) {
-                    Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), BuildConfig.APPLICATION_ID, arquivoImagem);
-                    List<ResolveInfo> resolvedIntentActivities = getApplicationContext().getPackageManager().queryIntentActivities(intentImagem, PackageManager.MATCH_DEFAULT_ONLY);
+                    Uri photoURI = FileProvider.getUriForFile(AppAplicacao.contextApp, BuildConfig.APPLICATION_ID, arquivoImagem);
+                    List<ResolveInfo> resolvedIntentActivities = AppAplicacao.contextApp.getPackageManager().queryIntentActivities(intentImagem, PackageManager.MATCH_DEFAULT_ONLY);
                     for (ResolveInfo resolvedIntentInfo : resolvedIntentActivities) {
                         String packageName = resolvedIntentInfo.activityInfo.packageName;
-                        getApplicationContext().grantUriPermission(packageName, photoURI, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        AppAplicacao.contextApp.grantUriPermission(packageName, photoURI, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     }
                     intentImagem.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 }
                 getMvpView().getStartActivityForResult(intentImagem, REQUEST_IMG_CAMERA);
-                //startActivityForResult(intentImagem, REQUEST_IMG_CAMERA);
             }
         } else
-            Toast.makeText(getApplicationContext(), context.getString(R.string.texto_aviso_camera_ausente), Toast.LENGTH_LONG).show();
+            Toast.makeText(AppAplicacao.contextApp, context.getString(R.string.texto_aviso_camera_ausente), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -224,7 +199,6 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
         Intent intentImagem = new Intent(Intent.ACTION_PICK);
         intentImagem.setAction(Intent.ACTION_GET_CONTENT);
         intentImagem.setType("image/*");
-        //startActivityForResult(intentImagem, REQUEST_IMG_GALERIA);
         getMvpView().getStartActivityForResult(intentImagem, REQUEST_IMG_GALERIA);
     }
 
@@ -249,14 +223,14 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
 
                             @Override
                             public void onError() {
-                                Toast.makeText(getApplicationContext(), context.getString(R.string.texto_aviso_erro_processo_imagem), Toast.LENGTH_LONG).show();
+                                Toast.makeText(AppAplicacao.contextApp, context.getString(R.string.texto_aviso_erro_processo_imagem), Toast.LENGTH_LONG).show();
                             }
                         });
                         task.execute();
                         /**
                          * ScanFile para que ele apareça na Galeria
                          */
-                        MediaScannerConnection.scanFile(getApplicationContext(),
+                        MediaScannerConnection.scanFile(AppAplicacao.contextApp,
                                 new String[]{arquivoImagem.getAbsolutePath()},
                                 new String[]{"image/jpg"},
                                 new MediaScannerConnection.OnScanCompletedListener() {
@@ -264,7 +238,7 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
                                         try {
                                             Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                                             mediaScanIntent.setData(uri);
-                                            getApplicationContext().sendBroadcast(mediaScanIntent);
+                                            AppAplicacao.contextApp.sendBroadcast(mediaScanIntent);
 
                                         } catch (Exception e) {
                                             e.printStackTrace();
@@ -272,7 +246,7 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
                                     }
                                 });
                     } else {
-                        Toast.makeText(getApplicationContext(), context.getString(R.string.texto_aviso_erro_aquisicao_imagem), Toast.LENGTH_LONG).show();
+                        Toast.makeText(AppAplicacao.contextApp, context.getString(R.string.texto_aviso_erro_aquisicao_imagem), Toast.LENGTH_LONG).show();
                     }
                 } else if (retornoRequestCode == REQUEST_IMG_GALERIA) {
                     if (data != null) {
@@ -281,12 +255,12 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
                         imageButton.setImageURI(uriImagem);
                         imagemBitmapFoto = ((BitmapDrawable) imageButton.getDrawable()).getBitmap();
                     } else
-                        Toast.makeText(getApplicationContext(), context.getString(R.string.texto_aviso_erro_aquisicao_imagem), Toast.LENGTH_LONG).show();
+                        Toast.makeText(AppAplicacao.contextApp, context.getString(R.string.texto_aviso_erro_aquisicao_imagem), Toast.LENGTH_LONG).show();
                 }
             }
         } catch (Exception ex) {
             ex.getStackTrace();
-            Toast.makeText(getApplicationContext(), context.getString(R.string.texto_aviso_erro_sistema_desatualizado), Toast.LENGTH_LONG).show();
+            Toast.makeText(AppAplicacao.contextApp, context.getString(R.string.texto_aviso_erro_sistema_desatualizado), Toast.LENGTH_LONG).show();
         }
         return imagemBitmapFoto;
     }

@@ -19,8 +19,8 @@ import java.io.File;
 
 public class ConverteBase64Task extends AsyncTask<Void, Bitmap, Bitmap> {
 
-    private ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    private File file;
+    private final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    private final File file;
     private int CompressionRatio = 60; //Qualquer proporção que desejar compactar entre 0 a 100.
     private boolean shouldrotate = true;
     private ImageCompressiorListner imageCompressiorListner;
@@ -111,10 +111,7 @@ public class ConverteBase64Task extends AsyncTask<Void, Bitmap, Bitmap> {
                 pickimg.compress(Bitmap.CompressFormat.JPEG, CompressionRatio, baos);
                 return pickimg;
 
-            } catch (OutOfMemoryError e) {
-                e.printStackTrace();
-                return null;
-            } catch (Exception e) {
+            } catch (OutOfMemoryError | Exception e) {
                 e.printStackTrace();
                 return null;
             }

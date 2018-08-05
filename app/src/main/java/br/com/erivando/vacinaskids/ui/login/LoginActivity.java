@@ -124,18 +124,13 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     }
 
     @Override
-    public void getStartActivity(Intent intent) {
-        startActivity(intent);
-    }
-
-    @Override
     public void getStartActivityForResult(Intent intent, int i) {
         startActivityForResult(intent, i);
     }
 
     @Override
     public Activity getContextActivity() {
-        return this;
+        return LoginActivity.this;
     }
 
     @Override

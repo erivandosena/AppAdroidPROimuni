@@ -18,7 +18,7 @@ import io.reactivex.Single;
 @Singleton
 public class ApiHelper implements IApiHelper {
 
-    private ApiHeader apiHeader;
+    private final ApiHeader apiHeader;
 
     @Inject
     public ApiHelper(ApiHeader apiHeader) {

@@ -1,7 +1,7 @@
 package br.com.erivando.vacinaskids.ui;
 
-import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDexApplication;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
@@ -25,7 +25,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class AppAplicacao extends Application {
+public class AppAplicacao extends MultiDexApplication {
 
     @Inject
     IDataManager iDataManager;
@@ -34,6 +34,8 @@ public class AppAplicacao extends Application {
     CalligraphyConfig calligraphyConfig;
 
     private ApplicationComponent applicationComponent;
+
+    public static Context contextApp;
 
     public static AppAplicacao get(Context context) {
         return (AppAplicacao) context.getApplicationContext();
@@ -55,6 +57,8 @@ public class AppAplicacao extends Application {
         }
 
         CalligraphyConfig.initDefault(calligraphyConfig);
+
+        contextApp = getApplicationContext();
     }
 
     public ApplicationComponent getComponent(){

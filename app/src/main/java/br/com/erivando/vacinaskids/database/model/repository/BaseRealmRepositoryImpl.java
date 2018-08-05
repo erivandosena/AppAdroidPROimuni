@@ -19,7 +19,7 @@ import io.realm.RealmResults;
 
 public abstract class BaseRealmRepositoryImpl<T extends RealmObject, ID extends Serializable> implements RealmRepository<T, ID> {
 
-    protected Class<T> clazz;
+    private final Class<T> clazz;
 
     public BaseRealmRepositoryImpl(Class<T> clazz) {
         this.clazz = clazz;

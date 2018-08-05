@@ -12,7 +12,7 @@ import android.view.WindowManager;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class ScreenUtils {
+class ScreenUtils {
     private ScreenUtils() {
         // Esta classe de utilitário não é  publicamente instanciável
     }

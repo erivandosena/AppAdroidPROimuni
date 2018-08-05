@@ -34,7 +34,7 @@ public interface MainMvpView extends MvpView {
 
     void showRateUsDialog();
 
-    void openMyFeedActivity();
+    //void openMyFeedActivity();
 
     void closeNavigationDrawer();
 

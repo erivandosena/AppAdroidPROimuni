@@ -1,9 +1,7 @@
 package br.com.erivando.vacinaskids.ui.login;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -15,7 +13,6 @@ import com.google.android.gms.tasks.Task;
 
 import org.json.JSONObject;
 
-import br.com.erivando.vacinaskids.database.model.Usuario;
 import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 
@@ -46,8 +43,6 @@ public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<
 
     void onGooleSignOut(Activity activity);
 
-    void onVerificaLoginGoogle();
-
     boolean onVerificaUsuarioCadastrado();
 
     GoogleSignInClient getGoogleSignInClient();
@@ -55,8 +50,6 @@ public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<
     void enviaSenhaPorEmail(View view, String login);
 
     void getRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults);
-
-    String getPathFromURI(Uri contentUri);
 
     void chooseAccount(View view);
 

@@ -113,10 +113,7 @@ public class Usuario extends RealmObject {
         if (usuaEmail != null ? !usuaEmail.equals(usuario.usuaEmail) : usuario.usuaEmail != null) {
             return false;
         }
-        if (usuaFoto != null ? !usuaFoto.equals(usuario.usuaFoto) : usuario.usuaFoto != null) {
-            return false;
-        }
-        return true;
+        return usuaFoto != null ? usuaFoto.equals(usuario.usuaFoto) : usuario.usuaFoto == null;
     }
 
     @Override

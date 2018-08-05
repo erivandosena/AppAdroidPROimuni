@@ -12,6 +12,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        /* Devido exceder o limite de 64K nos métodos (ao utilizar Firebase, Google Play, etc.) */
+        multiDexEnabled true
     }
     buildTypes {
         debug {
@@ -21,9 +23,30 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            multiDexKeepFile file('multidex-config.txt')
+            multiDexKeepProguard file('multidex-config.pro')
             buildConfigField("String", "BASE_URL", "\"http://www.mocky.io/v2\"")
             buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
         }
+    }
+    flavorDimensions 'beta'
+    productFlavors {
+        desevolvimento {
+            dimension 'beta'
+            // Ativar pré-dexing para produzir um APK que possa ser testado em
+            // Android 5.0+ sem os demorados processos de construção do DEX.
+            minSdkVersion 21
+        }
+        producao {
+            dimension 'beta'
+            // O minSdkVersion real para a versão de produção.
+            minSdkVersion 15
+        }
+
+    }
+    lintOptions {
+        checkReleaseBuilds true
+        abortOnError false
     }
     packagingOptions {
         exclude 'META-INF/mailcap.default'
@@ -33,23 +56,18 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/mimetypes.default'
-        pickFirst 'META-INF/INDEX.LIST'
-        pickFirst 'META-INF/io.netty.versions.properties'
     }
 }
 
 dependencies {
+    /* Android MultiDex */
+    implementation 'com.android.support:multidex:1.0.3'
 
     /* GMail/Google APIs/OAuth */
     implementation 'com.google.api-client:google-api-client-android:1.23.0'
-    //implementation 'com.google.android.gms:play-services-identity:15.0.1'
     implementation 'com.google.apis:google-api-services-gmail:v1-rev92-1.24.1'
 
-    /* JavaMail for Android */
-    //implementation 'com.sun.mail:android-mail:1.6.1'
-    //implementation 'com.sun.mail:android-activation:1.6.1'
-    //implementation 'com.sun.mail:android-additionnal:1.6.1'
-
+    /* JavaMail */
     implementation files('libs/mail.jar')
     implementation files('libs/activation.jar')
     implementation files('libs/additionnal.jar')
@@ -70,7 +88,7 @@ dependencies {
     /* Realm */
     implementation 'io.realm:android-adapters:2.1.1'
 
-    /* RxAndroid */
+    /* RxJava 2 */
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
     /* Fast Android Networking */

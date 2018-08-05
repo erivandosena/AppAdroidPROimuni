@@ -92,10 +92,7 @@ public abstract class BaseFragment extends Fragment implements MvpView {
 
     @Override
     public boolean isNetworkConnected() {
-        if (baseActivity != null) {
-            return baseActivity.isNetworkConnected();
-        }
-        return false;
+        return baseActivity != null && baseActivity.isNetworkConnected();
     }
 
     @Override
@@ -118,18 +115,18 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         }
     }
 
-    public ActivityComponent getActivityComponent() {
+    protected ActivityComponent getActivityComponent() {
         if (baseActivity != null) {
             return baseActivity.getActivityComponent();
         }
         return null;
     }
 
-    public BaseActivity getBaseActivity() {
+    protected BaseActivity getBaseActivity() {
         return baseActivity;
     }
 
-    public void setUnBinder(Unbinder unBinder) {
+    protected void setUnBinder(Unbinder unBinder) {
         this.unBinder = unBinder;
     }
 

@@ -19,8 +19,8 @@
     <string name="avaliacao">Avaliação do App</string>
     <string name="logout">Sair</string>
     <!-- Drawer. -->
-    <string name="open_drawer">Drawer Open</string>
-    <string name="close_drawer">Drawer Close</string>
+    <string name="open_drawer">Abre gaveta</string>
+    <string name="close_drawer">Fecha gaveta</string>
     <!-- Menus Toolbar. -->
     <string name="clear">Limpar</string>
     <string name="edita_usuario">Editar Usuário</string>
@@ -102,5 +102,16 @@
     <string name="google_notlogout">Sessão não encerrada</string>
     <string name="google_notrevoke">Sessão não revogada</string>
     <string name="google_logout">Fechar Sessão</string>
+    <string name="erro_request">Requisição cancelada.</string>
+    <string name="erro_google_oauth">Erro ao processar informações:</string>
+    <string name="envio_senha_email">Verifique sua caixa de entrada.</string>
+    <string name="envio_senha">Senha enviada para a conta do e-mail:</string>
+    <string name="resultado_google_oauth">Nenhum resultado retornado.</string>
+    <string name="texto_envio_senha">Segue a senha solicitada:</string>
+    <string name="texto_email_senha">Prezado(a) </string>
+    <string name="texto_email_assunto">Senha do App</string>
+    <string name="text_btn_ok">OK</string>
+    <string name="aviso_sem_internet">Sem conexão com à Internet!</string>
+    <string name="aviso_play_services_install">Este aplicativo requer o Google Play Services. Por favor instale o Google Play Services no seu dispositivo e tente novamente.</string>
 
 </resources>

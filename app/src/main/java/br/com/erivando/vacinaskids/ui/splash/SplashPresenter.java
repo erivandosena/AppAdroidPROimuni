@@ -5,7 +5,6 @@ import android.util.Log;
 
 import javax.inject.Inject;
 
-import br.com.erivando.vacinaskids.database.DataManager;
 import br.com.erivando.vacinaskids.database.IDataManager;
 import br.com.erivando.vacinaskids.mvp.base.BasePresenter;
 import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;

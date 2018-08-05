@@ -28,7 +28,7 @@ import io.reactivex.Single;
 @Singleton
 public class DataManager implements IDataManager {
 
-    private RealmDataBase realmDataBase;
+    private final RealmDataBase realmDataBase;
     private final PreferencesHelper preferencesHelper;
     private final Context context;
     private final IApiHelper iapiHelper;

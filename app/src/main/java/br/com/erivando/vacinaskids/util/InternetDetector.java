@@ -14,7 +14,7 @@ import android.net.NetworkInfo;
 
 public class InternetDetector {
 
-    private Context mcontext;
+    private final Context mcontext;
 
     public InternetDetector(Context context) {
         this.mcontext = context;

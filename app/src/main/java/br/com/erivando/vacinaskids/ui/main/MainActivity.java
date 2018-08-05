@@ -1,15 +1,11 @@
 package br.com.erivando.vacinaskids.ui.main;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -19,7 +15,6 @@ import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -31,7 +26,6 @@ import com.facebook.login.LoginManager;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.inject.Inject;
@@ -132,7 +126,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         setupNavMenu();
         presenter.onNavMenuCreated();
         setupCardContainerView();
-        presenter.onViewInitialized();
+        //presenter.onViewInitialized();
     }
 
     @Override
@@ -301,8 +295,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             InputStream in = (InputStream) imageURL.getContent();
             Bitmap bitmap = BitmapFactory.decodeStream(in);
             perfilImageView.setImageBitmap(bitmap);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -333,10 +325,10 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         */
     }
 
-    @Override
-    public void openMyFeedActivity() {
-
-    }
+   // @Override
+   // public void openMyFeedActivity() {
+//
+   // }
 
     @Override
     public void closeNavigationDrawer() {

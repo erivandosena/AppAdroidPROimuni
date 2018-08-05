@@ -20,11 +20,11 @@ public interface MainMvpPresenter<V extends MainMvpView> extends MvpPresenter<V>
 
     void onDrawerRateUsClick();
 
-    void onDrawerMyFeedClick();
+    //void onDrawerMyFeedClick();
 
-    void onViewInitialized();
+    //void onViewInitialized();
 
-    void onCardExhausted();
+    //void onCardExhausted();
 
     void onNavMenuCreated();
 }
