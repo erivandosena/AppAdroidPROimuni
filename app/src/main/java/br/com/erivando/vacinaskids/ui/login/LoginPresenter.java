@@ -140,8 +140,10 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         try {
             if (getIDataManager().validaLoginUsuario(login, senha)) {
                 Usuario usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login}, new String[]{"usuaSenha", senha});
+                String tokenUsuario = UUID.randomUUID().toString().replace("-","");
+                getIDataManager().setAccessToken(tokenUsuario);
                 getIDataManager().updateUserInfo(
-                        UUID.randomUUID().toString().replace("-",""),
+                        tokenUsuario,
                         usuario.getId(),
                         DataManager.LoggedInMode.LOGGED_IN_MODE_LOCAL,
                         usuario.getUsuaNome(),
@@ -209,7 +211,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                                                     String fotos = bundleData.getString("user_photos");
                                                     String localizacao = bundleData.getString("user_location");
                                                     URL imagemPerfil = new URL("https://graph.facebook.com/" + id + "/picture?type=large");
-
+                                                    getIDataManager().setAccessToken(accessToken.getToken());
                                                     getIDataManager().updateUserInfo(
                                                             accessToken.getToken(),
                                                             Long.valueOf(id),
@@ -354,6 +356,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             // Conectado com sucesso, mostre a interface do usuário autenticada.
+            getIDataManager().setAccessToken(account.getIdToken());
             getIDataManager().updateUserInfo(
                     account.getIdToken(),
                     Double.valueOf(account.getId()).longValue(),

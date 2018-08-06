@@ -168,12 +168,13 @@ public class DataManager implements IDataManager {
 
     @Override
     public String getAccessToken() {
-        return null;
+        return preferencesHelper.getAccessToken();
     }
 
     @Override
     public void setAccessToken(String accessToken) {
-
+        preferencesHelper.setAccessToken(accessToken);
+        iapiHelper.getApiHeader().getProtectedApiHeader().setAccessToken(accessToken);
     }
 
     /* API HELPER */

@@ -35,4 +35,6 @@ public interface CadastroUsuarioMvpPresenter<V extends CadastroUsuarioMvpView> e
     void imagemIntentGaleria();
 
     Bitmap onActivityResult(int requestCode, int resultCode, Intent data, @ApplicationContext final Context context, final ImageButton imageButton);
+
+    String getTokenUsuario();
 }

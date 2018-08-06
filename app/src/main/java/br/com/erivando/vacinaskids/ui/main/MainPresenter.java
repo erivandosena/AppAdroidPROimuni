@@ -46,16 +46,6 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
         getMvpView().openLoginActivity();
     }
 
-    //@Override
-    //public void onViewInitialized() {
-    //
-    //}
-
-    //@Override
-    //public void onCardExhausted() {
-    //
-   // }
-
     @Override
     public void onNavMenuCreated() {
         if (!isViewAttached()) {
@@ -85,9 +75,4 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
         getMvpView().showRateUsDialog();
     }
 
-    //@Override
-    //public void onDrawerMyFeedClick() {
-    //    getMvpView().closeNavigationDrawer();
-    //    getMvpView().openMyFeedActivity();
-    //}
 }

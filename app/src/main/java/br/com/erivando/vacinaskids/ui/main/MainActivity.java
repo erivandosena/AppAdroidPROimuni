@@ -126,7 +126,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         setupNavMenu();
         presenter.onNavMenuCreated();
         setupCardContainerView();
-        //presenter.onViewInitialized();
     }
 
     @Override
@@ -176,7 +175,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     protected void onStart() {
         super.onStart();
-        //loginPresenter.getGoogleApiClient().connect();
         loginPresenter.getGoogleSignInClient().getInstanceId();
     }
 
@@ -308,27 +306,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void showRateUsDialog() {
-
         exibeAvaliacaoDialog(this);
-
-        /*
-        Uri uri = Uri.parse("market://details?id="+ getPackageName());
-        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-        // Para contar com o backstack da Play Store, depois de pressionar o botão Voltar,
-        // para voltar ao aplicativo, precisamos adicionar os seguintes sinalizadores à intent.
-        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        try {
-            startActivity(goToMarket);
-        } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
-        }
-        */
     }
-
-   // @Override
-   // public void openMyFeedActivity() {
-//
-   // }
 
     @Override
     public void closeNavigationDrawer() {

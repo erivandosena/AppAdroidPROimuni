@@ -38,7 +38,7 @@
     <string name="text_usuario_nome">Usuário</string>
     <string name="text_usuario_email">E-mail</string>
     <string name="text_usuario_senha">Senha</string>
-    <string name="text_usuario_repete_senha">Repita a senha</string>
+    <string name="text_usuario_repete_senha">Repetir a senha</string>
     <string name="btn_salvar">Salvar</string>
     <string name="btn_voltar">Voltar</string>
     <string name="text_valida_cadastro">Não foi possível salvar!</string>
@@ -52,8 +52,9 @@
     <string name="erro_text_repeteSenha">Repita a senha</string>
     <string name="erro_text_senhaInvalida">Senhas não coincidem</string>
     <string name="btn_login_usuario">Entrar</string>
-    <string name="btn_login_lembrar_senha">Esqueci minha senha</string>
-    <string name="btn_cadastro_usuario">Cadastro</string>
+    <string name="btn_login_lembrar_senha">Lembrar senha</string>
+    <string name="btn_login_fazer_cadastro">Fazer cadastro</string>
+    <string name="text_login_redes_sociais">Entrar com</string>
     <string name="text_valida_login">Informe o usuário</string>
     <string name="text_valida_senha">Informe a senha</string>
     <string name="text_valida_email">Informe um e-mail válido</string>
@@ -96,7 +97,7 @@
     <string name="facebook_error_fabebook_login">Ocorreu um erro ao entrar</string>
     <string name="firebase_logout">Fechar Sessão</string>
     <!--  Google Login. -->
-    <string name="google_cancel_login">A operação login Google foi cancelada</string>
+    <string name="google_cancel_login">A operação foi cancelada</string>
     <string name="google_falha_conexao">Conexão falhou!</string>
     <string name="google_error_login">Ocorreu um erro ao entrar</string>
     <string name="google_notlogout">Sessão não encerrada</string>

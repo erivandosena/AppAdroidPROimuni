@@ -16,6 +16,7 @@ import br.com.erivando.vacinaskids.database.model.Usuario;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.main.MainActivity;
+import br.com.erivando.vacinaskids.util.Uteis;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -89,7 +90,7 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     public void openLoginOuMainActivity() {
         Intent intent = new Intent();
         try {
-            if (id == 0L) {
+            if (id == 0L && presenter.getTokenUsuario() == null) {
                 intent = LoginActivity.getStartIntent(this);
             } else {
                 intent = MainActivity.getStartIntent(this);

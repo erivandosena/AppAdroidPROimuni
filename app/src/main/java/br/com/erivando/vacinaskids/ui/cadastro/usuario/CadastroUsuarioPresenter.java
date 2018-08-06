@@ -265,4 +265,9 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
         return imagemBitmapFoto;
     }
 
+    @Override
+    public String getTokenUsuario() {
+        return getIDataManager().getAccessToken();
+    }
+
 }
