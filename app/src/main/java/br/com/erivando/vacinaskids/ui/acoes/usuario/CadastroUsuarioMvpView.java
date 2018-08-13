@@ -1,4 +1,4 @@
-package br.com.erivando.vacinaskids.ui.cadastro.usuario;
+package br.com.erivando.vacinaskids.ui.acoes.usuario;
 
 import android.content.Intent;
 

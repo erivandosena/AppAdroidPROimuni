@@ -8,14 +8,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import br.com.erivando.vacinaskids.database.api.ApiHeader;
-import br.com.erivando.vacinaskids.database.api.IApiHelper;
-import br.com.erivando.vacinaskids.database.api.LoginRequest;
-import br.com.erivando.vacinaskids.database.api.LoginResponse;
-import br.com.erivando.vacinaskids.database.api.LogoutResponse;
+import br.com.erivando.vacinaskids.database.model.Cartao;
+import br.com.erivando.vacinaskids.database.model.Classificacao;
+import br.com.erivando.vacinaskids.database.model.Crianca;
+import br.com.erivando.vacinaskids.database.model.Dose;
+import br.com.erivando.vacinaskids.database.model.Idade;
 import br.com.erivando.vacinaskids.database.model.Usuario;
+import br.com.erivando.vacinaskids.database.model.Vacina;
 import br.com.erivando.vacinaskids.di.ApplicationContext;
-import io.reactivex.Single;
 
 /**
  * Projeto:     VacinasKIDS
@@ -31,26 +31,271 @@ public class DataManager implements IDataManager {
     private final RealmDataBase realmDataBase;
     private final PreferencesHelper preferencesHelper;
     private final Context context;
-    private final IApiHelper iapiHelper;
 
     @Inject
-    public DataManager(@ApplicationContext Context context, PreferencesHelper preferencesHelper, RealmDataBase realmDataBase, IApiHelper iapiHelper) {
+    public DataManager(@ApplicationContext Context context, PreferencesHelper preferencesHelper, RealmDataBase realmDataBase) {
         this.context = context;
         this.preferencesHelper = preferencesHelper;
         this.realmDataBase = realmDataBase;
         this.realmDataBase.setup(context);
-        this.iapiHelper = iapiHelper;
     }
 
     /* CONTROLLER */
+    /* Criança */
     @Override
-    public AtomicInteger getUsuarioID() {
-        return realmDataBase.getIdByClassModel(Usuario.class);
+    public AtomicInteger getCriancaID() {
+        return realmDataBase.getIdByClassModel(Crianca.class);
     }
 
     @Override
-    public boolean validaLoginUsuario(String login, String senha) {
-        return realmDataBase.getLoginLocal(Usuario.class, login, senha);
+    public boolean novoAtualizaCrianca(Crianca crianca) {
+        return realmDataBase.addOrUpdate(crianca);
+    }
+
+    @Override
+    public boolean eliminaCrianca(Long id) {
+        return realmDataBase.remove(Crianca.class, "id", id);
+    }
+
+    @Override
+    public Crianca obtemCrianca(Long id) {
+        return realmDataBase.getObject(Crianca.class, "id", id);
+    }
+
+    @Override
+    public Crianca obtemCrianca() {
+        return realmDataBase.getObject(Crianca.class);
+    }
+
+    @Override
+    public Crianca obtemCrianca(String[] valores) {
+        return realmDataBase.getObject(Crianca.class, valores);
+    }
+
+    @Override
+    public Crianca obtemCrianca(String[] valoresA, String[] valoresB) {
+        return realmDataBase.getObject(Crianca.class, valoresA, valoresB);
+    }
+
+    @Override
+    public List<Crianca> obtemTodasCriancas(String[] campo, String[] valor) {
+        return realmDataBase.findAll(campo, valor, Crianca.class);
+    }
+
+    @Override
+    public List<Crianca> obtemTodasCriancas() {
+        return realmDataBase.findAll(Crianca.class);
+    }
+
+    /* Cartão */
+    @Override
+    public AtomicInteger getCartaoID() {
+        return realmDataBase.getIdByClassModel(Cartao.class);
+    }
+
+    @Override
+    public boolean novoAtualizaCartao(Cartao cartao) {
+        return realmDataBase.addOrUpdate(cartao);
+    }
+
+    @Override
+    public boolean eliminaCartao(Long id) {
+        return realmDataBase.remove(Cartao.class, "id", id);
+    }
+
+    @Override
+    public Cartao obtemCartao(Long id) {
+        return realmDataBase.getObject(Cartao.class, "id", id);
+    }
+
+    @Override
+    public Cartao obtemCartao() {
+        return realmDataBase.getObject(Cartao.class);
+    }
+
+    @Override
+    public Cartao obtemCartao(String[] valores) {
+        return realmDataBase.getObject(Cartao.class, valores);
+    }
+
+    @Override
+    public Cartao obtemCartao(String[] valoresA, String[] valoresB) {
+        return realmDataBase.getObject(Cartao.class, valoresA, valoresB);
+    }
+
+    @Override
+    public List<Cartao> obtemTodosCartoes(String[] campo, String[] valor) {
+        return realmDataBase.findAll(campo, valor, Cartao.class);
+    }
+
+    /* Classificação */
+    @Override
+    public AtomicInteger getClassificacaoID() {
+        return realmDataBase.getIdByClassModel(Classificacao.class);
+    }
+
+    @Override
+    public boolean novoAtualizaClassificacao(Classificacao classificacao) {
+        return realmDataBase.addOrUpdate(classificacao);
+    }
+
+    @Override
+    public boolean eliminaClassificacao(Long id) {
+        return realmDataBase.remove(Classificacao.class, "id", id);
+    }
+
+    @Override
+    public Classificacao obtemClassificacao(Long id) {
+        return realmDataBase.getObject(Classificacao.class, "id", id);
+    }
+
+    @Override
+    public Classificacao obtemClassificacao() {
+        return realmDataBase.getObject(Classificacao.class);
+    }
+
+    @Override
+    public Classificacao obtemClassificacao(String[] valores) {
+        return realmDataBase.getObject(Classificacao.class, valores);
+    }
+
+    @Override
+    public Classificacao obtemClassificacao(String[] valoresA, String[] valoresB) {
+        return realmDataBase.getObject(Classificacao.class, valoresA, valoresB);
+    }
+
+    @Override
+    public List<Classificacao> obtemTodasClassificacoes(String[] campo, String[] valor) {
+        return realmDataBase.findAll(campo, valor, Classificacao.class);
+    }
+
+    /* Dose */
+    @Override
+    public AtomicInteger getDoseID() {
+        return realmDataBase.getIdByClassModel(Dose.class);
+    }
+
+    @Override
+    public boolean novoAtualizaDose(Dose dose) {
+        return realmDataBase.addOrUpdate(dose);
+    }
+
+    @Override
+    public boolean eliminaDose(Long id) {
+        return realmDataBase.remove(Dose.class, "id", id);
+    }
+
+    @Override
+    public Dose obtemDose(Long id) {
+        return realmDataBase.getObject(Dose.class, "id", id);
+    }
+
+    @Override
+    public Dose obtemDose() {
+        return realmDataBase.getObject(Dose.class);
+    }
+
+    @Override
+    public Dose obtemDose(String[] valores) {
+        return realmDataBase.getObject(Dose.class, valores);
+    }
+
+    @Override
+    public Dose obtemDose(String[] valoresA, String[] valoresB) {
+        return realmDataBase.getObject(Dose.class, valoresA, valoresB);
+    }
+
+    @Override
+    public List<Dose> obtemTodasDoses(String[] campo, String[] valor) {
+        return realmDataBase.findAll(campo, valor, Dose.class);
+    }
+
+    /* Idade */
+    @Override
+    public AtomicInteger getIdadeID() {
+        return realmDataBase.getIdByClassModel(Idade.class);
+    }
+
+    @Override
+    public boolean novoAtualizaIdade(Idade idade) {
+        return realmDataBase.addOrUpdate(idade);
+    }
+
+    @Override
+    public boolean eliminaIdade(Long id) {
+        return realmDataBase.remove(Idade.class, "id", id);
+    }
+
+    @Override
+    public Idade obtemIdade(Long id) {
+        return realmDataBase.getObject(Idade.class, "id", id);
+    }
+
+    @Override
+    public Idade obtemIdade() {
+        return realmDataBase.getObject(Idade.class);
+    }
+
+    @Override
+    public Idade obtemIdade(String[] valores) {
+        return realmDataBase.getObject(Idade.class, valores);
+    }
+
+    @Override
+    public Idade obtemIdade(String[] valoresA, String[] valoresB) {
+        return realmDataBase.getObject(Idade.class, valoresA, valoresB);
+    }
+
+    @Override
+    public List<Idade> obtemTodasIdades(String[] campo, String[] valor) {
+        return realmDataBase.findAll(campo, valor, Idade.class);
+    }
+
+    /* Vacina */
+    @Override
+    public AtomicInteger getVacinaID() {
+        return realmDataBase.getIdByClassModel(Vacina.class);
+    }
+
+    @Override
+    public boolean novoAtualizaVacina(Vacina vacina) {
+        return realmDataBase.addOrUpdate(vacina);
+    }
+
+    @Override
+    public boolean eliminaVacina(Long id) {
+        return realmDataBase.remove(Vacina.class, "id", id);
+    }
+
+    @Override
+    public Vacina obtemVacina(Long id) {
+        return realmDataBase.getObject(Vacina.class, "id", id);
+    }
+
+    @Override
+    public Vacina obtemVacina() {
+        return realmDataBase.getObject(Vacina.class);
+    }
+
+    @Override
+    public Vacina obtemVacina(String[] valores) {
+        return realmDataBase.getObject(Vacina.class, valores);
+    }
+
+    @Override
+    public Vacina obtemVacina(String[] valoresA, String[] valoresB) {
+        return realmDataBase.getObject(Vacina.class, valoresA, valoresB);
+    }
+
+    @Override
+    public List<Vacina> obtemTodasVacinas(String[] campo, String[] valor) {
+        return realmDataBase.findAll(campo, valor, Vacina.class);
+    }
+
+    /* Usuário */
+    @Override
+    public AtomicInteger getUsuarioID() {
+        return realmDataBase.getIdByClassModel(Usuario.class);
     }
 
     @Override
@@ -88,11 +333,12 @@ public class DataManager implements IDataManager {
         return realmDataBase.findAll(campo, valor, Usuario.class);
     }
 
-    /* PREFERENCES HELPER */
     @Override
-    public void updateApiHeader(Long userId, String accessToken) {
-
+    public boolean validaLoginUsuario(String login, String senha) {
+        return realmDataBase.getLoginLocal(Usuario.class, login, senha);
     }
+
+    /* PREFERENCES HELPER */
 
     @Override
     public void updateUserInfo(String accessToken, Long userId, LoggedInMode loggedInMode, String userName, String email, String profilePicPath) {
@@ -102,7 +348,6 @@ public class DataManager implements IDataManager {
             setCurrentUserName(userName);
             setCurrentUserEmail(email);
             setCurrentUserProfilePicUrl(profilePicPath);
-            updateApiHeader(userId, accessToken);
     }
 
     @Override
@@ -174,34 +419,6 @@ public class DataManager implements IDataManager {
     @Override
     public void setAccessToken(String accessToken) {
         preferencesHelper.setAccessToken(accessToken);
-        iapiHelper.getApiHeader().getProtectedApiHeader().setAccessToken(accessToken);
-    }
-
-    /* API HELPER */
-
-    @Override
-    public ApiHeader getApiHeader() {
-        return iapiHelper.getApiHeader();
-    }
-
-    @Override
-    public Single<LoginResponse> doGoogleLoginApiCall(LoginRequest.GoogleLoginRequest request) {
-        return null;
-    }
-
-    @Override
-    public Single<LoginResponse> doFacebookLoginApiCall(LoginRequest.FacebookLoginRequest request) {
-        return iapiHelper.doFacebookLoginApiCall(request);
-    }
-
-    @Override
-    public Single<LoginResponse> doServerLoginApiCall(LoginRequest.ServerLoginRequest request) {
-        return null;
-    }
-
-    @Override
-    public Single<LogoutResponse> doLogoutApiCall() {
-        return null;
     }
 
 }

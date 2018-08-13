@@ -24,7 +24,6 @@
     android:background="@drawable/bg_design"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -61,6 +60,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin"
         android:scrollbars="none">
 
         <LinearLayout
@@ -89,15 +90,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_vertical_margin"
                 android:layout_marginTop="5dp"
                 app:cardCornerRadius="7dp"
                 app:cardElevation="22dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:paddingLeft="@dimen/activity_vertical_margin"
+                    android:paddingRight="@dimen/activity_vertical_margin"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
@@ -113,13 +117,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
                             android:background="@drawable/input_border_bottom"
                             android:cursorVisible="true"
                             android:gravity="start|center|top"
-                            android:hint="@string/text_usuario_nome_completo"
-                            android:inputType="textEmailAddress"
+                            android:hint="@string/text_nome_completo"
+                            android:inputType="textAutoComplete"
                             android:maxLength="50"
                             android:textColor="@color/black_effective"
                             android:textSize="18sp" />
@@ -136,8 +138,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
                             android:background="@drawable/input_border_bottom"
                             android:cursorVisible="true"
                             android:gravity="start|center|top"
@@ -159,8 +159,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
                             android:background="@drawable/input_border_bottom"
                             android:cursorVisible="true"
                             android:gravity="start|center|top"
@@ -183,8 +181,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
                             android:background="@drawable/input_border_bottom"
                             android:cursorVisible="true"
                             android:gravity="start|center|top"
@@ -207,8 +203,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
                             android:background="@drawable/input_border_bottom"
                             android:cursorVisible="true"
                             android:gravity="start|center|top"
@@ -225,8 +219,6 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
                         android:background="@drawable/botao_interativo"
                         android:text="@string/btn_salvar"
                         android:textColor="@color/white" />

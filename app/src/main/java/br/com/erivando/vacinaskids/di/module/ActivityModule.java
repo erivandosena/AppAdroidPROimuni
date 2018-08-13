@@ -6,9 +6,15 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import br.com.erivando.vacinaskids.di.ActivityContext;
 import br.com.erivando.vacinaskids.di.PerActivity;
-import br.com.erivando.vacinaskids.ui.cadastro.usuario.CadastroUsuarioMvpPresenter;
-import br.com.erivando.vacinaskids.ui.cadastro.usuario.CadastroUsuarioMvpView;
-import br.com.erivando.vacinaskids.ui.cadastro.usuario.CadastroUsuarioPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoMvpPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoMvpView;
+import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaMvpPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaMvpView;
+import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioMvpPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioMvpView;
+import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioPresenter;
 import br.com.erivando.vacinaskids.ui.login.LoginMvpPresenter;
 import br.com.erivando.vacinaskids.ui.login.LoginMvpView;
 import br.com.erivando.vacinaskids.ui.login.LoginPresenter;
@@ -66,6 +72,11 @@ public class ActivityModule {
     }
 
     @Provides
+    LinearLayoutManager provideLinearLayoutManager(AppCompatActivity activity) {
+        return new LinearLayoutManager(activity);
+    }
+
+    @Provides
     @PerActivity
     MainMvpPresenter<MainMvpView> provideMainPresenter(
             MainPresenter<MainMvpView> presenter) {
@@ -88,21 +99,26 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    CadastroUsuarioMvpPresenter<CadastroUsuarioMvpView> provideCadastroUsuarioPresenter(
-            CadastroUsuarioPresenter<CadastroUsuarioMvpView> presenter) {
+    CadastroUsuarioMvpPresenter<CadastroUsuarioMvpView> provideCadastroUsuarioPresenter(CadastroUsuarioPresenter<CadastroUsuarioMvpView> presenter) {
         return presenter;
     }
 
     @Provides
     @PerActivity
-    SobreMvpPresenter<SobreMvpView> provideSobrePresenter(
-            SobrePresenter<SobreMvpView> presenter) {
+    SobreMvpPresenter<SobreMvpView> provideSobrePresenter(SobrePresenter<SobreMvpView> presenter) {
         return presenter;
     }
 
     @Provides
-    LinearLayoutManager provideLinearLayoutManager(AppCompatActivity activity) {
-        return new LinearLayoutManager(activity);
+    @PerActivity
+    CriancaMvpPresenter<CriancaMvpView> provideCriancaPresenter(CriancaPresenter<CriancaMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    CartaoMvpPresenter<CartaoMvpView> provideCartaoPresenter(CartaoPresenter<CartaoMvpView> presenter) {
+        return presenter;
     }
 
 }

@@ -1,4 +1,4 @@
-package br.com.erivando.vacinaskids.ui.cadastro.usuario;
+package br.com.erivando.vacinaskids.ui.acoes.usuario;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,11 +22,13 @@ import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 @PerActivity
 public interface CadastroUsuarioMvpPresenter<V extends CadastroUsuarioMvpView> extends MvpPresenter<V> {
 
+    String getTokenUsuario();
+
     void onCadasrarClick(Long id, String nome, String login, String email, String senha, String repeteSenha, Bitmap foto);
 
-    Usuario onUsuarioCadastrado();
-
     boolean onNovoAtualizaUsuario(Usuario usuario);
+
+    Usuario onUsuarioCadastrado();
 
     void selecionarImagem(@ApplicationContext final Context context);
 
@@ -36,5 +38,4 @@ public interface CadastroUsuarioMvpPresenter<V extends CadastroUsuarioMvpView> e
 
     Bitmap onActivityResult(int requestCode, int resultCode, Intent data, @ApplicationContext final Context context, final ImageButton imageButton);
 
-    String getTokenUsuario();
 }

@@ -9,7 +9,6 @@ import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
-import br.com.erivando.vacinaskids.service.SyncService;
 import br.com.erivando.vacinaskids.ui.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.main.MainActivity;
 import butterknife.ButterKnife;
@@ -62,11 +61,6 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
         Intent intent = MainActivity.getStartIntent(SplashActivity.this);
         startActivity(intent);
         finish();
-    }
-
-    @Override
-    public void startSyncService() {
-        SyncService.start(this);
     }
 
     @Override

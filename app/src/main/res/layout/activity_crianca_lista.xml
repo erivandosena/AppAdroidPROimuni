@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+~ Copyright [2018] [Erivando Sena]
+~
+~ Licenciado sob a Licença Apache, Versão 2.0 (a "Licença");
+~ você não pode usar este arquivo, exceto em conformidade com a Licença.
+~ Você pode obter uma cópia da Licença em
+~
+~ http://www.apache.org/licenses/LICENSE-2.0
+~
+~ A menos que exigido pela lei aplicável ou acordado por escrito, o software
+~ distribuído sob a Licença é distribuído em uma base "COMO ESTÁ",
+~ SEM GARANTIAS OU CONDIÇÕES DE QUALQUER TIPO, expressas ou implícitas.
+~ Veja a Licença para o idioma específico que governa as permissões e
+~ limitações sob a licença.
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_design"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="@dimen/app_bar_height"
+        android:background="@color/com_facebook_button_background_color_pressed"
+        android:gravity="center|start"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_nav_voltar"
+            style="@style/Button.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:background="@color/transparent"
+            android:contentDescription="@null"
+            android:tint="@color/white"
+            app:srcCompat="@drawable/ic_keyboard_backspace_24px"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            style="@style/TextStyle.Heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:text="@string/text_lista_crianca_titulo"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:scrollbars="none">
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="7dp"
+                app:cardElevation="22dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+
+                    <ListView
+                        android:id="@+id/lista_criancas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:divider="@android:color/transparent" />
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+    </LinearLayout>
+
+</LinearLayout>

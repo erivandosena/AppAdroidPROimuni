@@ -1,5 +1,6 @@
 package br.com.erivando.vacinaskids.util;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -26,11 +27,18 @@ import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import br.com.erivando.vacinaskids.R;
 
@@ -45,6 +53,17 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  */
 
 public class Uteis {
+
+    private static final SimpleDateFormat DATA_FORMAT_PARSER = new SimpleDateFormat("dd/MM/yyyy");
+
+    public static final int REQUEST_IMG_CAMERA = 1;
+    public static final int REQUEST_IMG_GALERIA = 2;
+    public static final int TODAS_PERMISSOES = 1;
+    public static final String[] PERMISSOES = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+    };
 
     /**
      *
@@ -254,5 +273,100 @@ public class Uteis {
 
     private static boolean isMarshmallow() {
         return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+    }
+
+    /**
+     *
+     * @param data
+     * @return
+     */
+    public static Calendar parseDateString(String data) {
+        Calendar calendar = Calendar.getInstance();
+        DATA_FORMAT_PARSER.setLenient(false);
+        try {
+            calendar.setTime(DATA_FORMAT_PARSER.parse(data));
+        } catch (ParseException e) {}
+        return calendar;
+    }
+
+    public static String parseDateString(Date data) {
+        return DATA_FORMAT_PARSER.format(data);
+    }
+
+    /**
+     *
+     * @param data
+     * @return
+     */
+    public static boolean isDataValida(String data) {
+        Calendar calendar = parseDateString(data);
+        int year = calendar.get(Calendar.YEAR);
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        return year >= 1900 && year < thisYear;
+    }
+
+    public static String obtemIdadeCompleta(Date data)  {
+        Calendar calendarioHoje = GregorianCalendar.getInstance();
+        int diaHoje = calendarioHoje.get(Calendar.DAY_OF_MONTH);
+        int mesHoje = calendarioHoje.get(Calendar.MONTH) + 1;
+        int anoHoje = calendarioHoje.get(Calendar.YEAR);
+
+        String dataNascimento = parseDateString(data);
+
+        // Data do nascimento.
+        String[] separaDN = dataNascimento.split("/");
+        int diaNasc = Integer.valueOf(separaDN[0]);
+        int mesNasc = Integer.valueOf(separaDN[1]);
+        int anoNasc = Integer.valueOf(separaDN[2]);
+
+        String strAniv = anoHoje+"-"+mesNasc+"-"+diaNasc;
+        Calendar calAniv = Calendar.getInstance();
+        try {
+            calAniv.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(strAniv));
+        } catch (ParseException ex) {
+            ex.getStackTrace();
+        }
+
+        int anos = (calendarioHoje.getTimeInMillis() < calAniv.getTimeInMillis())? (anoHoje-anoNasc-1):anoHoje-anoNasc ;
+        int meses;
+        int dias;
+
+        meses = mesHoje - mesNasc;
+        if (meses > 0) {//Verificando se já fez aniversário ou não
+            if (diaHoje < diaNasc) {
+                meses--;
+            }
+        } else if (meses < 0) {//Se o mês atual for menor que o mês do aniversário
+            meses = 12 + meses;//Lembrar que meses está negativo, por isso a soma;
+            //Da mesma forma, vamos comparar o dia atual com o dia do aniversário, para sabermos se o mês está completo ou não:
+            if (diaHoje < diaNasc) {
+                meses--;
+            }
+        } else {//Se o mês atual for o mês do aniversário:
+            if (diaHoje<diaNasc) {
+                meses = 11;
+            }
+        }
+
+        dias = diaHoje - diaNasc;
+        if (dias < 0) {//Se dia hoje menor que dia do niver, somar os dias desde o mês anterior:
+            if (mesHoje==5||mesHoje==7||mesHoje==8||mesHoje==10||mesHoje==12) {
+                dias = 30-diaNasc+diaHoje;
+            } else if (mesHoje==1||mesHoje==2||mesHoje==4||mesHoje==6||mesHoje==9||mesHoje==11) {
+                dias = 31-diaNasc+diaHoje;
+            } else {//Verificando se o ano é bissexto ou não: Esse else é para o mês 3, cujo anterior é fevereiro:
+                if (anoHoje%4 == 0) {
+                    dias = 29-diaNasc+diaHoje;
+                } else {
+                    dias = 28-diaNasc+diaHoje;
+                }
+            }
+        }
+
+        String dia = (dias > 1) ? " e "+dias+" dias" : " e "+dias + " dia";
+        String mes = (meses > 1) ? meses+" meses" : meses + " mês";
+        String ano = (anos > 1) ? anos+" anos, " : anos + " ano, ";
+
+        return ano+" "+mes+" "+dia;
     }
 }

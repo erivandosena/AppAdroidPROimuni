@@ -33,7 +33,7 @@
     <string name="botao_cancel_avaliacao_app">Depois</string>
     <!-- Usuário -->
     <string name="text_usuario_titulo">Dados do Usuário</string>
-    <string name="text_usuario_nome_completo">Nome completo do usuário</string>
+    <string name="text_nome_completo">Nome completo</string>
     <string name="text_usuario_login">Nome único do usuário</string>
     <string name="text_usuario_nome">Usuário</string>
     <string name="text_usuario_email">E-mail</string>
@@ -114,5 +114,16 @@
     <string name="text_btn_ok">OK</string>
     <string name="aviso_sem_internet">Sem conexão com à Internet!</string>
     <string name="aviso_play_services_install">Este aplicativo requer o Google Play Services. Por favor instale o Google Play Services no seu dispositivo e tente novamente.</string>
+    <!-- Cadastro Criança -->
+    <string name="erro_text_data">Informe uma data válida</string>
+    <string name="text_crianca_titulo">Dados da Criança</string>
+    <string name="text_valida_sexo">Informe o sexo</string>
+    <string name="text_nascimento">Data do Nascimento</string>
+    <string name="text_responsavel">Responsável</string>
+    <string name="text_sexo">Sexo</string>
+    <string name="texto_aviso_usuario_nao_cadastrado">É necessário cadastrar o usuário!</string>
+    <string name="texto_aviso_crianca_nao_cadastrada">É necessário cadastrar uma crianca!</string>
+    <string name="text_lista_crianca_titulo">Selecione a Criança</string>
+    <string name="text_lista_cartao_titulo">Cartão Vacinal</string>
 
 </resources>

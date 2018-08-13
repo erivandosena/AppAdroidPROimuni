@@ -18,7 +18,7 @@ import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
-import br.com.erivando.vacinaskids.ui.cadastro.usuario.CadastroUsuarioActivity;
+import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioActivity;
 import br.com.erivando.vacinaskids.ui.main.MainActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;

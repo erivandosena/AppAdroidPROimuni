@@ -1,4 +1,4 @@
-package br.com.erivando.vacinaskids.ui.cadastro.usuario;
+package br.com.erivando.vacinaskids.ui.acoes.crianca;
 
 import android.Manifest;
 import android.content.Context;
@@ -23,88 +23,71 @@ import javax.inject.Inject;
 import br.com.erivando.vacinaskids.BuildConfig;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.database.IDataManager;
+import br.com.erivando.vacinaskids.database.model.Crianca;
 import br.com.erivando.vacinaskids.database.model.Usuario;
 import br.com.erivando.vacinaskids.mvp.base.BasePresenter;
 import br.com.erivando.vacinaskids.ui.AppAplicacao;
-import br.com.erivando.vacinaskids.util.CommonUtils;
 import br.com.erivando.vacinaskids.util.ConverteBase64Task;
 import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
 
 import static android.app.Activity.RESULT_OK;
+import static br.com.erivando.vacinaskids.util.Uteis.REQUEST_IMG_CAMERA;
+import static br.com.erivando.vacinaskids.util.Uteis.REQUEST_IMG_GALERIA;
 import static br.com.erivando.vacinaskids.util.Uteis.bitmapParaBase64;
 import static br.com.erivando.vacinaskids.util.Uteis.capitalizeNome;
 import static br.com.erivando.vacinaskids.util.Uteis.criaArquivoImagem;
+import static br.com.erivando.vacinaskids.util.Uteis.isDataValida;
+import static br.com.erivando.vacinaskids.util.Uteis.parseDateString;
 
 /**
  * Projeto:     VacinasKIDS
  * Autor:       Erivando Sena
- * Data/Hora:   21 de Julho de 2018 as 16:52
+ * Data/Hora:   09 de Agosto de 2018 as 10:53
  * Local:       Fortaleza/CE
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends BasePresenter<V> implements CadastroUsuarioMvpPresenter<V> {
+public class CriancaPresenter<V extends CriancaMvpView> extends BasePresenter<V> implements CriancaMvpPresenter<V> {
 
-    private static final int REQUEST_IMG_CAMERA = 1;
-    private static final int REQUEST_IMG_GALERIA = 2;
-    public static final int TODAS_PERMISSOES = 1;
-    public static final String[] PERMISSOES = {
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
-    };
     private File arquivoImagem;
 
     @Inject
-    public CadastroUsuarioPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
+    public CriancaPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(iDataManager, schedulerProvider, compositeDisposable);
     }
 
     @Override
-    public void onCadasrarClick(Long id, String nome, String login, String email, String senha, String repeteSenha, Bitmap foto) {
-        //validando cadastro do usuário
+    public void onCadasrarClick(Long id, String nome, String nascimento, String responsavel, String sexo, Bitmap foto) {
         if ((nome == null) || (nome.isEmpty()) || !nome.matches("^[a-zA-Za-zà-ú]+ [a-zA-ZA-ZÀ-Ú]+.*")) {
             getMvpView().onError(R.string.erro_text_nome_completo);
             return;
         }
-        if (login == null || login.isEmpty() || login.length() < 4 || login.length() > 20 || login.matches("^[a-zA-Z]+ [a-zA-Z]+.*")) {
-            getMvpView().onError(R.string.erro_text_usuario);
-            return;
-        }
-        if (!CommonUtils.isEmailValid(email)) {
-            getMvpView().onError(R.string.erro_text_email_invalido);
-            return;
-        }
-        if (senha == null || senha.isEmpty() || senha.length() > 20) {
-            getMvpView().onError(R.string.erro_text_senha);
-            return;
-        }
-        if (repeteSenha == null || repeteSenha.isEmpty()) {
-            getMvpView().onError(R.string.erro_text_repeteSenha);
-            return;
-        }
-        if (!senha.equals(repeteSenha)) {
-            getMvpView().onError(R.string.erro_text_senhaInvalida);
+
+        if (!isDataValida(nascimento)) {
+            getMvpView().onError(R.string.erro_text_data);
             return;
         }
 
-        nome = capitalizeNome(nome.trim());
-        login = login.trim().toLowerCase();
-        email = email.trim().toLowerCase();
+        if (sexo == null || sexo.isEmpty()) {
+            getMvpView().onError(R.string.text_valida_sexo);
+            return;
+        }
 
         getMvpView().showLoading();
+        nome = capitalizeNome(nome.trim());
+        Usuario usuario = getIDataManager().obtemUsuario(getIDataManager().obtemUsuario().getId());
 
-        Usuario usuario = new Usuario();
-        usuario.setId((id == 0L) ? (long)getIDataManager().getUsuarioID().incrementAndGet() : id);
-        usuario.setUsuaNome(nome);
-        usuario.setUsuaLogin(login);
-        usuario.setUsuaSenha(senha);
-        usuario.setUsuaEmail(email);
-        usuario.setUsuaFoto((foto != null) ? bitmapParaBase64(foto) : null);
+        Crianca crianca = new Crianca();
+        crianca.setId((id == 0L) ? (long)getIDataManager().getCriancaID().incrementAndGet() : id);
+        crianca.setCriaNome(nome);
+        crianca.setCriaNascimento(parseDateString(nascimento).getTime());
+        crianca.setCriaSexo(sexo);
+        crianca.setUsuario(usuario);
+        crianca.setCriaFoto((foto != null) ? bitmapParaBase64(foto) : null);
 
         try {
-            if (onNovoAtualizaUsuario(usuario)) {
+            if (onNovoAtualizaCrianca(crianca)) {
                 getMvpView().showMessage(R.string.text_cadastro_sucesso);
             } else {
                 getMvpView().showMessage(R.string.text_valida_cadastro);
@@ -113,7 +96,7 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
             if (!isViewAttached()) {
                 return;
             }
-            getMvpView().openLoginOuMainActivity();
+            getMvpView().openCriancaListaActivity("edita");
         } catch (Exception ex) {
             getMvpView().onError(ex.getMessage());
             getMvpView().onError(R.string.erro_text_cadastro);
@@ -123,13 +106,18 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
     }
 
     @Override
-    public Usuario onUsuarioCadastrado() {
-        return getIDataManager().obtemUsuario();
+    public boolean onNovoAtualizaCrianca(Crianca crianca) {
+        return getIDataManager().novoAtualizaCrianca(crianca);
     }
 
     @Override
-    public boolean onNovoAtualizaUsuario(Usuario usuario) {
-        return getIDataManager().novoAtualizaUsuario(usuario);
+    public List<Crianca> onCriancaCadastrada() {
+        return getIDataManager().obtemTodasCriancas();
+    }
+
+    @Override
+    public Crianca onCriancaCadastrada(Long id) {
+        return getIDataManager().obtemCrianca(id);
     }
 
     @Override
@@ -205,7 +193,6 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
     @Override
     public Bitmap onActivityResult(int requestCode, int resultCode, Intent data, final Context context, final ImageButton imageButton) {
         final int retornoRequestCode = requestCode & 0x0000ffff;
-        //final ImageButton fotoImageButton = null;
         Bitmap imagemBitmapFoto = null;
         try {
             if (resultCode == RESULT_OK) {
@@ -217,7 +204,6 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
                         task.setImageCompressiorListner(new ConverteBase64Task.ImageCompressiorListner() {
                             @Override
                             public void onImageCompressed(Bitmap bitmap) {
-                                //imagemBitmapFoto = bitmap;
                                 imageButton.setImageBitmap(bitmap);
                             }
 
@@ -227,9 +213,6 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
                             }
                         });
                         task.execute();
-                        /**
-                         * ScanFile para que ele apareça na Galeria
-                         */
                         MediaScannerConnection.scanFile(AppAplicacao.contextApp,
                                 new String[]{arquivoImagem.getAbsolutePath()},
                                 new String[]{"image/jpg"},
@@ -264,10 +247,4 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
         }
         return imagemBitmapFoto;
     }
-
-    @Override
-    public String getTokenUsuario() {
-        return getIDataManager().getAccessToken();
-    }
-
 }

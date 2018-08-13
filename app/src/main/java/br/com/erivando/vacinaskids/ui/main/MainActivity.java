@@ -20,6 +20,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
@@ -34,13 +35,16 @@ import br.com.erivando.vacinaskids.BuildConfig;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.custom.imagem.RoundedImageView;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
-import br.com.erivando.vacinaskids.ui.cadastro.usuario.CadastroUsuarioActivity;
+import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoActivity;
+import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaListaActvity;
+import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioActivity;
 import br.com.erivando.vacinaskids.ui.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.login.LoginMvpPresenter;
 import br.com.erivando.vacinaskids.ui.login.LoginMvpView;
 import br.com.erivando.vacinaskids.ui.sobre.SobreFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static br.com.erivando.vacinaskids.util.Uteis.exibeAvaliacaoDialog;
 
@@ -74,6 +78,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @BindView(R.id.text_versao_app)
     TextView versaoAppTextView;
 
+    @BindView(R.id.btn_cartao_vacinal)
+    ImageButton cartaoImageButton;
+
     private TextView nomeTextView;
 
     private TextView emailTextView;
@@ -99,6 +106,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         presenter.onAttach(this);
 
         setUp();
+    }
+
+    @OnClick(R.id.btn_cartao_vacinal)
+    public void onCartaoVacinal() {
+        openCriancaListaActivity("cartao");
     }
 
     @Override
@@ -158,14 +170,15 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         switch (item.getItemId()) {
             case R.id.action_edita_usuario:
                 openCadastroUsuarioActivity();
-                //return true;
+                return true;
             case R.id.action_edita_crianca:
+                openCriancaListaActivity("edita");
                 return true;
             case R.id.action_postos:
                 return true;
             case R.id.action_share:
                 onCompartilhaApp();
-                //return true;
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -254,12 +267,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     @Override
-    public void openLoginActivity() {
-          startActivity(LoginActivity.getStartIntent(this));
-          finish();
-    }
-
-    @Override
     public void showAboutFragment() {
         lockDrawer();
         getSupportFragmentManager()
@@ -271,8 +278,35 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     @Override
+    public void openLoginActivity() {
+        startActivity(LoginActivity.getStartIntent(this));
+        finish();
+    }
+
+    @Override
     public void openCadastroUsuarioActivity() {
         startActivity(CadastroUsuarioActivity.getStartIntent(this));
+        finish();
+    }
+
+    @Override
+    public void openCartaoActivity() {
+        startActivity(CartaoActivity.getStartIntent(this));
+        finish();
+    }
+
+    @Override
+    public void openCriancaActivity() {
+
+    }
+
+    public void openCriancaListaActivity(String acao) {
+        Intent intent = CriancaListaActvity.getStartIntent(MainActivity.this);
+        if ("edita".equals(acao))
+            intent.putExtra("criancaLista", acao);
+        if ("cartao".equals(acao))
+            intent.putExtra("criancaLista", acao);
+        startActivity(intent);
         finish();
     }
 

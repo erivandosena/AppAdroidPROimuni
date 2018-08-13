@@ -38,9 +38,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/btn_cartao_vacinal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/transparent"
                     android:src="@drawable/ic_cartao"
                     android:layout_centerInParent="true"
                     android:contentDescription="@null" />
@@ -63,6 +65,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/transparent"
                     android:src="@drawable/ic_gerenciar"
                     android:layout_centerInParent="true"
                     android:contentDescription="@null" />
@@ -92,6 +95,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/transparent"
                     android:src="@drawable/ic_vacina"
                     android:layout_centerInParent="true"
                     android:contentDescription="@null" />
@@ -114,6 +118,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/transparent"
                     android:src="@drawable/ic_idades"
                     android:layout_centerInParent="true"
                     android:contentDescription="@null" />
@@ -143,6 +148,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/transparent"
                     android:src="@drawable/ic_mapa"
                     android:layout_centerInParent="true"
                     android:contentDescription="@null" />
@@ -165,6 +171,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/transparent"
                     android:src="@drawable/ic_curiosidades"
                     android:layout_centerInParent="true"
                     android:contentDescription="@null" />

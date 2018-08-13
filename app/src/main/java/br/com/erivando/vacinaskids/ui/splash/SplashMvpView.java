@@ -11,7 +11,6 @@ import br.com.erivando.vacinaskids.mvp.MvpView;
  */
 
 public interface SplashMvpView extends MvpView {
-    void startSyncService();
 
     void openLoginActivity();
 

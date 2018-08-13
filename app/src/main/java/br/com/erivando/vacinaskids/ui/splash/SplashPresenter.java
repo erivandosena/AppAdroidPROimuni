@@ -28,7 +28,6 @@ public class SplashPresenter<V extends SplashMvpView> extends BasePresenter<V> i
     @Override
     public void onAttach(V mvpView) {
         super.onAttach(mvpView);
-        getMvpView().startSyncService();
         Handler handler = new Handler();
         handler.postDelayed(this, 2 * 1000);
     }

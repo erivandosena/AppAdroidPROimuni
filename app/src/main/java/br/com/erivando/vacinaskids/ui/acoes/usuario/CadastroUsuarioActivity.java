@@ -1,4 +1,4 @@
-package br.com.erivando.vacinaskids.ui.cadastro.usuario;
+package br.com.erivando.vacinaskids.ui.acoes.usuario;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,13 +16,12 @@ import br.com.erivando.vacinaskids.database.model.Usuario;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.main.MainActivity;
-import br.com.erivando.vacinaskids.util.Uteis;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static br.com.erivando.vacinaskids.ui.cadastro.usuario.CadastroUsuarioPresenter.PERMISSOES;
-import static br.com.erivando.vacinaskids.ui.cadastro.usuario.CadastroUsuarioPresenter.TODAS_PERMISSOES;
+import static br.com.erivando.vacinaskids.util.Uteis.PERMISSOES;
+import static br.com.erivando.vacinaskids.util.Uteis.TODAS_PERMISSOES;
 import static br.com.erivando.vacinaskids.util.Uteis.base64ParaBitmap;
 import static br.com.erivando.vacinaskids.util.Uteis.habilitaTelaCheia;
 import static br.com.erivando.vacinaskids.util.Uteis.hasPermissoes;
@@ -102,8 +101,7 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     }
 
     @OnClick(R.id.img_usuario_foto)
-    //@Override
-    public void onIncluiFotoUsuario() {
+    public void onIncluiFoto() {
         if (!hasPermissoes(this, PERMISSOES)) {
             ActivityCompat.requestPermissions(this, PERMISSOES, TODAS_PERMISSOES);
         } else {

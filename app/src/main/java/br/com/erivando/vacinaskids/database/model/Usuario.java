@@ -1,5 +1,10 @@
 package br.com.erivando.vacinaskids.database.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.gson.GsonBuilder;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -17,7 +22,7 @@ import io.realm.annotations.Required;
  * Classe POJO para mapeamento da tabela usuário.
  * POJO representing table usuário.
  */
-public class Usuario extends RealmObject {
+public class Usuario extends RealmObject implements Parcelable {
 
     @Required
     @PrimaryKey
@@ -130,6 +135,7 @@ public class Usuario extends RealmObject {
 
     @Override
     public String toString() {
+        /*
         return "Usuario{"
                 + "Código: '" + id + '\''
                 + ", Nome: '" + usuaNome + '\''
@@ -138,6 +144,60 @@ public class Usuario extends RealmObject {
                 + ", E-mail: '" + usuaEmail + '\''
                 + ", Foto: '" + usuaFoto + '\''
                 + '}';
+        */
+        return new GsonBuilder().create().toJson(this, Usuario.class);
     }
 
+    public static final Parcelable.Creator<Usuario> CREATOR = new Parcelable.Creator<Usuario>() {
+        @Override
+        public Usuario createFromParcel(Parcel in) {
+            return new Usuario(in);
+        }
+
+        @Override
+        public Usuario[] newArray(int size) {
+            return new Usuario[size];
+        }
+    };
+
+    protected Usuario(Parcel in) {
+        id = in.readLong();
+        usuaNome = in.readString();
+        usuaLogin = in.readString();
+        usuaSenha = in.readString();
+        usuaEmail = in.readString();
+        usuaFoto = in.readString();
+    }
+
+    /**
+     * Describe the kinds of special objects contained in this Parcelable
+     * instance's marshaled representation. For example, if the object will
+     * include a file descriptor in the output of {@link #writeToParcel(Parcel, int)},
+     * the return value of this method must include the
+     * {@link #CONTENTS_FILE_DESCRIPTOR} bit.
+     *
+     * @return a bitmask indicating the set of special object types marshaled
+     * by this Parcelable object instance.
+     */
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    /**
+     * Flatten this object in to a Parcel.
+     *
+     * @param dest  The Parcel in which the object should be written.
+     * @param flags Additional flags about how the object should be written.
+     *              May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
+     */
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(usuaNome);
+        dest.writeString(usuaLogin);
+        dest.writeString(usuaSenha);
+        dest.writeString(usuaEmail);
+        dest.writeString(usuaFoto);
+    }
 }

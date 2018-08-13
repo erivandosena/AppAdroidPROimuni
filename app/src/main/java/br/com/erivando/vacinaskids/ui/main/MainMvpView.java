@@ -11,18 +11,15 @@ import br.com.erivando.vacinaskids.mvp.MvpView;
  */
 
 public interface MainMvpView extends MvpView {
+    void showAboutFragment();
 
     void openLoginActivity();
 
-    void showAboutFragment();
-
     void openCadastroUsuarioActivity();
 
-    /*
-    void refreshQuestionnaire(List<Question> questionList);
+    void openCartaoActivity();
 
-    void reloadQuestionnaire(List<Question> questionList);
-    */
+    void openCriancaActivity();
 
     void updateUserName(String currentUserName);
 
@@ -33,8 +30,6 @@ public interface MainMvpView extends MvpView {
     void updateAppVersion();
 
     void showRateUsDialog();
-
-    //void openMyFeedActivity();
 
     void closeNavigationDrawer();
 
