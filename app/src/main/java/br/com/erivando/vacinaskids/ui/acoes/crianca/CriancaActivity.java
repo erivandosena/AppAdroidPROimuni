@@ -64,14 +64,9 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     @BindView(R.id.img_crianca_foto)
     ImageButton fotoImageButton;
 
-    private static Intent intent;
-
-    private ArrayAdapter adapterSexo;
-    private ArrayAdapter adapterResponsavel;
-
-    private final String[] SEXO = new String[]{"Menino", "Menina"};
-    private String[] RESPONSAVEL;
-
+    private Intent intent;
+    private ArrayAdapter<String> adapterResponsavel;
+    private ArrayAdapter<String> adapterSexo;
     private Crianca crianca;
     private Long id;
     private Bitmap imagemBitmapFoto;
@@ -182,13 +177,13 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     private void getUsuario() {
         Usuario usuario = presenterUsuario.onUsuarioCadastrado();
         if (usuario != null) {
-            RESPONSAVEL = new String[]{usuario.getUsuaNome()};
-
-            adapterResponsavel = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, RESPONSAVEL);
+            String[] responsavel = new String[]{usuario.getUsuaNome()};
+            adapterResponsavel = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, responsavel);
             adapterResponsavel.setDropDownViewResource(android.R.layout.simple_spinner_item);
             comboResponsavel.setAdapter(adapterResponsavel);
 
-            adapterSexo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, SEXO);
+            String[] sexo = new String[]{"Menino", "Menina"};
+            adapterSexo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sexo);
             adapterSexo.setDropDownViewResource(android.R.layout.simple_spinner_item);
             comboSexo.setAdapter(adapterSexo);
         }
@@ -206,11 +201,6 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
             startActivity(intent);
             finish();
         }
-    }
-
-    public void openCriancaListaActivity() {
-        startActivity(CriancaListaActvity.getStartIntent(this));
-        finish();
     }
 
     public void openMainActivity() {

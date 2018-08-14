@@ -29,16 +29,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import br.com.erivando.vacinaskids.R;
 
@@ -299,10 +295,29 @@ public class Uteis {
      * @return
      */
     public static boolean isDataValida(String data) {
-        Calendar calendar = parseDateString(data);
-        int year = calendar.get(Calendar.YEAR);
-        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
-        return year >= 1900 && year < thisYear;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date testDate = null;
+        Date dateafter = new Date();
+        try {
+            testDate = sdf.parse(data);
+        } catch (ParseException e) {
+            return false;
+        }
+        if (!sdf.format(testDate).equals(data)) {
+            return false;
+        }
+        try {
+            Date convertedDate = DATA_FORMAT_PARSER.parse(data);
+            Date convertedDate2 = DATA_FORMAT_PARSER.parse(DATA_FORMAT_PARSER.format(dateafter));
+            if (convertedDate.equals(convertedDate2) || convertedDate.before(convertedDate2)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     public static String obtemIdadeCompleta(Date data)  {

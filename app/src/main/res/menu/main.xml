@@ -45,25 +45,37 @@ android:showAsAction
     <item
         android:id="@+id/action_edita_usuario"
         android:title="@string/edita_usuario"
-        android:icon="@drawable/avd_cut"
-        app:showAsAction="never|withText" />
+        android:icon="@android:drawable/ic_menu_myplaces"
+        app:showAsAction="ifRoom|withText" />
 
     <item
         android:id="@+id/action_edita_crianca"
         android:title="@string/copy"
-        android:icon="@drawable/avd_copy"
-        app:showAsAction="never|withText" />
+        android:icon="@drawable/ic_criancas_cadastro"
+        app:showAsAction="ifRoom|withText" />
 
     <item
         android:id="@+id/action_postos"
         android:title="@string/local_mapa"
-        android:icon="@drawable/avd_delete"
+        android:icon="@drawable/ic_mapa"
         app:showAsAction="never|withText" />
 
     <item
         android:id="@+id/action_share"
         android:title="@string/share"
         android:icon="@drawable/avd_share"
+        app:showAsAction="ifRoom|withText" />
+
+    <item
+        android:id="@+id/action_backup"
+        android:title="@string/backup"
+        android:icon="@android:drawable/stat_notify_sdcard"
+        app:showAsAction="ifRoom|withText" />
+
+    <item
+        android:id="@+id/action_restore"
+        android:title="@string/restore"
+        android:icon="@android:drawable/ic_menu_rotate"
         app:showAsAction="ifRoom|withText" />
 
 </menu>

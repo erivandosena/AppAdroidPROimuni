@@ -1,20 +1,25 @@
 package br.com.erivando.vacinaskids.ui.main;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -34,6 +39,7 @@ import javax.inject.Inject;
 import br.com.erivando.vacinaskids.BuildConfig;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.custom.imagem.RoundedImageView;
+import br.com.erivando.vacinaskids.database.backup.RealmBackupRestore;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoActivity;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaListaActvity;
@@ -89,6 +95,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     private ActionBarDrawerToggle drawerToggle;
 
+    private RealmBackupRestore backupRestore;
+
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         return intent;
@@ -104,6 +112,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         setUnBinder(ButterKnife.bind(this));
 
         presenter.onAttach(this);
+
+        backupRestore = new RealmBackupRestore(this);
 
         setUp();
     }
@@ -175,6 +185,12 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                 openCriancaListaActivity("edita");
                 return true;
             case R.id.action_postos:
+                return true;
+            case R.id.action_backup:
+                executaBackup();
+                return true;
+            case R.id.action_restore:
+                executaRestauracao();
                 return true;
             case R.id.action_share:
                 onCompartilhaApp();
@@ -381,4 +397,58 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         }
     }
 
+    private void executaBackup() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        alertDialog.setIcon(R.drawable.ic_launcher_round);
+        alertDialog.setTitle(getResources().getString(R.string.app_name)+ " | Copiar");
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage("Esta cópia de seguranca substituirá a cópia anterior.\n\nConfirme Sim para continuar ou Não para cancelar.");
+        alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                backupRestore.backup();
+            }
+        });
+        alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertDialog.show();
+    }
+
+    private void executaRestauracao(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        alertDialog.setIcon(R.drawable.ic_launcher_round);
+        alertDialog.setTitle(getResources().getString(R.string.app_name)+ " | Restaurar");
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage("Esta restauração substituirá seus dados atuais do aplicativo.\n\nConfirme Sim para continuar ou Não para cancelar.");
+        alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                backupRestore.restore();
+                new AlertDialog.Builder(MainActivity.this)
+                        .setIcon(R.drawable.ic_launcher_round)
+                        .setTitle(getResources().getString(R.string.app_name))
+                        .setMessage("O aplicativo será fechado para concluir o procedimento de restauração dos dados.")
+                        .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                try {
+                                    finish();
+                                    System.exit(1);
+                                } catch (Throwable throwable) {
+                                    throwable.printStackTrace();
+                                }
+                            }
+                        })
+                        .setCancelable(false)
+                        .show();
+            }
+        });
+        alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertDialog.show();
+    }
 }

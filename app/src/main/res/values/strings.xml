@@ -125,5 +125,7 @@
     <string name="texto_aviso_crianca_nao_cadastrada">É necessário cadastrar uma crianca!</string>
     <string name="text_lista_crianca_titulo">Selecione a Criança</string>
     <string name="text_lista_cartao_titulo">Cartão Vacinal</string>
+    <string name="backup">Copiar Dados</string>
+    <string name="restore">Restaurar Dados</string>
 
 </resources>
