@@ -1,6 +1,5 @@
 package br.com.erivando.vacinaskids.ui.main;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,10 +8,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ShareCompat;
@@ -40,6 +37,7 @@ import br.com.erivando.vacinaskids.BuildConfig;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.custom.imagem.RoundedImageView;
 import br.com.erivando.vacinaskids.database.backup.RealmBackupRestore;
+import br.com.erivando.vacinaskids.database.importacao.RealmImport;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoActivity;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaListaActvity;
@@ -148,6 +146,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         setupNavMenu();
         presenter.onNavMenuCreated();
         setupCardContainerView();
+
+
+        RealmImport.importFromJson(getResources());
     }
 
     @Override

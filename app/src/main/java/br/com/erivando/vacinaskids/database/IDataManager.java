@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import br.com.erivando.vacinaskids.database.model.Cartao;
 import br.com.erivando.vacinaskids.database.model.Classificacao;
+import br.com.erivando.vacinaskids.database.model.Controle;
 import br.com.erivando.vacinaskids.database.model.Crianca;
 import br.com.erivando.vacinaskids.database.model.Dose;
 import br.com.erivando.vacinaskids.database.model.Idade;
@@ -155,6 +156,8 @@ public interface IDataManager extends IPreferencesHelper {
 
     List<Idade> obtemTodasIdades(String[] campo, String[] valor);
 
+    List<Idade> obtemTodasIdades();
+
     /* VACINA */
     AtomicInteger getVacinaID();
 
@@ -171,4 +174,26 @@ public interface IDataManager extends IPreferencesHelper {
     Vacina obtemVacina(String[] valoresA, String[] valoresB);
 
     List<Vacina> obtemTodasVacinas(String[] campo, String[] valor);
+
+    List<Vacina> obtemTodasVacinas();
+
+    /* CONTROLE */
+    AtomicInteger getControleID();
+
+    boolean novoAtualizaControle(Controle controle);
+
+    boolean eliminaControle(Long id);
+
+    Controle obtemControle(Long id);
+
+    Controle obtemControle();
+
+    Controle obtemControle(String[] valores);
+
+    Controle obtemControle(String[] valoresA, String[] valoresB);
+
+    List<Controle> obtemTodosControles(String[] campo, String[] valor);
+
+    List<Controle> obtemTodosControles();
+
 }

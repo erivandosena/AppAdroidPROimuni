@@ -96,9 +96,9 @@ public class Classificacao extends RealmObject {
 
     @Override
     public String toString() {
-        return "Classificacao{"
-                + "id='" + id + '\''
-                + ", clasRanking='" + clasRanking + '\''
+        return "{"
+                + "Código: '" + id + '\''
+                + ", clasRanking: '" + clasRanking + '\''
                 + '}';
     }
 }

@@ -117,11 +117,11 @@ public class Cartao extends RealmObject {
 
     @Override
     public String toString() {
-        return "Cartao{"
-                + "id='" + id + '\''
-                + ", crianca='" + crianca + '\''
-                + ", vacina='" + vacina + '\''
-                + ", classificacao='" + classificacao + '\''
+        return "{"
+                + "Código: '" + id + '\''
+                + ", crianca: '" + crianca.toString() + '\''
+                + ", vacina: '" + vacina.toString() + '\''
+                + ", classificacao: '" + classificacao.toString() + '\''
                 + '}';
     }
 }

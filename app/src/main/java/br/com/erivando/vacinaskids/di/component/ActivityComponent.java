@@ -1,12 +1,14 @@
 package br.com.erivando.vacinaskids.di.component;
 
-import br.com.erivando.vacinaskids.database.model.Cartao;
 import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.di.module.ActivityModule;
 import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoActivity;
+import br.com.erivando.vacinaskids.ui.acoes.controle.ControleActivity;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaActivity;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaListaActvity;
+import br.com.erivando.vacinaskids.ui.acoes.idade.IdadeActivity;
 import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioActivity;
+import br.com.erivando.vacinaskids.ui.acoes.vacina.VacinaActivity;
 import br.com.erivando.vacinaskids.ui.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.main.MainActivity;
 import br.com.erivando.vacinaskids.ui.sobre.SobreFragment;
@@ -40,4 +42,10 @@ public interface ActivityComponent {
     void inject(CriancaListaActvity criancaListaActivity);
 
     void inject(CartaoActivity cartaoActivity);
+
+    void inject(ControleActivity controleActivity);
+
+    void inject(VacinaActivity vacinaActivity);
+
+    void inject(IdadeActivity idadeActivity);
 }

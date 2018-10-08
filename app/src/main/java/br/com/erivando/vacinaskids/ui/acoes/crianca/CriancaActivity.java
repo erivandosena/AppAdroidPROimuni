@@ -124,7 +124,6 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
         super.onDestroy();
     }
 
-
     @Override
     protected void setUp() {
         habilitaTelaCheia(this);

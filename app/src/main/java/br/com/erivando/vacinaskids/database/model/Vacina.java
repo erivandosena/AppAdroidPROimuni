@@ -20,7 +20,6 @@ public class Vacina extends RealmObject {
     @Required
     @PrimaryKey
     private Long id;
-    private Dose dose;
     private String vaciNome;
     private String vaciDescricao;
     private String vaciAdministracao;
@@ -34,14 +33,12 @@ public class Vacina extends RealmObject {
     /**
      * All columns constructor.
      * @param id value of column vaci_id.
-     * @param dose value of column dose_id.
      * @param vaciNome value of column vaci_nome.
      * @param vaciDescricao value of column vaci_descricao.
      * @param vaciAdministracao value of column vaci_administracao.
      */
-    public Vacina(Long id, Dose dose, String vaciNome, String vaciDescricao, String vaciAdministracao) {
+    public Vacina(Long id, String vaciNome, String vaciDescricao, String vaciAdministracao) {
         setId(id);
-        setDose(dose);
         setVaciNome(vaciNome);
         setVaciDescricao(vaciDescricao);
         setVaciAdministracao(vaciAdministracao);
@@ -60,20 +57,6 @@ public class Vacina extends RealmObject {
      */
     public void setId(Long id) {
         this.id = id;
-    }
-    /**
-     * Returns value of property {@link #dose}.
-     * @return value of property {@link #dose}.
-     */
-    public Dose getDose() {
-        return this.dose;
-    }
-    /**
-     * Sets new value of property {@link #dose}.
-     * @param dose new value of property {@link #dose}.
-     */
-    public void setDose(Dose dose) {
-        this.dose = dose;
     }
     /**
      * Returns value of property {@link #vaciNome}.
@@ -131,9 +114,6 @@ public class Vacina extends RealmObject {
         if (id != null ? !id.equals(vacina.id) : vacina.id != null) {
             return false;
         }
-        if (dose != null ? !dose.equals(vacina.dose) : vacina.dose != null) {
-            return false;
-        }
         if (vaciNome != null ? !vaciNome.equals(vacina.vaciNome) : vacina.vaciNome != null) {
             return false;
         }
@@ -150,7 +130,6 @@ public class Vacina extends RealmObject {
     public int hashCode() {
         int result = 0;
         result = 31 * result + (id != null ? id.hashCode() : 0);
-        result = 31 * result + (dose != null ? dose.hashCode() : 0);
         result = 31 * result + (vaciNome != null ? vaciNome.hashCode() : 0);
         result = 31 * result + (vaciDescricao != null ? vaciDescricao.hashCode() : 0);
         result = 31 * result + (vaciAdministracao != null ? vaciAdministracao.hashCode() : 0);
@@ -159,12 +138,12 @@ public class Vacina extends RealmObject {
 
     @Override
     public String toString() {
-        return "Vacina{"
-                + "id='" + id + '\''
-                + ", dose='" + dose + '\''
-                + ", vaciNome='" + vaciNome + '\''
-                + ", vaciDescricao='" + vaciDescricao + '\''
-                + ", vaciAdministracao='" + vaciAdministracao + '\''
+        return "{"
+                + "Código: '" + id + '\''
+                + ", vaciNome: '" + vaciNome + '\''
+                + ", vaciDescricao: '" + vaciDescricao + '\''
+                + ", vaciAdministracao: '" + vaciAdministracao + '\''
                 + '}';
     }
+
 }

@@ -11,8 +11,6 @@ package br.com.erivando.vacinaskids.database.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.GsonBuilder;
-
 import java.util.Date;
 import java.util.Objects;
 
@@ -114,8 +112,7 @@ public class Crianca extends RealmObject implements Parcelable {
 
     @Override
     public String toString() {
-        /*
-        return "Crianca{"
+        return "{"
                 + "id='" + id + '\''
                 + ", usuario='" + usuario + '\''
                 + ", criaNome='" + criaNome + '\''
@@ -123,8 +120,6 @@ public class Crianca extends RealmObject implements Parcelable {
                 + ", criaSexo='" + criaSexo + '\''
                 + ", criaFoto='" + criaFoto + '\''
                 + '}';
-       */
-        return new GsonBuilder().create().toJson(this, Crianca.class);
     }
 
     public static final Parcelable.Creator<Crianca> CREATOR = new Parcelable.Creator<Crianca>() {

@@ -161,12 +161,12 @@ public class Dose extends RealmObject {
 
     @Override
     public String toString() {
-        return "Dose{"
-                + "id='" + id + '\''
-                + ", doseData='" + doseData + '\''
-                + ", doseLote='" + doseLote + '\''
-                + ", doseUnidade='" + doseUnidade + '\''
-                + ", doseAgente='" + doseAgente + '\''
+        return "{"
+                + "Código: '" + id + '\''
+                + ", doseData: '" + doseData + '\''
+                + ", doseLote: '" + doseLote + '\''
+                + ", doseUnidade: '" + doseUnidade + '\''
+                + ", doseAgente: '" + doseAgente + '\''
                 + '}';
     }
 }

@@ -9,12 +9,21 @@ import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoMvpPresenter;
 import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoMvpView;
 import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.controle.ControleMvpPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.controle.ControleMvpView;
+import br.com.erivando.vacinaskids.ui.acoes.controle.ControlePresenter;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaMvpPresenter;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaMvpView;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.idade.IdadeMvpPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.idade.IdadeMvpView;
+import br.com.erivando.vacinaskids.ui.acoes.idade.IdadePresenter;
 import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioMvpPresenter;
 import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioMvpView;
 import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.vacina.VacinaMvpPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.vacina.VacinaMvpView;
+import br.com.erivando.vacinaskids.ui.acoes.vacina.VacinaPresenter;
 import br.com.erivando.vacinaskids.ui.login.LoginMvpPresenter;
 import br.com.erivando.vacinaskids.ui.login.LoginMvpView;
 import br.com.erivando.vacinaskids.ui.login.LoginPresenter;
@@ -121,4 +130,21 @@ public class ActivityModule {
         return presenter;
     }
 
+    @Provides
+    @PerActivity
+    ControleMvpPresenter<ControleMvpView> provideControlePresenter(ControlePresenter<ControleMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    VacinaMvpPresenter<VacinaMvpView> provideVacinaPresenter(VacinaPresenter<VacinaMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    IdadeMvpPresenter<IdadeMvpView> provideIdadePresenter(IdadePresenter<IdadeMvpView> presenter) {
+        return presenter;
+    }
 }

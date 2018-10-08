@@ -1,7 +1,15 @@
 package br.com.erivando.vacinaskids.ui.acoes.idade;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
+import javax.inject.Inject;
+
+import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
-import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioMvpView;
+import br.com.erivando.vacinaskids.ui.acoes.controle.ControleActivity;
+import butterknife.ButterKnife;
 
 /**
  * Projeto:     VacinasKIDS
@@ -12,8 +20,38 @@ import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioMvpView;
  */
 
 public class IdadeActivity extends BaseActivity implements IdadeMvpView {
+
+    @Inject
+    IdadeMvpPresenter<IdadeMvpView> presenter;
+
+    public static Intent getStartIntent(Context context) {
+        Intent intent = new Intent(context, ControleActivity.class);
+        return intent;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        getActivityComponent().inject(this);
+
+        setUnBinder(ButterKnife.bind(this));
+
+        presenter.onAttach(this);
+
+        setUp();
+    }
+
+    @Override
+    protected void onDestroy() {
+        presenter.onDetach();
+        super.onDestroy();
+    }
+
     @Override
     protected void setUp() {
 
     }
+
 }

@@ -3,8 +3,6 @@ package br.com.erivando.vacinaskids.database.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.GsonBuilder;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -135,8 +133,7 @@ public class Usuario extends RealmObject implements Parcelable {
 
     @Override
     public String toString() {
-        /*
-        return "Usuario{"
+        return "{"
                 + "Código: '" + id + '\''
                 + ", Nome: '" + usuaNome + '\''
                 + ", Login: '" + usuaLogin + '\''
@@ -144,8 +141,6 @@ public class Usuario extends RealmObject implements Parcelable {
                 + ", E-mail: '" + usuaEmail + '\''
                 + ", Foto: '" + usuaFoto + '\''
                 + '}';
-        */
-        return new GsonBuilder().create().toJson(this, Usuario.class);
     }
 
     public static final Parcelable.Creator<Usuario> CREATOR = new Parcelable.Creator<Usuario>() {

@@ -10,6 +10,7 @@ import javax.inject.Singleton;
 
 import br.com.erivando.vacinaskids.database.model.Cartao;
 import br.com.erivando.vacinaskids.database.model.Classificacao;
+import br.com.erivando.vacinaskids.database.model.Controle;
 import br.com.erivando.vacinaskids.database.model.Crianca;
 import br.com.erivando.vacinaskids.database.model.Dose;
 import br.com.erivando.vacinaskids.database.model.Idade;
@@ -251,6 +252,11 @@ public class DataManager implements IDataManager {
         return realmDataBase.findAll(campo, valor, Idade.class);
     }
 
+    @Override
+    public List<Idade> obtemTodasIdades() {
+        return realmDataBase.findAll(Idade.class);
+    }
+
     /* Vacina */
     @Override
     public AtomicInteger getVacinaID() {
@@ -290,6 +296,57 @@ public class DataManager implements IDataManager {
     @Override
     public List<Vacina> obtemTodasVacinas(String[] campo, String[] valor) {
         return realmDataBase.findAll(campo, valor, Vacina.class);
+    }
+
+    @Override
+    public List<Vacina> obtemTodasVacinas() {
+        return realmDataBase.findAll(Vacina.class);
+    }
+
+    /* Controle */
+    @Override
+    public AtomicInteger getControleID() {
+        return realmDataBase.getIdByClassModel(Controle.class);
+    }
+
+    @Override
+    public boolean novoAtualizaControle(Controle controle) {
+        return false;
+    }
+
+    @Override
+    public boolean eliminaControle(Long id) {
+        return false;
+    }
+
+    @Override
+    public Controle obtemControle(Long id) {
+        return null;
+    }
+
+    @Override
+    public Controle obtemControle() {
+        return null;
+    }
+
+    @Override
+    public Controle obtemControle(String[] valores) {
+        return null;
+    }
+
+    @Override
+    public Controle obtemControle(String[] valoresA, String[] valoresB) {
+        return null;
+    }
+
+    @Override
+    public List<Controle> obtemTodosControles(String[] campo, String[] valor) {
+        return null;
+    }
+
+    @Override
+    public List<Controle> obtemTodosControles() {
+        return realmDataBase.findAll(Controle.class);
     }
 
     /* Usuário */

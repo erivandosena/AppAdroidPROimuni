@@ -1,5 +1,8 @@
 package br.com.erivando.vacinaskids.ui.acoes.vacina;
 
+import java.util.List;
+
+import br.com.erivando.vacinaskids.database.model.Vacina;
 import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 
@@ -13,5 +16,7 @@ import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 
 @PerActivity
 public interface VacinaMvpPresenter<V extends VacinaMvpView> extends MvpPresenter<V> {
+
+    List<Vacina> onVacinasCadastradas();
 
 }

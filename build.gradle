@@ -1,32 +1,25 @@
-// Arquivo de compilação de nível superior onde é possível adicionar opções de configuração comuns
-// a todos os subprojetos/módulos.
+// Arquivo de compilação de nível superior onde você pode adicionar opções de configuração comuns a
+// todos os subprojetos / módulos.
 
 buildscript {
-
+    
     repositories {
         google()
         jcenter()
-        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
-
-        // NOTA: Não coloque suas dependências de aplicativo aqui; eles pertencem
-        // aos arquivos build.gradle do módulo individual.
         classpath 'io.realm:realm-gradle-plugin:4.3.1'
         classpath 'com.google.gms:google-services:4.0.1'
-      }
+        // NOTA: Não coloque suas dependências de aplicativo aqui; eles pertencem
+        // aos arquivos build.gradle do módulo individual.
+    }
 }
 
 allprojects {
     repositories {
         google()
         jcenter()
-        mavenCentral()
-        maven {
-            // Google's Maven repository
-            url "https://maven.google.com"
-        }
     }
 }
 
