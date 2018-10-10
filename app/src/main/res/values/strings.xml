@@ -9,7 +9,7 @@
     <string name="action_settings">Configurações</string>
     <!-- Strings do Aplicativo. -->
     <string name="app_slogan">Proteção de quem você ama a um clique de você!</string>
-    <string name="app_mensagem_indicacao">Olá!\n\nVacinas KIDs é um aplicativo incrível que ajuda no controle do cartão de vacinação das crianças.\n\nBaixe gratuitamente!</string>
+    <string name="app_mensagem_indicacao">Olá!\n\nVacinas KIDs é um aplicativo incrível que ajuda no calendario do cartão de vacinação das crianças.\n\nBaixe gratuitamente!</string>
     <string name="app_link_download">https://vacinaskids.page.link/app</string>
     <string name="legenda_action_snackbar">Substitua por sua própria ação</string>
     <string name="button_action_snackbar">Ação</string>
@@ -124,7 +124,7 @@
     <string name="texto_aviso_usuario_nao_cadastrado">É necessário cadastrar o usuário!</string>
     <string name="texto_aviso_crianca_nao_cadastrada">É necessário cadastrar uma crianca!</string>
     <string name="text_lista_crianca_titulo">Selecione a Criança</string>
-    <string name="text_lista_cartao_titulo">Cartão Vacinal</string>
+    <string name="text_lista_calendario_titulo">Calendário Vacinal</string>
     <string name="backup">Copiar Dados</string>
     <string name="restore">Restaurar Dados</string>
 

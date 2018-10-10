@@ -14,7 +14,7 @@ import io.realm.annotations.Required;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class Controle extends RealmObject {
+public class Calendario extends RealmObject {
 
     @Required
     @PrimaryKey
@@ -23,14 +23,14 @@ public class Controle extends RealmObject {
     private Vacina vacina;
     private Dose dose;
 
-    public Controle() {
+    public Calendario() {
     }
 
-    public Controle(Long id, Idade idade, Vacina vacina) {
+    public Calendario(Long id, Idade idade, Vacina vacina, Dose dose) {
         this.id = id;
         this.idade = idade;
         this.vacina = vacina;
-        //this.dose = dose;
+        this.dose = dose;
     }
 
     public Long getId() {
@@ -65,29 +65,14 @@ public class Controle extends RealmObject {
         this.dose = dose;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Controle controle = (Controle) o;
-        return Objects.equals(id, controle.id) &&
-                Objects.equals(idade, controle.idade) &&
-                Objects.equals(vacina, controle.vacina) &&
-                Objects.equals(dose, controle.dose);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, idade, vacina, dose);
-    }
 
     @Override
     public String toString() {
-        return "{"
-                + "Código: '" + id + '\''
-                + ", idade: '" + idade.toString() + '\''
-                + ", vacina: '" + vacina.toString() + '\''
-                //+ ", dose: '" + dose.toString() + '\''
-                + '}';
+        return "'calendario':[{" +
+                "'id':" + id +
+                ", 'idade':" + idade +
+                ", 'vacina':" + vacina +
+                ", 'dose':" + dose +
+                "}]";
     }
 }

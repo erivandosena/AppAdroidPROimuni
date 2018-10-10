@@ -75,7 +75,7 @@
             android:windowSoftInputMode="adjustPan"/>
 
         <activity
-            android:name=".ui.acoes.controle.ControleActivity"
+            android:name=".ui.acoes.calendario.CalendarioActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"

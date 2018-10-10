@@ -8,9 +8,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import br.com.erivando.vacinaskids.database.model.Calendario;
 import br.com.erivando.vacinaskids.database.model.Cartao;
 import br.com.erivando.vacinaskids.database.model.Classificacao;
-import br.com.erivando.vacinaskids.database.model.Controle;
 import br.com.erivando.vacinaskids.database.model.Crianca;
 import br.com.erivando.vacinaskids.database.model.Dose;
 import br.com.erivando.vacinaskids.database.model.Idade;
@@ -211,6 +211,11 @@ public class DataManager implements IDataManager {
         return realmDataBase.findAll(campo, valor, Dose.class);
     }
 
+    @Override
+    public List<Dose> obtemTodasDoses() {
+        return realmDataBase.findAll(Dose.class);
+    }
+
     /* Idade */
     @Override
     public AtomicInteger getIdadeID() {
@@ -303,14 +308,14 @@ public class DataManager implements IDataManager {
         return realmDataBase.findAll(Vacina.class);
     }
 
-    /* Controle */
+    /* Calendario */
     @Override
     public AtomicInteger getControleID() {
-        return realmDataBase.getIdByClassModel(Controle.class);
+        return realmDataBase.getIdByClassModel(Calendario.class);
     }
 
     @Override
-    public boolean novoAtualizaControle(Controle controle) {
+    public boolean novoAtualizaControle(Calendario calendario) {
         return false;
     }
 
@@ -320,33 +325,33 @@ public class DataManager implements IDataManager {
     }
 
     @Override
-    public Controle obtemControle(Long id) {
+    public Calendario obtemCalendario(Long id) {
         return null;
     }
 
     @Override
-    public Controle obtemControle() {
+    public Calendario obtemCalendario() {
         return null;
     }
 
     @Override
-    public Controle obtemControle(String[] valores) {
+    public Calendario obtemCalendario(String[] valores) {
         return null;
     }
 
     @Override
-    public Controle obtemControle(String[] valoresA, String[] valoresB) {
+    public Calendario obtemCalendario(String[] valoresA, String[] valoresB) {
         return null;
     }
 
     @Override
-    public List<Controle> obtemTodosControles(String[] campo, String[] valor) {
+    public List<Calendario> obtemTodosCalendarios(String[] campo, String[] valor) {
         return null;
     }
 
     @Override
-    public List<Controle> obtemTodosControles() {
-        return realmDataBase.findAll(Controle.class);
+    public List<Calendario> obtemTodosCalendarios() {
+        return realmDataBase.findAll(Calendario.class);
     }
 
     /* Usuário */

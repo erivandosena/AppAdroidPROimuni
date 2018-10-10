@@ -1,8 +1,8 @@
-package br.com.erivando.vacinaskids.ui.acoes.controle;
+package br.com.erivando.vacinaskids.ui.acoes.calendario;
 
 import java.util.List;
 
-import br.com.erivando.vacinaskids.database.model.Controle;
+import br.com.erivando.vacinaskids.database.model.Calendario;
 import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 
@@ -15,10 +15,10 @@ import br.com.erivando.vacinaskids.mvp.MvpPresenter;
  */
 
 @PerActivity
-public interface ControleMvpPresenter<V extends ControleMvpView> extends MvpPresenter<V> {
+public interface CalendarioMvpPresenter<V extends CalendarioMvpView> extends MvpPresenter<V> {
 
-    List<Controle> onControlesCadastrados();
+    List<Calendario> onCalendariosCadastrados();
 
-    Controle onControleCadastrado();
+    Calendario onCalendarioCadastrado();
 
 }

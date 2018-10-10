@@ -16,7 +16,7 @@ import javax.inject.Inject;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.database.model.Crianca;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
-import br.com.erivando.vacinaskids.ui.acoes.controle.ControleActivity;
+import br.com.erivando.vacinaskids.ui.acoes.calendario.CalendarioActivity;
 import br.com.erivando.vacinaskids.ui.adapter.CriancaAdapter;
 import br.com.erivando.vacinaskids.ui.main.MainActivity;
 import butterknife.BindView;
@@ -95,7 +95,7 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
                     }
                     if ("cartao".equals(acao)) {
                         //intencao = CartaoActivity.getStartIntent(CriancaListaActvity.this);
-                        intencao = ControleActivity.getStartIntent(CriancaListaActvity.this);
+                        intencao = CalendarioActivity.getStartIntent(CriancaListaActvity.this);
                         intencao.putExtra("crianca", ((Crianca)parent.getAdapter().getItem(position)).getId());
                     }
                     if (intencao != null) {

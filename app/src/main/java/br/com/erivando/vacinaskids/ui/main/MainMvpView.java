@@ -17,6 +17,8 @@ public interface MainMvpView extends MvpView {
 
     void openCadastroUsuarioActivity();
 
+    void openCalendarioVacinal();
+
     void openCartaoActivity();
 
     void openCriancaActivity();

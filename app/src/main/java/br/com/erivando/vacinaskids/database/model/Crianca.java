@@ -93,24 +93,6 @@ public class Crianca extends RealmObject implements Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Crianca crianca = (Crianca) o;
-        return Objects.equals(id, crianca.id) &&
-                Objects.equals(usuario, crianca.usuario) &&
-                Objects.equals(criaNome, crianca.criaNome) &&
-                Objects.equals(criaNascimento, crianca.criaNascimento) &&
-                Objects.equals(criaSexo, crianca.criaSexo) &&
-                Objects.equals(criaFoto, crianca.criaFoto);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, usuario, criaNome, criaNascimento, criaSexo, criaFoto);
-    }
-
-    @Override
     public String toString() {
         return "{"
                 + "id='" + id + '\''

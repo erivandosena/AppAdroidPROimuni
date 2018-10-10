@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
-import br.com.erivando.vacinaskids.ui.acoes.controle.ControleActivity;
+import br.com.erivando.vacinaskids.ui.acoes.calendario.CalendarioActivity;
 import butterknife.ButterKnife;
 
 /**
@@ -25,7 +25,7 @@ public class IdadeActivity extends BaseActivity implements IdadeMvpView {
     IdadeMvpPresenter<IdadeMvpView> presenter;
 
     public static Intent getStartIntent(Context context) {
-        Intent intent = new Intent(context, ControleActivity.class);
+        Intent intent = new Intent(context, CalendarioActivity.class);
         return intent;
     }
 

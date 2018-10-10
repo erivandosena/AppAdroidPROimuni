@@ -92,46 +92,6 @@ public class Usuario extends RealmObject implements Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Usuario usuario = (Usuario) o;
-
-        if (id != null ? !id.equals(usuario.id) : usuario.id != null) {
-            return false;
-        }
-        if (usuaNome != null ? !usuaNome.equals(usuario.usuaNome) : usuario.usuaNome != null) {
-            return false;
-        }
-        if (usuaLogin != null ? !usuaLogin.equals(usuario.usuaLogin) : usuario.usuaLogin != null) {
-            return false;
-        }
-        if (usuaSenha != null ? !usuaSenha.equals(usuario.usuaSenha) : usuario.usuaSenha != null) {
-            return false;
-        }
-        if (usuaEmail != null ? !usuaEmail.equals(usuario.usuaEmail) : usuario.usuaEmail != null) {
-            return false;
-        }
-        return usuaFoto != null ? usuaFoto.equals(usuario.usuaFoto) : usuario.usuaFoto == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 0;
-        result = 31 * result + (id != null ? id.hashCode() : 0);
-        result = 31 * result + (usuaNome != null ? usuaNome.hashCode() : 0);
-        result = 31 * result + (usuaLogin != null ? usuaLogin.hashCode() : 0);
-        result = 31 * result + (usuaSenha != null ? usuaSenha.hashCode() : 0);
-        result = 31 * result + (usuaEmail != null ? usuaEmail.hashCode() : 0);
-        result = 31 * result + (usuaFoto != null ? usuaFoto.hashCode() : 0);
-        return result;
-    }
-
-    @Override
     public String toString() {
         return "{"
                 + "Código: '" + id + '\''

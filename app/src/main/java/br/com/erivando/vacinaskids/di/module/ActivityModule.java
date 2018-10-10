@@ -9,12 +9,15 @@ import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoMvpPresenter;
 import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoMvpView;
 import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoPresenter;
-import br.com.erivando.vacinaskids.ui.acoes.controle.ControleMvpPresenter;
-import br.com.erivando.vacinaskids.ui.acoes.controle.ControleMvpView;
-import br.com.erivando.vacinaskids.ui.acoes.controle.ControlePresenter;
+import br.com.erivando.vacinaskids.ui.acoes.calendario.CalendarioMvpPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.calendario.CalendarioMvpView;
+import br.com.erivando.vacinaskids.ui.acoes.calendario.CalendarioPresenter;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaMvpPresenter;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaMvpView;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.dose.DoseMvpPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.dose.DoseMvpView;
+import br.com.erivando.vacinaskids.ui.acoes.dose.DosePresenter;
 import br.com.erivando.vacinaskids.ui.acoes.idade.IdadeMvpPresenter;
 import br.com.erivando.vacinaskids.ui.acoes.idade.IdadeMvpView;
 import br.com.erivando.vacinaskids.ui.acoes.idade.IdadePresenter;
@@ -132,7 +135,7 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    ControleMvpPresenter<ControleMvpView> provideControlePresenter(ControlePresenter<ControleMvpView> presenter) {
+    CalendarioMvpPresenter<CalendarioMvpView> provideCalendarioPresenter(CalendarioPresenter<CalendarioMvpView> presenter) {
         return presenter;
     }
 
@@ -145,6 +148,12 @@ public class ActivityModule {
     @Provides
     @PerActivity
     IdadeMvpPresenter<IdadeMvpView> provideIdadePresenter(IdadePresenter<IdadeMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    DoseMvpPresenter<DoseMvpView> provideDosePresenter(DosePresenter<DoseMvpView> presenter) {
         return presenter;
     }
 }

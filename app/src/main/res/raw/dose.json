@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "doseDescricao": "Dose Única"
+  },
+  {
+    "id": 2,
+    "doseDescricao": "1ª Dose"
+  },
+  {
+    "id": 3,
+    "doseDescricao": "2ª Dose"
+  },
+  {
+    "id": 4,
+    "doseDescricao": "3ª Dose"
+  },
+  {
+    "id": 5,
+    "doseDescricao": "Reforço Único"
+  },
+  {
+    "id": 6,
+    "doseDescricao": "1ª Reforço"
+  },
+  {
+    "id": 7,
+    "doseDescricao": "2ª Reforço"
+  },
+  {
+    "id": 8,
+    "doseDescricao": "3ª Reforço"
+  },
+  {
+    "id": 9,
+    "doseDescricao": "Duas Doses"
+  }
+]

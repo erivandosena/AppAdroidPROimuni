@@ -39,6 +39,7 @@ import br.com.erivando.vacinaskids.custom.imagem.RoundedImageView;
 import br.com.erivando.vacinaskids.database.backup.RealmBackupRestore;
 import br.com.erivando.vacinaskids.database.importacao.RealmImport;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
+import br.com.erivando.vacinaskids.ui.acoes.calendario.CalendarioActivity;
 import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoActivity;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaListaActvity;
 import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioActivity;
@@ -82,6 +83,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @BindView(R.id.text_versao_app)
     TextView versaoAppTextView;
 
+    @BindView(R.id.btn_calendario_vacinal)
+    ImageButton calendarioImageButton;
+
     @BindView(R.id.btn_cartao_vacinal)
     ImageButton cartaoImageButton;
 
@@ -116,9 +120,14 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         setUp();
     }
 
+    @OnClick(R.id.btn_calendario_vacinal)
+    public void onCalendarioVacinal() {
+        openCalendarioVacinal();
+    }
+
     @OnClick(R.id.btn_cartao_vacinal)
     public void onCartaoVacinal() {
-        openCriancaListaActivity("cartao");
+       // openCriancaListaActivity("cartao");
     }
 
     @Override
@@ -146,7 +155,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         setupNavMenu();
         presenter.onNavMenuCreated();
         setupCardContainerView();
-
 
         RealmImport.importFromJson(getResources());
     }
@@ -307,9 +315,15 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     @Override
-    public void openCartaoActivity() {
-        startActivity(CartaoActivity.getStartIntent(this));
+    public void openCalendarioVacinal() {
+        startActivity(CalendarioActivity.getStartIntent(this));
         finish();
+    }
+
+    @Override
+    public void openCartaoActivity() {
+       // startActivity(CartaoActivity.getStartIntent(this));
+       // finish();
     }
 
     @Override

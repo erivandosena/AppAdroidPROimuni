@@ -1,11 +1,11 @@
-package br.com.erivando.vacinaskids.ui.acoes.controle;
+package br.com.erivando.vacinaskids.ui.acoes.calendario;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.database.IDataManager;
-import br.com.erivando.vacinaskids.database.model.Controle;
+import br.com.erivando.vacinaskids.database.model.Calendario;
 import br.com.erivando.vacinaskids.mvp.base.BasePresenter;
 import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
@@ -18,20 +18,20 @@ import io.reactivex.disposables.CompositeDisposable;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class ControlePresenter<V extends ControleMvpView> extends BasePresenter<V> implements ControleMvpPresenter<V> {
+public class CalendarioPresenter<V extends CalendarioMvpView> extends BasePresenter<V> implements CalendarioMvpPresenter<V> {
 
     @Inject
-    public ControlePresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
+    public CalendarioPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(iDataManager, schedulerProvider, compositeDisposable);
     }
     @Override
-    public List<Controle> onControlesCadastrados() {
-        return getIDataManager().obtemTodosControles();
+    public List<Calendario> onCalendariosCadastrados() {
+        return getIDataManager().obtemTodosCalendarios();
     }
 
     @Override
-    public Controle onControleCadastrado() {
-        return getIDataManager().obtemControle();
+    public Calendario onCalendarioCadastrado() {
+        return getIDataManager().obtemCalendario();
     }
 
 }

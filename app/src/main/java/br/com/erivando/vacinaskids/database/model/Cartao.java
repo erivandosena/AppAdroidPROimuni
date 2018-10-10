@@ -26,20 +26,10 @@ public class Cartao extends RealmObject {
     private Vacina vacina;
     private Classificacao classificacao;
 
-    /**
-     * Default constructor.
-     */
     public Cartao() {
 
     }
 
-    /**
-     * All columns constructor.
-     * @param id value of column cart_id.
-     * @param crianca value of column cria_id.
-     * @param vacina value of column vaci_id.
-     * @param classificacao value of column clas_id.
-     */
     public Cartao(Long id, Crianca crianca, Vacina vacina, Classificacao classificacao) {
         setId(id);
         setCrianca(crianca);
@@ -47,17 +37,10 @@ public class Cartao extends RealmObject {
         setClassificacao(classificacao);
     }
 
-    /**
-     * Returns value of property {@link #id}.
-     * @return value of property {@link #id}.
-     */
     public Long getId() {
         return this.id;
     }
-    /**
-     * Sets new value of property {@link #id}.
-     * @param id new value of property {@link #id}.
-     */
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -70,49 +53,20 @@ public class Cartao extends RealmObject {
         this.crianca = crianca;
     }
 
-    /**
-     * Returns value of property {@link #vacina}.
-     * @return value of property {@link #vacina}.
-     */
     public Vacina getVacina() {
         return this.vacina;
     }
-    /**
-     * Sets new value of property {@link #vacina}.
-     * @param vacina new value of property {@link #vacina}.
-     */
+
     public void setVacina(Vacina vacina) {
         this.vacina = vacina;
     }
-    /**
-     * Returns value of property {@link #classificacao}.
-     * @return value of property {@link #classificacao}.
-     */
+
     public Classificacao getClassificacao() {
         return this.classificacao;
     }
-    /**
-     * Sets new value of property {@link #classificacao}.
-     * @param classificacao new value of property {@link #classificacao}.
-     */
+
     public void setClassificacao(Classificacao classificacao) {
         this.classificacao = classificacao;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cartao cartao = (Cartao) o;
-        return Objects.equals(id, cartao.id) &&
-                Objects.equals(crianca, cartao.crianca) &&
-                Objects.equals(vacina, cartao.vacina) &&
-                Objects.equals(classificacao, cartao.classificacao);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, crianca, vacina, classificacao);
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.erivando.vacinaskids.R;
-import br.com.erivando.vacinaskids.database.model.Controle;
+import br.com.erivando.vacinaskids.database.model.Calendario;
 
 /**
  * Projeto:     VacinasKIDS
@@ -23,17 +23,17 @@ import br.com.erivando.vacinaskids.database.model.Controle;
 
 public class AdapterControle extends RecyclerView.Adapter<AdapterControle.ViewHolder> {
 
-    private List<Controle> list = new ArrayList<Controle>();
+    private List<Calendario> list = new ArrayList<Calendario>();
     private Context context;
 
-    public AdapterControle(List<Controle> list, Context context) {
+    public AdapterControle(List<Calendario> list, Context context) {
         this.list = list;
         this.context = context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_controle_lista, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_calendario_lista, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }

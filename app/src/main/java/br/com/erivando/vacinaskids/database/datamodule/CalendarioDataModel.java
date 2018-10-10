@@ -1,6 +1,8 @@
-package br.com.erivando.vacinaskids.database.model;
+package br.com.erivando.vacinaskids.database.datamodule;
 
 import java.util.ArrayList;
+
+import br.com.erivando.vacinaskids.database.model.Vacina;
 
 /**
  * Projeto:     VacinasKIDS
@@ -10,15 +12,15 @@ import java.util.ArrayList;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class ControleDataModel {
+public class CalendarioDataModel {
 
     private String headerTitulo;
     private ArrayList<Vacina> itensInSection;
 
-    public ControleDataModel() {
+    public CalendarioDataModel() {
     }
 
-    public ControleDataModel(String headerTitulo, ArrayList<Vacina> itensInSection) {
+    public CalendarioDataModel(String headerTitulo, ArrayList<Vacina> itensInSection) {
         this.headerTitulo = headerTitulo;
         this.itensInSection = itensInSection;
     }

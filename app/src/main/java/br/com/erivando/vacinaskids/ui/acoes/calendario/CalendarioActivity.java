@@ -1,4 +1,4 @@
-package br.com.erivando.vacinaskids.ui.acoes.controle;
+package br.com.erivando.vacinaskids.ui.acoes.calendario;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.R;
-import br.com.erivando.vacinaskids.database.model.Controle;
-import br.com.erivando.vacinaskids.database.model.ControleDataModel;
+import br.com.erivando.vacinaskids.database.model.Calendario;
+import br.com.erivando.vacinaskids.database.datamodule.CalendarioDataModel;
+import br.com.erivando.vacinaskids.database.model.Dose;
 import br.com.erivando.vacinaskids.database.model.Idade;
 import br.com.erivando.vacinaskids.database.model.Vacina;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
+import br.com.erivando.vacinaskids.ui.acoes.dose.DoseMvpPresenter;
+import br.com.erivando.vacinaskids.ui.acoes.dose.DoseMvpView;
 import br.com.erivando.vacinaskids.ui.acoes.idade.IdadeMvpPresenter;
 import br.com.erivando.vacinaskids.ui.acoes.idade.IdadeMvpView;
 import br.com.erivando.vacinaskids.ui.acoes.vacina.VacinaMvpPresenter;
@@ -37,16 +40,19 @@ import static br.com.erivando.vacinaskids.util.Uteis.habilitaTelaCheia;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class ControleActivity extends BaseActivity implements ControleMvpView {
+public class CalendarioActivity extends BaseActivity implements CalendarioMvpView {
 
     @Inject
-    ControleMvpPresenter<ControleMvpView> presenter;
+    CalendarioMvpPresenter<CalendarioMvpView> presenter;
 
     @Inject
     VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
 
     @Inject
     IdadeMvpPresenter<IdadeMvpView> idadePresenter;
+
+    @Inject
+    DoseMvpPresenter<DoseMvpView> dosePresenter;
 
     private String[][] SPACESHIPS;
 
@@ -56,11 +62,13 @@ public class ControleActivity extends BaseActivity implements ControleMvpView {
 
     List<Idade> idades;
 
+    List<Dose> doses;
+
     List<Vacina> vacinas;
 
-    List<Controle> controles;
+    List<Calendario> calendarios;
 
-    private ArrayList<ControleDataModel> allSampleData;
+    private ArrayList<CalendarioDataModel> allSampleData;
 
     private RecyclerView recycler;
     private RecyclerView.LayoutManager manager;
@@ -68,14 +76,14 @@ public class ControleActivity extends BaseActivity implements ControleMvpView {
     private List<String> list;
 
     public static Intent getStartIntent(Context context) {
-        Intent intent = new Intent(context, ControleActivity.class);
+        Intent intent = new Intent(context, CalendarioActivity.class);
         return intent;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_controle);
+        setContentView(R.layout.activity_calendario);
 
         getActivityComponent().inject(this);
 
@@ -100,10 +108,11 @@ public class ControleActivity extends BaseActivity implements ControleMvpView {
         habilitaTelaCheia(this);
 
         idades = idadePresenter.onIdadesCadastradas();
+        doses = dosePresenter.onDosesCadastradas();
         vacinas = vacinaPresenter.onVacinasCadastradas();
-        controles = presenter.onControlesCadastrados();
+        calendarios = presenter.onCalendariosCadastrados();
 
-        allSampleData = new ArrayList<ControleDataModel>();
+        allSampleData = new ArrayList<CalendarioDataModel>();
 
         createDummyData();
 
@@ -116,15 +125,15 @@ public class ControleActivity extends BaseActivity implements ControleMvpView {
 
     public void createDummyData() {
         idades = idadePresenter.onIdadesCadastradas();
-        controles = presenter.onControlesCadastrados();
+        calendarios = presenter.onCalendariosCadastrados();
 
         for (Idade idade : idades) {
-            ControleDataModel dm = new ControleDataModel();
+            CalendarioDataModel dm = new CalendarioDataModel();
             dm.setHeaderTitulo(idade.getIdadDescricao());
             ArrayList<Vacina> singleItem = new ArrayList<Vacina>();
-            for (Controle controle : controles) {
-                if (controle.getIdade().getId() == idade.getId())
-                    singleItem.add(controle.getVacina());
+            for (Calendario calendario : calendarios) {
+                if (calendario.getIdade().getId() == idade.getId())
+                    singleItem.add(calendario.getVacina());
             }
             dm.setItensInSection(singleItem);
             allSampleData.add(dm);
@@ -149,8 +158,8 @@ public class ControleActivity extends BaseActivity implements ControleMvpView {
     }
 
     private void populaTabela() {
-        Controle spaceprobe = new Controle();
-        List<Controle> spaceprobeList = presenter.onControlesCadastrados();
+        Calendario spaceprobe = new Calendario();
+        List<Calendario> spaceprobeList = presenter.onCalendariosCadastrados();
 
         List<Vacina> vacinas = vacinaPresenter.onVacinasCadastradas();
 
@@ -163,8 +172,8 @@ public class ControleActivity extends BaseActivity implements ControleMvpView {
 
         spaceProbes = new String[spaceprobeList.size()][spaceprobeList.size()];
         int linhaVacina = 0;
-        for (Controle controle : spaceprobeList) {
-            spaceProbes[linhaVacina][linhaVacina] = controle.getIdade().getIdadDescricao();
+        for (Calendario calendario : spaceprobeList) {
+            spaceProbes[linhaVacina][linhaVacina] = calendario.getIdade().getIdadDescricao();
             linhaVacina++;
         }
 

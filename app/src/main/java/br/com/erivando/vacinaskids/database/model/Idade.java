@@ -46,25 +46,7 @@ public class Idade extends RealmObject {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Idade idade = (Idade) o;
-        return Objects.equals(id, idade.id) &&
-                Objects.equals(idadDescricao, idade.idadDescricao);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, idadDescricao);
-    }
-
-    @Override
     public String toString() {
-        return "{"
-                + "Código: '" + id + '\''
-                + ", idadDescricao: '" + idadDescricao + '\''
-                + '}';
+        return "'idade': [{'id':" + id + ", 'idadDescricao':'" + idadDescricao + "'}]";
     }
-
 }

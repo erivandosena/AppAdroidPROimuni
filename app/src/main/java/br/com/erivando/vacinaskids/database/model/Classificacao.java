@@ -22,47 +22,26 @@ public class Classificacao extends RealmObject {
     private Long id;
     private Long clasRanking;
 
-    /**
-     * Default constructor.
-     */
     public Classificacao() {
     }
 
-    /**
-     * All columns constructor.
-     * @param id value of column clas_id.
-     * @param clasRanking value of column clas_ranking.
-     */
     public Classificacao(Long id, Long clasRanking) {
         setId(id);
         setClasRanking(clasRanking);
     }
 
-    /**
-     * Returns value of property {@link #id}.
-     * @return value of property {@link #id}.
-     */
     public Long getId() {
         return this.id;
     }
-    /**
-     * Sets new value of property {@link #id}.
-     * @param id new value of property {@link #id}.
-     */
+
     public void setId(Long id) {
         this.id = id;
     }
-    /**
-     * Returns value of property {@link #clasRanking}.
-     * @return value of property {@link #clasRanking}.
-     */
+
     public Long getClasRanking() {
         return this.clasRanking;
     }
-    /**
-     * Sets new value of property {@link #clasRanking}.
-     * @param clasRanking new value of property {@link #clasRanking}.
-     */
+
     public void setClasRanking(Long clasRanking) {
         this.clasRanking = clasRanking;
     }

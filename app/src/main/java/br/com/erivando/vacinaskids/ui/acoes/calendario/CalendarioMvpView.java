@@ -1,4 +1,4 @@
-package br.com.erivando.vacinaskids.ui.acoes.controle;
+package br.com.erivando.vacinaskids.ui.acoes.calendario;
 
 import br.com.erivando.vacinaskids.mvp.MvpView;
 
@@ -10,5 +10,5 @@ import br.com.erivando.vacinaskids.mvp.MvpView;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public interface ControleMvpView extends MvpView {
+public interface CalendarioMvpView extends MvpView {
 }

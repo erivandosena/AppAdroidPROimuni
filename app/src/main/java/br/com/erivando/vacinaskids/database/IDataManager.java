@@ -3,9 +3,9 @@ package br.com.erivando.vacinaskids.database;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import br.com.erivando.vacinaskids.database.model.Calendario;
 import br.com.erivando.vacinaskids.database.model.Cartao;
 import br.com.erivando.vacinaskids.database.model.Classificacao;
-import br.com.erivando.vacinaskids.database.model.Controle;
 import br.com.erivando.vacinaskids.database.model.Crianca;
 import br.com.erivando.vacinaskids.database.model.Dose;
 import br.com.erivando.vacinaskids.database.model.Idade;
@@ -139,6 +139,8 @@ public interface IDataManager extends IPreferencesHelper {
 
     List<Dose> obtemTodasDoses(String[] campo, String[] valor);
 
+    List<Dose> obtemTodasDoses();
+
     /* IDADE */
     AtomicInteger getIdadeID();
 
@@ -180,20 +182,20 @@ public interface IDataManager extends IPreferencesHelper {
     /* CONTROLE */
     AtomicInteger getControleID();
 
-    boolean novoAtualizaControle(Controle controle);
+    boolean novoAtualizaControle(Calendario calendario);
 
     boolean eliminaControle(Long id);
 
-    Controle obtemControle(Long id);
+    Calendario obtemCalendario(Long id);
 
-    Controle obtemControle();
+    Calendario obtemCalendario();
 
-    Controle obtemControle(String[] valores);
+    Calendario obtemCalendario(String[] valores);
 
-    Controle obtemControle(String[] valoresA, String[] valoresB);
+    Calendario obtemCalendario(String[] valoresA, String[] valoresB);
 
-    List<Controle> obtemTodosControles(String[] campo, String[] valor);
+    List<Calendario> obtemTodosCalendarios(String[] campo, String[] valor);
 
-    List<Controle> obtemTodosControles();
+    List<Calendario> obtemTodosCalendarios();
 
 }

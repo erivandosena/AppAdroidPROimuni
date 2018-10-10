@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import br.com.erivando.vacinaskids.R;
-import br.com.erivando.vacinaskids.database.model.ControleDataModel;
+import br.com.erivando.vacinaskids.database.datamodule.CalendarioDataModel;
 
 /**
  * Projeto:     VacinasKIDS
@@ -25,10 +25,10 @@ import br.com.erivando.vacinaskids.database.model.ControleDataModel;
 
 public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDataAdapter.ItemRowHolder> {
 
-    private ArrayList<ControleDataModel> dataList;
+    private ArrayList<CalendarioDataModel> dataList;
     private Context mContext;
 
-    public RecyclerViewDataAdapter(Context context, ArrayList<ControleDataModel> dataList) {
+    public RecyclerViewDataAdapter(Context context, ArrayList<CalendarioDataModel> dataList) {
         this.dataList = dataList;
         this.mContext = context;
     }

@@ -53,26 +53,14 @@
   },
   {
     "id": 14,
-    "idadDescricao": "9 anos"
-  },
-  {
-    "id": 15,
-    "idadDescricao": "10 anos"
-  },
-  {
-    "id": 16,
     "idadDescricao": "11 anos"
   },
   {
-    "id": 17,
-    "idadDescricao": "12 anos"
+    "id": 15,
+    "idadDescricao": "9 a 14 anos"
   },
   {
-    "id": 18,
-    "idadDescricao": "13 anos"
-  },
-  {
-    "id": 19,
-    "idadDescricao": "14 anos"
+    "id": 16,
+    "idadDescricao": "11 a 14 anos"
   }
 ]

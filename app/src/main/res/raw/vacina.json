@@ -2,114 +2,140 @@
   {
     "id": 1,
     "vaciNome": "BCG",
+    "vaciRede": "Pública",
     "vaciDescricao": "Previne as formas graves de tuberculose.",
     "vaciAdministracao": "É administrada por via intradérmica, no braço direito da criança, para facilitar a identificação da cicatriz."
   },
   {
     "id": 2,
     "vaciNome": "Hepatite B",
-    "vaciDescricao": "Previne a infecção pelo vírus da hepatite B.",
+    "vaciRede": "Pública",
+    "vaciDescricao": "Previne a infecção pelo vírus da hepatite B",
     "vaciAdministracao": "É administrada por via intramuscular (braço ou perna, dependendo da idade)."
   },
   {
     "id": 3,
     "vaciNome": "Pentavalente/DTP",
+    "vaciRede": "Pública",
     "vaciDescricao": "Previne a difteria, o tétano, a coqueluche, a hepatite B e as infecções causadas pelo Haemophilus influenzae b.",
     "vaciAdministracao": "É administrada por via intramuscular. Em crianças menores de 2 anos, a injeção é realizada na coxa (vasto lateral); e em crianças maiores de 2 anos a injeção é realizada no braço (deltoide)."
   },
   {
     "id": 4,
-    "vaciNome": "Hexalente*",
+    "vaciNome": "Hexalente",
+    "vaciRede": "Privada",
     "vaciDescricao": "Previne a difteria, o tétano, a coqueluche (Penta/DTP) a hepatite B, poliomelite (vacina VIP/VOP) e as infecções causadas pelo Haemophilus influenzae b.",
     "vaciAdministracao": "É administrada por via intramuscular. Em crianças menores de 2 anos, a injeção é realizada na coxa (vasto lateral); e em crianças maiores de 2 anos a injeção é realizada no braço (deltoide)."
   },
   {
     "id": 5,
     "vaciNome": "VIP/VOP",
-    "vaciDescricao": "Previne 3 tipos de vírus da poliomielite.",
+    "vaciRede": "Pública",
+    "vaciDescricao": "Previne 3 tipos de vírus da poliomelite.",
     "vaciAdministracao": "É administrada por via intramuscular. Em crianças menores de 2 anos, a injeção é realizada na coxa (vasto lateral); e em crianças maiores de 2 anos a injeção é realizada no braço (deltoide)."
   },
   {
     "id": 6,
     "vaciNome": "Pneumocócica 10V",
+    "vaciRede": "Pública",
     "vaciDescricao": "Previne infecções invasivas (meningite, pneumonia, bacteremia e otite) causadas por 10 tipos de Streptococus pneumonia.",
     "vaciAdministracao": "É administrada por via intramuscular. Em crianças menores de 2 anos, a injeção é realizada na coxa (vasto lateral); e em crianças maiores de 2 anos a injeção é realizada no braço (deltoide)."
   },
   {
     "id": 7,
-    "vaciNome": "Pneumocócica 13V*",
+    "vaciNome": "Pneumocócica 13V",
+    "vaciRede": "Privada",
     "vaciDescricao": "Previne infecções invasivas (meningite, pneumonia, bacteremia e otite) causadas por 13 tipos de Streptococus pneumonia.",
     "vaciAdministracao": "É administrada por via intramuscular. Em crianças menores de 2 anos, a injeção é realizada na coxa (vasto lateral); e em crianças maiores de 2 anos a injeção é realizada no braço (deltoide)."
   },
   {
     "id": 8,
     "vaciNome": "Pneumocócica 23V",
+    "vaciRede": "Pública",
     "vaciDescricao": "Previne infecções invasivas (meningite, pneumonia, bacteremia e otite) causadas por 23 tipos de pneumococos (para a população indígena).",
     "vaciAdministracao": "É administrada por via intramuscular. Em crianças menores de 2 anos, a injeção é realizada na coxa (vasto lateral); e em crianças maiores de 2 anos a injeção é realizada no braço (deltoide)."
   },
   {
     "id": 9,
     "vaciNome": "Rotavírus (VRH1)",
+    "vaciRede": "Pública",
     "vaciDescricao": "Previne gastroenterites causadas por 1 tipo de rotavírus humano.",
     "vaciAdministracao": "Essa vacina é administrada exclusivamente por via oral."
   },
   {
     "id": 10,
-    "vaciNome": "Rotavírus (VR5)*",
+    "vaciNome": "Rotavírus (VR5)",
+    "vaciRede": "Privada",
     "vaciDescricao": "Previne gastroenterites causadas por 5 tipo de rotavírus humano.",
     "vaciAdministracao": "Essa vacina é administrada exclusivamente por via oral."
   },
   {
     "id": 11,
     "vaciNome": "Meningocócica C",
+    "vaciRede": "Pública",
     "vaciDescricao": "Previne a meningite e infeccões generalizadas causadas pela bactéria meningococo do tipo C.",
     "vaciAdministracao": "É administrada por via intramuscular. Em crianças menores de 2 anos, a injeção é realizada na coxa (vasto lateral); e em crianças maiores de 2 anos a injeção é realizada no braço (deltoide)."
   },
   {
     "id": 12,
-    "vaciNome": "Meningocócica B*",
+    "vaciNome": "Meningocócica B",
+    "vaciRede": "Privada",
     "vaciDescricao": "Previne a meningite e infecções generalizadas causadas pela bactéria meningococo do tipo B.",
     "vaciAdministracao": "É administrada por via intramuscular. Em crianças menores de 2 anos, a injeção é realizada na coxa (vasto lateral); e em crianças maiores de 2 anos a injeção é realizada no braço (deltoide)."
   },
   {
     "id": 13,
-    "vaciNome": "Meningocócica ACWY*",
+    "vaciNome": "Meningocócica ACWY",
+    "vaciRede": "Privada",
     "vaciDescricao": "Previne a meningite e infecções generalizadas causadas pela bactéria meningococo dos tipos A, C, W e Y.",
     "vaciAdministracao": "É administrada por via intramuscular. Em crianças menores de 2 anos, a injeção é realizada na coxa (vasto lateral); e em crianças maiores de 2 anos a injeção é realizada no braço (deltoide)."
   },
   {
     "id": 14,
     "vaciNome": "Febre Amarela",
+    "vaciRede": "Pública",
     "vaciDescricao": "Previne a febre amarela em residentes ou viajantes que se deslocam para as áreas com recomendação de vacinação e países com risco para a doença.",
     "vaciAdministracao": "É administrada por via intradérmica."
   },
   {
     "id": 15,
     "vaciNome": "Hepatite A",
+    "vaciRede": "Pública",
     "vaciDescricao": "Previne a infecção causada pelo vírus da hepatite A.",
     "vaciAdministracao": "É administrada por via intramuscular. Em crianças menores de 2 anos, a injeção é realizada na coxa (vasto lateral); e em crianças maiores de 2 anos a injeção é realizada no braço (deltoide)."
   },
   {
     "id": 16,
     "vaciNome": "Tríplice Viral",
+    "vaciRede": "Pública",
     "vaciDescricao": "Previne o sarampo, caxumba e rubéola.",
     "vaciAdministracao": "É administrada por via subcutânea (na região do deltoide, na face externa superior do braço)."
   },
   {
     "id": 17,
     "vaciNome": "Tetra Viral",
+    "vaciRede": "Pública",
     "vaciDescricao": "Previne o sarampo, caxumba, rubéola e varicela.",
     "vaciAdministracao": "É administrada por via subcutânea (na região do deltoide, na face externa superior do braço)."
   },
   {
     "id": 18,
     "vaciNome": "Varicela",
+    "vaciRede": "Pública",
     "vaciDescricao": "Previne a varicela (catapora).",
     "vaciAdministracao": "É administrada por via subcutânea."
   },
   {
     "id": 19,
+    "vaciNome": "Varicela",
+    "vaciRede": "Privada",
+    "vaciDescricao": "Previne a varicela (catapora).",
+    "vaciAdministracao": "É administrada por via subcutânea."
+  },
+  {
+    "id": 20,
     "vaciNome": "HPV",
+    "vaciRede": "Pública",
     "vaciDescricao": "Previne o câncer do colo do útero, vulvar, vaginal e anal, lesões pré-cancerosas ou displásicas, verrugas genitais e infecções causadas pelo papilomavírus humano (HPV) dos tipos 6, 11, 16 e 18.",
     "vaciAdministracao": "É administrada por via intramuscular, preferencialmente na parte superior do braço (deltoide),  ou na região anterolateral superior da coxa."
   }
