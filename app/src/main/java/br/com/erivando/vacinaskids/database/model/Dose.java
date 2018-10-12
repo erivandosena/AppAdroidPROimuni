@@ -50,6 +50,6 @@ public class Dose extends RealmObject {
 
     @Override
     public String toString() {
-        return "'dose': [{'id:" + id + ", 'doseDescricao': '" + doseDescricao + "'}]";
+        return getDoseDescricao();
     }
 }

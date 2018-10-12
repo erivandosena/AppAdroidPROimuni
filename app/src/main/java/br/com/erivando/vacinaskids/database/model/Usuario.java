@@ -93,14 +93,7 @@ public class Usuario extends RealmObject implements Parcelable {
 
     @Override
     public String toString() {
-        return "{"
-                + "Código: '" + id + '\''
-                + ", Nome: '" + usuaNome + '\''
-                + ", Login: '" + usuaLogin + '\''
-                + ", Senha: '" + usuaSenha + '\''
-                + ", E-mail: '" + usuaEmail + '\''
-                + ", Foto: '" + usuaFoto + '\''
-                + '}';
+        return getUsuaNome();
     }
 
     public static final Parcelable.Creator<Usuario> CREATOR = new Parcelable.Creator<Usuario>() {

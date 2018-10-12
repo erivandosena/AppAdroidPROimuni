@@ -14,4 +14,6 @@ import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 @PerActivity
 public interface SplashMvpPresenter<V extends SplashMvpView> extends MvpPresenter<V> {
 
+    void importaDadosJson();
+
 }

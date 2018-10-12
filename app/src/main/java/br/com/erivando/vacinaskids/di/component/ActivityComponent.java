@@ -4,6 +4,7 @@ import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.di.module.ActivityModule;
 import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoActivity;
 import br.com.erivando.vacinaskids.ui.acoes.calendario.CalendarioActivity;
+import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoListaActvity;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaActivity;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaListaActvity;
 import br.com.erivando.vacinaskids.ui.acoes.dose.DoseActivity;
@@ -28,27 +29,29 @@ import dagger.Component;
 @Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
 
-    void inject(MainActivity mainActivity);
+    void inject(MainActivity activityInject);
 
-    void inject(LoginActivity loginActivity);
+    void inject(LoginActivity activityInject);
 
-    void inject(SplashActivity splashActivity);
+    void inject(SplashActivity activityInject);
 
-    void inject(CadastroUsuarioActivity cadastroUsuarioActivity);
+    void inject(CadastroUsuarioActivity activityInject);
 
-    void inject(SobreFragment sobreFragment);
+    void inject(SobreFragment activityInject);
 
-    void inject(CriancaActivity criancaActivity);
+    void inject(CriancaActivity activityInject);
 
-    void inject(CriancaListaActvity criancaListaActivity);
+    void inject(CriancaListaActvity activityInject);
 
-    void inject(CartaoActivity cartaoActivity);
+    void inject(CartaoActivity activityInject);
 
-    void inject(CalendarioActivity calendarioActivity);
+    void inject(CalendarioActivity activityInject);
 
-    void inject(VacinaActivity vacinaActivity);
+    void inject(VacinaActivity activityInject);
 
-    void inject(IdadeActivity idadeActivity);
+    void inject(IdadeActivity activityInject);
 
-    void inject(DoseActivity doseActivity);
+    void inject(DoseActivity activityInject);
+
+    void inject(CartaoListaActvity activityInject);
 }

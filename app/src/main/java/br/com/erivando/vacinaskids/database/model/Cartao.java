@@ -8,8 +8,12 @@ package br.com.erivando.vacinaskids.database.model;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-import java.util.Objects;
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import java.util.List;
+
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -17,28 +21,24 @@ import io.realm.annotations.Required;
 /**
  * POJO representing table cartao.
  */
-public class Cartao extends RealmObject {
+public class Cartao extends RealmObject implements Parcelable {
 
     @Required
     @PrimaryKey
     private Long id;
     private Crianca crianca;
-    private Vacina vacina;
-    private Classificacao classificacao;
+    private RealmList<Imunizacao> imunizacoes;
 
     public Cartao() {
-
     }
 
-    public Cartao(Long id, Crianca crianca, Vacina vacina, Classificacao classificacao) {
-        setId(id);
-        setCrianca(crianca);
-        setVacina(vacina);
-        setClassificacao(classificacao);
+    public Cartao(Long id, Crianca crianca) {
+        this.id = id;
+        this.crianca = crianca;
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -53,29 +53,48 @@ public class Cartao extends RealmObject {
         this.crianca = crianca;
     }
 
-    public Vacina getVacina() {
-        return this.vacina;
+    public RealmList<Imunizacao> getImunizacoes() {
+        return imunizacoes;
     }
 
-    public void setVacina(Vacina vacina) {
-        this.vacina = vacina;
+    public void setImunizacoes(RealmList<Imunizacao> imunizacoes) {
+        this.imunizacoes = imunizacoes;
     }
 
-    public Classificacao getClassificacao() {
-        return this.classificacao;
+    protected Cartao(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readLong();
+        }
+        crianca = in.readParcelable(Crianca.class.getClassLoader());
     }
 
-    public void setClassificacao(Classificacao classificacao) {
-        this.classificacao = classificacao;
+    public static final Creator<Cartao> CREATOR = new Creator<Cartao>() {
+        @Override
+        public Cartao createFromParcel(Parcel in) {
+            return new Cartao(in);
+        }
+
+        @Override
+        public Cartao[] newArray(int size) {
+            return new Cartao[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     @Override
-    public String toString() {
-        return "{"
-                + "Código: '" + id + '\''
-                + ", crianca: '" + crianca.toString() + '\''
-                + ", vacina: '" + vacina.toString() + '\''
-                + ", classificacao: '" + classificacao.toString() + '\''
-                + '}';
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(id);
+        }
+        dest.writeParcelable(crianca, flags);
     }
 }

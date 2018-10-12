@@ -1,5 +1,6 @@
 package br.com.erivando.vacinaskids.database.importacao;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
 
@@ -35,12 +36,15 @@ public class RealmImport {
 
     private static Realm realm;
 
-    public static void importFromJson(final Resources resources) {
-        realm = new RealmDataBase(AppAplicacao.contextApp).getRealmInstance();
+    public static void importFromJson() {
+
+        final Context context = AppAplicacao.contextApp;
+        final Resources resources = context.getResources();
 
         //timer
         final TransactionTime transactionTime = new TransactionTime(System.currentTimeMillis());
 
+        realm = new RealmDataBase(context).getRealmAPI();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {

@@ -78,13 +78,8 @@ public class Vacina extends RealmObject {
 
     @Override
     public String toString() {
-        return "'vacina': [{" +
-                "id:" + id +
-                ", 'vaciNome':'" + vaciNome + '\'' +
-                ", 'vaciRede':'" + vaciRede + '\'' +
-                ", 'vaciDescricao':'" + vaciDescricao + '\'' +
-                ", 'vaciAdministracao':'" + vaciAdministracao + '\'' +
-                "}]";
+        return getVaciNome();
+
     }
 
 }

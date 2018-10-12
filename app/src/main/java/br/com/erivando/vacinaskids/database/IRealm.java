@@ -20,7 +20,7 @@ interface IRealm {
 
     void setup(Context context);
 
-    Realm getRealmInstance();
+    Realm getRealmAPI();
 
     <T extends RealmObject> T add(T model);
 

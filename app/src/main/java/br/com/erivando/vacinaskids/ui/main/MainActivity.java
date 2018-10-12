@@ -37,10 +37,9 @@ import br.com.erivando.vacinaskids.BuildConfig;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.custom.imagem.RoundedImageView;
 import br.com.erivando.vacinaskids.database.backup.RealmBackupRestore;
-import br.com.erivando.vacinaskids.database.importacao.RealmImport;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.acoes.calendario.CalendarioActivity;
-import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoActivity;
+import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoListaActvity;
 import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaListaActvity;
 import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioActivity;
 import br.com.erivando.vacinaskids.ui.login.LoginActivity;
@@ -89,6 +88,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @BindView(R.id.btn_cartao_vacinal)
     ImageButton cartaoImageButton;
 
+    @BindView(R.id.btn_crianca)
+    ImageButton criancaImageButton;
+
     private TextView nomeTextView;
 
     private TextView emailTextView;
@@ -127,7 +129,12 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @OnClick(R.id.btn_cartao_vacinal)
     public void onCartaoVacinal() {
-       // openCriancaListaActivity("cartao");
+        openCartaoListaActivity("edita");
+    }
+
+    @OnClick(R.id.btn_crianca)
+    public void onCrianca() {
+        openCriancaListaActivity("edita");
     }
 
     @Override
@@ -155,8 +162,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         setupNavMenu();
         presenter.onNavMenuCreated();
         setupCardContainerView();
-
-        RealmImport.importFromJson(getResources());
     }
 
     @Override
@@ -209,13 +214,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         }
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
         loginPresenter.getGoogleSignInClient().getInstanceId();
     }
-
 
     @Override
     protected void onResume() {
@@ -321,16 +324,17 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     @Override
-    public void openCartaoActivity() {
-       // startActivity(CartaoActivity.getStartIntent(this));
-       // finish();
+    public void openCartaoListaActivity(String acao) {
+        Intent intent = CartaoListaActvity.getStartIntent(MainActivity.this);
+        if ("edita".equals(acao))
+            intent.putExtra("cartaoLista", acao);
+        if ("cartao".equals(acao))
+            intent.putExtra("cartaoLista", acao);
+        startActivity(intent);
+        finish();
     }
 
     @Override
-    public void openCriancaActivity() {
-
-    }
-
     public void openCriancaListaActivity(String acao) {
         Intent intent = CriancaListaActvity.getStartIntent(MainActivity.this);
         if ("edita".equals(acao))

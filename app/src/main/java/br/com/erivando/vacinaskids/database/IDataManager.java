@@ -99,11 +99,15 @@ public interface IDataManager extends IPreferencesHelper {
 
     Cartao obtemCartao();
 
+    Cartao obtemCartaoPorCrianca(Long id);
+
     Cartao obtemCartao(String[] valores);
 
     Cartao obtemCartao(String[] valoresA, String[] valoresB);
 
-    List<Cartao> obtemTodosCartoes(String[] campo, String[] valor);
+    List<Cartao> obtemTodosCartoes();
+
+    List<Cartao> obtemTodosCartoesPorCrianca(Crianca crianca);
 
     /* CLASSIFICAÇÃO */
     AtomicInteger getClassificacaoID();

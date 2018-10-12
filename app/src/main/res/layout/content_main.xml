@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
-                    android:src="@drawable/ic_cartao"
+                    android:src="@drawable/ic_gerenciar"
                     android:layout_centerInParent="true"
                     android:contentDescription="@null" />
 
@@ -62,11 +62,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/btn_crianca"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
-                    android:src="@drawable/ic_gerenciar"
+                    android:src="@drawable/ic_idades"
                     android:layout_centerInParent="true"
                     android:contentDescription="@null" />
 
@@ -120,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
-                    android:src="@drawable/ic_idades"
+                    android:src="@drawable/ic_cartao"
                     android:layout_centerInParent="true"
                     android:contentDescription="@null" />
 

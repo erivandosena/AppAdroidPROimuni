@@ -93,11 +93,6 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
                         intencao = CriancaActivity.getStartIntent(CriancaListaActvity.this);
                         intencao.putExtra("crianca", ((Crianca)parent.getAdapter().getItem(position)).getId());
                     }
-                    if ("cartao".equals(acao)) {
-                        //intencao = CartaoActivity.getStartIntent(CriancaListaActvity.this);
-                        intencao = CalendarioActivity.getStartIntent(CriancaListaActvity.this);
-                        intencao.putExtra("crianca", ((Crianca)parent.getAdapter().getItem(position)).getId());
-                    }
                     if (intencao != null) {
                         startActivity(intencao);
                         finish();
@@ -121,7 +116,6 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
             openCriancaActivity();
         }
     }
-
 
     @Override
     public void onDestroy() {
@@ -158,7 +152,6 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
 
     @Override
     public void openCriancaListaActivity(String acao) {
-
     }
 
     public void openMainActivity() {
@@ -173,6 +166,5 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
 
     @Override
     public void getStartActivityForResult(Intent intentImagem, int requestImgCamera) {
-
     }
 }

@@ -24,7 +24,7 @@ import br.com.erivando.vacinaskids.ui.acoes.idade.IdadeMvpPresenter;
 import br.com.erivando.vacinaskids.ui.acoes.idade.IdadeMvpView;
 import br.com.erivando.vacinaskids.ui.acoes.vacina.VacinaMvpPresenter;
 import br.com.erivando.vacinaskids.ui.acoes.vacina.VacinaMvpView;
-import br.com.erivando.vacinaskids.ui.adapter.AdapterControle;
+import br.com.erivando.vacinaskids.ui.adapter.CalendarioAdapter;
 import br.com.erivando.vacinaskids.ui.adapter.RecyclerViewDataAdapter;
 import br.com.erivando.vacinaskids.ui.main.MainActivity;
 import butterknife.ButterKnife;
@@ -72,7 +72,7 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
 
     private RecyclerView recycler;
     private RecyclerView.LayoutManager manager;
-    private AdapterControle adapter;
+    private CalendarioAdapter adapter;
     private List<String> list;
 
     public static Intent getStartIntent(Context context) {

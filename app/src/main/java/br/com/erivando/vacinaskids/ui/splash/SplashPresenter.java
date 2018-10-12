@@ -5,7 +5,9 @@ import android.os.Handler;
 import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.database.IDataManager;
+import br.com.erivando.vacinaskids.database.importacao.RealmImport;
 import br.com.erivando.vacinaskids.mvp.base.BasePresenter;
+import br.com.erivando.vacinaskids.ui.AppAplicacao;
 import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -28,7 +30,8 @@ public class SplashPresenter<V extends SplashMvpView> extends BasePresenter<V> i
     public void onAttach(V mvpView) {
         super.onAttach(mvpView);
         Handler handler = new Handler();
-        handler.postDelayed(this, 2 * 1000);
+        handler.postDelayed(this, 1 * 1000);
+        importaDadosJson();
     }
 
     private void decideNextActivity() {
@@ -44,4 +47,8 @@ public class SplashPresenter<V extends SplashMvpView> extends BasePresenter<V> i
         decideNextActivity();
     }
 
+    @Override
+    public void importaDadosJson() {
+        RealmImport.importFromJson();
+    }
 }

@@ -47,6 +47,6 @@ public class Idade extends RealmObject {
 
     @Override
     public String toString() {
-        return "'idade': [{'id':" + id + ", 'idadDescricao':'" + idadDescricao + "'}]";
+        return getIdadDescricao();
     }
 }

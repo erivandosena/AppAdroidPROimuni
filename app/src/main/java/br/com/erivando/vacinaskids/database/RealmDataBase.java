@@ -13,6 +13,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  * Projeto:     VacinasKIDS
@@ -26,6 +27,7 @@ import io.realm.RealmResults;
 public class RealmDataBase implements IRealm {
 
     private final Context context;
+    private Realm realm;
 
     @Inject
     public RealmDataBase(@ApplicationContext Context context) {
@@ -40,18 +42,27 @@ public class RealmDataBase implements IRealm {
     }
 
     @Override
-    public Realm getRealmInstance() {
-        return Realm.getDefaultInstance();
+    public Realm getRealmAPI() {
+        try {
+            if (realm == null) {
+                this.setup(this.context);
+                realm = Realm.getDefaultInstance();
+                System.out.println("Realm criado!");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return realm;
     }
 
     @Override
     public void close() {
-        getRealmInstance().close();
+        getRealmAPI().close();
     }
 
     @Override
     public <T extends RealmObject> boolean getLoginLocal(Class<T> clazz, String login, String senha) {
-        Realm realm = getRealmInstance();
+        //Realm realm = getRealmInstance();
         try {
             return realm.where(clazz).equalTo("usuaLogin", login).and().equalTo("usuaSenha", senha).count() > 0;
         }catch (Exception e){
@@ -64,7 +75,7 @@ public class RealmDataBase implements IRealm {
 
     @Override
     public <T extends RealmObject> T add(T model) {
-        Realm realm = getRealmInstance();
+        //Realm realm = getRealmInstance();
         realm.beginTransaction();
         realm.copyToRealm(model);
         realm.commitTransaction();
@@ -73,7 +84,7 @@ public class RealmDataBase implements IRealm {
 
     @Override
     public <T extends RealmObject> boolean remove(Class<T> clazz, String field, Long id) {
-        Realm realm = getRealmInstance();
+        //Realm realm = getRealmInstance();
         try {
             realm.beginTransaction();
             realm.where(clazz).equalTo(field, id).findFirst().deleteFromRealm();
@@ -88,7 +99,7 @@ public class RealmDataBase implements IRealm {
 
     @Override
     public <T extends RealmObject> boolean addOrUpdate(T model) {
-        Realm realm = getRealmInstance();
+        //Realm realm = getRealmInstance();
         try {
             realm.beginTransaction();
             realm.copyToRealmOrUpdate(model);
@@ -103,42 +114,42 @@ public class RealmDataBase implements IRealm {
 
     @Override
     public <T extends RealmObject> T getObject(Class<T> clazz) {
-        return getRealmInstance().where(clazz).findFirst();
+        return realm.where(clazz).findFirst();
     }
 
     @Override
     public <T extends RealmObject> T getObject(Class<T> clazz, String field, Long value) {
-        return getRealmInstance().where(clazz).equalTo(field, value).findFirst();
+       return realm.where(clazz).equalTo(field, value).findFirst();
     }
 
     @Override
     public <T extends RealmObject> T getObject(Class<T> clazz, String[] fieldValues) {
-        Realm instance = getRealmInstance();
-        T realmObject = instance.where(clazz).equalTo(fieldValues[0], fieldValues[1]).findFirst();
+        //Realm instance = getRealmInstance();
+        T realmObject = realm.where(clazz).equalTo(fieldValues[0], fieldValues[1]).findFirst();
         if(realmObject != null)
-            return instance.copyFromRealm(realmObject);
+            return realm.copyFromRealm(realmObject);
         else
             return realmObject;
     }
 
     @Override
     public <T extends RealmObject> T getObject(Class<T> clazz, String[] fieldValueA, String[] fieldValueB) {
-        return getRealmInstance().where(clazz).equalTo(fieldValueA[0], fieldValueA[1]).equalTo(fieldValueB[0], fieldValueB[1]).findFirst();
+        return realm.where(clazz).equalTo(fieldValueA[0], fieldValueA[1]).equalTo(fieldValueB[0], fieldValueB[1]).findFirst();
     }
 
     @Override
     public <T extends RealmObject> List<T> findAll(Class<T> clazz) {
-        return getRealmInstance().where(clazz).findAll();
+        return realm.where(clazz).findAll();
     }
 
     @Override
     public <T extends RealmObject> List<T> findAll(String[] fieldsObject, String[] valuesObject, Class<T> clazz) {
-        return getRealmInstance().where(clazz).equalTo(fieldsObject[0], valuesObject[0]).equalTo(fieldsObject[1], valuesObject[1]).findAll();
+        return realm.where(clazz).equalTo(fieldsObject[0], valuesObject[0]).equalTo(fieldsObject[1], valuesObject[1]).findAll();
     }
 
     @Override
     public <T extends RealmObject> AtomicInteger getIdByClassModel(Class<T> clazz) {
-        RealmResults<T> results = getRealmInstance().where(clazz).findAll();
+        RealmResults<T> results = realm.where(clazz).findAll();
         return (results.size() > 0) ? new AtomicInteger(results.max("id").intValue()) : new AtomicInteger();
     }
 

@@ -38,7 +38,7 @@ public class DataManager implements IDataManager {
         this.context = context;
         this.preferencesHelper = preferencesHelper;
         this.realmDataBase = realmDataBase;
-        this.realmDataBase.setup(context);
+        this.realmDataBase.getRealmAPI();
     }
 
     /* CONTROLLER */
@@ -115,6 +115,11 @@ public class DataManager implements IDataManager {
     }
 
     @Override
+    public Cartao obtemCartaoPorCrianca(Long id) {
+        return realmDataBase.getObject(Cartao.class, "crianca.id", id);
+    }
+
+    @Override
     public Cartao obtemCartao(String[] valores) {
         return realmDataBase.getObject(Cartao.class, valores);
     }
@@ -125,8 +130,13 @@ public class DataManager implements IDataManager {
     }
 
     @Override
-    public List<Cartao> obtemTodosCartoes(String[] campo, String[] valor) {
-        return realmDataBase.findAll(campo, valor, Cartao.class);
+    public List<Cartao> obtemTodosCartoes() {
+        return realmDataBase.findAll(Cartao.class);
+    }
+
+    @Override
+    public List<Cartao> obtemTodosCartoesPorCrianca(Crianca crianca) {
+        return realmDataBase.findAll(new String[]{"crianca"}, new String[]{crianca.getId().toString()}, Cartao.class);
     }
 
     /* Classificação */

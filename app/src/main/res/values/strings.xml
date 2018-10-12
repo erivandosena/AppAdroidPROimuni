@@ -24,8 +24,6 @@
     <!-- Menus Toolbar. -->
     <string name="clear">Limpar</string>
     <string name="edita_usuario">Editar Usuário</string>
-    <string name="copy">Editar Criança</string>
-    <string name="paste">Editar Cartão</string>
     <string name="local_mapa">Postos de Saúde</string>
     <string name="share">Compartilhar</string>
     <string name="mensagen_avaliacao_app">Por favor, avalie este aplicativo na Play Store.</string>
@@ -85,7 +83,7 @@
     <string name="proj_autor">Desenvolvedor: \n erivandosena@gmail.com</string>
     <!-- Menu principal. -->
     <string name="menu_item1">Cartão Vacinal</string>
-    <string name="menu_item2">Adicionar Cartão</string>
+    <string name="menu_item2">Criança</string>
     <string name="menu_item3">Vacinas</string>
     <string name="menu_item4">Calendário Vacinal</string>
     <string name="menu_item5">Localizar Postos</string>
@@ -117,13 +115,19 @@
     <!-- Cadastro Criança -->
     <string name="erro_text_data">Informe uma data válida</string>
     <string name="text_crianca_titulo">Dados da Criança</string>
+    <string name="text_cartao_titulo">Dados do Cartão</string>
     <string name="text_valida_sexo">Informe o sexo</string>
+    <string name="text_valida_crianca">Informe uma criança</string>
     <string name="text_nascimento">Data do Nascimento</string>
     <string name="text_responsavel">Responsável</string>
+    <string name="text_crianca">Criança</string>
     <string name="text_sexo">Sexo</string>
     <string name="texto_aviso_usuario_nao_cadastrado">É necessário cadastrar o usuário!</string>
     <string name="texto_aviso_crianca_nao_cadastrada">É necessário cadastrar uma crianca!</string>
+    <string name="texto_aviso_cartao_nao_cadastrado">É necessário cadastrar um cartão!</string>
+    <string name="texto_aviso_crianca_cartao_cadastrada">Criança já possui cartão!</string>
     <string name="text_lista_crianca_titulo">Selecione a Criança</string>
+    <string name="text_lista_cartao_titulo">Selecione o Cartão</string>
     <string name="text_lista_calendario_titulo">Calendário Vacinal</string>
     <string name="backup">Copiar Dados</string>
     <string name="restore">Restaurar Dados</string>

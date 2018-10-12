@@ -32,7 +32,7 @@ android {
             dimension 'beta'
             // Ativar pré-dexing para produzir um APK que possa ser testado em
             // Android 5.0+ sem os demorados processos de construção do DEX.
-            minSdkVersion 15
+            minSdkVersion 25
         }
         producao {
             dimension 'beta'

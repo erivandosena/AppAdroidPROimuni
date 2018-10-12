@@ -94,14 +94,7 @@ public class Crianca extends RealmObject implements Parcelable {
 
     @Override
     public String toString() {
-        return "{"
-                + "id='" + id + '\''
-                + ", usuario='" + usuario + '\''
-                + ", criaNome='" + criaNome + '\''
-                + ", criaNascimento='" + criaNascimento + '\''
-                + ", criaSexo='" + criaSexo + '\''
-                + ", criaFoto='" + criaFoto + '\''
-                + '}';
+        return getCriaNome();
     }
 
     public static final Parcelable.Creator<Crianca> CREATOR = new Parcelable.Creator<Crianca>() {

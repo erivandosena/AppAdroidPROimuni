@@ -65,14 +65,4 @@ public class Calendario extends RealmObject {
         this.dose = dose;
     }
 
-
-    @Override
-    public String toString() {
-        return "'calendario':[{" +
-                "'id':" + id +
-                ", 'idade':" + idade +
-                ", 'vacina':" + vacina +
-                ", 'dose':" + dose +
-                "}]";
-    }
 }

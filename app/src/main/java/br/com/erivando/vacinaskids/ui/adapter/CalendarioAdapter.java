@@ -21,12 +21,12 @@ import br.com.erivando.vacinaskids.database.model.Calendario;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class AdapterControle extends RecyclerView.Adapter<AdapterControle.ViewHolder> {
+public class CalendarioAdapter extends RecyclerView.Adapter<CalendarioAdapter.ViewHolder> {
 
     private List<Calendario> list = new ArrayList<Calendario>();
     private Context context;
 
-    public AdapterControle(List<Calendario> list, Context context) {
+    public CalendarioAdapter(List<Calendario> list, Context context) {
         this.list = list;
         this.context = context;
     }

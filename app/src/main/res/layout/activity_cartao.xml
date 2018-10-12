@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:text="@string/text_lista_calendario_titulo"
+            android:text="@string/text_cartao_titulo"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:layout_marginStart="@dimen/activity_horizontal_margin" />
@@ -72,6 +72,20 @@
             android:padding="10dp"
             android:scrollbars="vertical">
 
+            <br.com.erivando.vacinaskids.custom.imagem.RoundedImageButton
+                android:id="@+id/img_cartao_foto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/transparent"
+                android:layout_gravity="center_horizontal"
+                android:tint="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:padding="5dp"
+                android:src="@drawable/ic_gerenciar" />
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,6 +96,42 @@
                 app:cardCornerRadius="7dp"
                 app:cardElevation="22dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:paddingLeft="@dimen/activity_vertical_margin"
+                    android:paddingRight="@dimen/activity_vertical_margin"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_crianca"
+                        android:textColor="@color/gray"
+                        style="@style/TextAppearence.App.TextInputLayout" />
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/crianca"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/black_effective"
+                        android:spinnerMode="dropdown"
+                        style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+                    <Button
+                        android:id="@+id/btn_cadadastar_cartao"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/botao_interativo"
+                        android:text="@string/btn_salvar"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
 
             </android.support.v7.widget.CardView>
 

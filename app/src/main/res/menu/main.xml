@@ -50,7 +50,7 @@ android:showAsAction
 
     <item
         android:id="@+id/action_edita_crianca"
-        android:title="@string/copy"
+        android:title="@string/menu_item2"
         android:icon="@drawable/ic_criancas_cadastro"
         app:showAsAction="ifRoom|withText" />
 

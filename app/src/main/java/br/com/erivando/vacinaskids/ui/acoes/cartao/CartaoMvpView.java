@@ -11,4 +11,7 @@ import br.com.erivando.vacinaskids.mvp.MvpView;
  */
 
 public interface CartaoMvpView extends MvpView {
+
+    void openCartaoListaActivity(String acao);
+
 }

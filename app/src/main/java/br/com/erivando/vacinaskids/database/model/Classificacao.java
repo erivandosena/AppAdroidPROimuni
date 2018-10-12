@@ -73,11 +73,4 @@ public class Classificacao extends RealmObject {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "{"
-                + "Código: '" + id + '\''
-                + ", clasRanking: '" + clasRanking + '\''
-                + '}';
-    }
 }

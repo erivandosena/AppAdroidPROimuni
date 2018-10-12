@@ -144,7 +144,7 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        this.openMainActivity();
+        openCriancaListaActivity("edita");
     }
 
     @Override
