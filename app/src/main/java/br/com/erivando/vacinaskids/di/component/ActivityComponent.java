@@ -2,19 +2,22 @@ package br.com.erivando.vacinaskids.di.component;
 
 import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.di.module.ActivityModule;
-import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoActivity;
-import br.com.erivando.vacinaskids.ui.acoes.calendario.CalendarioActivity;
-import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoListaActvity;
-import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaActivity;
-import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaListaActvity;
-import br.com.erivando.vacinaskids.ui.acoes.dose.DoseActivity;
-import br.com.erivando.vacinaskids.ui.acoes.idade.IdadeActivity;
-import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioActivity;
-import br.com.erivando.vacinaskids.ui.acoes.vacina.VacinaActivity;
-import br.com.erivando.vacinaskids.ui.login.LoginActivity;
-import br.com.erivando.vacinaskids.ui.main.MainActivity;
-import br.com.erivando.vacinaskids.ui.sobre.SobreFragment;
-import br.com.erivando.vacinaskids.ui.splash.SplashActivity;
+import br.com.erivando.vacinaskids.ui.activity.calendario.CalendarioActivity;
+import br.com.erivando.vacinaskids.ui.activity.cartao.CartaoActivity;
+import br.com.erivando.vacinaskids.ui.activity.cartao.CartaoListaActvity;
+import br.com.erivando.vacinaskids.ui.activity.crianca.CriancaActivity;
+import br.com.erivando.vacinaskids.ui.activity.crianca.CriancaListaActvity;
+import br.com.erivando.vacinaskids.ui.activity.dose.DoseActivity;
+import br.com.erivando.vacinaskids.ui.activity.idade.IdadeActivity;
+import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoActivity;
+import br.com.erivando.vacinaskids.ui.activity.login.LoginActivity;
+import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
+import br.com.erivando.vacinaskids.ui.activity.splash.SplashActivity;
+import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioActivity;
+import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaActivity;
+import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaDetalheActivity;
+import br.com.erivando.vacinaskids.ui.fragment.sobre.SobreFragment;
+import br.com.erivando.vacinaskids.ui.fragment.vacina.VacinaListFragment;
 import dagger.Component;
 
 /**
@@ -37,7 +40,7 @@ public interface ActivityComponent {
 
     void inject(CadastroUsuarioActivity activityInject);
 
-    void inject(SobreFragment activityInject);
+    void inject(SobreFragment fragmentInject);
 
     void inject(CriancaActivity activityInject);
 
@@ -54,4 +57,10 @@ public interface ActivityComponent {
     void inject(DoseActivity activityInject);
 
     void inject(CartaoListaActvity activityInject);
+
+    void inject(ImunizacaoActivity activityInject);
+
+    void inject(VacinaDetalheActivity activityInject);
+
+    void inject(VacinaListFragment fragmentInject);
 }

@@ -8,8 +8,6 @@ package br.com.erivando.vacinaskids.database.model;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-import java.util.Date;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;

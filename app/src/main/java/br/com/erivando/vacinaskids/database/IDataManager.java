@@ -63,9 +63,7 @@ public interface IDataManager extends IPreferencesHelper {
 
     Usuario obtemUsuario(String[] valores);
 
-    Usuario obtemUsuario(String[] valoresA, String[] valoresB);
-
-    List<Usuario> obtemTodosUsuarios(String[] campo, String[] valor);
+    List<Usuario> obtemUsuarios(String[] valores);
 
     boolean validaLoginUsuario(String login, String senha);
 
@@ -82,11 +80,9 @@ public interface IDataManager extends IPreferencesHelper {
 
     Crianca obtemCrianca(String[] valores);
 
-    Crianca obtemCrianca(String[] valoresA, String[] valoresB);
+    List<Crianca> obtemCriancas(String[] valores);
 
-    List<Crianca> obtemTodasCriancas(String[] campo, String[] valor);
-
-    List<Crianca> obtemTodasCriancas();
+    List<Crianca> obtemCriancas();
 
     /* CARTÃO */
     AtomicInteger getCartaoID();
@@ -103,9 +99,7 @@ public interface IDataManager extends IPreferencesHelper {
 
     Cartao obtemCartao(String[] valores);
 
-    Cartao obtemCartao(String[] valoresA, String[] valoresB);
-
-    List<Cartao> obtemTodosCartoes();
+    List<Cartao> obtemCartoes();
 
     List<Cartao> obtemTodosCartoesPorCrianca(Crianca crianca);
 
@@ -122,9 +116,7 @@ public interface IDataManager extends IPreferencesHelper {
 
     Classificacao obtemClassificacao(String[] valores);
 
-    Classificacao obtemClassificacao(String[] valoresA, String[] valoresB);
-
-    List<Classificacao> obtemTodasClassificacoes(String[] campo, String[] valor);
+    List<Classificacao> obtemClassificacoes(String[] valores);
 
     /* DOSE */
     AtomicInteger getDoseID();
@@ -139,11 +131,9 @@ public interface IDataManager extends IPreferencesHelper {
 
     Dose obtemDose(String[] valores);
 
-    Dose obtemDose(String[] valoresA, String[] valoresB);
+    List<Dose> obtemDoses(String[] valores);
 
-    List<Dose> obtemTodasDoses(String[] campo, String[] valor);
-
-    List<Dose> obtemTodasDoses();
+    List<Dose> obtemDoses();
 
     /* IDADE */
     AtomicInteger getIdadeID();
@@ -158,11 +148,9 @@ public interface IDataManager extends IPreferencesHelper {
 
     Idade obtemIdade(String[] valores);
 
-    Idade obtemIdade(String[] valoresA, String[] valoresB);
+    List<Idade> obtemIdades(String[] valores);
 
-    List<Idade> obtemTodasIdades(String[] campo, String[] valor);
-
-    List<Idade> obtemTodasIdades();
+    List<Idade> obtemIdades();
 
     /* VACINA */
     AtomicInteger getVacinaID();
@@ -177,11 +165,9 @@ public interface IDataManager extends IPreferencesHelper {
 
     Vacina obtemVacina(String[] valores);
 
-    Vacina obtemVacina(String[] valoresA, String[] valoresB);
+    List<Vacina> obtemVacinas(String[] valores);
 
-    List<Vacina> obtemTodasVacinas(String[] campo, String[] valor);
-
-    List<Vacina> obtemTodasVacinas();
+    List<Vacina> obtemVacinas();
 
     /* CONTROLE */
     AtomicInteger getControleID();
@@ -196,10 +182,11 @@ public interface IDataManager extends IPreferencesHelper {
 
     Calendario obtemCalendario(String[] valores);
 
-    Calendario obtemCalendario(String[] valoresA, String[] valoresB);
+    List<Calendario> obtemCalendarios(String[] valores);
 
-    List<Calendario> obtemTodosCalendarios(String[] campo, String[] valor);
+    List<Calendario> obtemCalendarios();
 
-    List<Calendario> obtemTodosCalendarios();
+    /* IMPORTACOES */
 
+    void getRecursosJson();
 }

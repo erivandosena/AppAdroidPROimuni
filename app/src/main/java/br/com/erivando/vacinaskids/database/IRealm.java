@@ -20,29 +20,31 @@ interface IRealm {
 
     void setup(Context context);
 
-    Realm getRealmAPI();
+    Realm getRealmInstance();
 
-    <T extends RealmObject> T add(T model);
+    <T extends RealmObject> boolean getLoginLocal(Class<T> clazz, String login, String senha);
 
-    <T extends RealmObject> boolean remove(Class<T> clazz, String field, Long value);
+    <T extends RealmObject> T add(T modelo);
 
-    <T extends RealmObject> boolean addOrUpdate(T model);
+    <T extends RealmObject> boolean addOrUpdate(T modelo);
+
+    <T extends RealmObject> boolean remove(Class<T> clazz, String campo, Long valor);
 
     <T extends RealmObject> T getObject(Class<T> clazz);
 
-    <T extends RealmObject> T getObject(Class<T> clazz, String field, Long value);
+    <T extends RealmObject> T getObject(Class<T> clazz, String campo, Long valor);
 
-    <T extends RealmObject> RealmObject getObject(Class<T> clazz, String[] fieldValues);
+    <T extends RealmObject> T getObject(Class<T> clazz, String campo, String valor);
 
-    <T extends RealmObject> T getObject(Class<T> clazz, String[] fieldValueA, String[] fieldValueB);
+    <T extends RealmObject> T getObject(Class<T> clazz, String[] valores);
 
     <T extends RealmObject> List<T> findAll(Class<T> clazz);
 
-    <T extends RealmObject> List<T> findAll(String[] fieldsObject, String[] valuesObject, Class<T> clazz);
+    <T extends RealmObject> List<T> findAll(String campo, Long valor, Class<T> clazz);
 
-    <T extends RealmObject> AtomicInteger getIdByClassModel( Class<T> clazz);
+    <T extends RealmObject> List<T> findAll(String campo, String valor, Class<T> clazz);
 
-    void close();
+    <T extends RealmObject> AtomicInteger getIdByClassModel(Class<T> clazz);
 
-    <T extends RealmObject> boolean getLoginLocal(Class<T> clazz, String login, String senha);
+    void getImportJson();
 }

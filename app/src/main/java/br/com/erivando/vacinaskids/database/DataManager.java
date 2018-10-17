@@ -38,7 +38,7 @@ public class DataManager implements IDataManager {
         this.context = context;
         this.preferencesHelper = preferencesHelper;
         this.realmDataBase = realmDataBase;
-        this.realmDataBase.getRealmAPI();
+        this.realmDataBase.setup(context);
     }
 
     /* CONTROLLER */
@@ -70,24 +70,18 @@ public class DataManager implements IDataManager {
 
     @Override
     public Crianca obtemCrianca(String[] valores) {
-        return realmDataBase.getObject(Crianca.class, valores);
+        return realmDataBase.getObject(Crianca.class, valores[0], valores[1]);
     }
 
     @Override
-    public Crianca obtemCrianca(String[] valoresA, String[] valoresB) {
-        return realmDataBase.getObject(Crianca.class, valoresA, valoresB);
-    }
-
-    @Override
-    public List<Crianca> obtemTodasCriancas(String[] campo, String[] valor) {
-        return realmDataBase.findAll(campo, valor, Crianca.class);
-    }
-
-    @Override
-    public List<Crianca> obtemTodasCriancas() {
+    public List<Crianca> obtemCriancas() {
         return realmDataBase.findAll(Crianca.class);
     }
 
+    @Override
+    public List<Crianca> obtemCriancas(String[] valores) {
+        return realmDataBase.findAll(valores[0], valores[1], Crianca.class);
+    }
     /* Cartão */
     @Override
     public AtomicInteger getCartaoID() {
@@ -121,22 +115,17 @@ public class DataManager implements IDataManager {
 
     @Override
     public Cartao obtemCartao(String[] valores) {
-        return realmDataBase.getObject(Cartao.class, valores);
+        return realmDataBase.getObject(Cartao.class, valores[0], valores[1]);
     }
 
     @Override
-    public Cartao obtemCartao(String[] valoresA, String[] valoresB) {
-        return realmDataBase.getObject(Cartao.class, valoresA, valoresB);
-    }
-
-    @Override
-    public List<Cartao> obtemTodosCartoes() {
+    public List<Cartao> obtemCartoes() {
         return realmDataBase.findAll(Cartao.class);
     }
 
     @Override
     public List<Cartao> obtemTodosCartoesPorCrianca(Crianca crianca) {
-        return realmDataBase.findAll(new String[]{"crianca"}, new String[]{crianca.getId().toString()}, Cartao.class);
+        return realmDataBase.findAll("crianca", crianca.getId(), Cartao.class);
     }
 
     /* Classificação */
@@ -167,17 +156,13 @@ public class DataManager implements IDataManager {
 
     @Override
     public Classificacao obtemClassificacao(String[] valores) {
-        return realmDataBase.getObject(Classificacao.class, valores);
+        return realmDataBase.getObject(Classificacao.class, valores[0], valores[1]);
     }
 
-    @Override
-    public Classificacao obtemClassificacao(String[] valoresA, String[] valoresB) {
-        return realmDataBase.getObject(Classificacao.class, valoresA, valoresB);
-    }
 
     @Override
-    public List<Classificacao> obtemTodasClassificacoes(String[] campo, String[] valor) {
-        return realmDataBase.findAll(campo, valor, Classificacao.class);
+    public List<Classificacao> obtemClassificacoes(String[] valores) {
+        return realmDataBase.findAll(valores[0], valores[1], Classificacao.class);
     }
 
     /* Dose */
@@ -208,21 +193,16 @@ public class DataManager implements IDataManager {
 
     @Override
     public Dose obtemDose(String[] valores) {
-        return realmDataBase.getObject(Dose.class, valores);
+        return realmDataBase.getObject(Dose.class, valores[0], valores[1]);
     }
 
     @Override
-    public Dose obtemDose(String[] valoresA, String[] valoresB) {
-        return realmDataBase.getObject(Dose.class, valoresA, valoresB);
+    public List<Dose> obtemDoses(String[] valores) {
+        return realmDataBase.findAll(valores[0], valores[1], Dose.class);
     }
 
     @Override
-    public List<Dose> obtemTodasDoses(String[] campo, String[] valor) {
-        return realmDataBase.findAll(campo, valor, Dose.class);
-    }
-
-    @Override
-    public List<Dose> obtemTodasDoses() {
+    public List<Dose> obtemDoses() {
         return realmDataBase.findAll(Dose.class);
     }
 
@@ -254,21 +234,16 @@ public class DataManager implements IDataManager {
 
     @Override
     public Idade obtemIdade(String[] valores) {
-        return realmDataBase.getObject(Idade.class, valores);
+        return realmDataBase.getObject(Idade.class, valores[0], valores[1]);
     }
 
     @Override
-    public Idade obtemIdade(String[] valoresA, String[] valoresB) {
-        return realmDataBase.getObject(Idade.class, valoresA, valoresB);
+    public List<Idade> obtemIdades(String[] valores) {
+        return realmDataBase.findAll(valores[0], valores[1], Idade.class);
     }
 
     @Override
-    public List<Idade> obtemTodasIdades(String[] campo, String[] valor) {
-        return realmDataBase.findAll(campo, valor, Idade.class);
-    }
-
-    @Override
-    public List<Idade> obtemTodasIdades() {
+    public List<Idade> obtemIdades() {
         return realmDataBase.findAll(Idade.class);
     }
 
@@ -300,21 +275,16 @@ public class DataManager implements IDataManager {
 
     @Override
     public Vacina obtemVacina(String[] valores) {
-        return realmDataBase.getObject(Vacina.class, valores);
+        return realmDataBase.getObject(Vacina.class, valores[0], valores[1]);
     }
 
     @Override
-    public Vacina obtemVacina(String[] valoresA, String[] valoresB) {
-        return realmDataBase.getObject(Vacina.class, valoresA, valoresB);
+    public List<Vacina> obtemVacinas(String[] valores) {
+        return realmDataBase.findAll(valores[0], valores[1], Vacina.class);
     }
 
     @Override
-    public List<Vacina> obtemTodasVacinas(String[] campo, String[] valor) {
-        return realmDataBase.findAll(campo, valor, Vacina.class);
-    }
-
-    @Override
-    public List<Vacina> obtemTodasVacinas() {
+    public List<Vacina> obtemVacinas() {
         return realmDataBase.findAll(Vacina.class);
     }
 
@@ -341,26 +311,21 @@ public class DataManager implements IDataManager {
 
     @Override
     public Calendario obtemCalendario() {
-        return null;
+        return realmDataBase.getObject(Calendario.class);
     }
 
     @Override
     public Calendario obtemCalendario(String[] valores) {
-        return null;
+        return realmDataBase.getObject(Calendario.class, valores[0], valores[1]);
     }
 
     @Override
-    public Calendario obtemCalendario(String[] valoresA, String[] valoresB) {
-        return null;
+    public List<Calendario> obtemCalendarios(String[] valores) {
+        return realmDataBase.findAll(valores[0], valores[1], Calendario.class);
     }
 
     @Override
-    public List<Calendario> obtemTodosCalendarios(String[] campo, String[] valor) {
-        return null;
-    }
-
-    @Override
-    public List<Calendario> obtemTodosCalendarios() {
+    public List<Calendario> obtemCalendarios() {
         return realmDataBase.findAll(Calendario.class);
     }
 
@@ -396,18 +361,19 @@ public class DataManager implements IDataManager {
     }
 
     @Override
-    public Usuario obtemUsuario(String[] valoresA, String[] valoresB) {
-        return realmDataBase.getObject(Usuario.class, valoresA, valoresB);
-    }
-
-    @Override
-    public List<Usuario> obtemTodosUsuarios(String[] campo, String[] valor) {
-        return realmDataBase.findAll(campo, valor, Usuario.class);
+    public List<Usuario> obtemUsuarios(String[] valores) {
+        return realmDataBase.findAll(valores[0], valores[1], Usuario.class);
     }
 
     @Override
     public boolean validaLoginUsuario(String login, String senha) {
         return realmDataBase.getLoginLocal(Usuario.class, login, senha);
+    }
+
+    /* JSON */
+    @Override
+    public void getRecursosJson() {
+        realmDataBase.getImportJson();
     }
 
     /* PREFERENCES HELPER */

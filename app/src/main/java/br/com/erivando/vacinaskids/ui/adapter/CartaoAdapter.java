@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.custom.imagem.RoundedImageView;
+import br.com.erivando.vacinaskids.database.model.Cartao;
 import br.com.erivando.vacinaskids.database.model.Crianca;
 import br.com.erivando.vacinaskids.util.Uteis;
 
@@ -23,37 +24,32 @@ import static br.com.erivando.vacinaskids.util.Uteis.obtemIdadeCompleta;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class CartaoAdapter extends ArrayAdapter<Crianca> {
+public class CartaoAdapter extends ArrayAdapter<Cartao> {
 
     public CartaoAdapter(Context context) {
-        super(context, R.layout.activity_crianca_item);
+        super(context, R.layout.activity_cartao_item);
     }
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        CartaoAdapter.ViewHolder holder;
+        ViewHolder holder;
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            convertView = inflater.inflate(R.layout.activity_crianca_item, parent, false);
-            holder = new CartaoAdapter.ViewHolder(convertView);
+            convertView = inflater.inflate(R.layout.activity_cartao_item, parent, false);
+            holder = new ViewHolder(convertView);
 
             convertView.setTag(holder);
         } else {
-            holder = (CartaoAdapter.ViewHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        Crianca model =  getItem(position);
-
-        if (model.getCriaFoto() != null)
-            holder.imageView.setImageBitmap(Uteis.base64ParaBitmap(model.getCriaFoto()));
-        else
-            holder.imageView.setImageDrawable(this.getContext().getResources().getDrawable(R.drawable.ic_launcher_round));
-        holder.tvTitle.setText(model.getCriaNome());
-        holder.tvSubtitle.setText(obtemIdadeCompleta(model.getCriaNascimento()));
-
+        Cartao model =  getItem(position);
+        holder.imageView.setImageDrawable(this.getContext().getResources().getDrawable(R.drawable.ic_gerenciar));
+        holder.tvTitle.setText(model.getCrianca().getCriaNome());
+        holder.tvSubtitle.setText(obtemIdadeCompleta(model.getCrianca().getCriaNascimento()));
         return convertView;
     }
 

@@ -121,6 +121,7 @@
     <string name="text_nascimento">Data do Nascimento</string>
     <string name="text_responsavel">Responsável</string>
     <string name="text_crianca">Criança</string>
+    <string name="text_vacina">Vacina</string>
     <string name="text_sexo">Sexo</string>
     <string name="texto_aviso_usuario_nao_cadastrado">É necessário cadastrar o usuário!</string>
     <string name="texto_aviso_crianca_nao_cadastrada">É necessário cadastrar uma crianca!</string>
@@ -131,5 +132,16 @@
     <string name="text_lista_calendario_titulo">Calendário Vacinal</string>
     <string name="backup">Copiar Dados</string>
     <string name="restore">Restaurar Dados</string>
+    <!-- Tabs -->
+    <string name="title_tab1">Rede Pública</string>
+    <string name="title_tab2">Rede Privada</string>
+    <string name="text_vacinas_titulo">Vacinas</string>
+
+
+    <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+    cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
+    bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
+    cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
+    the big cheese.</string>
 
 </resources>

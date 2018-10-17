@@ -12,7 +12,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.Date;
-import java.util.Objects;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

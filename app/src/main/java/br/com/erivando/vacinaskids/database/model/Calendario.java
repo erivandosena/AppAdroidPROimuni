@@ -1,7 +1,6 @@
 package br.com.erivando.vacinaskids.database.model;
 
-import java.util.Objects;
-
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -22,6 +21,8 @@ public class Calendario extends RealmObject {
     private Idade idade;
     private Vacina vacina;
     private Dose dose;
+    private String headerTitulo;
+    private RealmList<Vacina> vacinasInSection;
 
     public Calendario() {
     }
@@ -31,6 +32,15 @@ public class Calendario extends RealmObject {
         this.idade = idade;
         this.vacina = vacina;
         this.dose = dose;
+    }
+
+    public Calendario(Long id, Idade idade, Vacina vacina, Dose dose, String headerTitulo, RealmList<Vacina> vacinasInSection) {
+        this.id = id;
+        this.idade = idade;
+        this.vacina = vacina;
+        this.dose = dose;
+        this.headerTitulo = headerTitulo;
+        this.vacinasInSection = vacinasInSection;
     }
 
     public Long getId() {
@@ -65,4 +75,19 @@ public class Calendario extends RealmObject {
         this.dose = dose;
     }
 
+    public String getHeaderTitulo() {
+        return headerTitulo;
+    }
+
+    public void setHeaderTitulo(String headerTitulo) {
+        this.headerTitulo = headerTitulo;
+    }
+
+    public RealmList<Vacina> getVacinasInSection() {
+        return vacinasInSection;
+    }
+
+    public void setVacinasInSection(RealmList<Vacina> vacinasInSection) {
+        this.vacinasInSection = vacinasInSection;
+    }
 }

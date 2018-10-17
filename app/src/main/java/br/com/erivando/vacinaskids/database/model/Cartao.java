@@ -11,8 +11,6 @@ package br.com.erivando.vacinaskids.database.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.List;
-
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

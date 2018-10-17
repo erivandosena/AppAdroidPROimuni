@@ -30,9 +30,7 @@ public class RealmBackupRestore {
     private File EXPORT_REALM_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
     private String EXPORT_REALM_FILE_NAME = "vacinaskids.realm";
     private String IMPORT_REALM_FILE_NAME = "default.realm"; // Eventualmente, substitua isso se estiver usando um nome de banco de dados personalizado
-
     private final static String TAG = RealmBackupRestore.class.getName();
-
     private Activity activity;
     private Realm realm;
 
@@ -44,8 +42,7 @@ public class RealmBackupRestore {
     };
 
     public RealmBackupRestore(Activity activity) {
-        //this.realm = new DatabaseHandler(activity.getApplicationContext()).getRealmIstance();
-        this.realm = new RealmDataBase(activity.getApplicationContext()).getRealmAPI();
+        this.realm = new RealmDataBase(activity.getApplicationContext()).getRealmInstance();
         this.activity = activity;
     }
 
@@ -54,7 +51,7 @@ public class RealmBackupRestore {
             if (checkStoragePermissions(activity) == 0) {
                 File exportRealmFile;
                 try {
-                    Log.d(TAG, "Realm DB Path = " + realm.getPath());
+                    Log.d(TAG, "Realm DB Path = " + this.dbPath());
 
                     try {
                         EXPORT_REALM_PATH.mkdirs();

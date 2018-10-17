@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 import br.com.erivando.vacinaskids.database.IDataManager;
 import br.com.erivando.vacinaskids.di.ApplicationContext;
 import br.com.erivando.vacinaskids.di.module.ApplicationModule;
-import br.com.erivando.vacinaskids.ui.AppAplicacao;
+import br.com.erivando.vacinaskids.ui.application.AppAplicacao;
 import dagger.Component;
 
 /**

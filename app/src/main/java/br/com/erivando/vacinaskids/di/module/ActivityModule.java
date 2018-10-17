@@ -6,39 +6,42 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import br.com.erivando.vacinaskids.di.ActivityContext;
 import br.com.erivando.vacinaskids.di.PerActivity;
-import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoMvpPresenter;
-import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoMvpView;
-import br.com.erivando.vacinaskids.ui.acoes.cartao.CartaoPresenter;
-import br.com.erivando.vacinaskids.ui.acoes.calendario.CalendarioMvpPresenter;
-import br.com.erivando.vacinaskids.ui.acoes.calendario.CalendarioMvpView;
-import br.com.erivando.vacinaskids.ui.acoes.calendario.CalendarioPresenter;
-import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaMvpPresenter;
-import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaMvpView;
-import br.com.erivando.vacinaskids.ui.acoes.crianca.CriancaPresenter;
-import br.com.erivando.vacinaskids.ui.acoes.dose.DoseMvpPresenter;
-import br.com.erivando.vacinaskids.ui.acoes.dose.DoseMvpView;
-import br.com.erivando.vacinaskids.ui.acoes.dose.DosePresenter;
-import br.com.erivando.vacinaskids.ui.acoes.idade.IdadeMvpPresenter;
-import br.com.erivando.vacinaskids.ui.acoes.idade.IdadeMvpView;
-import br.com.erivando.vacinaskids.ui.acoes.idade.IdadePresenter;
-import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioMvpPresenter;
-import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioMvpView;
-import br.com.erivando.vacinaskids.ui.acoes.usuario.CadastroUsuarioPresenter;
-import br.com.erivando.vacinaskids.ui.acoes.vacina.VacinaMvpPresenter;
-import br.com.erivando.vacinaskids.ui.acoes.vacina.VacinaMvpView;
-import br.com.erivando.vacinaskids.ui.acoes.vacina.VacinaPresenter;
-import br.com.erivando.vacinaskids.ui.login.LoginMvpPresenter;
-import br.com.erivando.vacinaskids.ui.login.LoginMvpView;
-import br.com.erivando.vacinaskids.ui.login.LoginPresenter;
-import br.com.erivando.vacinaskids.ui.main.MainMvpPresenter;
-import br.com.erivando.vacinaskids.ui.main.MainMvpView;
-import br.com.erivando.vacinaskids.ui.main.MainPresenter;
-import br.com.erivando.vacinaskids.ui.sobre.SobreMvpPresenter;
-import br.com.erivando.vacinaskids.ui.sobre.SobreMvpView;
-import br.com.erivando.vacinaskids.ui.sobre.SobrePresenter;
-import br.com.erivando.vacinaskids.ui.splash.SplashMvpPresenter;
-import br.com.erivando.vacinaskids.ui.splash.SplashMvpView;
-import br.com.erivando.vacinaskids.ui.splash.SplashPresenter;
+import br.com.erivando.vacinaskids.ui.activity.calendario.CalendarioMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.calendario.CalendarioMvpView;
+import br.com.erivando.vacinaskids.ui.activity.calendario.CalendarioPresenter;
+import br.com.erivando.vacinaskids.ui.activity.cartao.CartaoMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.cartao.CartaoMvpView;
+import br.com.erivando.vacinaskids.ui.activity.cartao.CartaoPresenter;
+import br.com.erivando.vacinaskids.ui.activity.crianca.CriancaMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.crianca.CriancaMvpView;
+import br.com.erivando.vacinaskids.ui.activity.crianca.CriancaPresenter;
+import br.com.erivando.vacinaskids.ui.activity.dose.DoseMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.dose.DoseMvpView;
+import br.com.erivando.vacinaskids.ui.activity.dose.DosePresenter;
+import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpView;
+import br.com.erivando.vacinaskids.ui.activity.idade.IdadePresenter;
+import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoMvpView;
+import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoPresenter;
+import br.com.erivando.vacinaskids.ui.activity.login.LoginMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.login.LoginMvpView;
+import br.com.erivando.vacinaskids.ui.activity.login.LoginPresenter;
+import br.com.erivando.vacinaskids.ui.activity.main.MainMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.main.MainMvpView;
+import br.com.erivando.vacinaskids.ui.activity.main.MainPresenter;
+import br.com.erivando.vacinaskids.ui.activity.splash.SplashMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.splash.SplashMvpView;
+import br.com.erivando.vacinaskids.ui.activity.splash.SplashPresenter;
+import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioMvpView;
+import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioPresenter;
+import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaMvpView;
+import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaPresenter;
+import br.com.erivando.vacinaskids.ui.fragment.sobre.SobreMvpPresenter;
+import br.com.erivando.vacinaskids.ui.fragment.sobre.SobreMvpView;
+import br.com.erivando.vacinaskids.ui.fragment.sobre.SobrePresenter;
 import br.com.erivando.vacinaskids.util.rx.AppSchedulerProvider;
 import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;
 import dagger.Module;
@@ -154,6 +157,12 @@ public class ActivityModule {
     @Provides
     @PerActivity
     DoseMvpPresenter<DoseMvpView> provideDosePresenter(DosePresenter<DoseMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    ImunizacaoMvpPresenter<ImunizacaoMvpView> provideImunizacaoPresenter(ImunizacaoPresenter<ImunizacaoMvpView> presenter) {
         return presenter;
     }
 }

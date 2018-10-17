@@ -48,14 +48,12 @@ public class CriancaAdapter extends ArrayAdapter<Crianca> {
         }
 
         Crianca model =  getItem(position);
-
         if (model.getCriaFoto() != null)
            holder.imageView.setImageBitmap(Uteis.base64ParaBitmap(model.getCriaFoto()));
         else
             holder.imageView.setImageDrawable(this.getContext().getResources().getDrawable(R.drawable.ic_launcher_round));
         holder.tvTitle.setText(model.getCriaNome());
         holder.tvSubtitle.setText(obtemIdadeCompleta(model.getCriaNascimento()));//"Nascimento: "+parseDateString(model.getCriaNascimento()));
-
         return convertView;
     }
 

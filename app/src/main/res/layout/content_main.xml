@@ -22,7 +22,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".ui.activity.main.MainActivity">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -93,7 +93,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/btn_vacina"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
