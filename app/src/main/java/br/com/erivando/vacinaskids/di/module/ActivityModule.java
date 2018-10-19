@@ -165,4 +165,12 @@ public class ActivityModule {
     ImunizacaoMvpPresenter<ImunizacaoMvpView> provideImunizacaoPresenter(ImunizacaoPresenter<ImunizacaoMvpView> presenter) {
         return presenter;
     }
+
+    /*
+    @Provides
+    VacinaListAdapter provideVacinaListAdapter() {
+        return new VacinaListAdapter(new ArrayList<Vacina>());
+    }
+    */
+
 }

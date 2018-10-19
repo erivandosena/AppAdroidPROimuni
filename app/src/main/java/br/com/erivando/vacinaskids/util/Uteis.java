@@ -310,11 +310,7 @@ public class Uteis {
         try {
             Date convertedDate = DATA_FORMAT_PARSER.parse(data);
             Date convertedDate2 = DATA_FORMAT_PARSER.parse(DATA_FORMAT_PARSER.format(dateafter));
-            if (convertedDate.equals(convertedDate2) || convertedDate.before(convertedDate2)) {
-                return true;
-            } else {
-                return false;
-            }
+            return convertedDate.equals(convertedDate2) || convertedDate.before(convertedDate2);
         } catch (ParseException e) {
             e.printStackTrace();
         }

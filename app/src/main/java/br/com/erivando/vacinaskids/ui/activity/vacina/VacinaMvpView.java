@@ -1,5 +1,8 @@
 package br.com.erivando.vacinaskids.ui.activity.vacina;
 
+import java.util.List;
+
+import br.com.erivando.vacinaskids.database.model.Vacina;
 import br.com.erivando.vacinaskids.mvp.MvpView;
 
 /**
@@ -11,4 +14,5 @@ import br.com.erivando.vacinaskids.mvp.MvpView;
  */
 
 public interface VacinaMvpView extends MvpView {
+
 }

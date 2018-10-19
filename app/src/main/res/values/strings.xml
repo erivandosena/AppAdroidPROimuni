@@ -10,7 +10,7 @@
     <!-- Strings do Aplicativo. -->
     <string name="app_slogan">Proteção de quem você ama a um clique de você!</string>
     <string name="app_mensagem_indicacao">Olá!\n\nVacinas KIDs é um aplicativo incrível que ajuda no calendario do cartão de vacinação das crianças.\n\nBaixe gratuitamente!</string>
-    <string name="app_link_download">https://vacinaskids.page.link/app</string>
+    <string name="app_link_download">https://goo.gl/aXpXcF</string>
     <string name="legenda_action_snackbar">Substitua por sua própria ação</string>
     <string name="button_action_snackbar">Ação</string>
     <string name="versao_app">Versão</string>
@@ -143,5 +143,7 @@
     bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
     cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
     the big cheese.</string>
+    <string name="vacina_descricao">Descrição</string>
+    <string name="vacina_administracao">Administração</string>
 
 </resources>

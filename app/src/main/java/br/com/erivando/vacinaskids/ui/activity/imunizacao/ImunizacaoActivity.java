@@ -35,7 +35,7 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_vacina_detalhe);
 
         getActivityComponent().inject(this);
 

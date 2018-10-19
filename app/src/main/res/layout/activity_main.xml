@@ -42,11 +42,13 @@
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
-                    style="@style/Toolbar"
                     app:subtitleTextColor="@color/white"
                     app:title="@string/app_name"
                     app:titleTextAppearance="@style/Toolbar.TitleText"
-                    app:titleTextColor="@color/white" />
+                    app:titleTextColor="@color/white"
+                    style="@style/Toolbar"
+                    app:layout_collapseMode="pin"
+                    app:layout_scrollFlags="scroll|enterAlways|snap" />
 
                 <View
                     android:layout_width="match_parent"

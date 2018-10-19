@@ -1,45 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingLeft="50dp"
-    android:paddingRight="50dp"
-    app:cardCornerRadius="5dp"
-    app:cardUseCompatPadding="true">
+    android:background="?android:selectableItemBackground"
+    android:orientation="vertical"
+    android:padding="5dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?android:selectableItemBackground"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/image_item"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:scaleType="center"
-            android:padding="5dp"
-            android:src="@drawable/ic_vacina" />
-
+        android:layout_height="wrap_content"
+        android:padding="2dp">
 
         <TextView
             android:id="@+id/text_titulo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/image_item"
-            android:gravity="center"
-            android:maxLines="2"
-            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_toLeftOf="@+id/btn_info"
             android:text="@null"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            style="@style/TextStyle.Heading" />
+
+        <Button
+            android:id="@+id/btn_info"
+            android:layout_width="120dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/botao_interativo"
+            android:text="Informações"
+            android:textColor="@color/white" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
-</android.support.v7.widget.CardView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_lista"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal" />
+
+
+</LinearLayout>
+

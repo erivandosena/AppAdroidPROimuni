@@ -96,7 +96,7 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
 
         createDummyData();
 
-        RecyclerView my_recycler_view = (RecyclerView) findViewById(R.id.recyclerView);
+        RecyclerView my_recycler_view = findViewById(R.id.calendario_recyclerView);
         my_recycler_view.setHasFixedSize(true);
         CalendarioRVAdapter adapter = new CalendarioRVAdapter(this, (ArrayList<Calendario>) allSampleData);
         my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

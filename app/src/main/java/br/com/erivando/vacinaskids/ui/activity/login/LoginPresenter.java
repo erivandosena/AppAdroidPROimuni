@@ -388,10 +388,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
     @Override
     public boolean onVerificaUsuarioCadastrado() {
-        if(getIDataManager().getUsuarioID().get() == 0)
-            return true;
-        else
-            return false;
+        return getIDataManager().getUsuarioID().get() == 0;
     }
 
     @Override

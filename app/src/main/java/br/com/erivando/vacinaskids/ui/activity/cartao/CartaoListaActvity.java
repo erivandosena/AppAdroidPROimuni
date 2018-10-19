@@ -103,7 +103,6 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
         }
     }
 
-
     @Override
     public void onDestroy() {
         presenterCartao.onDetach();
@@ -119,7 +118,7 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
     private void getCartao() {
         List<Cartao> cartoes = presenterCartao.onCartaoCadastrados();
         if (!cartoes.isEmpty()) {
-            ListView lvCartoes = (ListView) findViewById(R.id.lista_cartoes);
+            ListView lvCartoes = findViewById(R.id.lista_cartoes);
             CartaoAdapter adapter = new CartaoAdapter(this);
             lvCartoes.setAdapter(adapter);
             for (Cartao cartao : cartoes) {

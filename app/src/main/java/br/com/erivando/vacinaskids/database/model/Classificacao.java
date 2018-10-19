@@ -59,10 +59,7 @@ public class Classificacao extends RealmObject {
         if (id != null ? !id.equals(classificacao.id) : classificacao.id != null) {
             return false;
         }
-        if (clasRanking != null ? !clasRanking.equals(classificacao.clasRanking) : classificacao.clasRanking != null) {
-            return false;
-        }
-        return true;
+        return clasRanking != null ? clasRanking.equals(classificacao.clasRanking) : classificacao.clasRanking == null;
     }
 
     @Override

@@ -33,7 +33,7 @@ public class VacinaRVAdapter extends RecyclerView.Adapter<VacinaRVAdapter.Single
 
     @Override
     public SingleItemRowHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_calendario_lista, null);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_calendario_item, null);
         SingleItemRowHolder mh = new SingleItemRowHolder(v);
         return mh;
     }
@@ -57,8 +57,8 @@ public class VacinaRVAdapter extends RecyclerView.Adapter<VacinaRVAdapter.Single
         public SingleItemRowHolder(View view) {
             super(view);
 
-            this.textTitulo = (TextView) view.findViewById(R.id.text_titulo);
-            this.imageItem = (ImageView) view.findViewById(R.id.image_item);
+            this.textTitulo = view.findViewById(R.id.text_titulo);
+            this.imageItem = view.findViewById(R.id.image_item);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

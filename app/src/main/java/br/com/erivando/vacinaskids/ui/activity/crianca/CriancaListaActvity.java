@@ -131,7 +131,7 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
     private void getCrianca() {
         List<Crianca> criancas = presenterCrianca.onCriancaCadastrada();
         if (!criancas.isEmpty()) {
-            ListView lvCriancas = (ListView) findViewById(R.id.lista_criancas);
+            ListView lvCriancas = findViewById(R.id.lista_criancas);
             CriancaAdapter adapter = new CriancaAdapter(this);
             lvCriancas.setAdapter(adapter);
             for (Crianca crianca: criancas) {

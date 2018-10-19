@@ -63,9 +63,9 @@ public class CriancaAdapter extends ArrayAdapter<Crianca> {
         TextView tvSubtitle;
 
         ViewHolder(View view) {
-            imageView = (RoundedImageView) view.findViewById(R.id.image);
-            tvTitle = (TextView) view.findViewById(R.id.text_titulo);
-            tvSubtitle = (TextView) view.findViewById(R.id.text_sub_titulo);
+            imageView = view.findViewById(R.id.image);
+            tvTitle = view.findViewById(R.id.text_titulo);
+            tvSubtitle = view.findViewById(R.id.text_sub_titulo);
         }
     }
 }

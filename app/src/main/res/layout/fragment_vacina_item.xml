@@ -21,6 +21,9 @@
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
     android:gravity="center_horizontal"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -31,7 +34,6 @@
         android:layout_margin="@dimen/card_margin"
         card_view:cardUseCompatPadding="true"
         android:elevation="@dimen/card_radius"
-        android:clickable="true"
         card_view:cardCornerRadius="@dimen/card_radius">
 
         <RelativeLayout
@@ -49,7 +51,6 @@
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@null"
                 android:scaleType="fitCenter"
-                android:clickable="true"
                 android:background="?attr/selectableItemBackgroundBorderless"/>
 
             <TextView

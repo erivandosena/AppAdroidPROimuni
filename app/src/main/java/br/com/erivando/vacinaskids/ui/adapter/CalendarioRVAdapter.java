@@ -37,7 +37,7 @@ public class CalendarioRVAdapter extends RecyclerView.Adapter<CalendarioRVAdapte
 
     @Override
     public ItemRowHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_calendario_item, null);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_calendario_lista, null);
         ItemRowHolder mh = new ItemRowHolder(v);
         return mh;
     }
@@ -74,9 +74,9 @@ public class CalendarioRVAdapter extends RecyclerView.Adapter<CalendarioRVAdapte
 
         public ItemRowHolder(View view) {
             super(view);
-            this.textTitulo = (TextView) view.findViewById(R.id.text_titulo);
-            this.rvLista = (RecyclerView) view.findViewById(R.id.recycler_view_lista);
-            this.btnInfo = (Button) view.findViewById(R.id.btn_info);
+            this.textTitulo = view.findViewById(R.id.text_titulo);
+            this.rvLista = view.findViewById(R.id.recycler_view_lista);
+            this.btnInfo = view.findViewById(R.id.btn_info);
         }
     }
 
