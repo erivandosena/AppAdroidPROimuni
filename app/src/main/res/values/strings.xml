@@ -23,7 +23,7 @@
     <string name="close_drawer">Fecha gaveta</string>
     <!-- Menus Toolbar. -->
     <string name="clear">Limpar</string>
-    <string name="edita_usuario">Editar Usuário</string>
+    <string name="edita_usuario">Usuário</string>
     <string name="local_mapa">Postos de Saúde</string>
     <string name="share">Compartilhar</string>
     <string name="mensagen_avaliacao_app">Por favor, avalie este aplicativo na Play Store.</string>
@@ -136,14 +136,14 @@
     <string name="title_tab1">Rede Pública</string>
     <string name="title_tab2">Rede Privada</string>
     <string name="text_vacinas_titulo">Vacinas</string>
-
-
-    <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
-    cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
-    bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
-    cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
-    the big cheese.</string>
     <string name="vacina_descricao">Descrição</string>
     <string name="vacina_administracao">Administração</string>
+
+    <!-- Imunização -->
+    <string name="text_nome_agente">Nome do agente de saúde</string>
+    <string name="text_nome_unidade">Nome da unidade de saúde</string>
+    <string name="text_lote_vacina">Lote da vacina</string>
+    <string name="text_data_imunizacao">Data da imunização</string>
+    <string name="text_imunizacao_titulo">Imunização</string>
 
 </resources>

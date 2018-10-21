@@ -45,13 +45,19 @@ android:showAsAction
     <item
         android:id="@+id/action_edita_usuario"
         android:title="@string/edita_usuario"
-        android:icon="@android:drawable/ic_menu_myplaces"
+        android:icon="@drawable/ic_usuario"
         app:showAsAction="ifRoom|withText" />
 
     <item
         android:id="@+id/action_edita_crianca"
         android:title="@string/menu_item2"
         android:icon="@drawable/ic_criancas_cadastro"
+        app:showAsAction="ifRoom|withText" />
+
+    <item
+        android:id="@+id/action_edita_cartao"
+        android:title="@string/menu_item1"
+        android:icon="@drawable/ic_gerenciar"
         app:showAsAction="ifRoom|withText" />
 
     <item

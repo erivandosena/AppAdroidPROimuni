@@ -44,20 +44,20 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
     @Inject
     CalendarioMvpPresenter<CalendarioMvpView> presenter;
 
-    @Inject
-    VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
+    //@Inject
+    //VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
 
     @Inject
     IdadeMvpPresenter<IdadeMvpView> idadePresenter;
 
-    @Inject
-    DoseMvpPresenter<DoseMvpView> dosePresenter;
+   // @Inject
+   // DoseMvpPresenter<DoseMvpView> dosePresenter;
 
     List<Idade> idades;
     List<Calendario> calendarios;
     List<Dose> doses;
     List<Vacina> vacinas;
-    private List<Calendario> allSampleData;
+    private ArrayList<Calendario> calendarioCompleto;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, CalendarioActivity.class);
@@ -87,36 +87,43 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
     protected void setUp() {
         habilitaTelaCheia(this);
 
-        idades = idadePresenter.onIdadesCadastradas();
         calendarios = presenter.onCalendariosCadastrados();
-        doses = dosePresenter.onDosesCadastradas();
-        vacinas = vacinaPresenter.onVacinasCadastradas();
+        //vacinas = vacinaPresenter.onVacinasCadastradas();
+        //doses = dosePresenter.onDosesCadastradas();
+        idades = idadePresenter.onIdadesCadastradas();
 
-        allSampleData = new ArrayList<Calendario>();
+        calendarioCompleto = new ArrayList<Calendario>();
 
         createDummyData();
 
         RecyclerView my_recycler_view = findViewById(R.id.calendario_recyclerView);
         my_recycler_view.setHasFixedSize(true);
-        CalendarioRVAdapter adapter = new CalendarioRVAdapter(this, (ArrayList<Calendario>) allSampleData);
+        CalendarioRVAdapter adapter = new CalendarioRVAdapter(calendarioCompleto, this);
         my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         my_recycler_view.setAdapter(adapter);
     }
 
     public void createDummyData() {
-        idades = idadePresenter.onIdadesCadastradas();
-        calendarios = presenter.onCalendariosCadastrados();
+        //idades = idadePresenter.onIdadesCadastradas();
+        //calendarios = presenter.onCalendariosCadastrados();
 
         for (Idade idade : idades) {
             Calendario dm = new Calendario();
-            dm.setHeaderTitulo(idade.getIdadDescricao());
-            RealmList<Vacina> singleItem = new RealmList<Vacina>();
+            dm.setTituloIdade(idade.getIdadDescricao());
+            RealmList<Vacina> itemVacina = new RealmList<Vacina>();
+            RealmList<Dose> itemDose = new RealmList<Dose>();
+            RealmList<Idade> itemIdade = new RealmList<Idade>();
             for (Calendario calendario : calendarios) {
-                if (calendario.getIdade().getId() == idade.getId())
-                    singleItem.add(calendario.getVacina());
+                if (calendario.getIdade().getId() == idade.getId()) {
+                    itemVacina.add(calendario.getVacina());
+                    itemDose.add(calendario.getDose());
+                    itemIdade.add(calendario.getIdade());
+                }
             }
-            dm.setVacinasInSection(singleItem);
-            allSampleData.add(dm);
+            dm.setVacinasInSection(itemVacina);
+            dm.setDosesInSection(itemDose);
+            dm.setIdadesInSection(itemIdade);
+            calendarioCompleto.add(dm);
         }
     }
 

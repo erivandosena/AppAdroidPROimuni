@@ -17,72 +17,63 @@
 -->
 
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingLeft="50dp"
-    android:paddingRight="50dp"
-    app:cardCornerRadius="5dp"
-    app:cardUseCompatPadding="true">
+    android:layout_gravity="top"
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:focusable="true"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="4dp"
+    card_view:cardUseCompatPadding="true">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:selectableItemBackground"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <ImageView
-            android:id="@+id/image_item"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:contentDescription="@null"
-            android:padding="5dp"
-            android:scaleType="center"
+            android:id="@+id/imagem_vacina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="18dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_vacina" />
 
         <TextView
-            android:id="@+id/texto_titulo_vacina"
+            android:id="@+id/text_vacina"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:maxLines="2"
-            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imagem_vacina"
+            android:layout_toEndOf="@+id/imagem_vacina"
             android:text="@null"
             android:theme="@style/TextStyle.Heading" />
 
         <TextView
-            android:id="@+id/texto_titulo_dose"
+            android:id="@+id/text_dose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
+            android:layout_below="@+id/text_vacina"
+            android:layout_toEndOf="@+id/imagem_vacina"
             android:text="@null" />
-
-        <!--
-        <TextView
-            android:id="@+id/texto_titulo_idade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:text="@null" />
-        -->
 
         <TextView
-            android:id="@+id/texto_titulo_rede"
+            android:id="@+id/text_idade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
+            android:layout_below="@+id/text_dose"
+            android:layout_toEndOf="@+id/imagem_vacina"
             android:text="@null" />
 
+        <TextView
+            android:id="@+id/text_rede"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_idade"
+            android:layout_toEndOf="@+id/imagem_vacina"
+            android:text="@null" />
 
-    </LinearLayout>
-
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

@@ -42,11 +42,12 @@
                 android:id="@+id/image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:scaleType="centerCrop"
                 android:contentDescription="@null"
                 android:src="@mipmap/ic_launcher" />
 
             <TextView
-                android:id="@+id/text_titulo"
+                android:id="@+id/text_cartao_tit_vacina"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -60,7 +61,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@id/text_titulo"
+                android:layout_below="@id/text_cartao_tit_vacina"
                 android:layout_toEndOf="@id/image"
                 android:paddingStart="5dp"
                 android:textAppearance="?android:textAppearanceMedium" />

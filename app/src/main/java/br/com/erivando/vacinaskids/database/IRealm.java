@@ -44,6 +44,12 @@ interface IRealm {
 
     <T extends RealmObject> List<T> findAll(String campo, String valor, Class<T> clazz);
 
+    <T extends RealmObject> List<T> findAllOrderBy(String orderBy, Class<T> clazz);
+
+    <T extends RealmObject> List<T> findAllOrderBy(String campo, Long valor, String orderBy, Class<T> clazz);
+
+    <T extends RealmObject> List<T> findAllOrderBy(String campo, String valor, String orderBy, Class<T> clazz);
+
     <T extends RealmObject> AtomicInteger getIdByClassModel(Class<T> clazz);
 
     void getImportJson();

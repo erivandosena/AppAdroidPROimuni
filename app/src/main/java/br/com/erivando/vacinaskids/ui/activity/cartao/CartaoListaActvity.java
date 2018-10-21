@@ -15,7 +15,9 @@ import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.database.model.Cartao;
+import br.com.erivando.vacinaskids.database.model.Imunizacao;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
+import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoActivity;
 import br.com.erivando.vacinaskids.ui.adapter.CartaoAdapter;
 import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
 import butterknife.BindView;
@@ -68,9 +70,14 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
         cartoesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 if(intent != null) {
                     String acao = intent.getStringExtra("cartaoLista");
                     Intent intencao = null;
+                    if ("cartao".equals(acao)) {
+                        intencao = CartaoDetalheActivity.getStartIntent(CartaoListaActvity.this);
+                        intencao.putExtra("cartao", ((Cartao)parent.getAdapter().getItem(position)).getId());
+                    }
                     if ("edita".equals(acao)) {
                         intencao = CartaoActivity.getStartIntent(CartaoListaActvity.this);
                         intencao.putExtra("cartao", ((Cartao)parent.getAdapter().getItem(position)).getId());
@@ -126,7 +133,6 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
             }
         } else {
             Toast.makeText(this, this.getString(R.string.texto_aviso_cartao_nao_cadastrado), Toast.LENGTH_LONG).show();
-            //openCartaoActivity();
         }
     }
 
@@ -134,7 +140,6 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
         startActivity(CartaoActivity.getStartIntent(this));
         finish();
     }
-
 
     public void openMainActivity() {
         startActivity(MainActivity.getStartIntent(this));

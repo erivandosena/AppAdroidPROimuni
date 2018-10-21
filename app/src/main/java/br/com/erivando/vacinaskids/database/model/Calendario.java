@@ -1,5 +1,7 @@
 package br.com.erivando.vacinaskids.database.model;
 
+import android.support.annotation.NonNull;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -13,7 +15,7 @@ import io.realm.annotations.Required;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class Calendario extends RealmObject {
+public class Calendario extends RealmObject implements Comparable<Calendario> {
 
     @Required
     @PrimaryKey
@@ -21,26 +23,23 @@ public class Calendario extends RealmObject {
     private Idade idade;
     private Vacina vacina;
     private Dose dose;
-    private String headerTitulo;
+    private String tituloIdade;
     private RealmList<Vacina> vacinasInSection;
+    private RealmList<Dose> dosesInSection;
+    private RealmList<Idade> idadesInSection;
 
     public Calendario() {
     }
 
-    public Calendario(Long id, Idade idade, Vacina vacina, Dose dose) {
+    public Calendario(Long id, Idade idade, Vacina vacina, Dose dose, String tituloIdade, RealmList<Vacina> vacinasInSection, RealmList<Dose> dosesInSection, RealmList<Idade> idadesInSection) {
         this.id = id;
         this.idade = idade;
         this.vacina = vacina;
         this.dose = dose;
-    }
-
-    public Calendario(Long id, Idade idade, Vacina vacina, Dose dose, String headerTitulo, RealmList<Vacina> vacinasInSection) {
-        this.id = id;
-        this.idade = idade;
-        this.vacina = vacina;
-        this.dose = dose;
-        this.headerTitulo = headerTitulo;
+        this.tituloIdade = tituloIdade;
         this.vacinasInSection = vacinasInSection;
+        this.dosesInSection = dosesInSection;
+        this.idadesInSection = idadesInSection;
     }
 
     public Long getId() {
@@ -75,12 +74,12 @@ public class Calendario extends RealmObject {
         this.dose = dose;
     }
 
-    public String getHeaderTitulo() {
-        return headerTitulo;
+    public String getTituloIdade() {
+        return tituloIdade;
     }
 
-    public void setHeaderTitulo(String headerTitulo) {
-        this.headerTitulo = headerTitulo;
+    public void setTituloIdade(String tituloIdade) {
+        this.tituloIdade = tituloIdade;
     }
 
     public RealmList<Vacina> getVacinasInSection() {
@@ -89,5 +88,26 @@ public class Calendario extends RealmObject {
 
     public void setVacinasInSection(RealmList<Vacina> vacinasInSection) {
         this.vacinasInSection = vacinasInSection;
+    }
+
+    public RealmList<Dose> getDosesInSection() {
+        return dosesInSection;
+    }
+
+    public void setDosesInSection(RealmList<Dose> dosesInSection) {
+        this.dosesInSection = dosesInSection;
+    }
+
+    public RealmList<Idade> getIdadesInSection() {
+        return idadesInSection;
+    }
+
+    public void setIdadesInSection(RealmList<Idade> idadesInSection) {
+        this.idadesInSection = idadesInSection;
+    }
+
+    @Override
+    public int compareTo(@NonNull Calendario o) {
+        return o.id.intValue() - this.id.intValue();
     }
 }

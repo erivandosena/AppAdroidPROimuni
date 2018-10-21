@@ -15,4 +15,5 @@
     <dimen name="list_item_avatar_size">40dp</dimen>
     <dimen name="detail_backdrop_height">256dp</dimen>
     <dimen name="card_radius">5dp</dimen>
+    <dimen name="card_elevation">6dp</dimen>
 </resources>

@@ -32,7 +32,7 @@ public class VacinaPresenter<V extends VacinaMvpView> extends BasePresenter<V> i
 
     @Override
     public List<Vacina> onVacinasCadastradas() {
-        return getIDataManager().obtemVacinas();
+        return getIDataManager().obtemVacinasOrderBy("id");
     }
 
     @Override

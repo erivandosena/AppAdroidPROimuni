@@ -4,6 +4,7 @@ import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.di.module.ActivityModule;
 import br.com.erivando.vacinaskids.ui.activity.calendario.CalendarioActivity;
 import br.com.erivando.vacinaskids.ui.activity.cartao.CartaoActivity;
+import br.com.erivando.vacinaskids.ui.activity.cartao.CartaoDetalheActivity;
 import br.com.erivando.vacinaskids.ui.activity.cartao.CartaoListaActvity;
 import br.com.erivando.vacinaskids.ui.activity.crianca.CriancaActivity;
 import br.com.erivando.vacinaskids.ui.activity.crianca.CriancaListaActvity;
@@ -17,8 +18,8 @@ import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaActivity;
 import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaDetalheActivity;
 import br.com.erivando.vacinaskids.ui.fragment.sobre.SobreFragment;
-import br.com.erivando.vacinaskids.ui.fragment.vacina.VacinaPublicaFragment;
 import br.com.erivando.vacinaskids.ui.fragment.vacina.VacinaPrivadaFragment;
+import br.com.erivando.vacinaskids.ui.fragment.vacina.VacinaPublicaFragment;
 import dagger.Component;
 
 /**
@@ -66,4 +67,6 @@ public interface ActivityComponent {
     void inject(VacinaPublicaFragment fragmentInject);
 
     void inject(VacinaPrivadaFragment fragmentInject);
+
+    void inject(CartaoDetalheActivity activityInject);
 }

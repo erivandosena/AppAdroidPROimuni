@@ -11,8 +11,6 @@ import android.widget.TextView;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.custom.imagem.RoundedImageView;
 import br.com.erivando.vacinaskids.database.model.Cartao;
-import br.com.erivando.vacinaskids.database.model.Crianca;
-import br.com.erivando.vacinaskids.util.Uteis;
 
 import static br.com.erivando.vacinaskids.util.Uteis.obtemIdadeCompleta;
 
@@ -60,8 +58,9 @@ public class CartaoAdapter extends ArrayAdapter<Cartao> {
 
         ViewHolder(View view) {
             imageView = view.findViewById(R.id.image);
-            tvTitle = view.findViewById(R.id.text_titulo);
+            tvTitle = view.findViewById(R.id.text_cartao_tit_vacina);
             tvSubtitle = view.findViewById(R.id.text_sub_titulo);
         }
     }
+
 }

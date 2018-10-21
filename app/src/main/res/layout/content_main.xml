@@ -22,6 +22,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@drawable/bg_design"
     tools:context=".ui.activity.main.MainActivity">
 
     <TableLayout
@@ -36,7 +37,9 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5">
+                android:layout_weight="0.5"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_light_background">
 
                 <ImageButton
                     android:id="@+id/btn_cartao_vacinal"
@@ -60,7 +63,9 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5">
+                android:layout_weight="0.5"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_light_background">
 
                 <ImageButton
                     android:id="@+id/btn_crianca"
@@ -91,7 +96,9 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5">
+                android:layout_weight="0.5"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_light_background">
 
                 <ImageButton
                     android:id="@+id/btn_vacina"
@@ -115,7 +122,9 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5">
+                android:layout_weight="0.5"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_light_background">
 
                 <ImageButton
                     android:id="@+id/btn_calendario_vacinal"
@@ -146,7 +155,9 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5">
+                android:layout_weight="0.5"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_light_background">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -169,7 +180,9 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5">
+                android:layout_weight="0.5"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_light_background">
 
                 <ImageView
                     android:layout_width="wrap_content"

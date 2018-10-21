@@ -288,6 +288,11 @@ public class DataManager implements IDataManager {
         return realmDataBase.findAll(Vacina.class);
     }
 
+    @Override
+    public List<Vacina> obtemVacinasOrderBy(String orderBy) {
+        return realmDataBase.findAllOrderBy(orderBy, Vacina.class);
+    }
+
     /* Calendario */
     @Override
     public AtomicInteger getControleID() {
@@ -306,7 +311,22 @@ public class DataManager implements IDataManager {
 
     @Override
     public Calendario obtemCalendario(Long id) {
-        return null;
+        return realmDataBase.getObject(Calendario.class, "id", id);
+    }
+
+    @Override
+    public Calendario obtemCalendarioPorVacina(Long id) {
+        return realmDataBase.getObject(Calendario.class, "vacina.id", id);
+    }
+
+    @Override
+    public Calendario obtemCalendarioPorDose(Long id) {
+        return realmDataBase.getObject(Calendario.class, "dose.id", id);
+    }
+
+    @Override
+    public Calendario obtemCalendarioPorIdade(Long id) {
+        return realmDataBase.getObject(Calendario.class, "idade.id", id);
     }
 
     @Override
@@ -327,6 +347,11 @@ public class DataManager implements IDataManager {
     @Override
     public List<Calendario> obtemCalendarios() {
         return realmDataBase.findAll(Calendario.class);
+    }
+
+    @Override
+    public List<Calendario> obtemCalendariosOrderBy(String orderBy) {
+        return realmDataBase.findAllOrderBy(orderBy, Calendario.class);
     }
 
     /* Usuário */

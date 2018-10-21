@@ -2,7 +2,6 @@ package br.com.erivando.vacinaskids.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +63,7 @@ public class CriancaAdapter extends ArrayAdapter<Crianca> {
 
         ViewHolder(View view) {
             imageView = view.findViewById(R.id.image);
-            tvTitle = view.findViewById(R.id.text_titulo);
+            tvTitle = view.findViewById(R.id.text_crianca_tit_vacina);
             tvSubtitle = view.findViewById(R.id.text_sub_titulo);
         }
     }

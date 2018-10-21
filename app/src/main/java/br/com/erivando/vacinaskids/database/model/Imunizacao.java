@@ -23,8 +23,11 @@ public class Imunizacao extends RealmObject {
     private String imunLote;
     private String imunAgente;
     private String imunPosto;
-    private Calendario calendario;
+    private Vacina vacina;
+    private Dose dose;
+    private Idade idade;
     private Cartao cartao;
+    private Calendario calendario;
 
     public Imunizacao() {
 

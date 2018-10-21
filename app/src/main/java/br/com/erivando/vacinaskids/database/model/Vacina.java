@@ -8,6 +8,8 @@ package br.com.erivando.vacinaskids.database.model;
  * E-mail:      erivandoramos@bol.com.br
  */
 
+import android.support.annotation.NonNull;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -15,7 +17,7 @@ import io.realm.annotations.Required;
 /**
  * POJO representing table vacina.
  */
-public class Vacina extends RealmObject {
+public class Vacina extends RealmObject implements Comparable<Vacina> {
 
     @Required
     @PrimaryKey
@@ -82,4 +84,8 @@ public class Vacina extends RealmObject {
 
     }
 
+    @Override
+    public int compareTo(@NonNull Vacina o) {
+        return o.id.intValue() - this.id.intValue();
+    }
 }

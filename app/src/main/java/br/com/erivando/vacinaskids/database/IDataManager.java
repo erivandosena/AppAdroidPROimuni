@@ -169,16 +169,24 @@ public interface IDataManager extends IPreferencesHelper {
 
     List<Vacina> obtemVacinas();
 
-    /* CONTROLE */
+    List<Vacina> obtemVacinasOrderBy(String orderBy);
+
+    /* CALENDÁRIO */
     AtomicInteger getControleID();
 
     boolean novoAtualizaControle(Calendario calendario);
 
     boolean eliminaControle(Long id);
 
+    Calendario obtemCalendario();
+
     Calendario obtemCalendario(Long id);
 
-    Calendario obtemCalendario();
+    Calendario obtemCalendarioPorVacina(Long id);
+
+    Calendario obtemCalendarioPorDose(Long id);
+
+    Calendario obtemCalendarioPorIdade(Long id);
 
     Calendario obtemCalendario(String[] valores);
 
@@ -186,7 +194,8 @@ public interface IDataManager extends IPreferencesHelper {
 
     List<Calendario> obtemCalendarios();
 
-    /* IMPORTACOES */
+    List<Calendario> obtemCalendariosOrderBy(String orderBy);
 
+    /* IMPORTACOES */
     void getRecursosJson();
 }

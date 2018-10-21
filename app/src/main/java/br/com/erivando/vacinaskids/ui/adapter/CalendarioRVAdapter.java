@@ -14,6 +14,8 @@ import java.util.ArrayList;
 
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.database.model.Calendario;
+import br.com.erivando.vacinaskids.database.model.Dose;
+import br.com.erivando.vacinaskids.database.model.Idade;
 import br.com.erivando.vacinaskids.database.model.Vacina;
 import io.realm.RealmList;
 
@@ -28,11 +30,13 @@ import io.realm.RealmList;
 public class CalendarioRVAdapter extends RecyclerView.Adapter<CalendarioRVAdapter.ItemRowHolder> {
 
     private ArrayList<Calendario> calendarioList;
+   // private List<Calendario> calendarios;
     private Context mContext;
 
-    public CalendarioRVAdapter(Context context, ArrayList<Calendario> calendarioList) {
+    public CalendarioRVAdapter(ArrayList<Calendario> calendarioList, Context mContext) {
         this.calendarioList = calendarioList;
-        this.mContext = context;
+       // this.calendarios = calendarios;
+        this.mContext = mContext;
     }
 
     @Override
@@ -45,10 +49,12 @@ public class CalendarioRVAdapter extends RecyclerView.Adapter<CalendarioRVAdapte
     @Override
     public void onBindViewHolder(ItemRowHolder itemRowHolder, int i) {
 
-        final String sectionName = calendarioList.get(i).getHeaderTitulo();
-        RealmList<Vacina> singleSectionItems = calendarioList.get(i).getVacinasInSection();
-        itemRowHolder.textTitulo.setText(sectionName);
-        VacinaRVAdapter itemListDataAdapter = new VacinaRVAdapter(mContext, singleSectionItems);
+        final String sectionName = calendarioList.get(i).getTituloIdade();
+        RealmList<Vacina> vacinaSectionItems = calendarioList.get(i).getVacinasInSection();
+        RealmList<Dose> doseSectionItems = calendarioList.get(i).getDosesInSection();
+        RealmList<Idade> idadeSectionItems = calendarioList.get(i).getIdadesInSection();
+        itemRowHolder.textTituloIdade.setText(sectionName);
+        VacinaRVAdapter itemListDataAdapter = new VacinaRVAdapter(vacinaSectionItems, doseSectionItems, idadeSectionItems, mContext);
 
         itemRowHolder.rvLista.setHasFixedSize(true);
         itemRowHolder.rvLista.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
@@ -68,13 +74,13 @@ public class CalendarioRVAdapter extends RecyclerView.Adapter<CalendarioRVAdapte
     }
 
     public class ItemRowHolder extends RecyclerView.ViewHolder {
-        protected TextView textTitulo;
+        protected TextView textTituloIdade;
         protected RecyclerView rvLista;
         protected Button btnInfo;
 
         public ItemRowHolder(View view) {
             super(view);
-            this.textTitulo = view.findViewById(R.id.text_titulo);
+            this.textTituloIdade = view.findViewById(R.id.text_calendario_tit_vacina);
             this.rvLista = view.findViewById(R.id.recycler_view_lista);
             this.btnInfo = view.findViewById(R.id.btn_info);
         }

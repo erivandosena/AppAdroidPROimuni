@@ -133,7 +133,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @OnClick(R.id.btn_cartao_vacinal)
     public void onCartaoVacinal() {
-        openCartaoListaActivity("edita");
+        openCartaoListaActivity("cartao");
     }
 
     @OnClick(R.id.btn_crianca)
@@ -206,6 +206,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                 return true;
             case R.id.action_edita_crianca:
                 openCriancaListaActivity("edita");
+                return true;
+            case R.id.action_edita_cartao:
+                openEditaCartaoActivity("edita");
                 return true;
             case R.id.action_postos:
                 return true;
@@ -338,6 +341,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         finish();
     }
 
+    /*
     @Override
     public void openCartaoListaActivity(String acao) {
         Intent intent = CartaoListaActvity.getStartIntent(MainActivity.this);
@@ -345,6 +349,35 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             intent.putExtra("cartaoLista", acao);
         if ("cartao".equals(acao))
             intent.putExtra("cartaoLista", acao);
+        startActivity(intent);
+        finish();
+    }
+    */
+
+    @Override
+    public void openCartaoListaActivity(String acao) {
+        Intent intent = CartaoListaActvity.getStartIntent(MainActivity.this);
+        /*
+        if ("edita".equals(acao))
+            intent.putExtra("cartaoLista", acao);
+        if ("cartao".equals(acao))
+            intent.putExtra("cartaoLista", acao);
+        */
+        intent.putExtra("cartaoLista", acao);
+        startActivity(intent);
+        finish();
+    }
+
+    // @Override
+    public void openEditaCartaoActivity(String acao) {
+        Intent intent = CartaoListaActvity.getStartIntent(MainActivity.this);
+        /*
+        if ("edita".equals(acao))
+            intent.putExtra("cartaoLista", acao);
+        if ("cartao".equals(acao))
+            intent.putExtra("cartaoLista", acao);
+        */
+        intent.putExtra("cartaoLista", acao);
         startActivity(intent);
         finish();
     }

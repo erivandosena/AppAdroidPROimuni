@@ -159,6 +159,24 @@ public class RealmDataBase implements IRealm {
     }
 
     @Override
+    public <T extends RealmObject> List<T> findAllOrderBy(String orderBy, Class<T> clazz) {
+        Realm realm = getRealmInstance();
+        return realm.where(clazz).sort(orderBy).findAll();
+    }
+
+    @Override
+    public <T extends RealmObject> List<T> findAllOrderBy(String campo, Long valor, String orderBy, Class<T> clazz) {
+        Realm realm = getRealmInstance();
+        return realm.where(clazz).equalTo(campo, valor).sort(orderBy).findAll();
+    }
+
+    @Override
+    public <T extends RealmObject> List<T> findAllOrderBy(String campo, String valor, String orderBy, Class<T> clazz) {
+        Realm realm = getRealmInstance();
+        return realm.where(clazz).equalTo(campo, valor).sort(orderBy).findAll();
+    }
+
+    @Override
     public <T extends RealmObject> AtomicInteger getIdByClassModel(Class<T> clazz) {
         Realm realm = getRealmInstance();
         RealmResults<T> results = realm.where(clazz).findAll();
