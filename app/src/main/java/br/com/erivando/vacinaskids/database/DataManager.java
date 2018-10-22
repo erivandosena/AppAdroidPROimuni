@@ -14,6 +14,7 @@ import br.com.erivando.vacinaskids.database.model.Classificacao;
 import br.com.erivando.vacinaskids.database.model.Crianca;
 import br.com.erivando.vacinaskids.database.model.Dose;
 import br.com.erivando.vacinaskids.database.model.Idade;
+import br.com.erivando.vacinaskids.database.model.Imunizacao;
 import br.com.erivando.vacinaskids.database.model.Usuario;
 import br.com.erivando.vacinaskids.database.model.Vacina;
 import br.com.erivando.vacinaskids.di.ApplicationContext;
@@ -352,6 +353,52 @@ public class DataManager implements IDataManager {
     @Override
     public List<Calendario> obtemCalendariosOrderBy(String orderBy) {
         return realmDataBase.findAllOrderBy(orderBy, Calendario.class);
+    }
+
+    /* Imunizacao */
+    @Override
+    public AtomicInteger getImunizacaoID() {
+        return realmDataBase.getIdByClassModel(Imunizacao.class);
+    }
+
+    @Override
+    public boolean novoAtualizaImunizacao(Imunizacao imunizacao) {
+        return realmDataBase.addOrUpdate(imunizacao);
+    }
+
+    @Override
+    public boolean eliminaImunizacao(Long id) {
+        return realmDataBase.remove(Imunizacao.class, "id", id);
+    }
+
+    @Override
+    public Imunizacao obtemImunizacao(Long id) {
+        return realmDataBase.getObject(Imunizacao.class, "id", id);
+    }
+
+    @Override
+    public Imunizacao obtemImunizacao() {
+        return realmDataBase.getObject(Imunizacao.class);
+    }
+
+    @Override
+    public Imunizacao obtemImunizacao(String[] valores) {
+        return realmDataBase.getObject(Imunizacao.class, valores);
+    }
+
+    @Override
+    public Imunizacao obtemImunizacao(String[] strings, Long[] longs) {
+        return realmDataBase.getObject(Imunizacao.class, strings, longs);
+    }
+
+    @Override
+    public List<Imunizacao> obtemImunizacoes(String[] valores) {
+        return realmDataBase.findAll(valores[0], valores[1], Imunizacao.class);
+    }
+
+    @Override
+    public List<Imunizacao> obtemImunizacoes() {
+        return realmDataBase.findAll(Imunizacao.class);
     }
 
     /* Usuário */

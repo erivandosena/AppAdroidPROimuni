@@ -95,7 +95,7 @@ public class Uteis {
      * @param nomeCompleto
      * @return
      */
-    public static String capitalizeNome(final String nomeCompleto) {
+    public static String getCapitalizeNome(final String nomeCompleto) {
         String[] palavras = nomeCompleto.split(" ");
         StringBuilder sb = new StringBuilder();
         List<String> excessoes = new ArrayList<>(Arrays.asList("de", "da", "das", "do", "dos", "na", "nas", "no", "nos", "a", "e", "o", "em", "com"));
@@ -277,7 +277,7 @@ public class Uteis {
      * @param data
      * @return
      */
-    public static Calendar parseDateString(String data) {
+    public static Calendar getParseDateString(String data) {
         Calendar calendar = Calendar.getInstance();
         DATA_FORMAT_PARSER.setLenient(false);
         try {
@@ -286,7 +286,7 @@ public class Uteis {
         return calendar;
     }
 
-    public static String parseDateString(Date data) {
+    public static String getParseDateString(Date data) {
         return DATA_FORMAT_PARSER.format(data);
     }
 
@@ -323,7 +323,7 @@ public class Uteis {
         int mesHoje = calendarioHoje.get(Calendar.MONTH) + 1;
         int anoHoje = calendarioHoje.get(Calendar.YEAR);
 
-        String dataNascimento = parseDateString(data);
+        String dataNascimento = getParseDateString(data);
 
         // Data do nascimento.
         String[] separaDN = dataNascimento.split("/");
@@ -380,6 +380,71 @@ public class Uteis {
         String ano = (anos > 1) ? anos+" anos, " : anos + " ano, ";
 
         return ano+" "+mes+" "+dia;
+    }
+
+    public static String obtemIdadePorDiaOuMesOuAno(Date data)  {
+        Calendar calendarioHoje = GregorianCalendar.getInstance();
+        int diaHoje = calendarioHoje.get(Calendar.DAY_OF_MONTH);
+        int mesHoje = calendarioHoje.get(Calendar.MONTH) + 1;
+        int anoHoje = calendarioHoje.get(Calendar.YEAR);
+
+        String dataNascimento = getParseDateString(data);
+
+        // Data do nascimento.
+        String[] separaDN = dataNascimento.split("/");
+        int diaNasc = Integer.valueOf(separaDN[0]);
+        int mesNasc = Integer.valueOf(separaDN[1]);
+        int anoNasc = Integer.valueOf(separaDN[2]);
+
+        String strAniv = anoHoje+"-"+mesNasc+"-"+diaNasc;
+        Calendar calAniv = Calendar.getInstance();
+        try {
+            calAniv.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(strAniv));
+        } catch (ParseException ex) {
+            ex.getStackTrace();
+        }
+
+        int anos = (calendarioHoje.getTimeInMillis() < calAniv.getTimeInMillis())? (anoHoje-anoNasc-1):anoHoje-anoNasc ;
+        int meses;
+        int dias;
+
+        meses = mesHoje - mesNasc;
+        if (meses > 0) {//Verificando se já fez aniversário ou não
+            if (diaHoje < diaNasc) {
+                meses--;
+            }
+        } else if (meses < 0) {//Se o mês atual for menor que o mês do aniversário
+            meses = 12 + meses;//Lembrar que meses está negativo, por isso a soma;
+            //Da mesma forma, vamos comparar o dia atual com o dia do aniversário, para sabermos se o mês está completo ou não:
+            if (diaHoje < diaNasc) {
+                meses--;
+            }
+        } else {//Se o mês atual for o mês do aniversário:
+            if (diaHoje<diaNasc) {
+                meses = 11;
+            }
+        }
+
+        dias = diaHoje - diaNasc;
+        if (dias < 0) {//Se dia hoje menor que dia do niver, somar os dias desde o mês anterior:
+            if (mesHoje==5||mesHoje==7||mesHoje==8||mesHoje==10||mesHoje==12) {
+                dias = 30-diaNasc+diaHoje;
+            } else if (mesHoje==1||mesHoje==2||mesHoje==4||mesHoje==6||mesHoje==9||mesHoje==11) {
+                dias = 31-diaNasc+diaHoje;
+            } else {//Verificando se o ano é bissexto ou não: Esse else é para o mês 3, cujo anterior é fevereiro:
+                if (anoHoje%4 == 0) {
+                    dias = 29-diaNasc+diaHoje;
+                } else {
+                    dias = 28-diaNasc+diaHoje;
+                }
+            }
+        }
+
+        String dia = (dias > 1) ? dias+" Dias" : dias + " Dia";
+        String mes = (meses > 1) ? meses+" Meses" : meses + " Mês";
+        String ano = (anos > 1) ? anos+" Anos" : anos + " Ano";
+
+        return  (!"0 Ano".equals(ano)) ? ano : ((!"0 Mês".equals(mes)) ? mes : dia);
     }
 
     public static int getToolbarHeight(Context context) {

@@ -41,10 +41,10 @@ import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.activity.calendario.CalendarioActivity;
 import br.com.erivando.vacinaskids.ui.activity.cartao.CartaoListaActvity;
 import br.com.erivando.vacinaskids.ui.activity.crianca.CriancaListaActvity;
-import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginMvpView;
+import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaActivity;
 import br.com.erivando.vacinaskids.ui.fragment.sobre.SobreFragment;
 import butterknife.BindView;
@@ -295,11 +295,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         Intent shareIntent = ShareCompat.IntentBuilder.from(this)
                 .setType("text/html")
                 .setSubject(getResources().getString(R.string.app_name))
-                .setText(getResources().getString(R.string.app_mensagem_indicacao))
-                .setChooserTitle(getResources().getString(R.string.app_slogan))
-                .setText(getResources().getString(R.string.app_link_download))
+                .setChooserTitle(getResources().getString(R.string.app_name))
+                .setText("Olá!\n"+getResources().getString(R.string.app_name)+" "+getResources().getString(R.string.app_mensagem_indicacao) + "\n"+ getResources().getString(R.string.app_link_download) +"\n\n♥ "+getResources().getString(R.string.app_slogan))
                 .createChooserIntent()
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         if (shareIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(shareIntent);
@@ -341,28 +339,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         finish();
     }
 
-    /*
     @Override
     public void openCartaoListaActivity(String acao) {
         Intent intent = CartaoListaActvity.getStartIntent(MainActivity.this);
-        if ("edita".equals(acao))
-            intent.putExtra("cartaoLista", acao);
-        if ("cartao".equals(acao))
-            intent.putExtra("cartaoLista", acao);
-        startActivity(intent);
-        finish();
-    }
-    */
-
-    @Override
-    public void openCartaoListaActivity(String acao) {
-        Intent intent = CartaoListaActvity.getStartIntent(MainActivity.this);
-        /*
-        if ("edita".equals(acao))
-            intent.putExtra("cartaoLista", acao);
-        if ("cartao".equals(acao))
-            intent.putExtra("cartaoLista", acao);
-        */
         intent.putExtra("cartaoLista", acao);
         startActivity(intent);
         finish();
@@ -371,12 +350,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     // @Override
     public void openEditaCartaoActivity(String acao) {
         Intent intent = CartaoListaActvity.getStartIntent(MainActivity.this);
-        /*
-        if ("edita".equals(acao))
-            intent.putExtra("cartaoLista", acao);
-        if ("cartao".equals(acao))
-            intent.putExtra("cartaoLista", acao);
-        */
         intent.putExtra("cartaoLista", acao);
         startActivity(intent);
         finish();
@@ -517,5 +490,10 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             }
         });
         alertDialog.show();
+    }
+
+    @Override
+    public Context getContextActivity() {
+        return MainActivity.this;
     }
 }

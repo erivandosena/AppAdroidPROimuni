@@ -1,5 +1,7 @@
 package br.com.erivando.vacinaskids.ui.activity.classificacao;
 
+import android.content.Context;
+
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 
 /**
@@ -14,5 +16,10 @@ public class ClassificacaoActivity extends BaseActivity implements Classificacao
     @Override
     protected void setUp() {
 
+    }
+
+    @Override
+    public Context getContextActivity() {
+        return ClassificacaoActivity.this;
     }
 }

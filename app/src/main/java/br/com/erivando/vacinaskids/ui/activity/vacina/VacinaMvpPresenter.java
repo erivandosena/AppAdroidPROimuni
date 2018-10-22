@@ -17,6 +17,8 @@ import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 @PerActivity
 public interface VacinaMvpPresenter<V extends VacinaMvpView> extends MvpPresenter<V> {
 
+    Vacina onVacinaCadastrada(Long id);
+
     List<Vacina> onVacinasCadastradas();
 
     List<Vacina> onVacinasPorRede(String[] valores);

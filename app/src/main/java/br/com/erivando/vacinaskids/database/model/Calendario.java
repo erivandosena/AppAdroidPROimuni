@@ -27,11 +27,12 @@ public class Calendario extends RealmObject implements Comparable<Calendario> {
     private RealmList<Vacina> vacinasInSection;
     private RealmList<Dose> dosesInSection;
     private RealmList<Idade> idadesInSection;
+    private RealmList<Imunizacao> ImunizacoesInSection;
 
     public Calendario() {
     }
 
-    public Calendario(Long id, Idade idade, Vacina vacina, Dose dose, String tituloIdade, RealmList<Vacina> vacinasInSection, RealmList<Dose> dosesInSection, RealmList<Idade> idadesInSection) {
+    public Calendario(Long id, Idade idade, Vacina vacina, Dose dose, String tituloIdade, RealmList<Vacina> vacinasInSection, RealmList<Dose> dosesInSection, RealmList<Idade> idadesInSection, RealmList<Imunizacao> imunizacoesInSection) {
         this.id = id;
         this.idade = idade;
         this.vacina = vacina;
@@ -40,6 +41,7 @@ public class Calendario extends RealmObject implements Comparable<Calendario> {
         this.vacinasInSection = vacinasInSection;
         this.dosesInSection = dosesInSection;
         this.idadesInSection = idadesInSection;
+        ImunizacoesInSection = imunizacoesInSection;
     }
 
     public Long getId() {
@@ -104,6 +106,14 @@ public class Calendario extends RealmObject implements Comparable<Calendario> {
 
     public void setIdadesInSection(RealmList<Idade> idadesInSection) {
         this.idadesInSection = idadesInSection;
+    }
+
+    public RealmList<Imunizacao> getImunizacoesInSection() {
+        return ImunizacoesInSection;
+    }
+
+    public void setImunizacoesInSection(RealmList<Imunizacao> imunizacoesInSection) {
+        ImunizacoesInSection = imunizacoesInSection;
     }
 
     @Override

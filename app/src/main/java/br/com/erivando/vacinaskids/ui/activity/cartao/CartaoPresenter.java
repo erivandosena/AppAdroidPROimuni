@@ -12,7 +12,7 @@ import br.com.erivando.vacinaskids.mvp.base.BasePresenter;
 import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
 
-import static br.com.erivando.vacinaskids.util.Uteis.parseDateString;
+import static br.com.erivando.vacinaskids.util.Uteis.getParseDateString;
 
 /**
  * Projeto:     VacinasKIDS

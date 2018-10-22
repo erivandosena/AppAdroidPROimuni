@@ -9,10 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import br.com.erivando.vacinaskids.R;
-import br.com.erivando.vacinaskids.database.model.Calendario;
 import br.com.erivando.vacinaskids.database.model.Dose;
 import br.com.erivando.vacinaskids.database.model.Idade;
 import br.com.erivando.vacinaskids.database.model.Vacina;
@@ -31,7 +28,6 @@ public class VacinaRVAdapter extends RecyclerView.Adapter<VacinaRVAdapter.Single
     private RealmList<Vacina> vacinaList;
     private RealmList<Dose> doseList;
     private RealmList<Idade> idadeList;
-    //private List<Calendario> calendarioList;
     private Context mContext;
 
     public VacinaRVAdapter(RealmList<Vacina> vacinaList, RealmList<Dose> doseList, RealmList<Idade> idadeList, Context mContext) {
@@ -63,18 +59,6 @@ public class VacinaRVAdapter extends RecyclerView.Adapter<VacinaRVAdapter.Single
         holder.textTituloVacina.setText(singleItemVacina.getVaciNome());
         holder.textTituloDose.setText(singleItemDose.getDoseDescricao());
         holder.textTituloRede.setText(rede + " "+singleItemVacina.getVaciRede());
-
-        /*
-        for (Calendario calendario: calendarioList) {
-            if (calendario.getVacina().getId() == singleItem.getId()) {
-                if("Pública".equals(calendario.getVacina().getVaciRede()))
-                    rede = "Disponível na rede";
-                else
-                    rede = "Opcional na rede";
-                holder.textTituloDose.setText(calendario.getDose().getDoseDescricao());
-            }
-        }
-        */
     }
 
     @Override

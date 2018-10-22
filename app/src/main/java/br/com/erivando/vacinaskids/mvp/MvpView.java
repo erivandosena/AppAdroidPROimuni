@@ -1,5 +1,6 @@
 package br.com.erivando.vacinaskids.mvp;
 
+import android.content.Context;
 import android.support.annotation.StringRes;
 
 /**
@@ -29,5 +30,7 @@ public interface MvpView {
     boolean isNetworkConnected();
 
     void hideKeyboard();
+
+    Context getContextActivity();
 
 }

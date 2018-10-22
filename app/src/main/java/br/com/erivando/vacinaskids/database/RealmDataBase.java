@@ -141,6 +141,11 @@ public class RealmDataBase implements IRealm {
     }
 
     @Override
+    public <T extends RealmObject> T getObject(Class<T> clazz, String[] strings, Long[] longs) {
+        return getRealmInstance().where(clazz).equalTo(strings[0], longs[0]).equalTo(strings[1], longs[1]).findFirst();
+    }
+
+    @Override
     public <T extends RealmObject> List<T> findAll(Class<T> clazz) {
         Realm realm = getRealmInstance();
         return realm.where(clazz).findAll();

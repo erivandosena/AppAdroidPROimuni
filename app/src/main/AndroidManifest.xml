@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:name=".ui.application.AppAplicacao"
         android:theme="@style/AppTheme"
-        android:fullBackupContent="@xml/backup_descriptor">
+        android:fullBackupContent="@xml/backup_descriptor"
+        android:largeHeap="true">
 
         <activity
             android:name=".ui.activity.splash.SplashActivity"

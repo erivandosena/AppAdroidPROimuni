@@ -166,4 +166,9 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
     @Override
     public void getStartActivityForResult(Intent intentImagem, int requestImgCamera) {
     }
+
+    @Override
+    public Context getContextActivity() {
+        return CriancaListaActvity.this;
+    }
 }

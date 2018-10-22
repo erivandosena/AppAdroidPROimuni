@@ -78,4 +78,8 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
         habilitaTelaCheia(this);
     }
 
+    @Override
+    public Context getContextActivity() {
+        return SplashActivity.this;
+    }
 }

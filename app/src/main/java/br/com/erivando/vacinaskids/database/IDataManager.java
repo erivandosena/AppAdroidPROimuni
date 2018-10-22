@@ -9,6 +9,7 @@ import br.com.erivando.vacinaskids.database.model.Classificacao;
 import br.com.erivando.vacinaskids.database.model.Crianca;
 import br.com.erivando.vacinaskids.database.model.Dose;
 import br.com.erivando.vacinaskids.database.model.Idade;
+import br.com.erivando.vacinaskids.database.model.Imunizacao;
 import br.com.erivando.vacinaskids.database.model.Usuario;
 import br.com.erivando.vacinaskids.database.model.Vacina;
 
@@ -196,6 +197,25 @@ public interface IDataManager extends IPreferencesHelper {
 
     List<Calendario> obtemCalendariosOrderBy(String orderBy);
 
-    /* IMPORTACOES */
+    /* IMUNIZAÇÃO */
+    AtomicInteger getImunizacaoID();
+
+    boolean novoAtualizaImunizacao(Imunizacao imunizacao);
+
+    boolean eliminaImunizacao(Long id);
+
+    Imunizacao obtemImunizacao(Long id);
+
+    Imunizacao obtemImunizacao();
+
+    Imunizacao obtemImunizacao(String[] valores);
+
+    Imunizacao obtemImunizacao(String[] strings, Long[] longs);
+
+    List<Imunizacao> obtemImunizacoes(String[] valores);
+
+    List<Imunizacao> obtemImunizacoes();
+
+    /* IMPORTAÇÕES */
     void getRecursosJson();
 }

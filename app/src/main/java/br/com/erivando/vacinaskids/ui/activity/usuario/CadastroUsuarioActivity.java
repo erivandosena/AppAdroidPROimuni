@@ -150,4 +150,9 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
         super.onActivityResult(requestCode, resultCode, data);
         imagemBitmapFoto = presenter.onActivityResult(requestCode, resultCode, data, this, fotoImageButton);
     }
+
+    @Override
+    public Context getContextActivity() {
+        return CadastroUsuarioActivity.this;
+    }
 }

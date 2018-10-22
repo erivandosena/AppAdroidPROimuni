@@ -152,4 +152,9 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView{
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public Context getContextActivity() {
+        return CartaoActivity.this;
+    }
 }

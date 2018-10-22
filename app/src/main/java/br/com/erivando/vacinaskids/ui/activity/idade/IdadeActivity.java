@@ -54,4 +54,8 @@ public class IdadeActivity extends BaseActivity implements IdadeMvpView {
 
     }
 
+    @Override
+    public Context getContextActivity() {
+        return IdadeActivity.this;
+    }
 }

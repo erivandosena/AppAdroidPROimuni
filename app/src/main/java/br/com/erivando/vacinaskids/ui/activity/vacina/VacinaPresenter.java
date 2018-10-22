@@ -31,6 +31,11 @@ public class VacinaPresenter<V extends VacinaMvpView> extends BasePresenter<V> i
     }
 
     @Override
+    public Vacina onVacinaCadastrada(Long id) {
+        return getIDataManager().obtemVacina(id);
+    }
+
+    @Override
     public List<Vacina> onVacinasCadastradas() {
         return getIDataManager().obtemVacinasOrderBy("id");
     }

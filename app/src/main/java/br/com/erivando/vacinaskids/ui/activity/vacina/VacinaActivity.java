@@ -18,6 +18,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.R;
+import br.com.erivando.vacinaskids.database.model.Vacina;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
 import br.com.erivando.vacinaskids.ui.fragment.vacina.VacinaPrivadaFragment;
@@ -105,6 +106,11 @@ public class VacinaActivity extends BaseActivity implements VacinaMvpView {
         adapter.addFragment(new VacinaPublicaFragment(), "Pública");
         adapter.addFragment(new VacinaPrivadaFragment(), "Privada");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public Context getContextActivity() {
+        return VacinaActivity.this;
     }
 
     static class Adapter extends FragmentPagerAdapter {

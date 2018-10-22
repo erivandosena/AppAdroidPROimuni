@@ -7,13 +7,11 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,19 +21,17 @@ import br.com.erivando.vacinaskids.database.model.Calendario;
 import br.com.erivando.vacinaskids.database.model.Cartao;
 import br.com.erivando.vacinaskids.database.model.Dose;
 import br.com.erivando.vacinaskids.database.model.Idade;
+import br.com.erivando.vacinaskids.database.model.Imunizacao;
 import br.com.erivando.vacinaskids.database.model.Vacina;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.activity.calendario.CalendarioMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.calendario.CalendarioMvpView;
-import br.com.erivando.vacinaskids.ui.activity.dose.DoseMvpPresenter;
-import br.com.erivando.vacinaskids.ui.activity.dose.DoseMvpView;
 import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpView;
 import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoActivity;
-import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaMvpPresenter;
-import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaMvpView;
+import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoMvpView;
 import br.com.erivando.vacinaskids.ui.adapter.VacinaRVA;
-import br.com.erivando.vacinaskids.ui.fragment.vacina.VacinaRecyclerViewAdapter;
 import br.com.erivando.vacinaskids.util.Uteis;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,16 +50,13 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
     CartaoMvpPresenter<CartaoMvpView> presenter;
 
     @Inject
-    VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
-
-    @Inject
     IdadeMvpPresenter<IdadeMvpView> idadePresenter;
 
     @Inject
-    DoseMvpPresenter<DoseMvpView> dosePresenter;
+    CalendarioMvpPresenter<CalendarioMvpView> calendarioPresenter;
 
     @Inject
-    CalendarioMvpPresenter<CalendarioMvpView> calendarioPresenter;
+    ImunizacaoMvpPresenter<ImunizacaoMvpView> imunizacaoPresenter;
 
     @BindView(R.id.image_cartao_vacinal)
     public ImageView mImagemCartao;
@@ -74,9 +67,9 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
     @BindView(R.id.text_idade_crianca)
     public TextView mTextIdade;
 
-    private Intent intent;
-
     private Cartao cartao;
+
+    private Intent intent;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, CartaoDetalheActivity.class);
@@ -115,7 +108,7 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
     @Override
     protected void setUp() {
         if(intent != null) {
-            Long idCartao = intent.getLongExtra("cartao", -1L);
+            Long idCartao = intent.getLongExtra("cartao", 0L);
             cartao = presenter.onCartaoCadastrado(idCartao);
             if (cartao.getCrianca().getCriaFoto() != null)
                 mImagemCartao.setImageBitmap(Uteis.base64ParaBitmap(cartao.getCrianca().getCriaFoto()));
@@ -129,6 +122,7 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         List<Vacina> listaVacinas = new ArrayList<Vacina>();
         List<Dose> listaDoses = new ArrayList<Dose>();
         List<Idade> listaIdades = new ArrayList<Idade>();
+        List<Imunizacao> listaImunizacoes = new ArrayList<Imunizacao>();
         for (Idade idade : idadeList) {
             RealmList<Vacina> vacinaItem = new RealmList<Vacina>();
             for (Calendario calendarioItem : calendarioList) {
@@ -136,13 +130,17 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
                     listaVacinas.add(calendarioItem.getVacina());
                     listaDoses.add(calendarioItem.getDose());
                     listaIdades.add(calendarioItem.getIdade());
+                    Imunizacao imunizacao = imunizacaoPresenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id"}, new Long[]{calendarioItem.getVacina().getId(), calendarioItem.getDose().getId()});
+                    if(imunizacao != null) {
+                        listaImunizacoes.add(imunizacao);
+                    }
                 }
             }
         }
 
         RecyclerView my_recycler_view = findViewById(R.id.cartao_lista_vacina_recyclerView);
         my_recycler_view.setHasFixedSize(true);
-        VacinaRVA adapter = new VacinaRVA(listaVacinas, listaDoses, listaIdades, cartao, this);
+        VacinaRVA adapter = new VacinaRVA(listaVacinas, listaDoses, listaIdades, listaImunizacoes, cartao, this);
         my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         my_recycler_view.setAdapter(adapter);
     }
@@ -159,16 +157,16 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         openCartaoListaActivity("cartao");
     }
 
+    @Override
+    public Context getContextActivity() {
+        return CartaoDetalheActivity.this;
+    }
+
+    @Override
     public void openCartaoListaActivity(String acao) {
         Intent intent = CartaoListaActvity.getStartIntent(this);
         intent.putExtra("cartaoLista", acao);
         startActivity(intent);
         finish();
     }
-
-    public void openImunizacaoActivity() {
-        startActivity(ImunizacaoActivity.getStartIntent(this));
-        finish();
-    }
-
 }

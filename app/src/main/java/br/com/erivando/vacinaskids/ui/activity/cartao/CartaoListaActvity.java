@@ -70,22 +70,26 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
         cartoesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if(intent != null) {
-                    String acao = intent.getStringExtra("cartaoLista");
-                    Intent intencao = null;
-                    if ("cartao".equals(acao)) {
-                        intencao = CartaoDetalheActivity.getStartIntent(CartaoListaActvity.this);
-                        intencao.putExtra("cartao", ((Cartao)parent.getAdapter().getItem(position)).getId());
+                showLoading();
+                try {
+                    if (intent != null) {
+                        String acao = intent.getStringExtra("cartaoLista");
+                        Intent intencao = null;
+                        if ("cartao".equals(acao)) {
+                            intencao = CartaoDetalheActivity.getStartIntent(CartaoListaActvity.this);
+                            intencao.putExtra("cartao", ((Cartao) parent.getAdapter().getItem(position)).getId());
+                        }
+                        if ("edita".equals(acao)) {
+                            intencao = CartaoActivity.getStartIntent(CartaoListaActvity.this);
+                            intencao.putExtra("cartao", ((Cartao) parent.getAdapter().getItem(position)).getId());
+                        }
+                        if (intencao != null) {
+                            startActivity(intencao);
+                            finish();
+                        }
                     }
-                    if ("edita".equals(acao)) {
-                        intencao = CartaoActivity.getStartIntent(CartaoListaActvity.this);
-                        intencao.putExtra("cartao", ((Cartao)parent.getAdapter().getItem(position)).getId());
-                    }
-                    if (intencao != null) {
-                        startActivity(intencao);
-                        finish();
-                    }
+                } finally {
+                    hideLoading();
                 }
             }
         });
@@ -148,5 +152,10 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
 
     @Override
     public void openCartaoListaActivity(String acao) {
+    }
+
+    @Override
+    public Context getContextActivity() {
+        return CartaoListaActvity.this;
     }
 }

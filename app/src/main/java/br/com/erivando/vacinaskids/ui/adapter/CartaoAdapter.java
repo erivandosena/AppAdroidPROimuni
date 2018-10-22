@@ -12,7 +12,7 @@ import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.custom.imagem.RoundedImageView;
 import br.com.erivando.vacinaskids.database.model.Cartao;
 
-import static br.com.erivando.vacinaskids.util.Uteis.obtemIdadeCompleta;
+import static br.com.erivando.vacinaskids.util.Uteis.obtemIdadePorDiaOuMesOuAno;
 
 /**
  * Projeto:     VacinasKIDS
@@ -47,7 +47,7 @@ public class CartaoAdapter extends ArrayAdapter<Cartao> {
         Cartao model =  getItem(position);
         holder.imageView.setImageDrawable(this.getContext().getResources().getDrawable(R.drawable.ic_gerenciar));
         holder.tvTitle.setText(model.getCrianca().getCriaNome());
-        holder.tvSubtitle.setText(obtemIdadeCompleta(model.getCrianca().getCriaNascimento()));
+        holder.tvSubtitle.setText(obtemIdadePorDiaOuMesOuAno(model.getCrianca().getCriaNascimento()));
         return convertView;
     }
 

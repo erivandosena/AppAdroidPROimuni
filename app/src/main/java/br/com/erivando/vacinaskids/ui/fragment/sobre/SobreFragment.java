@@ -1,5 +1,6 @@
 package br.com.erivando.vacinaskids.ui.fragment.sobre;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import br.com.erivando.vacinaskids.BuildConfig;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.di.component.ActivityComponent;
 import br.com.erivando.vacinaskids.mvp.base.BaseFragment;
+import br.com.erivando.vacinaskids.ui.application.AppAplicacao;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -84,4 +86,8 @@ public class SobreFragment extends BaseFragment implements SobreMvpView {
         versaoAppSobreTextView.setText(version);
     }
 
+    @Override
+    public Context getContextActivity() {
+        return getContext();
+    }
 }

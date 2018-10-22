@@ -17,6 +17,7 @@ import br.com.erivando.vacinaskids.database.model.Dose;
 import br.com.erivando.vacinaskids.database.model.Idade;
 import br.com.erivando.vacinaskids.database.model.Vacina;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
+import br.com.erivando.vacinaskids.ui.activity.crianca.CriancaActivity;
 import br.com.erivando.vacinaskids.ui.activity.dose.DoseMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.dose.DoseMvpView;
 import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpPresenter;
@@ -144,4 +145,8 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
         finish();
     }
 
+    @Override
+    public Context getContextActivity() {
+        return CalendarioActivity.this;
+    }
 }

@@ -22,6 +22,7 @@ import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioMvpView;
 import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
+import br.com.erivando.vacinaskids.util.Uteis;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -31,7 +32,7 @@ import static br.com.erivando.vacinaskids.util.Uteis.TODAS_PERMISSOES;
 import static br.com.erivando.vacinaskids.util.Uteis.base64ParaBitmap;
 import static br.com.erivando.vacinaskids.util.Uteis.habilitaTelaCheia;
 import static br.com.erivando.vacinaskids.util.Uteis.hasPermissoes;
-import static br.com.erivando.vacinaskids.util.Uteis.parseDateString;
+import static br.com.erivando.vacinaskids.util.Uteis.getParseDateString;
 
 /**
  * Projeto:     VacinasKIDS
@@ -132,7 +133,7 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
             crianca = presenter.onCriancaCadastrada(id);
             if (crianca != null) {
                 nomeEditText.setText(crianca.getCriaNome());
-                nascimentoEditText.setText(parseDateString(crianca.getCriaNascimento()));
+                nascimentoEditText.setText(Uteis.getParseDateString(crianca.getCriaNascimento()));
                 comboResponsavel.setSelection(adapterResponsavel.getPosition(crianca.getUsuario().getUsuaNome()));
                 comboSexo.setSelection(adapterSexo.getPosition(crianca.getCriaSexo()));
                 if (crianca.getCriaFoto() != null)
@@ -205,5 +206,10 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     public void openMainActivity() {
         startActivity(MainActivity.getStartIntent(this));
         finish();
+    }
+
+    @Override
+    public Context getContextActivity() {
+        return CriancaActivity.this;
     }
 }

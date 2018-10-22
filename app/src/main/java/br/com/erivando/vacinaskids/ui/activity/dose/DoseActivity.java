@@ -1,5 +1,7 @@
 package br.com.erivando.vacinaskids.ui.activity.dose;
 
+import android.content.Context;
+
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 
 /**
@@ -14,5 +16,10 @@ public class DoseActivity extends BaseActivity implements DoseMvpView {
     @Override
     protected void setUp() {
 
+    }
+
+    @Override
+    public Context getContextActivity() {
+        return DoseActivity.this;
     }
 }

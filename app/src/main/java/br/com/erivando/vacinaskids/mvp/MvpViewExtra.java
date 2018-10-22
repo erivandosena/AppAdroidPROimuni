@@ -10,6 +10,7 @@ package br.com.erivando.vacinaskids.mvp;
 
 public interface MvpViewExtra extends MvpView {
 
+
     void onCreate();
 
     void onStart();
@@ -23,4 +24,5 @@ public interface MvpViewExtra extends MvpView {
     void onDestroy();
 
     void attachParentMvpView(MvpView mvpView);
+
 }

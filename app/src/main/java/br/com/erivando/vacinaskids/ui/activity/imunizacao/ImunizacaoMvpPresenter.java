@@ -1,5 +1,8 @@
 package br.com.erivando.vacinaskids.ui.activity.imunizacao;
 
+import android.content.Context;
+
+import br.com.erivando.vacinaskids.database.model.Imunizacao;
 import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.mvp.MvpPresenter;
 
@@ -12,5 +15,11 @@ import br.com.erivando.vacinaskids.mvp.MvpPresenter;
  */
 @PerActivity
 public interface ImunizacaoMvpPresenter<V extends ImunizacaoMvpView> extends MvpPresenter<V> {
+
+    void onCadasrarClick(Long id, String imunData, String imunAgente, String imunPosto, String imunLote, Long idVacina, Long idDose, Long idIdade, Long idCartao);
+
+    boolean onNovoAtualizaImunizacao(Imunizacao imunizacao);
+
+    Imunizacao onImunizacaoCadastrada(String[] strings, Long[] longs);
 
 }

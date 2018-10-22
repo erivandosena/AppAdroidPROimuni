@@ -91,10 +91,10 @@
 
                     <TextView
                         android:id="@+id/text_nome_crianca"
-                        style="@style/TextAppearance.AppCompat.Widget.Button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@null" />
+                        android:text="@null"
+                        android:theme="@style/Toolbar.TitleText"/>
 
                     <TextView
                         android:id="@+id/text_idade_crianca"
@@ -102,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/text_nome_crianca"
                         android:text="@null"
-                        android:theme="@style/TextStyle.Heading" />
+                        android:theme="@style/TextStyle.Title" />
                 </RelativeLayout>
 
 

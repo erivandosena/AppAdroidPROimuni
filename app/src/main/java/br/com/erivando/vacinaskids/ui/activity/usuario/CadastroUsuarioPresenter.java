@@ -35,7 +35,7 @@ import static android.app.Activity.RESULT_OK;
 import static br.com.erivando.vacinaskids.util.Uteis.REQUEST_IMG_CAMERA;
 import static br.com.erivando.vacinaskids.util.Uteis.REQUEST_IMG_GALERIA;
 import static br.com.erivando.vacinaskids.util.Uteis.bitmapParaBase64;
-import static br.com.erivando.vacinaskids.util.Uteis.capitalizeNome;
+import static br.com.erivando.vacinaskids.util.Uteis.getCapitalizeNome;
 import static br.com.erivando.vacinaskids.util.Uteis.criaArquivoImagem;
 
 /**
@@ -83,7 +83,7 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
             return;
         }
 
-        nome = capitalizeNome(nome.trim());
+        nome = getCapitalizeNome(nome.trim());
         login = login.trim().toLowerCase();
         email = email.trim().toLowerCase();
 

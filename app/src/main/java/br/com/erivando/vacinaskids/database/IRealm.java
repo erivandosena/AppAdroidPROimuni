@@ -38,6 +38,8 @@ interface IRealm {
 
     <T extends RealmObject> T getObject(Class<T> clazz, String[] valores);
 
+    <T extends RealmObject> T getObject(Class<T> clazz, String[] strings, Long[] longs);
+
     <T extends RealmObject> List<T> findAll(Class<T> clazz);
 
     <T extends RealmObject> List<T> findAll(String campo, Long valor, Class<T> clazz);

@@ -1,6 +1,7 @@
 
 package br.com.erivando.vacinaskids.ui.fragment.vacina;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -70,4 +71,8 @@ public class VacinaPublicaFragment extends BaseFragment implements VacinaMvpView
     protected void setUp(View view) {
     }
 
+    @Override
+    public Context getContextActivity() {
+        return getContext();
+    }
 }

@@ -99,12 +99,11 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
         if (view == floatingActionButtonVacinaShare) {
             Intent shareIntent = ShareCompat.IntentBuilder.from(this)
                     .setType("text/html")
-                    .setSubject(getResources().getString(R.string.app_name) + " - "+ vacinaNome)
+                    .setSubject(getResources().getString(R.string.app_name))
+                    .setChooserTitle(getResources().getString(R.string.app_name))
                     .setText(vacinaNome.toUpperCase() +"\n\n"+
                             vacinaDesc +"\n\n"+
-                            vacinaAdmin+ "\n\n"+ getResources().getString(R.string.app_name)+ "\n"
-                            +getResources().getString(R.string.app_link_download))
-                    .setChooserTitle(getResources().getString(R.string.app_name))
+                            vacinaAdmin+ "\n\n"+ getResources().getString(R.string.app_name)+ "\n"+ getResources().getString(R.string.app_link_download) +"\n\n♥ "+getResources().getString(R.string.app_slogan))
                     .createChooserIntent()
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             if (shareIntent.resolveActivity(getPackageManager()) != null) {
@@ -139,4 +138,8 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
         Glide.with(this).load(R.drawable.ic_vacina).apply(RequestOptions.centerCropTransform()).into(imageView);
     }
 
+    @Override
+    public Context getContextActivity() {
+        return VacinaDetalheActivity.this;
+    }
 }

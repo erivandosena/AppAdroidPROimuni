@@ -9,7 +9,7 @@
     <string name="action_settings">Configurações</string>
     <!-- Strings do Aplicativo. -->
     <string name="app_slogan">Proteção de quem você ama a um clique de você!</string>
-    <string name="app_mensagem_indicacao">Olá!\n\nVacinas KIDs é um aplicativo incrível que ajuda no calendario do cartão de vacinação das crianças.\n\nBaixe gratuitamente!</string>
+    <string name="app_mensagem_indicacao">é um aplicativo incrível que ajuda no calendário do cartão de vacinação das crianças.\n\nBaixe gratuitamente:</string>
     <string name="app_link_download">https://goo.gl/aXpXcF</string>
     <string name="legenda_action_snackbar">Substitua por sua própria ação</string>
     <string name="button_action_snackbar">Ação</string>
@@ -145,5 +145,11 @@
     <string name="text_lote_vacina">Lote da vacina</string>
     <string name="text_data_imunizacao">Data da imunização</string>
     <string name="text_imunizacao_titulo">Imunização</string>
+
+    <!-- Cadastro Imunização -->
+    <string name="text_valida_agente">Informe o nome do profissional da saúde</string>
+    <string name="text_valida_posto">Informe o nome da unidade de saúde</string>
+    <string name="text_valida_lote">Informe a referência do lote</string>
+    <string name="btn_imunizar">Imunizar</string>
 
 </resources>
