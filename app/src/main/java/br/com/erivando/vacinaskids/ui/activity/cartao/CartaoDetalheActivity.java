@@ -28,7 +28,6 @@ import br.com.erivando.vacinaskids.ui.activity.calendario.CalendarioMvpPresenter
 import br.com.erivando.vacinaskids.ui.activity.calendario.CalendarioMvpView;
 import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpView;
-import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoActivity;
 import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoMvpView;
 import br.com.erivando.vacinaskids.ui.adapter.VacinaRVA;

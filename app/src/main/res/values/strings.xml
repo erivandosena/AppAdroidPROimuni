@@ -77,10 +77,12 @@
     <string name="perfil_nome" />
     <string name="perfil_email" />
     <!-- Sobre. -->
-    <string name="proj_info">Este aplicativo possui desenvolvimento nativo da plataforma Android compatível a partir da versão 4.0.3 (API 15) a versão 8.1.0 (API 27). Implementa arquitetura MVP, utilizando tecnologias Dagger 2, Realm 3, RxJava, FastAndroidNetworking.</string>
-    <string name="proj_repo">Repositório: \n https://bitbucket.org/erivandoramos/vacinaskids/src/</string>
-    <string name="proj_participantes">Participantes: \n thaispaula73@gmail.com \n cunhacos@gmail.com \n nirlagomesg@gmail.com \n jhsfelix@gmail.com</string>
-    <string name="proj_autor">Desenvolvedor: \n erivandosena@gmail.com</string>
+    <string name="proj_info">Tecnologia: \nPossui desenvolvimento nativo da plataforma Android compatível a partir da versão 4.0.3 (API 15) a versão 8.1.0 (API 27). Utiliza linguagem de programação compatível com o Java 8 JDK. Implementa arquitetura MVP, utilizando tecnologias Dagger 2, Realm 3, RxJava, FastAndroidNetworking.</string>
+    <string name="proj_nome">Projeto: \nDesenvolvimento de Aplicativo Móvel sobre Vacinação Infantil para Pais de Crianças e Adolescentes</string>
+    <string name="proj_repo">Repositório: \nhttps://bitbucket.org/erivandoramos/vacinaskids/src/</string>
+    <string name="proj_participantes">Participantes: \nthaispaula73@gmail.com \ncunhacos@gmail.com \nnirlagomesg@gmail.com \njhsfelix@gmail.com</string>
+    <string name="proj_autor">Desenvolvedor: \nErivando Sena | erivandosena@gmail.com</string>
+    <string name="text_sobre_titulo">Sobre o Aplicativo</string>
     <!-- Menu principal. -->
     <string name="menu_item1">Cartão Vacinal</string>
     <string name="menu_item2">Criança</string>
@@ -151,5 +153,14 @@
     <string name="text_valida_posto">Informe o nome da unidade de saúde</string>
     <string name="text_valida_lote">Informe a referência do lote</string>
     <string name="btn_imunizar">Imunizar</string>
+
+    <!-- MapaActivity -->
+    <string name="error_location_provider">Erro de localização</string>
+    <string name="text_mapa_titulo">Postos de Saúde</string>
+    <string name="text_pesuisa_mapa">Faça uma pesquisa</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">"Mapa "</string>
+    <string name="btn_localizar_postos">Localizar</string>
+    <string name="erro_text_pesquisa_posto">Informe um bairro</string>
 
 </resources>

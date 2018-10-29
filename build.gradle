@@ -8,7 +8,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:3.2.1'
         classpath 'io.realm:realm-gradle-plugin:4.3.1'
         classpath 'com.google.gms:google-services:4.0.1'
         // NOTA: Não coloque suas dependências de aplicativo aqui; eles pertencem
@@ -22,7 +22,6 @@ allprojects {
         jcenter()
         maven {
             url "https://maven.google.com"
-            //url "https://mvnrepository.com"
         }
     }
 }

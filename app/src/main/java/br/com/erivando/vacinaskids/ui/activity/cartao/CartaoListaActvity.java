@@ -15,9 +15,7 @@ import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.database.model.Cartao;
-import br.com.erivando.vacinaskids.database.model.Imunizacao;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
-import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoActivity;
 import br.com.erivando.vacinaskids.ui.adapter.CartaoAdapter;
 import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
 import butterknife.BindView;

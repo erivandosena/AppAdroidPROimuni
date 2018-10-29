@@ -44,9 +44,11 @@ import br.com.erivando.vacinaskids.ui.activity.crianca.CriancaListaActvity;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginMvpView;
+import br.com.erivando.vacinaskids.ui.activity.mapa.MapLocationActivity;
 import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaActivity;
-import br.com.erivando.vacinaskids.ui.fragment.sobre.SobreFragment;
+import br.com.erivando.vacinaskids.ui.activity.mapa.MapaActivity;
+import br.com.erivando.vacinaskids.ui.fragment.sobre.Sobre;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -62,8 +64,6 @@ import static br.com.erivando.vacinaskids.util.Uteis.exibeAvaliacaoDialog;
  */
 
 public class MainActivity extends BaseActivity implements MainMvpView {
-
-    private static final String TAG = "LoginActivity";
 
     @Inject
     MainMvpPresenter<MainMvpView> presenter;
@@ -94,6 +94,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @BindView(R.id.btn_vacina)
     ImageButton vacinaImageButton;
+
+    @BindView(R.id.btn_mapa_postos_vacina)
+    ImageButton mapaImageButton;
 
     private TextView nomeTextView;
 
@@ -146,6 +149,12 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         openVacinaActivity();
     }
 
+    @OnClick(R.id.btn_mapa_postos_vacina)
+    public void onMapa() {
+        openMapaPostosVacinacao();
+    }
+
+
     @Override
     protected void setUp() {
         setSupportActionBar(toolbar);
@@ -175,13 +184,17 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void onBackPressed() {
+        /*
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag(SobreFragment.TAG);
+        Fragment fragment = fragmentManager.findFragmentByTag("Fragment");
         if (fragment == null) {
             super.onBackPressed();
         } else {
-              onFragmentDetached(SobreFragment.TAG);
+              onFragmentDetached(Sobre.TAG);
+              //onFragmentDetached(MapaActivity.TAG);
         }
+        */
+
     }
 
     @Override
@@ -261,6 +274,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                         switch (item.getItemId()) {
                             case R.id.nav_item_about:
                                 presenter.onDrawerOptionAboutClick();
+                                //showAboutFragment();
                                 return true;
                             case R.id.nav_item_rate_us:
                                 presenter.onDrawerRateUsClick();
@@ -307,12 +321,17 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void showAboutFragment() {
         lockDrawer();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .disallowAddToBackStack()
-                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
-                .add(R.id.cl_root_view, SobreFragment.newInstance(), SobreFragment.TAG)
-                .commit();
+        startActivity(Sobre.getStartIntent(this));
+        finish();
+    }
+
+    public void showMapaActivity() {
+        if (isNetworkConnected()) {
+            if (isNetworkConnected()) {
+                startActivity(MapLocationActivity.getStartIntent(this));
+                finish();
+            }
+        }
     }
 
     @Override
@@ -364,6 +383,16 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             intent.putExtra("criancaLista", acao);
         startActivity(intent);
         finish();
+    }
+
+    public void openMapaPostosVacinacao() {
+        /*
+        Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?q=Posto%20de%20saúde");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
+        */
+        showMapaActivity();
     }
 
     @Override
@@ -425,16 +454,29 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void onFragmentDetached(String tag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag(tag);
-        if (fragment != null) {
+        Fragment fragmentSobre = fragmentManager.findFragmentByTag(tag);
+        if (fragmentSobre != null) {
             fragmentManager
                     .beginTransaction()
                     .disallowAddToBackStack()
                     .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
-                    .remove(fragment)
+                    .remove(fragmentSobre)
                     .commitNow();
             unlockDrawer();
         }
+
+        fragmentManager = getSupportFragmentManager();
+        Fragment fragmentMapa = fragmentManager.findFragmentByTag(tag);
+        if (fragmentMapa != null) {
+            fragmentManager
+                    .beginTransaction()
+                    .disallowAddToBackStack()
+                    .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
+                    .remove(fragmentMapa)
+                    .commitNow();
+            unlockDrawer();
+        }
+
     }
 
     private void executaBackup() {

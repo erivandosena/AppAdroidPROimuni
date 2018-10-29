@@ -18,6 +18,9 @@ import br.com.erivando.vacinaskids.ui.activity.crianca.CriancaPresenter;
 import br.com.erivando.vacinaskids.ui.activity.dose.DoseMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.dose.DoseMvpView;
 import br.com.erivando.vacinaskids.ui.activity.dose.DosePresenter;
+import br.com.erivando.vacinaskids.ui.activity.mapa.MapaMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.mapa.MapaMvpView;
+import br.com.erivando.vacinaskids.ui.activity.mapa.MapaPresenter;
 import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpView;
 import br.com.erivando.vacinaskids.ui.activity.idade.IdadePresenter;
@@ -166,11 +169,10 @@ public class ActivityModule {
         return presenter;
     }
 
-    /*
     @Provides
-    VacinaListAdapter provideVacinaListAdapter() {
-        return new VacinaListAdapter(new ArrayList<Vacina>());
+    @PerActivity
+    MapaMvpPresenter<MapaMvpView> provideMapaPresenter(MapaPresenter<MapaMvpView> presenter) {
+        return presenter;
     }
-    */
 
 }

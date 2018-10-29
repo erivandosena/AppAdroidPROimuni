@@ -32,5 +32,4 @@ public interface MvpView {
     void hideKeyboard();
 
     Context getContextActivity();
-
 }

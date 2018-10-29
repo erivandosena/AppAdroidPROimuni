@@ -6,134 +6,173 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <permission android:name="com.javapapers.android.googleplacesdetail.permission.MAPS_RECEIVE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.javapapers.android.googleplacesdetail.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
+        android:name=".ui.application.AppAplicacao"
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".ui.application.AppAplicacao"
-        android:theme="@style/AppTheme"
-        android:fullBackupContent="@xml/backup_descriptor"
-        android:largeHeap="true">
-
+        android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activity.splash.SplashActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppThemeFullScreen"
             android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.activity.login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <data android:scheme="@string/facebook_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.activity.main.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.SEND"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:mimeType="text/plain"/>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.activity.usuario.CadastroUsuarioActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.crianca.CriancaActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.cartao.CartaoActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.calendario.CalendarioActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.crianca.CriancaListaActvity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.cartao.CartaoListaActvity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.vacina.VacinaActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.imunizacao.ImunizacaoActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.vacina.VacinaDetalheActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.cartao.CartaoDetalheActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <activity
+            android:name=".ui.activity.mapa.MapaActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
 
-        <activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" />
+        <activity
+            android:name=".ui.fragment.sobre.Sobre"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".ui.activity.mapa.MapLocationActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/facebook_login_protocol_scheme" />
             </intent-filter>
         </activity>

@@ -37,8 +37,6 @@ import static br.com.erivando.vacinaskids.util.Uteis.habilitaTelaCheia;
 
 public class LoginActivity extends BaseActivity implements LoginMvpView {
 
-    private static final String TAG = "LoginActivity";
-
     @Inject
     LoginMvpPresenter<LoginMvpView> presenter;
 

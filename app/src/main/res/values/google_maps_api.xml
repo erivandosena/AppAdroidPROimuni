@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    TODO: Antes de executar seu aplicativo, você precisa de uma chave da API do Google Maps.
+
+    Para obter um, siga este link, siga as instruções e pressione "Criar" no final:
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=2C:2B:D1:EB:B9:A2:C5:6D:85:A5:9C:37:88:AF:1D:A8:0F:B0:8E:D1%3Bbr.com.erivando.vacinaskids.ui.fragment.mapa
+
+    Você também pode adicionar suas credenciais a uma chave existente, usando estes valores:
+    Nome do pacote:
+    2C: 2B: D1: EB: B9: A2: C5: 6D: 85: A5: 9C: 37: 88: AF: 1D: A8: 0F: B0: 8E: D1
+
+    Impressão digital do certificado SHA-1:
+    2C: 2B: D1: EB: B9: A2: C5: 6D: 85: A5: 9C: 37: 88: AF: 1D: A8: 0F: B0: 8E: D1
+
+    Alternativamente, siga as instruções aqui:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Depois de ter sua chave (começa com "AIza"), substitua o "google_maps_key" string neste arquivo.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDfjILD6c4LpiXBEHJrEvWdk726eXlyLZA</string>
+</resources>

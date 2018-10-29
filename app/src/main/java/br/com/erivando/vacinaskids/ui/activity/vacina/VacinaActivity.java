@@ -18,7 +18,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.R;
-import br.com.erivando.vacinaskids.database.model.Vacina;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
 import br.com.erivando.vacinaskids.ui.fragment.vacina.VacinaPrivadaFragment;

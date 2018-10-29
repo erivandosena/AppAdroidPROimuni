@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +47,12 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT < 22)
+            setStatusBarTranslucent(false);
+        else
+            setStatusBarTranslucent(true);
         super.onCreate(savedInstanceState);
+
         activityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((AppAplicacao) getApplication()).getComponent())
@@ -172,4 +178,11 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 
     protected abstract void setUp();
 
+    protected void setStatusBarTranslucent(boolean makeTranslucent) {
+        if (makeTranslucent) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        } else {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
 }

@@ -24,6 +24,7 @@ public class CalendarioPresenter<V extends CalendarioMvpView> extends BasePresen
     public CalendarioPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(iDataManager, schedulerProvider, compositeDisposable);
     }
+
     @Override
     public List<Calendario> onCalendariosCadastrados() {
         return getIDataManager().obtemCalendariosOrderBy("vacina.id");
