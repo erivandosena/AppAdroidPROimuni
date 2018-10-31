@@ -3,7 +3,9 @@ package br.com.erivando.vacinaskids.ui.activity.cartao;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -16,8 +18,8 @@ import javax.inject.Inject;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.database.model.Cartao;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
-import br.com.erivando.vacinaskids.ui.adapter.CartaoAdapter;
 import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
+import br.com.erivando.vacinaskids.ui.adapter.CartaoAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,6 +39,12 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
     @Inject
     CartaoMvpPresenter<CartaoMvpView> presenterCartao;
 
+    @BindView(R.id.toolbar_cartao_lista)
+    Toolbar toolbar;
+
+    @BindView(R.id.collapsing_toolbar_cartao_lista)
+    CollapsingToolbarLayout collapsingToolbar;
+
     @BindView(R.id.fab)
     FloatingActionButton fabFloatingActionButton;
 
@@ -54,13 +62,19 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartao_lista);
+        setUnBinder(ButterKnife.bind(this));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        collapsingToolbar.setTitle(getResources().getString(R.string.text_lista_cartao_titulo));
 
         getActivityComponent().inject(this);
-
-        setUnBinder(ButterKnife.bind(this));
-
         presenterCartao.onAttach(this);
-
         intent = getIntent();
 
         getCartao();
@@ -97,12 +111,6 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
 
     @Override
     protected void setUp() {
-        habilitaTelaCheia(this);
-    }
-
-    @OnClick(R.id.btn_nav_voltar)
-    public void onMainActivity() {
-        this.onBackPressed();
     }
 
     @OnClick(R.id.fab)

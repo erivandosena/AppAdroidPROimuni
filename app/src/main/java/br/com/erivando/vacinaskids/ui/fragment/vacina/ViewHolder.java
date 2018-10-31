@@ -19,12 +19,10 @@ import butterknife.ButterKnife;
 
 public class ViewHolder extends BaseViewHolder {
 
+    public final View mView;
     public String mBoundStringNome;
     public String mBoundStringDesc;
     public String mBoundStringAdmin;
-
-    public final View mView;
-
     @BindView(R.id.avatar)
     public ImageView mImageView;
 

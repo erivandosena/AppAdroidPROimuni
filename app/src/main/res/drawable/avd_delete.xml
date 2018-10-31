@@ -19,8 +19,8 @@
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:targetApi="21"
-    android:drawable="@drawable/ic_delete_white_24dp">
+    android:drawable="@drawable/ic_delete_white_24dp"
+    tools:targetApi="21">
 
     <target android:name="cap">
         <aapt:attr name="android:animation">

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -39,6 +41,12 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     @Inject
     CadastroUsuarioMvpPresenter<CadastroUsuarioMvpView> presenter;
 
+    @BindView(R.id.toolbar_usuario)
+    Toolbar toolbar;
+
+    @BindView(R.id.collapsing_toolbar_usuario)
+    CollapsingToolbarLayout collapsingToolbar;
+
     @BindView(R.id.text_cad_nome)
     EditText nomeEditText;
 
@@ -71,9 +79,18 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
 
-        getActivityComponent().inject(this);
-
         setUnBinder(ButterKnife.bind(this));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLoginOuMainActivity();
+            }
+        });
+        collapsingToolbar.setTitle(getResources().getString(R.string.text_usuario_titulo));
+
+        getActivityComponent().inject(this);
 
         presenter.onAttach(this);
 
@@ -84,7 +101,8 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
         setUp();
     }
 
-    @OnClick(R.id.btn_nav_voltar)
+
+    //@OnClick(R.id.btn_nav_voltar)
     @Override
     public void openLoginOuMainActivity() {
         Intent intent = new Intent();
@@ -127,7 +145,7 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
 
     @Override
     protected void setUp() {
-        habilitaTelaCheia(this);
+        //habilitaTelaCheia(this);
         usuario = presenter.onUsuarioCadastrado();
         if (usuario != null) {
             id = usuario.getId();

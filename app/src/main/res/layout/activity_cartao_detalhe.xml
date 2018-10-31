@@ -81,8 +81,8 @@
                 android:layout_gravity="top"
                 android:layout_margin="6dp"
                 android:clickable="true"
-                android:focusable="true"
-                android:elevation="5dp">
+                android:elevation="5dp"
+                android:focusable="true">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -94,7 +94,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@null"
-                        android:theme="@style/Toolbar.TitleText"/>
+                        android:theme="@style/Toolbar.TitleText" />
 
                     <TextView
                         android:id="@+id/text_idade_crianca"

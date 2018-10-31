@@ -62,25 +62,25 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
         String rede = new String();
         String vacinar = new String();
 
-        if("ao nascer".equals(idadeList.get(i).getIdadDescricao().toLowerCase()))
+        if ("ao nascer".equals(idadeList.get(i).getIdadDescricao().toLowerCase()))
             vacinar = "Vacinar";
         else
             vacinar = "Vacinar com";
-        if("9 a 14 anos".equals(idadeList.get(i).getIdadDescricao().toLowerCase()) || "11 a 14 anos".equals(idadeList.get(i).getIdadDescricao().toLowerCase()))
+        if ("9 a 14 anos".equals(idadeList.get(i).getIdadDescricao().toLowerCase()) || "11 a 14 anos".equals(idadeList.get(i).getIdadDescricao().toLowerCase()))
             vacinar = "Vacinar entre";
-        if("Pública".equals(vacinaList.get(i).getVaciRede()))
+        if ("Pública".equals(vacinaList.get(i).getVaciRede()))
             rede = "Disponível na rede";
         else
             rede = "Opcional na rede";
 
-        for (Imunizacao imunizacao: imunizacaoList) {
-            if (imunizacao.getVacina().getId() ==  vacinaList.get(i).getId() && imunizacao.getDose().getId() == doseList.get(i).getId())
+        for (Imunizacao imunizacao : imunizacaoList) {
+            if (imunizacao.getVacina().getId() == vacinaList.get(i).getId() && imunizacao.getDose().getId() == doseList.get(i).getId())
                 holder.imageVacina.setImageResource(R.drawable.ic_vacina_imunizada);
             else {
                 holder.imageVacina.setImageResource(R.drawable.ic_vacina);
             }
 
-            if(!idadeList.get(i).getIdadDescricao().toLowerCase().trim().contains(imunizacao.getIdade().getIdadDescricao().toLowerCase().trim()))
+            if (!idadeList.get(i).getIdadDescricao().toLowerCase().trim().contains(imunizacao.getIdade().getIdadDescricao().toLowerCase().trim()))
                 holder.imageVacina.setImageResource(R.drawable.ic_vacina_vencida);
         }
         if (obtemIdadePorDiaOuMesOuAno(cartaoVacinal.getCrianca().getCriaNascimento()).toLowerCase().trim().equals(idadeList.get(i).getIdadDescricao().toLowerCase().trim()))
@@ -88,8 +88,8 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
 
         holder.textVacina.setText(vacinaList.get(i).getVaciNome());
         holder.textDose.setText(doseList.get(i).getDoseDescricao());
-        holder.textIdade.setText(vacinar+" "+ idadeList.get(i).getIdadDescricao());
-        holder.textRede.setText(rede + " "+vacinaList.get(i).getVaciRede());
+        holder.textIdade.setText(vacinar + " " + idadeList.get(i).getIdadDescricao());
+        holder.textRede.setText(rede + " " + vacinaList.get(i).getVaciRede());
 
         holder.idVacina = vacinaList.get(i).getId();
         holder.idDose = doseList.get(i).getId();

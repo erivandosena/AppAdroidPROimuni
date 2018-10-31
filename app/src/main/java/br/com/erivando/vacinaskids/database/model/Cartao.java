@@ -21,6 +21,17 @@ import io.realm.annotations.Required;
  */
 public class Cartao extends RealmObject implements Parcelable {
 
+    public static final Creator<Cartao> CREATOR = new Creator<Cartao>() {
+        @Override
+        public Cartao createFromParcel(Parcel in) {
+            return new Cartao(in);
+        }
+
+        @Override
+        public Cartao[] newArray(int size) {
+            return new Cartao[size];
+        }
+    };
     @Required
     @PrimaryKey
     private Long id;
@@ -33,6 +44,15 @@ public class Cartao extends RealmObject implements Parcelable {
     public Cartao(Long id, Crianca crianca) {
         this.id = id;
         this.crianca = crianca;
+    }
+
+    protected Cartao(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readLong();
+        }
+        crianca = in.readParcelable(Crianca.class.getClassLoader());
     }
 
     public Long getId() {
@@ -58,27 +78,6 @@ public class Cartao extends RealmObject implements Parcelable {
     public void setImunizacoes(RealmList<Imunizacao> imunizacoes) {
         this.imunizacoes = imunizacoes;
     }
-
-    protected Cartao(Parcel in) {
-        if (in.readByte() == 0) {
-            id = null;
-        } else {
-            id = in.readLong();
-        }
-        crianca = in.readParcelable(Crianca.class.getClassLoader());
-    }
-
-    public static final Creator<Cartao> CREATOR = new Creator<Cartao>() {
-        @Override
-        public Cartao createFromParcel(Parcel in) {
-            return new Cartao(in);
-        }
-
-        @Override
-        public Cartao[] newArray(int size) {
-            return new Cartao[size];
-        }
-    };
 
     @Override
     public int describeContents() {

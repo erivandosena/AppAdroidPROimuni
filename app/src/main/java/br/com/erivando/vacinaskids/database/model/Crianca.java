@@ -22,6 +22,17 @@ import io.realm.annotations.Required;
  */
 public class Crianca extends RealmObject implements Parcelable {
 
+    public static final Parcelable.Creator<Crianca> CREATOR = new Parcelable.Creator<Crianca>() {
+        @Override
+        public Crianca createFromParcel(Parcel in) {
+            return new Crianca(in);
+        }
+
+        @Override
+        public Crianca[] newArray(int size) {
+            return new Crianca[size];
+        }
+    };
     @Required
     @PrimaryKey
     private Long id;
@@ -41,6 +52,17 @@ public class Crianca extends RealmObject implements Parcelable {
         this.criaNascimento = criaNascimento;
         this.criaSexo = criaSexo;
         this.criaFoto = criaFoto;
+    }
+
+    protected Crianca(Parcel in) {
+        Long data = in.readLong();
+
+        id = in.readLong();
+        usuario = in.readParcelable(Usuario.class.getClassLoader());
+        criaNome = in.readString();
+        criaNascimento = data == -1 ? null : new Date(data);
+        criaSexo = in.readString();
+        criaFoto = in.readString();
     }
 
     public Long getId() {
@@ -94,29 +116,6 @@ public class Crianca extends RealmObject implements Parcelable {
     @Override
     public String toString() {
         return getCriaNome();
-    }
-
-    public static final Parcelable.Creator<Crianca> CREATOR = new Parcelable.Creator<Crianca>() {
-        @Override
-        public Crianca createFromParcel(Parcel in) {
-            return new Crianca(in);
-        }
-
-        @Override
-        public Crianca[] newArray(int size) {
-            return new Crianca[size];
-        }
-    };
-
-    protected Crianca(Parcel in) {
-        Long data = in.readLong();
-
-        id = in.readLong();
-        usuario = in.readParcelable(Usuario.class.getClassLoader());
-        criaNome = in.readString();
-        criaNascimento = data == -1 ? null : new Date(data);
-        criaSexo = in.readString();
-        criaFoto = in.readString();
     }
 
     /**

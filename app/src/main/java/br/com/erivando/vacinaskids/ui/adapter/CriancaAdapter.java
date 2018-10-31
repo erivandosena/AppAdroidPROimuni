@@ -14,7 +14,6 @@ import br.com.erivando.vacinaskids.database.model.Crianca;
 import br.com.erivando.vacinaskids.util.Uteis;
 
 import static br.com.erivando.vacinaskids.util.Uteis.obtemIdadeCompleta;
-import static br.com.erivando.vacinaskids.util.Uteis.getParseDateString;
 
 /**
  * Projeto:     VacinasKIDS
@@ -46,9 +45,9 @@ public class CriancaAdapter extends ArrayAdapter<Crianca> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Crianca model =  getItem(position);
+        Crianca model = getItem(position);
         if (model.getCriaFoto() != null)
-           holder.imageView.setImageBitmap(Uteis.base64ParaBitmap(model.getCriaFoto()));
+            holder.imageView.setImageBitmap(Uteis.base64ParaBitmap(model.getCriaFoto()));
         else
             holder.imageView.setImageDrawable(this.getContext().getResources().getDrawable(R.drawable.ic_launcher_round));
         holder.tvTitle.setText(model.getCriaNome());

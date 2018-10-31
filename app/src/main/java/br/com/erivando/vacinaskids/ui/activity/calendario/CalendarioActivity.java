@@ -3,8 +3,11 @@ package br.com.erivando.vacinaskids.ui.activity.calendario;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,7 @@ import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpView;
 import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
 import br.com.erivando.vacinaskids.ui.adapter.CalendarioRVAdapter;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.RealmList;
@@ -40,14 +44,14 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
     @Inject
     CalendarioMvpPresenter<CalendarioMvpView> presenter;
 
-    //@Inject
-    //VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
-
     @Inject
     IdadeMvpPresenter<IdadeMvpView> idadePresenter;
 
-   // @Inject
-   // DoseMvpPresenter<DoseMvpView> dosePresenter;
+    @BindView(R.id.toolbar_calendario)
+    Toolbar toolbar;
+
+    @BindView(R.id.collapsing_toolbar_calendario)
+    CollapsingToolbarLayout collapsingToolbar;
 
     List<Idade> idades;
     List<Calendario> calendarios;
@@ -65,24 +69,27 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario);
 
-        getActivityComponent().inject(this);
-
         setUnBinder(ButterKnife.bind(this));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        collapsingToolbar.setTitle(getResources().getString(R.string.text_lista_calendario_titulo));
+
+        getActivityComponent().inject(this);
 
         presenter.onAttach(this);
 
         setUp();
     }
 
-    @OnClick(R.id.btn_nav_voltar)
-    public void onClickVoltar() {
-        this.onBackPressed();
-    }
 
     @Override
     protected void setUp() {
-        habilitaTelaCheia(this);
-
         calendarios = presenter.onCalendariosCadastrados();
         //vacinas = vacinaPresenter.onVacinasCadastradas();
         //doses = dosePresenter.onDosesCadastradas();

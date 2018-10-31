@@ -1,11 +1,6 @@
 package br.com.erivando.vacinaskids.ui.activity.vacina;
 
-import android.support.annotation.NonNull;
-
-import com.androidnetworking.error.ANError;
-
 import java.util.List;
-import java.util.function.Consumer;
 
 import javax.inject.Inject;
 

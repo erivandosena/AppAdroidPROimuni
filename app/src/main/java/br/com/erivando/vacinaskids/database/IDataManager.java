@@ -30,25 +30,6 @@ public interface IDataManager extends IPreferencesHelper {
             String email,
             String profilePicPath);
 
-    enum LoggedInMode {
-
-        LOGGED_IN_MODE_LOGGED_OUT(0),
-        LOGGED_IN_MODE_GOOGLE(1),
-        LOGGED_IN_MODE_FACEBOOK(2),
-        LOGGED_IN_MODE_SERVER(3),
-        LOGGED_IN_MODE_LOCAL(4);
-
-        private final int type;
-
-        LoggedInMode(int type) {
-            this.type = type;
-        }
-
-        public int getType() {
-            return type;
-        }
-    }
-
     /* USUÁRIO */
     AtomicInteger getUsuarioID();
 
@@ -218,4 +199,23 @@ public interface IDataManager extends IPreferencesHelper {
 
     /* IMPORTAÇÕES */
     void getRecursosJson();
+
+    enum LoggedInMode {
+
+        LOGGED_IN_MODE_LOGGED_OUT(0),
+        LOGGED_IN_MODE_GOOGLE(1),
+        LOGGED_IN_MODE_FACEBOOK(2),
+        LOGGED_IN_MODE_SERVER(3),
+        LOGGED_IN_MODE_LOCAL(4);
+
+        private final int type;
+
+        LoggedInMode(int type) {
+            this.type = type;
+        }
+
+        public int getType() {
+            return type;
+        }
+    }
 }

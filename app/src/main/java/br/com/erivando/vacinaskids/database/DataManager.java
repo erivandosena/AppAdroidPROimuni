@@ -83,6 +83,7 @@ public class DataManager implements IDataManager {
     public List<Crianca> obtemCriancas(String[] valores) {
         return realmDataBase.findAll(valores[0], valores[1], Crianca.class);
     }
+
     /* Cartão */
     @Override
     public AtomicInteger getCartaoID() {
@@ -452,12 +453,12 @@ public class DataManager implements IDataManager {
 
     @Override
     public void updateUserInfo(String accessToken, Long userId, LoggedInMode loggedInMode, String userName, String email, String profilePicPath) {
-            setAccessToken(accessToken);
-            setCurrentUserId(userId);
-            setCurrentUserLoggedInMode(loggedInMode);
-            setCurrentUserName(userName);
-            setCurrentUserEmail(email);
-            setCurrentUserProfilePicUrl(profilePicPath);
+        setAccessToken(accessToken);
+        setCurrentUserId(userId);
+        setCurrentUserLoggedInMode(loggedInMode);
+        setCurrentUserName(userName);
+        setCurrentUserEmail(email);
+        setCurrentUserProfilePicUrl(profilePicPath);
     }
 
     @Override

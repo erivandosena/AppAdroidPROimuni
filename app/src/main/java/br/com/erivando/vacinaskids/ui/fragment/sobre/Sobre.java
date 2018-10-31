@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
  */
 
 public class Sobre extends BaseActivity implements SobreMvpView {
-    
+
     @Inject
     SobreMvpPresenter<SobreMvpView> presenter;
 
@@ -50,11 +50,11 @@ public class Sobre extends BaseActivity implements SobreMvpView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_sobre);
-        
+
         getActivityComponent().inject(this);
         setUnBinder(ButterKnife.bind(this));
         presenter.onAttach(this);
-        
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -86,10 +86,10 @@ public class Sobre extends BaseActivity implements SobreMvpView {
     public Context getContextActivity() {
         return this;
     }
-    
+
     public void openMainActivity() {
         startActivity(MainActivity.getStartIntent(this));
         finish();
     }
-    
+
 }

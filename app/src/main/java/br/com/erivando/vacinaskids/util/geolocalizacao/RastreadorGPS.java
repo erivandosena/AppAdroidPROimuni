@@ -26,29 +26,22 @@ import android.util.Log;
  */
 public class RastreadorGPS extends Service implements LocationListener {
 
+    // A distância mínima para alterar atualizações em metros
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
+    // O tempo mínimo entre atualizações em milissegundos
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
     private final Context mContext;
-
+    // Declaração Location Manager
+    protected LocationManager locationManager;
     // flag para GPS status
     boolean isGPSEnabled = false;
-
     // flag para network status
     boolean isNetworkEnabled = false;
-
     // flag para GPS status
     boolean canGetLocation = false;
-
     Location location; // location
     double latitude; // latitude
     double longitude; // longitude
-
-    // A distância mínima para alterar atualizações em metros
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-
-    // O tempo mínimo entre atualizações em milissegundos
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
-
-    // Declaração Location Manager
-    protected LocationManager locationManager;
 
     public RastreadorGPS(Context context) {
         this.mContext = context;

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
@@ -8,6 +9,7 @@ android {
         applicationId "br.com.erivando.vacinaskids"
         minSdkVersion 15
         targetSdkVersion 27
+        /* Você especifica o código da versão do seu aplicativo apenas no módulo base. */
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -54,12 +56,36 @@ android {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/mimetypes.default'
     }
+    // Ao criar pacotes de aplicativos para Android, o bloco de divisões é ignorado.
+    splits {
+
+    }
+
+    // Em vez disso, use o bloco de bundles para controlar os tipos de APKs de
+    // configuração que você deseja que seu pacote de aplicativos ofereça suporte.
+    bundle {
+        language {
+            // Especifica que o pacote de aplicativos não deve suportar os APKs de
+            // configuração para recursos de idioma. Esses recursos são empacotados
+            // com cada base e recurso dinâmico APK.
+            enableSplit = false
+        }
+        density {
+            // Esta propriedade é configurada para true por padrão.
+            enableSplit = true
+        }
+        abi {
+            // Esta propriedade é configurada para true por padrão.
+            enableSplit = true
+        }
+    }
+
 }
 
 dependencies {
 
-    /* Mapbox Navigation SDK */
-    //implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.6.0'
+    /* Declara uma dependência no módulo base, ': app'. */
+    // implementation project(':app')
 
     /* Google Maps */
     implementation 'com.google.android.gms:play-services-maps:15.0.1'

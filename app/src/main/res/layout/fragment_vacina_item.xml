@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,10 +19,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
-    android:gravity="center_horizontal"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -32,15 +31,15 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_margin="@dimen/card_margin"
-        card_view:cardUseCompatPadding="true"
         android:elevation="@dimen/card_radius"
-        card_view:cardCornerRadius="@dimen/card_radius">
+        card_view:cardCornerRadius="@dimen/card_radius"
+        card_view:cardUseCompatPadding="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="5dp"
             android:paddingLeft="5dp"
+            android:paddingTop="5dp"
             android:paddingRight="5dp">
 
             <ImageView
@@ -49,20 +48,20 @@
                 android:layout_height="50dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@null"
-                android:scaleType="fitCenter"
-                android:background="?attr/selectableItemBackgroundBorderless"/>
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:id="@android:id/text1"
+                style="@style/TextAppearance.AppCompat.Body2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/avatar"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:inputType="text"
-                android:text="@null"
-                style="@style/TextAppearance.AppCompat.Body2"/>
+                android:text="@null" />
 
         </RelativeLayout>
 

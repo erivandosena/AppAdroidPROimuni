@@ -27,19 +27,18 @@ import io.realm.internal.IOException;
 
 public class RealmBackupRestore {
 
-    private File EXPORT_REALM_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-    private String EXPORT_REALM_FILE_NAME = "vacinaskids.realm";
-    private String IMPORT_REALM_FILE_NAME = "default.realm"; // Eventualmente, substitua isso se estiver usando um nome de banco de dados personalizado
     private final static String TAG = RealmBackupRestore.class.getName();
-    private Activity activity;
-    private Realm realm;
-
     // Permissões de armazenamento
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
+    private File EXPORT_REALM_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+    private String EXPORT_REALM_FILE_NAME = "vacinaskids.realm";
+    private String IMPORT_REALM_FILE_NAME = "default.realm"; // Eventualmente, substitua isso se estiver usando um nome de banco de dados personalizado
+    private Activity activity;
+    private Realm realm;
 
     public RealmBackupRestore(Activity activity) {
         this.realm = new RealmDataBase(activity.getApplicationContext()).getRealmInstance();
@@ -48,35 +47,35 @@ public class RealmBackupRestore {
 
     public void backup() {
         //Primeiro, verifique se temos permissões de armazenamento
-            if (checkStoragePermissions(activity) == 0) {
-                File exportRealmFile;
+        if (checkStoragePermissions(activity) == 0) {
+            File exportRealmFile;
+            try {
+                Log.d(TAG, "Realm DB Path = " + this.dbPath());
+
                 try {
-                    Log.d(TAG, "Realm DB Path = " + this.dbPath());
+                    EXPORT_REALM_PATH.mkdirs();
 
-                    try {
-                        EXPORT_REALM_PATH.mkdirs();
+                    //criar um arquivo de backup
+                    exportRealmFile = new File(EXPORT_REALM_PATH, EXPORT_REALM_FILE_NAME);
 
-                        //criar um arquivo de backup
-                        exportRealmFile = new File(EXPORT_REALM_PATH, EXPORT_REALM_FILE_NAME);
+                    //se o arquivo de backup já existir, exclua-o
+                    exportRealmFile.delete();
 
-                        //se o arquivo de backup já existir, exclua-o
-                        exportRealmFile.delete();
+                    // copiar o Realm atual para o arquivo de backup
+                    realm.writeCopyTo(exportRealmFile);
 
-                        // copiar o Realm atual para o arquivo de backup
-                        realm.writeCopyTo(exportRealmFile);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    String msg = "Arquivo exportado para o local: " + EXPORT_REALM_PATH + "/" + EXPORT_REALM_FILE_NAME;
-                    Toast.makeText(activity.getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-                    Log.d(TAG, msg);
-                } finally {
-                    realm.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } else {
-                Toast.makeText(activity.getApplicationContext(), "Necessário conceder permissões.", Toast.LENGTH_LONG).show();
+                String msg = "Arquivo exportado para o local: " + EXPORT_REALM_PATH + "/" + EXPORT_REALM_FILE_NAME;
+                Toast.makeText(activity.getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                Log.d(TAG, msg);
+            } finally {
+                realm.close();
             }
+        } else {
+            Toast.makeText(activity.getApplicationContext(), "Necessário conceder permissões.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void restore() {
@@ -111,7 +110,7 @@ public class RealmBackupRestore {
             return file.getAbsolutePath();
         } catch (IOException e) {
             e.printStackTrace();
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (java.io.IOException e) {
             e.printStackTrace();
@@ -123,13 +122,13 @@ public class RealmBackupRestore {
         // Verifique se temos permissão de gravação
         int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-        if(permission != PackageManager.PERMISSION_GRANTED){
+        if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
         }
         return permission;
     }
 
-    private String dbPath(){
+    private String dbPath() {
         return realm.getPath();
     }
 }

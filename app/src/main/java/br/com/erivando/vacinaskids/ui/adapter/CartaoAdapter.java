@@ -44,7 +44,7 @@ public class CartaoAdapter extends ArrayAdapter<Cartao> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Cartao model =  getItem(position);
+        Cartao model = getItem(position);
         holder.imageView.setImageDrawable(this.getContext().getResources().getDrawable(R.drawable.ic_gerenciar));
         holder.tvTitle.setText(model.getCrianca().getCriaNome());
         holder.tvSubtitle.setText(obtemIdadePorDiaOuMesOuAno(model.getCrianca().getCriaNascimento()));

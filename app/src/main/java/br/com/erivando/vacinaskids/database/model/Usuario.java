@@ -22,6 +22,17 @@ import io.realm.annotations.Required;
  */
 public class Usuario extends RealmObject implements Parcelable {
 
+    public static final Parcelable.Creator<Usuario> CREATOR = new Parcelable.Creator<Usuario>() {
+        @Override
+        public Usuario createFromParcel(Parcel in) {
+            return new Usuario(in);
+        }
+
+        @Override
+        public Usuario[] newArray(int size) {
+            return new Usuario[size];
+        }
+    };
     @Required
     @PrimaryKey
     private Long id;
@@ -41,6 +52,15 @@ public class Usuario extends RealmObject implements Parcelable {
         this.usuaSenha = usuaSenha;
         this.usuaEmail = usuaEmail;
         this.usuaFoto = usuaFoto;
+    }
+
+    protected Usuario(Parcel in) {
+        id = in.readLong();
+        usuaNome = in.readString();
+        usuaLogin = in.readString();
+        usuaSenha = in.readString();
+        usuaEmail = in.readString();
+        usuaFoto = in.readString();
     }
 
     public Long getId() {
@@ -94,27 +114,6 @@ public class Usuario extends RealmObject implements Parcelable {
     @Override
     public String toString() {
         return getUsuaNome();
-    }
-
-    public static final Parcelable.Creator<Usuario> CREATOR = new Parcelable.Creator<Usuario>() {
-        @Override
-        public Usuario createFromParcel(Parcel in) {
-            return new Usuario(in);
-        }
-
-        @Override
-        public Usuario[] newArray(int size) {
-            return new Usuario[size];
-        }
-    };
-
-    protected Usuario(Parcel in) {
-        id = in.readLong();
-        usuaNome = in.readString();
-        usuaLogin = in.readString();
-        usuaSenha = in.readString();
-        usuaEmail = in.readString();
-        usuaFoto = in.readString();
     }
 
     /**

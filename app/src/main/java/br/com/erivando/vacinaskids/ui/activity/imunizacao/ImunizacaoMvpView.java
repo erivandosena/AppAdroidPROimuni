@@ -9,7 +9,7 @@ import br.com.erivando.vacinaskids.mvp.MvpView;
  * Local:       Fortaleza/CE
  * E-mail:      erivandoramos@bol.com.br
  */
-public interface ImunizacaoMvpView extends MvpView  {
+public interface ImunizacaoMvpView extends MvpView {
 
     void openCartaoDetalheActivity(Long idLong);
 

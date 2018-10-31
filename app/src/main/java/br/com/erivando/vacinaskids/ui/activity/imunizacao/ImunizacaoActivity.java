@@ -33,44 +33,33 @@ import butterknife.OnClick;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpView{
-
-    @Inject
-    ImunizacaoMvpPresenter<ImunizacaoMvpView> presenter;
-
-    @Inject
-    VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
+public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpView {
 
     @BindView(R.id.text_nome_agente)
     public TextView mTextAgente;
-
     @BindView(R.id.text_nome_unidade)
     public TextView mTextUnidade;
-
     @BindView(R.id.text_lote_vacina)
     public TextView mTextLote;
-
     @BindView(R.id.text_data_imunizacao)
     public TextView mTextData;
-
     @BindView(R.id.btn_registra_imunizacao)
     public Button mRegistrar;
-
+    @BindView(R.id.text_imunizacao_vacina_descricao)
+    public TextView mTexVacinaDescricao;
+    @Inject
+    ImunizacaoMvpPresenter<ImunizacaoMvpView> presenter;
+    @Inject
+    VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    // @BindView(R.id.toolbar_header_view)
+    // HeaderView toolbarHeaderView;
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
-
-   // @BindView(R.id.toolbar_header_view)
-   // HeaderView toolbarHeaderView;
-
     @BindView(R.id.float_header_view)
     HeaderView floatHeaderView;
-
-    @BindView(R.id.text_imunizacao_vacina_descricao)
-    public TextView mTexVacinaDescricao;
-
     Intent intent;
 
     private Long idVacina;
@@ -112,13 +101,13 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
 
     @Override
     protected void setUp() {
-        if(intent != null) {
+        if (intent != null) {
             idVacina = intent.getLongExtra("vacina", 0L);
             idDose = intent.getLongExtra("dose", 0L);
             idIdade = intent.getLongExtra("idade", 0L);
             idCartao = intent.getLongExtra("cartao", 0L);
 
-            if(presenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id"}, new Long[]{idVacina, idDose}) != null) {
+            if (presenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id"}, new Long[]{idVacina, idDose}) != null) {
                 new AlertDialog.Builder(this)
                         .setIcon(R.drawable.ic_launcher_round)
                         .setTitle(AppAplicacao.contextApp.getResources().getString(R.string.app_name))

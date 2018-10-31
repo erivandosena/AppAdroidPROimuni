@@ -12,8 +12,6 @@ import br.com.erivando.vacinaskids.mvp.base.BasePresenter;
 import br.com.erivando.vacinaskids.util.rx.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
 
-import static br.com.erivando.vacinaskids.util.Uteis.getParseDateString;
-
 /**
  * Projeto:     VacinasKIDS
  * Autor:       Erivando Sena
@@ -39,7 +37,7 @@ public class CartaoPresenter<V extends CartaoMvpView> extends BasePresenter<V> i
         }
 
         Cartao cartao = new Cartao();
-        cartao.setId((id == 0L) ? (long)getIDataManager().getCartaoID().incrementAndGet() : id);
+        cartao.setId((id == 0L) ? (long) getIDataManager().getCartaoID().incrementAndGet() : id);
         cartao.setCrianca(crianca);
 
         try {

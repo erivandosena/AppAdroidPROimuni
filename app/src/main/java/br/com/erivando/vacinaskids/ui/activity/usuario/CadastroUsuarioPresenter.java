@@ -35,8 +35,8 @@ import static android.app.Activity.RESULT_OK;
 import static br.com.erivando.vacinaskids.util.Uteis.REQUEST_IMG_CAMERA;
 import static br.com.erivando.vacinaskids.util.Uteis.REQUEST_IMG_GALERIA;
 import static br.com.erivando.vacinaskids.util.Uteis.bitmapParaBase64;
-import static br.com.erivando.vacinaskids.util.Uteis.getCapitalizeNome;
 import static br.com.erivando.vacinaskids.util.Uteis.criaArquivoImagem;
+import static br.com.erivando.vacinaskids.util.Uteis.getCapitalizeNome;
 
 /**
  * Projeto:     VacinasKIDS
@@ -90,7 +90,7 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
         getMvpView().showLoading();
 
         Usuario usuario = new Usuario();
-        usuario.setId((id == 0L) ? (long)getIDataManager().getUsuarioID().incrementAndGet() : id);
+        usuario.setId((id == 0L) ? (long) getIDataManager().getUsuarioID().incrementAndGet() : id);
         usuario.setUsuaNome(nome);
         usuario.setUsuaLogin(login);
         usuario.setUsuaSenha(senha);

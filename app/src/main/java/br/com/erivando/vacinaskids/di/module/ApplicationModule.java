@@ -5,13 +5,11 @@ import android.content.Context;
 
 import javax.inject.Singleton;
 
-import br.com.erivando.vacinaskids.BuildConfig;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.database.DataManager;
 import br.com.erivando.vacinaskids.database.IDataManager;
 import br.com.erivando.vacinaskids.database.IPreferencesHelper;
 import br.com.erivando.vacinaskids.database.PreferencesHelper;
-import br.com.erivando.vacinaskids.di.ApiInfo;
 import br.com.erivando.vacinaskids.di.ApplicationContext;
 import br.com.erivando.vacinaskids.di.PreferenceInfo;
 import br.com.erivando.vacinaskids.util.AppConstants;

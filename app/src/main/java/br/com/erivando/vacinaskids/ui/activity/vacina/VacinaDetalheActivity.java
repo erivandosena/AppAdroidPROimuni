@@ -30,27 +30,22 @@ import butterknife.OnClick;
  * Local:       Fortaleza/CE
  * E-mail:      erivandoramos@bol.com.br
  */
-public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView{
+public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView {
 
     public static final String EXTRA_NOME = "vacina_nome";
     public static final String EXTRA_DESC = "vacina_descricao";
     public static final String EXTRA_ADMIN = "vacina_admin";
-
+    @BindView(R.id.text_vacina_descricao)
+    public TextView mTexVacinaDescricao;
+    @BindView(R.id.text_vacina_administracao)
+    public TextView mTexVacinaAdministracao;
+    @BindView(R.id.fab_vacina_share)
+    public FloatingActionButton floatingActionButtonVacinaShare;
+    @Inject
+    VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
     private String vacinaNome;
     private String vacinaDesc;
     private String vacinaAdmin;
-
-    @Inject
-    VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
-
-    @BindView(R.id.text_vacina_descricao)
-    public TextView mTexVacinaDescricao;
-
-    @BindView(R.id.text_vacina_administracao)
-    public TextView mTexVacinaAdministracao;
-
-    @BindView(R.id.fab_vacina_share)
-    public FloatingActionButton floatingActionButtonVacinaShare;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, ImunizacaoActivity.class);
@@ -101,9 +96,9 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
                     .setType("text/html")
                     .setSubject(getResources().getString(R.string.app_name))
                     .setChooserTitle(getResources().getString(R.string.app_name))
-                    .setText(vacinaNome.toUpperCase() +"\n\n"+
-                            vacinaDesc +"\n\n"+
-                            vacinaAdmin+ "\n\n"+ getResources().getString(R.string.app_name)+ "\n"+ getResources().getString(R.string.app_link_download) +"\n\n♥ "+getResources().getString(R.string.app_slogan))
+                    .setText(vacinaNome.toUpperCase() + "\n\n" +
+                            vacinaDesc + "\n\n" +
+                            vacinaAdmin + "\n\n" + getResources().getString(R.string.app_name) + "\n" + getResources().getString(R.string.app_link_download) + "\n\n♥ " + getResources().getString(R.string.app_slogan))
                     .createChooserIntent()
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             if (shareIntent.resolveActivity(getPackageManager()) != null) {

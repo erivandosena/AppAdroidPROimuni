@@ -16,12 +16,10 @@
 ~ limitações sob a licença.
 -->
 
-<br.com.erivando.vacinaskids.util.HeaderView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<br.com.erivando.vacinaskids.util.HeaderView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <!-- Titulo -->
     <TextView
@@ -29,8 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
-        />
+        android:textSize="18sp" />
 
     <!-- SubTitulo -->
     <TextView
@@ -38,7 +35,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
-        android:textSize="16sp"
-        />
+        android:textSize="16sp" />
 
 </br.com.erivando.vacinaskids.util.HeaderView>

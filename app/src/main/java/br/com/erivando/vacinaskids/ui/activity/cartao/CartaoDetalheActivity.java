@@ -43,29 +43,22 @@ import io.realm.RealmList;
  * Local:       Fortaleza/CE
  * E-mail:      erivandoramos@bol.com.br
  */
-public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView{
-
-    @Inject
-    CartaoMvpPresenter<CartaoMvpView> presenter;
-
-    @Inject
-    IdadeMvpPresenter<IdadeMvpView> idadePresenter;
-
-    @Inject
-    CalendarioMvpPresenter<CalendarioMvpView> calendarioPresenter;
-
-    @Inject
-    ImunizacaoMvpPresenter<ImunizacaoMvpView> imunizacaoPresenter;
+public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView {
 
     @BindView(R.id.image_cartao_vacinal)
     public ImageView mImagemCartao;
-
     @BindView(R.id.text_nome_crianca)
     public TextView mTextCrianca;
-
     @BindView(R.id.text_idade_crianca)
     public TextView mTextIdade;
-
+    @Inject
+    CartaoMvpPresenter<CartaoMvpView> presenter;
+    @Inject
+    IdadeMvpPresenter<IdadeMvpView> idadePresenter;
+    @Inject
+    CalendarioMvpPresenter<CalendarioMvpView> calendarioPresenter;
+    @Inject
+    ImunizacaoMvpPresenter<ImunizacaoMvpView> imunizacaoPresenter;
     private Cartao cartao;
 
     private Intent intent;
@@ -106,13 +99,13 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
 
     @Override
     protected void setUp() {
-        if(intent != null) {
+        if (intent != null) {
             Long idCartao = intent.getLongExtra("cartao", 0L);
             cartao = presenter.onCartaoCadastrado(idCartao);
             if (cartao.getCrianca().getCriaFoto() != null)
                 mImagemCartao.setImageBitmap(Uteis.base64ParaBitmap(cartao.getCrianca().getCriaFoto()));
             mTextCrianca.setText(cartao.getCrianca().getCriaNome());
-            mTextIdade.setText("Idade: "+ Uteis.obtemIdadeCompleta(cartao.getCrianca().getCriaNascimento()));
+            mTextIdade.setText("Idade: " + Uteis.obtemIdadeCompleta(cartao.getCrianca().getCriaNascimento()));
         }
 
         List<Idade> idadeList = idadePresenter.onIdadesCadastradas();
@@ -130,7 +123,7 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
                     listaDoses.add(calendarioItem.getDose());
                     listaIdades.add(calendarioItem.getIdade());
                     Imunizacao imunizacao = imunizacaoPresenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id"}, new Long[]{calendarioItem.getVacina().getId(), calendarioItem.getDose().getId()});
-                    if(imunizacao != null) {
+                    if (imunizacao != null) {
                         listaImunizacoes.add(imunizacao);
                     }
                 }

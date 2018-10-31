@@ -1,4 +1,3 @@
-
 package br.com.erivando.vacinaskids.ui.fragment.vacina;
 
 import android.content.Context;

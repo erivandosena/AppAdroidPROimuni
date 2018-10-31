@@ -1,7 +1,5 @@
 package br.com.erivando.vacinaskids.ui.activity.imunizacao;
 
-import android.content.Context;
-
 import br.com.erivando.vacinaskids.database.model.Imunizacao;
 import br.com.erivando.vacinaskids.di.PerActivity;
 import br.com.erivando.vacinaskids.mvp.MvpPresenter;

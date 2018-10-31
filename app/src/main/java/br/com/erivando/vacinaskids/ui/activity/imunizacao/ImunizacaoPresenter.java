@@ -1,10 +1,7 @@
 package br.com.erivando.vacinaskids.ui.activity.imunizacao;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 
 import javax.inject.Inject;
 
@@ -63,7 +60,7 @@ public class ImunizacaoPresenter<V extends ImunizacaoMvpView> extends BasePresen
         final Cartao cartao = getIDataManager().obtemCartao(idCartao);
 
         Imunizacao imunizacao = new Imunizacao();
-        imunizacao.setId((id == 0L) ? (long)getIDataManager().getImunizacaoID().incrementAndGet() : id);
+        imunizacao.setId((id == 0L) ? (long) getIDataManager().getImunizacaoID().incrementAndGet() : id);
         imunizacao.setImunData((imunData != null) ? getParseDateString(imunData).getTime() : getParseDateString(getCurrentTimeStamp()).getTime());
         imunizacao.setImunAgente(imunAgente);
         imunizacao.setImunPosto(imunPosto);

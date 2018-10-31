@@ -35,10 +35,10 @@ import static android.app.Activity.RESULT_OK;
 import static br.com.erivando.vacinaskids.util.Uteis.REQUEST_IMG_CAMERA;
 import static br.com.erivando.vacinaskids.util.Uteis.REQUEST_IMG_GALERIA;
 import static br.com.erivando.vacinaskids.util.Uteis.bitmapParaBase64;
-import static br.com.erivando.vacinaskids.util.Uteis.getCapitalizeNome;
 import static br.com.erivando.vacinaskids.util.Uteis.criaArquivoImagem;
-import static br.com.erivando.vacinaskids.util.Uteis.isDataValida;
+import static br.com.erivando.vacinaskids.util.Uteis.getCapitalizeNome;
 import static br.com.erivando.vacinaskids.util.Uteis.getParseDateString;
+import static br.com.erivando.vacinaskids.util.Uteis.isDataValida;
 
 /**
  * Projeto:     VacinasKIDS
@@ -79,7 +79,7 @@ public class CriancaPresenter<V extends CriancaMvpView> extends BasePresenter<V>
         Usuario usuario = getIDataManager().obtemUsuario(getIDataManager().obtemUsuario().getId());
 
         Crianca crianca = new Crianca();
-        crianca.setId((id == 0L) ? (long)getIDataManager().getCriancaID().incrementAndGet() : id);
+        crianca.setId((id == 0L) ? (long) getIDataManager().getCriancaID().incrementAndGet() : id);
         crianca.setCriaNome(nome);
         crianca.setCriaNascimento(getParseDateString(nascimento).getTime());
         crianca.setCriaSexo(sexo);

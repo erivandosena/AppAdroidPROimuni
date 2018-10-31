@@ -27,15 +27,12 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class AppAplicacao extends MultiDexApplication {
 
+    public static Context contextApp;
     @Inject
     IDataManager iDataManager;
-
     @Inject
     CalligraphyConfig calligraphyConfig;
-
     private ApplicationComponent applicationComponent;
-
-    public static Context contextApp;
 
     public static AppAplicacao get(Context context) {
         return (AppAplicacao) context.getApplicationContext();
@@ -61,7 +58,7 @@ public class AppAplicacao extends MultiDexApplication {
         contextApp = getApplicationContext();
     }
 
-    public ApplicationComponent getComponent(){
+    public ApplicationComponent getComponent() {
         return applicationComponent;
     }
 

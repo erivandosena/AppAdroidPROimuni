@@ -8,8 +8,6 @@ package br.com.erivando.vacinaskids.mvp;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-import com.androidnetworking.error.ANError;
-
 /**
  * Cada apresentador no aplicativo deve implementar essa interface ou estender o
  * BasePresenter indicando o tipo de MvpView com o qual deseja se conectar.

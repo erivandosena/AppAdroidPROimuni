@@ -44,10 +44,9 @@ import br.com.erivando.vacinaskids.ui.activity.crianca.CriancaListaActvity;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginMvpView;
-import br.com.erivando.vacinaskids.ui.activity.mapa.MapLocationActivity;
+import br.com.erivando.vacinaskids.ui.activity.mapa.MapaActivity;
 import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaActivity;
-import br.com.erivando.vacinaskids.ui.activity.mapa.MapaActivity;
 import br.com.erivando.vacinaskids.ui.fragment.sobre.Sobre;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -310,7 +309,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                 .setType("text/html")
                 .setSubject(getResources().getString(R.string.app_name))
                 .setChooserTitle(getResources().getString(R.string.app_name))
-                .setText("Olá!\n"+getResources().getString(R.string.app_name)+" "+getResources().getString(R.string.app_mensagem_indicacao) + "\n"+ getResources().getString(R.string.app_link_download) +"\n\n♥ "+getResources().getString(R.string.app_slogan))
+                .setText("Olá!\n" + getResources().getString(R.string.app_name) + " " + getResources().getString(R.string.app_mensagem_indicacao) + "\n" + getResources().getString(R.string.app_link_download) + "\n\n♥ " + getResources().getString(R.string.app_slogan))
                 .createChooserIntent()
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         if (shareIntent.resolveActivity(getPackageManager()) != null) {
@@ -328,7 +327,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     public void showMapaActivity() {
         if (isNetworkConnected()) {
             if (isNetworkConnected()) {
-                startActivity(MapLocationActivity.getStartIntent(this));
+                startActivity(MapaActivity.getStartIntent(this));
                 finish();
             }
         }
@@ -482,11 +481,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     private void executaBackup() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
         alertDialog.setIcon(R.drawable.ic_launcher_round);
-        alertDialog.setTitle(getResources().getString(R.string.app_name)+ " | Copiar");
+        alertDialog.setTitle(getResources().getString(R.string.app_name) + " | Copiar");
         alertDialog.setCancelable(false);
         alertDialog.setMessage("Esta cópia de seguranca substituirá a cópia anterior.\n\nConfirme Sim para continuar ou Não para cancelar.");
         alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
+            public void onClick(DialogInterface dialog, int which) {
                 backupRestore.backup();
             }
         });
@@ -498,14 +497,14 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         alertDialog.show();
     }
 
-    private void executaRestauracao(){
+    private void executaRestauracao() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
         alertDialog.setIcon(R.drawable.ic_launcher_round);
-        alertDialog.setTitle(getResources().getString(R.string.app_name)+ " | Restaurar");
+        alertDialog.setTitle(getResources().getString(R.string.app_name) + " | Restaurar");
         alertDialog.setCancelable(false);
         alertDialog.setMessage("Esta restauração substituirá seus dados atuais do aplicativo.\n\nConfirme Sim para continuar ou Não para cancelar.");
         alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
+            public void onClick(DialogInterface dialog, int which) {
                 backupRestore.restore();
                 new AlertDialog.Builder(MainActivity.this)
                         .setIcon(R.drawable.ic_launcher_round)

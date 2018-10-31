@@ -97,7 +97,15 @@ import static br.com.erivando.vacinaskids.util.Uteis.hasPermissoes;
 
 public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> implements LoginMvpPresenter<V>, GoogleApiClient.OnConnectionFailedListener {
 
+    public static final int RC_SIGN_IN = 777;
     private static final String TAG = "LoginPresenter";
+    /* GMail API OAuth 2.0 */
+    private static final int REQUEST_ACCOUNT_PICKER = 1000;
+    private static final int REQUEST_AUTHORIZATION = 1001;
+    private static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
+    private static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
+    private static final String PREF_ACCOUNT_NAME = "accountName";
+    private static final List<String> SCOPES = Arrays.asList(GmailScopes.GMAIL_LABELS, GmailScopes.GMAIL_COMPOSE, GmailScopes.GMAIL_INSERT, GmailScopes.MAIL_GOOGLE_COM);
     /* Login facebook */
     private CallbackManager callbackManager;
     private AccessTokenTracker accessTokenTracker;
@@ -105,14 +113,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
     private boolean isLoggedIn;
     /* Login google */
     private GoogleSignInClient googleSignInClient;
-    public static final int RC_SIGN_IN = 777;
-    /* GMail API OAuth 2.0 */
-    private static final int REQUEST_ACCOUNT_PICKER = 1000;
-    private static final int REQUEST_AUTHORIZATION = 1001;
-    private static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
-    private static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
-    private static final String PREF_ACCOUNT_NAME = "accountName";
-    private static final List<String> SCOPES = Arrays.asList(GmailScopes.GMAIL_LABELS,GmailScopes.GMAIL_COMPOSE,GmailScopes.GMAIL_INSERT,GmailScopes.MAIL_GOOGLE_COM);
     private GoogleAccountCredential googleAccountCredential;
     private InternetDetector internetDetector;
     private FloatingActionButton floatingActionButton;
@@ -140,7 +140,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         try {
             if (getIDataManager().validaLoginUsuario(login, senha)) {
                 Usuario usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login, "usuaSenha", senha});
-                String tokenUsuario = UUID.randomUUID().toString().replace("-","");
+                String tokenUsuario = UUID.randomUUID().toString().replace("-", "");
                 getIDataManager().setAccessToken(tokenUsuario);
                 getIDataManager().updateUserInfo(
                         tokenUsuario,
@@ -148,7 +148,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                         DataManager.LoggedInMode.LOGGED_IN_MODE_LOCAL,
                         usuario.getUsuaNome(),
                         usuario.getUsuaEmail(),
-                        (usuario.getUsuaFoto() != null) ? "file://"+getPathFromUri(AppAplicacao.contextApp, bitmapParaUri(AppAplicacao.contextApp,base64ParaBitmap(usuario.getUsuaFoto()))) : null
+                        (usuario.getUsuaFoto() != null) ? "file://" + getPathFromUri(AppAplicacao.contextApp, bitmapParaUri(AppAplicacao.contextApp, base64ParaBitmap(usuario.getUsuaFoto()))) : null
                 );
                 if (!isViewAttached()) {
                     return;
@@ -431,6 +431,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
     /**
      * Armazenando o ID do Mail usando Shared Preferences
+     *
      * @param view
      */
     @Override
@@ -451,6 +452,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
     /**
      * Método para informações de erro do Google Play Service
+     *
      * @param connectionStatusCode
      */
     @Override
@@ -474,6 +476,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
     /**
      * Armazenando o ID do Mail usando Shared Preferences
+     *
      * @return
      */
     @Override
@@ -515,9 +518,9 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
      */
     class CredentialRequestTask extends AsyncTask<Void, Void, String> {
 
+        private final View view = floatingActionButton;
         private Gmail service = null;
         private Exception lastError = null;
-        private final View view = floatingActionButton;
         private LoginActivity activity;
 
         CredentialRequestTask(LoginPresenter<V> vLoginPresenter, GoogleAccountCredential googleAccountCredential) {
@@ -535,7 +538,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             String to = usuario.getUsuaEmail();
             String from = googleAccountCredential.getSelectedAccountName();
             String subject = AppAplicacao.contextApp.getResources().getString(R.string.texto_email_assunto);
-            String body =  AppAplicacao.contextApp.getResources().getString(R.string.texto_email_senha)+" "+usuario.getUsuaNome()+"\n\n"+AppAplicacao.contextApp.getResources().getString(R.string.texto_envio_senha)+" "+usuario.getUsuaSenha()+"\n\n© "+ Calendar.getInstance().get(Calendar.YEAR)+" "+AppAplicacao.contextApp.getResources().getString(R.string.app_name)+"\n"+AppAplicacao.contextApp.getResources().getString(R.string.app_slogan);
+            String body = AppAplicacao.contextApp.getResources().getString(R.string.texto_email_senha) + " " + usuario.getUsuaNome() + "\n\n" + AppAplicacao.contextApp.getResources().getString(R.string.texto_envio_senha) + " " + usuario.getUsuaSenha() + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + AppAplicacao.contextApp.getResources().getString(R.string.app_name) + "\n" + AppAplicacao.contextApp.getResources().getString(R.string.app_slogan);
             MimeMessage mimeMessage;
             String response = "";
             try {
@@ -608,11 +611,11 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
         @Override
         protected void onPostExecute(String output) {
-            getMvpView(). hideLoading();
+            getMvpView().hideLoading();
             if (output == null || output.length() == 0) {
                 showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.resultado_google_oauth));
             } else {
-                alertDialogBuilder.setMessage(AppAplicacao.contextApp.getResources().getString(R.string.envio_senha)+"\n"+usuario.getUsuaEmail()+" \n\n"+AppAplicacao.contextApp.getResources().getString(R.string.envio_senha_email));
+                alertDialogBuilder.setMessage(AppAplicacao.contextApp.getResources().getString(R.string.envio_senha) + "\n" + usuario.getUsuaEmail() + " \n\n" + AppAplicacao.contextApp.getResources().getString(R.string.envio_senha_email));
                 AlertDialog dialog = alertDialogBuilder.create();
                 dialog.show();
             }
@@ -627,7 +630,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                 } else if (lastError instanceof UserRecoverableAuthIOException) {
                     getMvpView().getStartActivityForResult(((UserRecoverableAuthIOException) lastError).getIntent(), REQUEST_AUTHORIZATION);
                 } else {
-                    showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_google_oauth)+"\n" + lastError);
+                    showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_google_oauth) + "\n" + lastError);
                 }
             } else {
                 showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_request));

@@ -51,8 +51,6 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Uteis {
 
-    private static final SimpleDateFormat DATA_FORMAT_PARSER = new SimpleDateFormat("dd/MM/yyyy");
-
     public static final int REQUEST_IMG_CAMERA = 1;
     public static final int REQUEST_IMG_GALERIA = 2;
     public static final int TODAS_PERMISSOES = 1;
@@ -61,9 +59,9 @@ public class Uteis {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA
     };
+    private static final SimpleDateFormat DATA_FORMAT_PARSER = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
-     *
      * @return
      */
     public static String getCurrentTimeStamp() {
@@ -77,13 +75,12 @@ public class Uteis {
      */
     public static void habilitaImmersiveMode(Context context) {
         ((Activity) context).getWindow().getDecorView().setSystemUiVisibility(
-                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
                         View.SYSTEM_UI_FLAG_FULLSCREEN |
                         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
     /**
-     *
      * @param context
      */
     public static void habilitaTelaCheia(Context context) {
@@ -91,7 +88,6 @@ public class Uteis {
     }
 
     /**
-     *
      * @param nomeCompleto
      * @return
      */
@@ -109,7 +105,6 @@ public class Uteis {
     }
 
     /**
-     *
      * @param bitmap
      * @return
      */
@@ -136,7 +131,6 @@ public class Uteis {
     }
 
     /**
-     *
      * @param arquivo
      * @return
      */
@@ -183,7 +177,6 @@ public class Uteis {
     }
 
     /**
-     *
      * @param context
      * @param bitmap
      * @return
@@ -196,7 +189,6 @@ public class Uteis {
     }
 
     /**
-     *
      * @param context
      * @param contentUri
      * @return
@@ -204,7 +196,7 @@ public class Uteis {
     public static String getPathFromUri(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {
-            String[] proj = { MediaStore.Images.Media.DATA };
+            String[] proj = {MediaStore.Images.Media.DATA};
             cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
@@ -217,7 +209,6 @@ public class Uteis {
     }
 
     /**
-     *
      * @param context
      */
     public static void exibeAvaliacaoDialog(final Context context) {
@@ -231,7 +222,7 @@ public class Uteis {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (context != null) {
-                            Uri uri = Uri.parse("market://details?id="+ context.getPackageName());
+                            Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
                             Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
                             // Para contar com o backstack da Play Store, depois de pressionar o botão Voltar,
                             // para voltar ao aplicativo, precisamos adicionar os seguintes sinalizadores à intent.
@@ -248,7 +239,6 @@ public class Uteis {
     }
 
     /**
-     *
      * @param context
      * @param permissions
      * @return
@@ -273,7 +263,6 @@ public class Uteis {
     }
 
     /**
-     *
      * @param data
      * @return
      */
@@ -282,7 +271,8 @@ public class Uteis {
         DATA_FORMAT_PARSER.setLenient(false);
         try {
             calendar.setTime(DATA_FORMAT_PARSER.parse(data));
-        } catch (ParseException e) {}
+        } catch (ParseException e) {
+        }
         return calendar;
     }
 
@@ -291,7 +281,6 @@ public class Uteis {
     }
 
     /**
-     *
      * @param data
      * @return
      */
@@ -317,7 +306,7 @@ public class Uteis {
         return true;
     }
 
-    public static String obtemIdadeCompleta(Date data)  {
+    public static String obtemIdadeCompleta(Date data) {
         Calendar calendarioHoje = GregorianCalendar.getInstance();
         int diaHoje = calendarioHoje.get(Calendar.DAY_OF_MONTH);
         int mesHoje = calendarioHoje.get(Calendar.MONTH) + 1;
@@ -331,7 +320,7 @@ public class Uteis {
         int mesNasc = Integer.valueOf(separaDN[1]);
         int anoNasc = Integer.valueOf(separaDN[2]);
 
-        String strAniv = anoHoje+"-"+mesNasc+"-"+diaNasc;
+        String strAniv = anoHoje + "-" + mesNasc + "-" + diaNasc;
         Calendar calAniv = Calendar.getInstance();
         try {
             calAniv.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(strAniv));
@@ -339,7 +328,7 @@ public class Uteis {
             ex.getStackTrace();
         }
 
-        int anos = (calendarioHoje.getTimeInMillis() < calAniv.getTimeInMillis())? (anoHoje-anoNasc-1):anoHoje-anoNasc ;
+        int anos = (calendarioHoje.getTimeInMillis() < calAniv.getTimeInMillis()) ? (anoHoje - anoNasc - 1) : anoHoje - anoNasc;
         int meses;
         int dias;
 
@@ -355,34 +344,34 @@ public class Uteis {
                 meses--;
             }
         } else {//Se o mês atual for o mês do aniversário:
-            if (diaHoje<diaNasc) {
+            if (diaHoje < diaNasc) {
                 meses = 11;
             }
         }
 
         dias = diaHoje - diaNasc;
         if (dias < 0) {//Se dia hoje menor que dia do niver, somar os dias desde o mês anterior:
-            if (mesHoje==5||mesHoje==7||mesHoje==8||mesHoje==10||mesHoje==12) {
-                dias = 30-diaNasc+diaHoje;
-            } else if (mesHoje==1||mesHoje==2||mesHoje==4||mesHoje==6||mesHoje==9||mesHoje==11) {
-                dias = 31-diaNasc+diaHoje;
+            if (mesHoje == 5 || mesHoje == 7 || mesHoje == 8 || mesHoje == 10 || mesHoje == 12) {
+                dias = 30 - diaNasc + diaHoje;
+            } else if (mesHoje == 1 || mesHoje == 2 || mesHoje == 4 || mesHoje == 6 || mesHoje == 9 || mesHoje == 11) {
+                dias = 31 - diaNasc + diaHoje;
             } else {//Verificando se o ano é bissexto ou não: Esse else é para o mês 3, cujo anterior é fevereiro:
-                if (anoHoje%4 == 0) {
-                    dias = 29-diaNasc+diaHoje;
+                if (anoHoje % 4 == 0) {
+                    dias = 29 - diaNasc + diaHoje;
                 } else {
-                    dias = 28-diaNasc+diaHoje;
+                    dias = 28 - diaNasc + diaHoje;
                 }
             }
         }
 
-        String dia = (dias > 1) ? " e "+dias+" dias" : " e "+dias + " dia";
-        String mes = (meses > 1) ? meses+" meses" : meses + " mês";
-        String ano = (anos > 1) ? anos+" anos, " : anos + " ano, ";
+        String dia = (dias > 1) ? " e " + dias + " dias" : " e " + dias + " dia";
+        String mes = (meses > 1) ? meses + " meses" : meses + " mês";
+        String ano = (anos > 1) ? anos + " anos, " : anos + " ano, ";
 
-        return ano+" "+mes+" "+dia;
+        return ano + " " + mes + " " + dia;
     }
 
-    public static String obtemIdadePorDiaOuMesOuAno(Date data)  {
+    public static String obtemIdadePorDiaOuMesOuAno(Date data) {
         Calendar calendarioHoje = GregorianCalendar.getInstance();
         int diaHoje = calendarioHoje.get(Calendar.DAY_OF_MONTH);
         int mesHoje = calendarioHoje.get(Calendar.MONTH) + 1;
@@ -396,7 +385,7 @@ public class Uteis {
         int mesNasc = Integer.valueOf(separaDN[1]);
         int anoNasc = Integer.valueOf(separaDN[2]);
 
-        String strAniv = anoHoje+"-"+mesNasc+"-"+diaNasc;
+        String strAniv = anoHoje + "-" + mesNasc + "-" + diaNasc;
         Calendar calAniv = Calendar.getInstance();
         try {
             calAniv.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(strAniv));
@@ -404,7 +393,7 @@ public class Uteis {
             ex.getStackTrace();
         }
 
-        int anos = (calendarioHoje.getTimeInMillis() < calAniv.getTimeInMillis())? (anoHoje-anoNasc-1):anoHoje-anoNasc ;
+        int anos = (calendarioHoje.getTimeInMillis() < calAniv.getTimeInMillis()) ? (anoHoje - anoNasc - 1) : anoHoje - anoNasc;
         int meses;
         int dias;
 
@@ -420,31 +409,31 @@ public class Uteis {
                 meses--;
             }
         } else {//Se o mês atual for o mês do aniversário:
-            if (diaHoje<diaNasc) {
+            if (diaHoje < diaNasc) {
                 meses = 11;
             }
         }
 
         dias = diaHoje - diaNasc;
         if (dias < 0) {//Se dia hoje menor que dia do niver, somar os dias desde o mês anterior:
-            if (mesHoje==5||mesHoje==7||mesHoje==8||mesHoje==10||mesHoje==12) {
-                dias = 30-diaNasc+diaHoje;
-            } else if (mesHoje==1||mesHoje==2||mesHoje==4||mesHoje==6||mesHoje==9||mesHoje==11) {
-                dias = 31-diaNasc+diaHoje;
+            if (mesHoje == 5 || mesHoje == 7 || mesHoje == 8 || mesHoje == 10 || mesHoje == 12) {
+                dias = 30 - diaNasc + diaHoje;
+            } else if (mesHoje == 1 || mesHoje == 2 || mesHoje == 4 || mesHoje == 6 || mesHoje == 9 || mesHoje == 11) {
+                dias = 31 - diaNasc + diaHoje;
             } else {//Verificando se o ano é bissexto ou não: Esse else é para o mês 3, cujo anterior é fevereiro:
-                if (anoHoje%4 == 0) {
-                    dias = 29-diaNasc+diaHoje;
+                if (anoHoje % 4 == 0) {
+                    dias = 29 - diaNasc + diaHoje;
                 } else {
-                    dias = 28-diaNasc+diaHoje;
+                    dias = 28 - diaNasc + diaHoje;
                 }
             }
         }
 
-        String dia = (dias > 1) ? dias+" Dias" : dias + " Dia";
-        String mes = (meses > 1) ? meses+" Meses" : meses + " Mês";
-        String ano = (anos > 1) ? anos+" Anos" : anos + " Ano";
+        String dia = (dias > 1) ? dias + " Dias" : dias + " Dia";
+        String mes = (meses > 1) ? meses + " Meses" : meses + " Mês";
+        String ano = (anos > 1) ? anos + " Anos" : anos + " Ano";
 
-        return  (!"0 Ano".equals(ano)) ? ano : ((!"0 Mês".equals(mes)) ? mes : dia);
+        return (!"0 Ano".equals(ano)) ? ano : ((!"0 Mês".equals(mes)) ? mes : dia);
     }
 
     public static int getToolbarHeight(Context context) {

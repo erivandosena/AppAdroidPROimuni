@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.view.WindowManager;
 
 import br.com.erivando.vacinaskids.di.component.ActivityComponent;
 import br.com.erivando.vacinaskids.mvp.MvpView;

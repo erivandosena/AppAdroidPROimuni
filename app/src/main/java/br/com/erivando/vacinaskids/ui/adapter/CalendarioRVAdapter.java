@@ -30,12 +30,12 @@ import io.realm.RealmList;
 public class CalendarioRVAdapter extends RecyclerView.Adapter<CalendarioRVAdapter.ItemRowHolder> {
 
     private ArrayList<Calendario> calendarioList;
-   // private List<Calendario> calendarios;
+    // private List<Calendario> calendarios;
     private Context mContext;
 
     public CalendarioRVAdapter(ArrayList<Calendario> calendarioList, Context mContext) {
         this.calendarioList = calendarioList;
-       // this.calendarios = calendarios;
+        // this.calendarios = calendarios;
         this.mContext = mContext;
     }
 

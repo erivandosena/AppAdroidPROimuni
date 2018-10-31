@@ -51,14 +51,14 @@ public class VacinaRVAdapter extends RecyclerView.Adapter<VacinaRVAdapter.Single
         Idade singleItemIdade = idadeList.get(i);
 
         String rede = new String();
-        if("Pública".equals(singleItemVacina.getVaciRede()))
+        if ("Pública".equals(singleItemVacina.getVaciRede()))
             rede = "Disponível na rede";
         else
             rede = "Opcional na rede";
 
         holder.textTituloVacina.setText(singleItemVacina.getVaciNome());
         holder.textTituloDose.setText(singleItemDose.getDoseDescricao());
-        holder.textTituloRede.setText(rede + " "+singleItemVacina.getVaciRede());
+        holder.textTituloRede.setText(rede + " " + singleItemVacina.getVaciRede());
     }
 
     @Override

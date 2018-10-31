@@ -3,6 +3,8 @@ package br.com.erivando.vacinaskids.ui.activity.cartao;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -34,13 +36,19 @@ import static br.com.erivando.vacinaskids.util.Uteis.habilitaTelaCheia;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class CartaoActivity extends BaseActivity implements CartaoMvpView{
+public class CartaoActivity extends BaseActivity implements CartaoMvpView {
 
     @Inject
     CartaoMvpPresenter<CartaoMvpView> presenter;
 
     @Inject
     CriancaMvpPresenter<CriancaMvpView> presenterCrianca;
+
+    @BindView(R.id.toolbar_cartao)
+    Toolbar toolbar;
+
+    @BindView(R.id.collapsing_toolbar_cartao)
+    CollapsingToolbarLayout collapsingToolbar;
 
     @BindView(R.id.crianca)
     Spinner comboCartao;
@@ -60,11 +68,18 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartao);
+        setUnBinder(ButterKnife.bind(this));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        collapsingToolbar.setTitle(getResources().getString(R.string.text_cartao_titulo));
 
         getActivityComponent().inject(this);
-
-        setUnBinder(ButterKnife.bind(this));
-
         presenter.onAttach(this);
 
         id = 0L;
@@ -76,11 +91,6 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView{
         getCrianca();
 
         setUp();
-    }
-
-    @OnClick(R.id.btn_nav_voltar)
-    public void onCartaoListaActivity() {
-        this.onBackPressed();
     }
 
     @OnClick(R.id.btn_cadadastar_cartao)
@@ -99,8 +109,7 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView{
 
     @Override
     protected void setUp() {
-        habilitaTelaCheia(this);
-        if(intent != null) {
+        if (intent != null) {
             id = intent.getLongExtra("cartao", 0L);
             cartao = presenter.onCartaoCadastrado(id);
             if (cartao != null) {
@@ -132,8 +141,7 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView{
             adapterCartao = new ArrayAdapter<Crianca>(this, android.R.layout.simple_spinner_item, criancas);
             adapterCartao.setDropDownViewResource(android.R.layout.simple_spinner_item);
             comboCartao.setAdapter(adapterCartao);
-        }
-        else {
+        } else {
             Toast.makeText(this, this.getString(R.string.texto_aviso_crianca_nao_cadastrada), Toast.LENGTH_LONG).show();
             openCriancaActivity();
         }
