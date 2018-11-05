@@ -1,5 +1,6 @@
 package br.com.erivando.vacinaskids.ui.activity.imunizacao;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,7 +10,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.inject.Inject;
 
@@ -97,6 +102,26 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
         intent = getIntent();
 
         setUp();
+
+        mTextData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog.OnDateSetListener dpd = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        int mes = monthOfYear+1;
+                        String data = dayOfMonth + "/" + mes + "/" + year;
+                        mTextData.setText(data);
+                    }
+                };
+                Calendar calendario = GregorianCalendar.getInstance();
+                DatePickerDialog d = new DatePickerDialog(ImunizacaoActivity.this, dpd,
+                        calendario.get(Calendar.YEAR),
+                        calendario.get(Calendar.MONTH),
+                        calendario.get(Calendar.DAY_OF_MONTH));
+                d.show();
+            }
+        });
     }
 
     @Override

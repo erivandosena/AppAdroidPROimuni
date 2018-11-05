@@ -167,6 +167,8 @@
                             android:cursorVisible="true"
                             android:gravity="start|center|top"
                             android:hint="@string/text_data_imunizacao"
+                            android:clickable="true"
+                            android:focusable="false"
                             android:inputType="date"
                             android:maxLength="50"
                             android:textColor="@color/black_effective"

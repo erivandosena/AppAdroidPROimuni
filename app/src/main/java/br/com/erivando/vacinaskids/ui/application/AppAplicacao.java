@@ -28,10 +28,13 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 public class AppAplicacao extends MultiDexApplication {
 
     public static Context contextApp;
+
     @Inject
     IDataManager iDataManager;
+
     @Inject
     CalligraphyConfig calligraphyConfig;
+
     private ApplicationComponent applicationComponent;
 
     public static AppAplicacao get(Context context) {

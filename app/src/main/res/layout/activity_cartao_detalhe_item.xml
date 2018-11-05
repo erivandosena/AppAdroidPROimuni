@@ -49,7 +49,8 @@
             android:layout_alignTop="@+id/imagem_vacina"
             android:layout_toEndOf="@+id/imagem_vacina"
             android:text="@null"
-            android:theme="@style/TextStyle.Heading" />
+            android:theme="@style/TextStyle.Heading"
+            android:layout_toRightOf="@+id/imagem_vacina" />
 
         <TextView
             android:id="@+id/text_dose"
@@ -57,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_vacina"
             android:layout_toEndOf="@+id/imagem_vacina"
-            android:text="@null" />
+            android:text="@null"
+            android:layout_toRightOf="@+id/imagem_vacina" />
 
         <TextView
             android:id="@+id/text_idade"
@@ -65,7 +67,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_dose"
             android:layout_toEndOf="@+id/imagem_vacina"
-            android:text="@null" />
+            android:text="@null"
+            android:layout_toRightOf="@+id/imagem_vacina" />
 
         <TextView
             android:id="@+id/text_rede"
@@ -73,7 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_idade"
             android:layout_toEndOf="@+id/imagem_vacina"
-            android:text="@null" />
+            android:text="@null"
+            android:layout_toRightOf="@+id/imagem_vacina" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

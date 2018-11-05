@@ -1,5 +1,6 @@
 package br.com.erivando.vacinaskids.di.component;
 
+import android.app.Application;
 import android.content.Context;
 
 import javax.inject.Singleton;
@@ -7,6 +8,7 @@ import javax.inject.Singleton;
 import br.com.erivando.vacinaskids.database.IDataManager;
 import br.com.erivando.vacinaskids.di.ApplicationContext;
 import br.com.erivando.vacinaskids.di.module.ApplicationModule;
+import br.com.erivando.vacinaskids.service.Servico;
 import br.com.erivando.vacinaskids.ui.application.AppAplicacao;
 import dagger.Component;
 
@@ -24,8 +26,14 @@ public interface ApplicationComponent {
 
     void inject(AppAplicacao appAplicacao);
 
+    void inject(Servico service);
+
     @ApplicationContext
     Context getContext();
 
+    Application application();
+
     IDataManager getIDataManager();
+
+
 }

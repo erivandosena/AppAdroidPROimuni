@@ -7,6 +7,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpView;
 import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoMvpView;
+import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
 import br.com.erivando.vacinaskids.ui.adapter.VacinaRVA;
 import br.com.erivando.vacinaskids.util.Uteis;
 import butterknife.BindView;
@@ -102,10 +104,15 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         if (intent != null) {
             Long idCartao = intent.getLongExtra("cartao", 0L);
             cartao = presenter.onCartaoCadastrado(idCartao);
-            if (cartao.getCrianca().getCriaFoto() != null)
-                mImagemCartao.setImageBitmap(Uteis.base64ParaBitmap(cartao.getCrianca().getCriaFoto()));
-            mTextCrianca.setText(cartao.getCrianca().getCriaNome());
-            mTextIdade.setText("Idade: " + Uteis.obtemIdadeCompleta(cartao.getCrianca().getCriaNascimento()));
+            if(cartao == null) {
+                startActivity(CartaoListaActvity.getStartIntent(this).putExtra("cartaoLista", "cartao"));
+                finish();
+            } else {
+                if (cartao.getCrianca().getCriaFoto() != null)
+                    mImagemCartao.setImageBitmap(Uteis.base64ParaBitmap(cartao.getCrianca().getCriaFoto()));
+                mTextCrianca.setText(cartao.getCrianca().getCriaNome());
+                mTextIdade.setText("Idade: " + Uteis.obtemIdadeCompleta(cartao.getCrianca().getCriaNascimento()));
+            }
         }
 
         List<Idade> idadeList = idadePresenter.onIdadesCadastradas();

@@ -1,5 +1,10 @@
 package br.com.erivando.vacinaskids.ui.activity.main;
 
+import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,8 +12,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,6 +32,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 
@@ -38,9 +47,12 @@ import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.custom.imagem.RoundedImageView;
 import br.com.erivando.vacinaskids.database.backup.RealmBackupRestore;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
+import br.com.erivando.vacinaskids.service.Servico;
 import br.com.erivando.vacinaskids.ui.activity.calendario.CalendarioActivity;
 import br.com.erivando.vacinaskids.ui.activity.cartao.CartaoListaActvity;
 import br.com.erivando.vacinaskids.ui.activity.crianca.CriancaListaActvity;
+import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoMvpView;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginMvpView;
@@ -69,6 +81,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Inject
     LoginMvpPresenter<LoginMvpView> loginPresenter;
+
+    @Inject
+    ImunizacaoMvpPresenter<ImunizacaoMvpView> imunizacaoPresenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -112,6 +127,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         return intent;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,6 +195,10 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         setupNavMenu();
         presenter.onNavMenuCreated();
         setupCardContainerView();
+
+
+       // Intent msgIntent = new Intent(MainActivity.this, Servico.class);
+       // startService(msgIntent);
     }
 
     @Override
@@ -537,4 +557,5 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     public Context getContextActivity() {
         return MainActivity.this;
     }
+
 }

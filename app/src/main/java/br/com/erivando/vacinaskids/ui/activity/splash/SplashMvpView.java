@@ -16,4 +16,5 @@ public interface SplashMvpView extends MvpView {
 
     void openMainActivity();
 
+    void startServico();
 }

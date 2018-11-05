@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".ui.application.AppAplicacao"
@@ -171,9 +172,26 @@
                 android:resource="@xml/file_provider_paths" />
         </provider>
 
-        <activity
-            android:name=".ui.activity.mapa.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+        <service
+            android:name=".service.Servico"
+            android:exported="false" />
+
+        <receiver
+            android:name=".broadcast.AlarmNotificationReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".notification.AlarmReceiver"/>
+        <receiver android:name=".notification.AlarmBootReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

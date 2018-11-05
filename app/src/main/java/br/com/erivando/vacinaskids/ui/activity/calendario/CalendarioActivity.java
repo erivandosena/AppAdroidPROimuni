@@ -26,10 +26,7 @@ import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
 import br.com.erivando.vacinaskids.ui.adapter.CalendarioRVAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.realm.RealmList;
-
-import static br.com.erivando.vacinaskids.util.Uteis.habilitaTelaCheia;
 
 /**
  * Projeto:     VacinasKIDS
@@ -55,8 +52,6 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
 
     List<Idade> idades;
     List<Calendario> calendarios;
-    List<Dose> doses;
-    List<Vacina> vacinas;
     private ArrayList<Calendario> calendarioCompleto;
 
     public static Intent getStartIntent(Context context) {
@@ -91,10 +86,7 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
     @Override
     protected void setUp() {
         calendarios = presenter.onCalendariosCadastrados();
-        //vacinas = vacinaPresenter.onVacinasCadastradas();
-        //doses = dosePresenter.onDosesCadastradas();
         idades = idadePresenter.onIdadesCadastradas();
-
         calendarioCompleto = new ArrayList<Calendario>();
 
         createDummyData();
@@ -107,9 +99,6 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
     }
 
     public void createDummyData() {
-        //idades = idadePresenter.onIdadesCadastradas();
-        //calendarios = presenter.onCalendariosCadastrados();
-
         for (Idade idade : idades) {
             Calendario dm = new Calendario();
             dm.setTituloIdade(idade.getIdadDescricao());

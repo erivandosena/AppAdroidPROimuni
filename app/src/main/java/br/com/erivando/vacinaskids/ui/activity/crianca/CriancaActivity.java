@@ -1,18 +1,31 @@
 package br.com.erivando.vacinaskids.ui.activity.crianca;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -28,10 +41,12 @@ import br.com.erivando.vacinaskids.util.Uteis;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.internal.Util;
 
 import static br.com.erivando.vacinaskids.util.Uteis.PERMISSOES;
 import static br.com.erivando.vacinaskids.util.Uteis.TODAS_PERMISSOES;
 import static br.com.erivando.vacinaskids.util.Uteis.base64ParaBitmap;
+import static br.com.erivando.vacinaskids.util.Uteis.getCurrentTimeStamp;
 import static br.com.erivando.vacinaskids.util.Uteis.habilitaTelaCheia;
 import static br.com.erivando.vacinaskids.util.Uteis.hasPermissoes;
 
@@ -114,6 +129,44 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
 
         setUp();
 
+        /*
+        nascimentoEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
+        */
+
+        nascimentoEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog.OnDateSetListener dpd = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int ano, int mes, int dia) {
+                        String data = dia + "/" + mes+1 + "/" + ano;
+                        nascimentoEditText.setText(data);
+                    }
+                };
+
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt", "BR"));
+                Date convertedDate;
+                String[] separaData;
+                int dia = 0, mes = 0, ano = 0;
+                try {
+                    convertedDate = formatter.parse((nascimentoEditText.getText().toString().length() > 0) ? nascimentoEditText.getText().toString() : "01/01/2000");
+                    separaData = formatter.format(convertedDate).split("/");
+                    dia = Integer.valueOf(separaData[0]);
+                    mes = Integer.valueOf(separaData[1]);
+                    ano = Integer.valueOf(separaData[2]);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(CriancaActivity.this, dpd, ano, mes, dia);
+                datePickerDialog.show();
+            }
+        });
     }
 
     @OnClick(R.id.img_crianca_foto)

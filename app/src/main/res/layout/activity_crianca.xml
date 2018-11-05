@@ -153,6 +153,7 @@
                             android:cursorVisible="true"
                             android:gravity="start|center|top"
                             android:hint="@string/text_nascimento"
+                            android:clickable="true"
                             android:inputType="date"
                             android:maxLength="50"
                             android:textColor="@color/black_effective"

@@ -364,9 +364,9 @@ public class Uteis {
             }
         }
 
-        String dia = (dias > 1) ? " e " + dias + " dias" : " e " + dias + " dia";
+        String dia = (dias > 1) ? " e " + dias + " dias" : "e " + dias + " dia";
         String mes = (meses > 1) ? meses + " meses" : meses + " mês";
-        String ano = (anos > 1) ? anos + " anos, " : anos + " ano, ";
+        String ano = (anos > 1) ? anos + " anos," : anos + " ano,";
 
         return ano + " " + mes + " " + dia;
     }
