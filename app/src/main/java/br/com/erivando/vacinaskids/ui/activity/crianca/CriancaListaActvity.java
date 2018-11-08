@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -19,12 +19,10 @@ import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.database.model.Crianca;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
-import br.com.erivando.vacinaskids.ui.adapter.CriancaAdapter;
+import br.com.erivando.vacinaskids.ui.adapter.CriancaRVA;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static br.com.erivando.vacinaskids.util.Uteis.habilitaTelaCheia;
 
 /**
  * Projeto:     VacinasKIDS
@@ -48,8 +46,10 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
     @BindView(R.id.fab)
     FloatingActionButton fabFloatingActionButton;
 
-    @BindView(R.id.lista_criancas)
-    ListView criancasListView;
+    @BindView(R.id.crianca_recyclerView)
+    RecyclerView crianca_recycler_view;
+
+    private List<Crianca> listaCriancas;
 
     private Intent intent;
 
@@ -81,41 +81,6 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
 
         getCrianca();
 
-        criancasListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            /**
-             * Callback method to be invoked when an item in this AdapterView has
-             * been clicked.
-             * <p>
-             * Implementers can call getItemAtPosition(position) if they need
-             * to access the data associated with the selected item.
-             *
-             * @param parent   The AdapterView where the click happened.
-             * @param view     The view within the AdapterView that was clicked (this
-             *                 will be a view provided by the adapter)
-             * @param position The position of the view in the adapter.
-             * @param id       The row id of the item that was clicked.
-             */
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                //  Intent intent = new Intent(CriancaListaActvity.this, CriancaActivity.class);
-                //  intent.putExtra("crianca", ((Crianca)parent.getAdapter().getItem(position)).getId());
-
-                if (intent != null) {
-                    String acao = intent.getStringExtra("criancaLista");
-                    Intent intencao = null;
-                    if ("edita".equals(acao)) {
-                        intencao = CriancaActivity.getStartIntent(CriancaListaActvity.this);
-                        intencao.putExtra("crianca", ((Crianca) parent.getAdapter().getItem(position)).getId());
-                    }
-                    if (intencao != null) {
-                        startActivity(intencao);
-                        finish();
-                    }
-                }
-            }
-        });
-
         setUp();
     }
 
@@ -129,6 +94,10 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
 
     @Override
     protected void setUp() {
+        crianca_recycler_view.setHasFixedSize(true);
+        CriancaRVA adapter = new CriancaRVA(listaCriancas, CriancaListaActvity.this, intent);
+        crianca_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        crianca_recycler_view.setAdapter(adapter);
     }
 
     @Override
@@ -146,12 +115,7 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
     private void getCrianca() {
         List<Crianca> criancas = presenterCrianca.onCriancaCadastrada();
         if (!criancas.isEmpty()) {
-            ListView lvCriancas = findViewById(R.id.lista_criancas);
-            CriancaAdapter adapter = new CriancaAdapter(this);
-            lvCriancas.setAdapter(adapter);
-            for (Crianca crianca : criancas) {
-                adapter.add(crianca);
-            }
+            listaCriancas = criancas;
         } else {
             Toast.makeText(this, this.getString(R.string.texto_aviso_crianca_nao_cadastrada), Toast.LENGTH_LONG).show();
             //openCriancaActivity();

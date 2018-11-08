@@ -76,7 +76,8 @@
                         android:inputType="text"
                         android:maxLength="50"
                         android:textColor="@color/black_effective"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:drawableLeft="@drawable/ic_login_usuario" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -97,7 +98,8 @@
                         android:inputType="textPassword"
                         android:maxLength="50"
                         android:textColor="@color/black_effective"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:drawableLeft="@drawable/ic_login_senha" />
                 </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
@@ -121,7 +123,8 @@
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/navy_blue"
                         android:textColorHighlight="@color/red_dark2"
-                        android:textColorLink="@color/red_dark" />
+                        android:textColorLink="@color/red_dark"
+                        android:layout_marginRight="10dp" />
 
                     <TextView
                         android:id="@+id/btn_cadastro_usuario"
@@ -137,7 +140,8 @@
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/navy_blue"
                         android:textColorHighlight="@color/red_dark2"
-                        android:textColorLink="@color/red_dark" />
+                        android:textColorLink="@color/red_dark"
+                        android:layout_marginLeft="10dp" />
 
                 </LinearLayout>
 
@@ -177,7 +181,8 @@
                         android:background="@color/transparent"
                         android:contentDescription="@null"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_google_plus" />
+                        app:srcCompat="@drawable/ic_google_plus"
+                        android:layout_marginRight="10dp" />
 
                     <ImageButton
                         android:id="@+id/btn_facebook_login"
@@ -188,7 +193,8 @@
                         android:background="@color/transparent"
                         android:contentDescription="@null"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_facebook" />
+                        app:srcCompat="@drawable/ic_facebook"
+                        android:layout_marginLeft="10dp" />
 
                 </LinearLayout>
 

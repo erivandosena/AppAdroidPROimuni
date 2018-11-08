@@ -75,6 +75,11 @@ public class DataManager implements IDataManager {
     }
 
     @Override
+    public Crianca obtemCriancaPorUsuario(Long id) {
+        return realmDataBase.getObject(Crianca.class, "usuario.id", id);
+    }
+
+    @Override
     public List<Crianca> obtemCriancas() {
         return realmDataBase.findAll(Crianca.class);
     }

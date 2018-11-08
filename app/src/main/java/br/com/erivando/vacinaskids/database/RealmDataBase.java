@@ -142,7 +142,7 @@ public class RealmDataBase implements IRealm {
 
     @Override
     public <T extends RealmObject> T getObject(Class<T> clazz, String[] strings, Long[] longs) {
-        return getRealmInstance().where(clazz).equalTo(strings[0], longs[0]).equalTo(strings[1], longs[1]).findFirst();
+        return getRealmInstance().where(clazz).equalTo(strings[0], longs[0]).equalTo(strings[1], longs[1]).equalTo(strings[2], longs[2]).findFirst();
     }
 
     @Override
@@ -155,6 +155,11 @@ public class RealmDataBase implements IRealm {
     public <T extends RealmObject> List<T> findAll(String campo, Long valor, Class<T> clazz) {
         Realm realm = getRealmInstance();
         return realm.where(clazz).equalTo(campo, valor).findAll();
+    }
+
+    public <T extends RealmObject> List<T> findAll(String[] campo, Long[] valor, Class<T> clazz) {
+        Realm realm = getRealmInstance();
+        return realm.where(clazz).equalTo(campo[0], valor[0]).equalTo(campo[1], valor[1]).equalTo(campo[2], valor[2]).findAll();
     }
 
     @Override

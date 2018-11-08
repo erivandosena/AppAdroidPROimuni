@@ -23,7 +23,7 @@ import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.idade.IdadeMvpView;
 import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
-import br.com.erivando.vacinaskids.ui.adapter.CalendarioRVAdapter;
+import br.com.erivando.vacinaskids.ui.adapter.CalendarioRVA;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmList;
@@ -93,7 +93,7 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
 
         RecyclerView my_recycler_view = findViewById(R.id.calendario_recyclerView);
         my_recycler_view.setHasFixedSize(true);
-        CalendarioRVAdapter adapter = new CalendarioRVAdapter(calendarioCompleto, this);
+        CalendarioRVA adapter = new CalendarioRVA(calendarioCompleto, this);
         my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         my_recycler_view.setAdapter(adapter);
     }

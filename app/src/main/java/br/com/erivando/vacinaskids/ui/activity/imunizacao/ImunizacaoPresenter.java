@@ -2,6 +2,7 @@ package br.com.erivando.vacinaskids.ui.activity.imunizacao;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -36,7 +37,7 @@ public class ImunizacaoPresenter<V extends ImunizacaoMvpView> extends BasePresen
     }
 
     @Override
-    public void onCadasrarClick(Long id, String imunData, String imunAgente, String imunPosto, String imunLote, Long idVacina, Long idDose, Long idIdade, Long idCartao) {
+    public void onCadasrarClick(Long id, String imunData, String imunAgente, String imunPosto, String imunLote, Long idVacina, Long idDose, Long idIdade, final Long idCartao) {
 
         if (imunAgente == null || imunAgente.isEmpty()) {
             getMvpView().onError(R.string.text_valida_agente);
@@ -57,7 +58,7 @@ public class ImunizacaoPresenter<V extends ImunizacaoMvpView> extends BasePresen
         Vacina vacina = getIDataManager().obtemVacina(idVacina);
         Dose dose = getIDataManager().obtemDose(idDose);
         Idade idade = getIDataManager().obtemIdade(idIdade);
-        final Cartao cartao = getIDataManager().obtemCartao(idCartao);
+        Cartao cartao = getIDataManager().obtemCartao(idCartao);
 
         Imunizacao imunizacao = new Imunizacao();
         imunizacao.setId((id == 0L) ? (long) getIDataManager().getImunizacaoID().incrementAndGet() : id);
@@ -89,7 +90,7 @@ public class ImunizacaoPresenter<V extends ImunizacaoMvpView> extends BasePresen
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             try {
-                                getMvpView().openCartaoDetalheActivity(cartao.getId());
+                                getMvpView().openCartaoDetalheActivity(idCartao);
 
                             } catch (Throwable throwable) {
                                 throwable.printStackTrace();

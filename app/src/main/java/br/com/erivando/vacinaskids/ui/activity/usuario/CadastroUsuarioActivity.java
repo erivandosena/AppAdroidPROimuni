@@ -134,6 +134,9 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
 
     @OnClick(R.id.btn_cadadastar_usuario)
     public void onCadasrarClick(View v) {
+        if (imagemBitmapFoto == null && usuario != null)
+            if(usuario.getUsuaFoto() != null)
+                imagemBitmapFoto = base64ParaBitmap(usuario.getUsuaFoto());
         presenter.onCadasrarClick(id, nomeEditText.getText().toString(), loginEditText.getText().toString(), emailEditText.getText().toString(), senhaEditText.getText().toString(), repSenhaEditText.getText().toString(), imagemBitmapFoto);
     }
 

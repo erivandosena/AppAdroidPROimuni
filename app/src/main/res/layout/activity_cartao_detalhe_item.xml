@@ -23,8 +23,6 @@
     android:layout_height="wrap_content"
     android:layout_gravity="top"
     android:layout_margin="5dp"
-    android:clickable="true"
-    android:focusable="true"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="4dp"
     card_view:cardUseCompatPadding="true">

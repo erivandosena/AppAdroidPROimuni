@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
-~ Copyright [2018] [Erivando Sena]
-~
-~ Licenciado sob a Licença Apache, Versão 2.0 (a "Licença");
-~ você não pode usar este arquivo, exceto em conformidade com a Licença.
-~ Você pode obter uma cópia da Licença em
-~
-~ http://www.apache.org/licenses/LICENSE-2.0
-~
-~ A menos que exigido pela lei aplicável ou acordado por escrito, o software
-~ distribuído sob a Licença é distribuído em uma base "COMO ESTÁ",
-~ SEM GARANTIAS OU CONDIÇÕES DE QUALQUER TIPO, expressas ou implícitas.
-~ Veja a Licença para o idioma específico que governa as permissões e
-~ limitações sob a licença.
--->
+  ~ Copyright (C) 2015 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/cardview_default_elevation"
-    android:paddingTop="@dimen/cardview_default_elevation"
-    android:paddingRight="@dimen/cardview_default_elevation"
-    android:paddingBottom="@dimen/cardview_default_elevation">
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_margin"
+        android:elevation="@dimen/card_radius"
+        card_view:cardCornerRadius="@dimen/card_radius"
+        card_view:cardUseCompatPadding="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -54,7 +58,10 @@
                 android:layout_marginTop="8dp"
                 android:layout_toEndOf="@id/image"
                 android:paddingStart="5dp"
-                android:textAppearance="?android:textAppearanceLarge" />
+                android:textAppearance="?android:textAppearanceLarge"
+                android:paddingLeft="5dp"
+                android:layout_toRightOf="@id/image"
+                android:layout_alignParentRight="true" />
 
             <TextView
                 android:id="@+id/text_sub_titulo"
@@ -64,7 +71,12 @@
                 android:layout_alignParentEnd="true"
                 android:layout_toEndOf="@id/image"
                 android:paddingStart="5dp"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:textAppearance="?android:textAppearanceMedium"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/image"
+                android:paddingLeft="5dp" />
         </RelativeLayout>
+
     </android.support.v7.widget.CardView>
+
 </LinearLayout>

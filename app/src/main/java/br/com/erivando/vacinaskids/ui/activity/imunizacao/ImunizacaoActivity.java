@@ -8,13 +8,17 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -108,10 +112,13 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
             public void onClick(View v) {
                 DatePickerDialog.OnDateSetListener dpd = new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        int mes = monthOfYear+1;
-                        String data = dayOfMonth + "/" + mes + "/" + year;
-                        mTextData.setText(data);
+                    public void onDateSet(DatePicker view, int ano, int mes, int dia) {
+                        //mes = mes+1;
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt", "BR"));
+                        Calendar calendario = Calendar.getInstance();
+                        calendario.set(ano, mes, dia);
+                        //String data = dia + "/" + mes + "/" + ano;
+                        mTextData.setText(dateFormat.format(calendario.getTime()));
                     }
                 };
                 Calendar calendario = GregorianCalendar.getInstance();
@@ -132,11 +139,15 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
             idIdade = intent.getLongExtra("idade", 0L);
             idCartao = intent.getLongExtra("cartao", 0L);
 
-            if (presenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id"}, new Long[]{idVacina, idDose}) != null) {
+            Log.e("ID_VACINA ", idVacina.toString());
+            Log.e("ID_DOSE ", idDose.toString());
+            Log.e("ID_CARTAO ", idCartao.toString());
+
+            if (presenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{idVacina, idDose, idCartao}) != null) {
                 new AlertDialog.Builder(this)
                         .setIcon(R.drawable.ic_launcher_round)
                         .setTitle(AppAplicacao.contextApp.getResources().getString(R.string.app_name))
-                        .setMessage("Olá! \nEsta imunização já foi registrada!")
+                        .setMessage("\nImunização já foi registrada!")
                         .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

@@ -47,23 +47,31 @@ import io.realm.RealmList;
  */
 public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView {
 
-    @BindView(R.id.image_cartao_vacinal)
-    public ImageView mImagemCartao;
-    @BindView(R.id.text_nome_crianca)
-    public TextView mTextCrianca;
-    @BindView(R.id.text_idade_crianca)
-    public TextView mTextIdade;
     @Inject
     CartaoMvpPresenter<CartaoMvpView> presenter;
+
     @Inject
     IdadeMvpPresenter<IdadeMvpView> idadePresenter;
+
     @Inject
     CalendarioMvpPresenter<CalendarioMvpView> calendarioPresenter;
+
     @Inject
     ImunizacaoMvpPresenter<ImunizacaoMvpView> imunizacaoPresenter;
-    private Cartao cartao;
 
+    @BindView(R.id.image_cartao_vacinal)
+    public ImageView mImagemCartao;
+
+    @BindView(R.id.text_nome_crianca)
+    public TextView mTextCrianca;
+
+    @BindView(R.id.text_idade_crianca)
+    public TextView mTextIdade;
+
+    private Cartao cartao;
     private Intent intent;
+
+    private Long idCartao;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, CartaoDetalheActivity.class);
@@ -102,7 +110,7 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
     @Override
     protected void setUp() {
         if (intent != null) {
-            Long idCartao = intent.getLongExtra("cartao", 0L);
+            idCartao = intent.getLongExtra("cartao", 0L);
             cartao = presenter.onCartaoCadastrado(idCartao);
             if(cartao == null) {
                 startActivity(CartaoListaActvity.getStartIntent(this).putExtra("cartaoLista", "cartao"));
@@ -129,7 +137,8 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
                     listaVacinas.add(calendarioItem.getVacina());
                     listaDoses.add(calendarioItem.getDose());
                     listaIdades.add(calendarioItem.getIdade());
-                    Imunizacao imunizacao = imunizacaoPresenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id"}, new Long[]{calendarioItem.getVacina().getId(), calendarioItem.getDose().getId()});
+                    Imunizacao imunizacao = imunizacaoPresenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{calendarioItem.getVacina().getId(), calendarioItem.getDose().getId(), idCartao});
+
                     if (imunizacao != null) {
                         listaImunizacoes.add(imunizacao);
                     }

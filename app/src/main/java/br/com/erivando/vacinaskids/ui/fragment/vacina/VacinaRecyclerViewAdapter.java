@@ -40,7 +40,7 @@ public class VacinaRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_vacina_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_vacina_item, parent, false);
         view.setBackgroundResource(mBackground);
         return new ViewHolder(view);
     }

@@ -64,16 +64,6 @@
             android:gravity="center"
             android:text="@null" />
 
-        <!--
-        <TextView
-            android:id="@+id/texto_titulo_idade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:text="@null" />
-        -->
-
         <TextView
             android:id="@+id/texto_titulo_rede"
             android:layout_width="match_parent"

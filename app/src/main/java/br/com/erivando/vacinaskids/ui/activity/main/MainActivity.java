@@ -203,6 +203,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         /*
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag("Fragment");

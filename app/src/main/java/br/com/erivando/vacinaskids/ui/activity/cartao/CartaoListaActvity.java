@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -19,12 +19,10 @@ import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.database.model.Cartao;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
-import br.com.erivando.vacinaskids.ui.adapter.CartaoAdapter;
+import br.com.erivando.vacinaskids.ui.adapter.CartaoRVA;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static br.com.erivando.vacinaskids.util.Uteis.habilitaTelaCheia;
 
 /**
  * Projeto:     VacinasKIDS
@@ -48,8 +46,10 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
     @BindView(R.id.fab)
     FloatingActionButton fabFloatingActionButton;
 
-    @BindView(R.id.lista_cartoes)
-    ListView cartoesListView;
+    @BindView(R.id.cartao_recyclerView)
+    RecyclerView cartao_recycler_view;
+
+    private List<Cartao> listaCartoes;
 
     private Intent intent;
 
@@ -79,38 +79,15 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
 
         getCartao();
 
-        cartoesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showLoading();
-                try {
-                    if (intent != null) {
-                        String acao = intent.getStringExtra("cartaoLista");
-                        Intent intencao = null;
-                        if ("cartao".equals(acao)) {
-                            intencao = CartaoDetalheActivity.getStartIntent(CartaoListaActvity.this);
-                            intencao.putExtra("cartao", ((Cartao) parent.getAdapter().getItem(position)).getId());
-                        }
-                        if ("edita".equals(acao)) {
-                            intencao = CartaoActivity.getStartIntent(CartaoListaActvity.this);
-                            intencao.putExtra("cartao", ((Cartao) parent.getAdapter().getItem(position)).getId());
-                        }
-                        if (intencao != null) {
-                            startActivity(intencao);
-                            finish();
-                        }
-                    }
-                } finally {
-                    hideLoading();
-                }
-            }
-        });
-
         setUp();
     }
 
     @Override
     protected void setUp() {
+        cartao_recycler_view.setHasFixedSize(true);
+        CartaoRVA adapter = new CartaoRVA(listaCartoes, CartaoListaActvity.this, intent);
+        cartao_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        cartao_recycler_view.setAdapter(adapter);
     }
 
     @OnClick(R.id.fab)
@@ -135,12 +112,7 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
     private void getCartao() {
         List<Cartao> cartoes = presenterCartao.onCartaoCadastrados();
         if (!cartoes.isEmpty()) {
-            ListView lvCartoes = findViewById(R.id.lista_cartoes);
-            CartaoAdapter adapter = new CartaoAdapter(this);
-            lvCartoes.setAdapter(adapter);
-            for (Cartao cartao : cartoes) {
-                adapter.add(cartao);
-            }
+            listaCartoes = cartoes;
         } else {
             Toast.makeText(this, this.getString(R.string.texto_aviso_cartao_nao_cadastrado), Toast.LENGTH_LONG).show();
         }

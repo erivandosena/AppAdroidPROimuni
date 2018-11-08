@@ -53,7 +53,6 @@
             android:text="Informações"
             android:textColor="@color/white" />
 
-
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -62,7 +61,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal" />
-
 
 </LinearLayout>
 

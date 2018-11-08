@@ -23,14 +23,14 @@ import io.realm.RealmList;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class VacinaRVAdapter extends RecyclerView.Adapter<VacinaRVAdapter.SingleItemRowHolder> {
+public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRVA.SingleItemRowHolder> {
 
     private RealmList<Vacina> vacinaList;
     private RealmList<Dose> doseList;
     private RealmList<Idade> idadeList;
     private Context mContext;
 
-    public VacinaRVAdapter(RealmList<Vacina> vacinaList, RealmList<Dose> doseList, RealmList<Idade> idadeList, Context mContext) {
+    public CalendarioVacinaRVA(RealmList<Vacina> vacinaList, RealmList<Dose> doseList, RealmList<Idade> idadeList, Context mContext) {
         this.vacinaList = vacinaList;
         this.doseList = doseList;
         this.idadeList = idadeList;

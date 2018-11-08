@@ -125,37 +125,31 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
 
         id = 0L;
 
-        getUsuario();
+        getCrianca();
 
         setUp();
-
-        /*
-        nascimentoEditText.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-        });
-        */
 
         nascimentoEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt", "BR"));
+
                 DatePickerDialog.OnDateSetListener dpd = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int ano, int mes, int dia) {
-                        String data = dia + "/" + mes+1 + "/" + ano;
-                        nascimentoEditText.setText(data);
+                        Calendar calendario = Calendar.getInstance();
+                        calendario.set(ano, mes, dia);
+                        nascimentoEditText.setText(dateFormat.format(calendario.getTime()));
+
                     }
                 };
 
-                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt", "BR"));
                 Date convertedDate;
                 String[] separaData;
                 int dia = 0, mes = 0, ano = 0;
                 try {
-                    convertedDate = formatter.parse((nascimentoEditText.getText().toString().length() > 0) ? nascimentoEditText.getText().toString() : "01/01/2000");
-                    separaData = formatter.format(convertedDate).split("/");
+                    convertedDate = dateFormat.parse((nascimentoEditText.getText().toString().length() > 0) ? nascimentoEditText.getText().toString() : "01/01/2000");
+                    separaData = dateFormat.format(convertedDate).split("/");
                     dia = Integer.valueOf(separaData[0]);
                     mes = Integer.valueOf(separaData[1]);
                     ano = Integer.valueOf(separaData[2]);
@@ -163,7 +157,7 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
                     e.printStackTrace();
                 }
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(CriancaActivity.this, dpd, ano, mes, dia);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(CriancaActivity.this, dpd, ano, mes-1, dia);
                 datePickerDialog.show();
             }
         });
@@ -180,6 +174,9 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
 
     @OnClick(R.id.btn_cadadastar_crianca)
     public void onCadasrarClick(View v) {
+        if (imagemBitmapFoto == null && crianca!= null)
+            if (crianca.getCriaFoto() != null)
+                imagemBitmapFoto = base64ParaBitmap(crianca.getCriaFoto());
         presenter.onCadasrarClick(id, nomeEditText.getText().toString(), nascimentoEditText.getText().toString(), comboResponsavel.getSelectedItem().toString(), comboSexo.getSelectedItem().toString(), imagemBitmapFoto);
     }
 
@@ -214,7 +211,7 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        imagemBitmapFoto = presenter.onActivityResult(requestCode, resultCode, data, this, fotoImageButton);
+        imagemBitmapFoto =  presenter.onActivityResult(requestCode, resultCode, data, this, fotoImageButton);
     }
 
     @Override
@@ -237,7 +234,7 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
         finish();
     }
 
-    private void getUsuario() {
+    private void getCrianca() {
         Usuario usuario = presenterUsuario.onUsuarioCadastrado();
         if (usuario != null) {
             String[] responsavel = new String[]{usuario.getUsuaNome()};

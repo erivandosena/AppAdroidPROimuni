@@ -62,6 +62,8 @@ public interface IDataManager extends IPreferencesHelper {
 
     Crianca obtemCrianca(String[] valores);
 
+    Crianca obtemCriancaPorUsuario(Long id);
+
     List<Crianca> obtemCriancas(String[] valores);
 
     List<Crianca> obtemCriancas();

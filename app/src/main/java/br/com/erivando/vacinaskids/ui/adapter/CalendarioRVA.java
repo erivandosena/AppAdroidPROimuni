@@ -27,15 +27,13 @@ import io.realm.RealmList;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class CalendarioRVAdapter extends RecyclerView.Adapter<CalendarioRVAdapter.ItemRowHolder> {
+public class CalendarioRVA extends RecyclerView.Adapter<CalendarioRVA.ItemRowHolder> {
 
     private ArrayList<Calendario> calendarioList;
-    // private List<Calendario> calendarios;
     private Context mContext;
 
-    public CalendarioRVAdapter(ArrayList<Calendario> calendarioList, Context mContext) {
+    public CalendarioRVA(ArrayList<Calendario> calendarioList, Context mContext) {
         this.calendarioList = calendarioList;
-        // this.calendarios = calendarios;
         this.mContext = mContext;
     }
 
@@ -48,13 +46,14 @@ public class CalendarioRVAdapter extends RecyclerView.Adapter<CalendarioRVAdapte
 
     @Override
     public void onBindViewHolder(ItemRowHolder itemRowHolder, int i) {
-
         final String sectionName = calendarioList.get(i).getTituloIdade();
+
         RealmList<Vacina> vacinaSectionItems = calendarioList.get(i).getVacinasInSection();
         RealmList<Dose> doseSectionItems = calendarioList.get(i).getDosesInSection();
         RealmList<Idade> idadeSectionItems = calendarioList.get(i).getIdadesInSection();
+
         itemRowHolder.textTituloIdade.setText(sectionName);
-        VacinaRVAdapter itemListDataAdapter = new VacinaRVAdapter(vacinaSectionItems, doseSectionItems, idadeSectionItems, mContext);
+        CalendarioVacinaRVA itemListDataAdapter = new CalendarioVacinaRVA(vacinaSectionItems, doseSectionItems, idadeSectionItems, mContext);
 
         itemRowHolder.rvLista.setHasFixedSize(true);
         itemRowHolder.rvLista.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
