@@ -46,6 +46,12 @@ public class Cartao extends RealmObject implements Parcelable {
         this.crianca = crianca;
     }
 
+    public Cartao(Long id, Crianca crianca, RealmList<Imunizacao> imunizacoes) {
+        this.id = id;
+        this.crianca = crianca;
+        this.imunizacoes = imunizacoes;
+    }
+
     protected Cartao(Parcel in) {
         if (in.readByte() == 0) {
             id = null;

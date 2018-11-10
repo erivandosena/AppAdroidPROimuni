@@ -1,5 +1,6 @@
 package br.com.erivando.vacinaskids.ui.activity.splash;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,13 +9,8 @@ import android.os.StrictMode;
 import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.R;
-import br.com.erivando.vacinaskids.broadcast.AlarmNotificationReceiver;
-import br.com.erivando.vacinaskids.broadcast.LocalData;
-import br.com.erivando.vacinaskids.broadcast.NotificationScheduler;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
-import br.com.erivando.vacinaskids.notification.NotificationHelper;
 import br.com.erivando.vacinaskids.service.Servico;
-import br.com.erivando.vacinaskids.ui.activity.cartao.CartaoListaActvity;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
 import butterknife.ButterKnife;
@@ -34,9 +30,8 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
     @Inject
     SplashMvpPresenter<SplashMvpView> mPresenter;
 
-    private LocalData localData;
-    private int hour;
-    private int min;
+    private Servico mServico;
+    private Intent intent;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, SplashActivity.class);
@@ -54,6 +49,12 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
         setUnBinder(ButterKnife.bind(this));
 
         mPresenter.onAttach(SplashActivity.this);
+
+        mServico = new Servico(this);
+        intent = new Intent(this, mServico.getClass());
+        if (!isMyServiceRunning(mServico.getClass())) {
+            startService(intent);
+        }
     }
 
     /**
@@ -75,23 +76,12 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
     @Override
     public void startServico() {
-      //  Intent intent = new Intent(SplashActivity.this, Servico.class);
-      //  startService(intent);
-
-        localData = new LocalData(getApplicationContext());
-        hour = localData.get_hour();
-        min = localData.get_min();
-
-       // NotificationScheduler.setReminder(SplashActivity.this, AlarmNotificationReceiver.class, localData.get_hour(), localData.get_min());
-       // NotificationHelper.scheduleRepeatingRTCNotification(SplashActivity.this, String.valueOf(localData.get_hour()), String.valueOf(localData.get_min()));
-
-        NotificationHelper.scheduleRepeatingElapsedNotification(SplashActivity.this);
-        NotificationHelper.enableBootReceiver(SplashActivity.this);
     }
 
     @Override
     protected void onDestroy() {
         mPresenter.onDetach();
+        stopService(intent);
         super.onDestroy();
     }
 
@@ -109,4 +99,13 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
         return SplashActivity.this;
     }
 
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

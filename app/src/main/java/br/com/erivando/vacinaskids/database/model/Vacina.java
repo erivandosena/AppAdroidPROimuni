@@ -79,10 +79,35 @@ public class Vacina extends RealmObject implements Comparable<Vacina> {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vacina)) return false;
+
+        Vacina vacina = (Vacina) o;
+
+        if (!getId().equals(vacina.getId())) return false;
+        if (!getVaciNome().equals(vacina.getVaciNome())) return false;
+        if (!getVaciRede().equals(vacina.getVaciRede())) return false;
+        if (!getVaciDescricao().equals(vacina.getVaciDescricao())) return false;
+        return getVaciAdministracao().equals(vacina.getVaciAdministracao());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getVaciNome().hashCode();
+        result = 31 * result + getVaciRede().hashCode();
+        result = 31 * result + getVaciDescricao().hashCode();
+        result = 31 * result + getVaciAdministracao().hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return getVaciNome();
 
     }
+
 
     @Override
     public int compareTo(@NonNull Vacina o) {

@@ -33,7 +33,7 @@ public class SplashPresenter<V extends SplashMvpView> extends BasePresenter<V> i
         getMvpView().startServico();
 
         Handler handler = new Handler();
-        handler.postDelayed(this, 2 * 800);
+        handler.postDelayed(this, 1500);
         importaDadosJson();
     }
 

@@ -113,7 +113,7 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
                 onBackPressed();
             }
         });
-        collapsingToolbar.setTitle(getResources().getString(R.string.text_cartao_titulo));
+        collapsingToolbar.setTitle(getResources().getString(R.string.text_crianca_titulo));
 
         getActivityComponent().inject(this);
 
