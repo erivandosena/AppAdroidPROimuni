@@ -398,6 +398,11 @@ public class DataManager implements IDataManager {
     }
 
     @Override
+    public List<Imunizacao> obtemImunizacoes(String[] strings, Long[] longs) {
+        return realmDataBase.findAll(strings, longs, Imunizacao.class);
+    }
+
+    @Override
     public List<Imunizacao> obtemImunizacoes(String[] valores) {
         return realmDataBase.findAll(valores[0], valores[1], Imunizacao.class);
     }

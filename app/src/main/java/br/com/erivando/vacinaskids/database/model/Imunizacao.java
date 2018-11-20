@@ -112,4 +112,9 @@ public class Imunizacao extends RealmObject {
     public void setCartao(Cartao cartao) {
         this.cartao = cartao;
     }
+
+    @Override
+    public String toString() {
+        return "["+getVacina().getVaciNome()+","+getDose().getDoseDescricao()+","+getCartao().getId()+"]";
+    }
 }

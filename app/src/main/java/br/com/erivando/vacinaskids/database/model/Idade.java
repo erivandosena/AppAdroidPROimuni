@@ -44,12 +44,6 @@ public class Idade extends RealmObject {
     }
 
     @Override
-    public String toString() {
-        return getIdadDescricao();
-    }
-
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Idade)) return false;
@@ -65,5 +59,10 @@ public class Idade extends RealmObject {
         int result = getId().hashCode();
         result = 31 * result + getIdadDescricao().hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return getIdadDescricao();
     }
 }

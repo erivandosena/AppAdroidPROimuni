@@ -14,6 +14,7 @@ import br.com.erivando.vacinaskids.ui.activity.imunizacao.ImunizacaoActivity;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
 import br.com.erivando.vacinaskids.ui.activity.mapa.MapaActivity;
+import br.com.erivando.vacinaskids.ui.activity.notificacao.NotificacaoActivity;
 import br.com.erivando.vacinaskids.ui.activity.splash.SplashActivity;
 import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaActivity;
@@ -72,4 +73,6 @@ public interface ActivityComponent {
     void inject(CartaoDetalheActivity activityInject);
 
     void inject(MapaActivity activityInject);
+
+    void inject(NotificacaoActivity activityInject);
 }

@@ -11,15 +11,18 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:name=".ui.application.AppAplicacao"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@drawable/ic_launcher_round"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -130,6 +133,13 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
 
+        <activity
+            android:name=".ui.activity.notificacao.NotificacaoActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -174,23 +184,13 @@
 
         <service
             android:name=".service.Servico"
-            android:enabled="true" />
-
-        <receiver
-            android:name=".broadcast.Notifica"
-            android:enabled="true"
             android:exported="false"
-            android:label="RestartServiceWhenStopped">
-            <intent-filter>
-                <action android:name="SensorServico"/>
-            </intent-filter>
-        </receiver>
+            android:icon="@drawable/ic_launcher_round"
+            android:label="@string/app_name" />
 
-        <receiver android:name=".notification.AlarmReceiver"/>
-        <receiver android:name=".notification.AlarmBootReceiver"
-            android:enabled="false">
+        <receiver android:name=".broadcast.Notificacao">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 

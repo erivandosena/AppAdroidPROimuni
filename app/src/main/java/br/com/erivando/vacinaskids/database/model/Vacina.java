@@ -105,7 +105,6 @@ public class Vacina extends RealmObject implements Comparable<Vacina> {
     @Override
     public String toString() {
         return getVaciNome();
-
     }
 
 

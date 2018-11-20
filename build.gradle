@@ -6,14 +6,25 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
-        classpath 'io.realm:realm-gradle-plugin:4.3.1'
-        classpath 'com.google.gms:google-services:4.0.1'
+        classpath 'io.realm:realm-gradle-plugin:5.3.1'
+        classpath 'com.google.gms:google-services:4.0.2'
+
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
         // NOTA: Não coloque suas dependências de aplicativo aqui; eles pertencem
         // aos arquivos build.gradle do módulo individual.
     }
+
 }
 
 allprojects {
@@ -22,6 +33,7 @@ allprojects {
         jcenter()
         maven {
             url "https://maven.google.com"
+            name 'Google'
         }
     }
 }

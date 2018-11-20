@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -137,12 +138,22 @@ public class RealmDataBase implements IRealm {
 
     @Override
     public <T extends RealmObject> T getObject(Class<T> clazz, String[] valores) {
-        return getRealmInstance().where(clazz).equalTo(valores[0], valores[1]).equalTo(valores[2], valores[3]).findFirst();
+        Realm realm = getRealmInstance();
+        T realmObject = null;
+        if(valores.length  == 2)
+            realmObject = realm.where(clazz).equalTo(valores[0], valores[1]).findFirst();
+        if(valores.length  == 4)
+            realmObject = realm.where(clazz).equalTo(valores[0], valores[1]).equalTo(valores[2], valores[3]).findFirst();
+        if(valores.length  == 6)
+            realmObject = realm.where(clazz).equalTo(valores[0], valores[1]).equalTo(valores[2], valores[3]).equalTo(valores[4], valores[5]).findFirst();
+
+        return realmObject;
     }
 
     @Override
     public <T extends RealmObject> T getObject(Class<T> clazz, String[] strings, Long[] longs) {
-        return getRealmInstance().where(clazz).equalTo(strings[0], longs[0]).equalTo(strings[1], longs[1]).equalTo(strings[2], longs[2]).findFirst();
+        Realm realm = getRealmInstance();
+        return realm.where(clazz).equalTo(strings[0], longs[0]).equalTo(strings[1], longs[1]).equalTo(strings[2], longs[2]).findFirst();
     }
 
     @Override
@@ -159,7 +170,24 @@ public class RealmDataBase implements IRealm {
 
     public <T extends RealmObject> List<T> findAll(String[] campo, Long[] valor, Class<T> clazz) {
         Realm realm = getRealmInstance();
-        return realm.where(clazz).equalTo(campo[0], valor[0]).equalTo(campo[1], valor[1]).equalTo(campo[2], valor[2]).findAll();
+        List<T> lista = new ArrayList<T>();
+        if(campo.length  == 1 && valor.length == 1)
+            lista = realm.where(clazz).equalTo(campo[0], valor[0]).findAll();
+        if(campo.length  == 2 && valor.length == 2)
+            lista = realm.where(clazz).equalTo(campo[0], valor[0]).equalTo(campo[1], valor[1]).findAll();
+        if(campo.length  == 3 && valor.length == 3)
+            lista = realm.where(clazz).equalTo(campo[0], valor[0]).equalTo(campo[1], valor[1]).equalTo(campo[2], valor[2]).findAll();
+        if(campo.length  == 4 && valor.length == 4)
+            lista = realm.where(clazz).equalTo(campo[0], valor[0]).equalTo(campo[1], valor[1]).equalTo(campo[2], valor[2]).equalTo(campo[3], valor[3]).findAll();
+        if(campo.length  == 5 && valor.length == 5)
+            lista = realm.where(clazz).equalTo(campo[0], valor[0]).equalTo(campo[1], valor[1]).equalTo(campo[2], valor[2]).equalTo(campo[3], valor[3]).equalTo(campo[4], valor[4]).findAll();
+        return lista;
+    }
+
+    @Override
+    public <T extends RealmObject> List<T> findNotAll(String[] campo, Long[] valor, Class<T> clazz) {
+        Realm realm = getRealmInstance();
+        return realm.where(clazz).notEqualTo(campo[0], valor[0]).notEqualTo(campo[1], valor[1]).notEqualTo(campo[2], valor[2]).findAll();
     }
 
     @Override

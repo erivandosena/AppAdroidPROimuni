@@ -195,6 +195,8 @@ public interface IDataManager extends IPreferencesHelper {
 
     Imunizacao obtemImunizacao(String[] strings, Long[] longs);
 
+    List<Imunizacao> obtemImunizacoes(String[] strings, Long[] longs);
+
     List<Imunizacao> obtemImunizacoes(String[] valores);
 
     List<Imunizacao> obtemImunizacoes();

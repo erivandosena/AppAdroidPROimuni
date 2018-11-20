@@ -1,6 +1,6 @@
 <resources>
     <!-- Strings Padrões da Activity da gaveta de navegação(Navigation Drawer Activity). -->
-    <string name="app_name">Vacinas KIDs</string>
+    <string name="app_name">PROimuni</string>
     <string name="navigation_drawer_open">Abrir gaveta de navegação</string>
     <string name="navigation_drawer_close">Fechar gaveta de navegação</string>
     <string name="nav_header_title">Android Studio</string>
@@ -164,5 +164,12 @@
     <string name="erro_text_pesquisa_posto">Informe um bairro</string>
     <string name="title_vacinaskids_dynamic_feature">Módulo Vacinas Kids</string>
     <string name="title_dynamic_feature2">Module Title</string>
+
+    <!-- Notificação -->
+
+    <string name="btn_ativa_notificacao">Ativar Notificações</string>
+    <string name="btn_desativa_notificacao">Desativar Notificações</string>
+    <string name="text_configuracoes_titulo">Configurações do Aplicativo</string>
+    <string name="config">Configurações</string>
 
 </resources>

@@ -33,6 +33,9 @@ import br.com.erivando.vacinaskids.ui.activity.main.MainPresenter;
 import br.com.erivando.vacinaskids.ui.activity.mapa.MapaMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.mapa.MapaMvpView;
 import br.com.erivando.vacinaskids.ui.activity.mapa.MapaPresenter;
+import br.com.erivando.vacinaskids.ui.activity.notificacao.NotificacaoMvpPresenter;
+import br.com.erivando.vacinaskids.ui.activity.notificacao.NotificacaoMvpView;
+import br.com.erivando.vacinaskids.ui.activity.notificacao.NotificacaoPresenter;
 import br.com.erivando.vacinaskids.ui.activity.splash.SplashMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.splash.SplashMvpView;
 import br.com.erivando.vacinaskids.ui.activity.splash.SplashPresenter;
@@ -175,4 +178,9 @@ public class ActivityModule {
         return presenter;
     }
 
+    @Provides
+    @PerActivity
+    NotificacaoMvpPresenter<NotificacaoMvpView> provideNotificacaoPresenter(NotificacaoPresenter<NotificacaoMvpView> presenter) {
+        return presenter;
+    }
 }

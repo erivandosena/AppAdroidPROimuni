@@ -2,7 +2,6 @@ package br.com.erivando.vacinaskids.di.component;
 
 import br.com.erivando.vacinaskids.di.PerService;
 import br.com.erivando.vacinaskids.di.module.ServiceModule;
-import br.com.erivando.vacinaskids.notification.AlarmReceiver;
 import br.com.erivando.vacinaskids.service.Servico;
 import dagger.Component;
 
@@ -20,6 +19,5 @@ import dagger.Component;
 public interface ServiceComponent {
 
     void inject(Servico service);
-    void inject(AlarmReceiver receiver);
 
 }

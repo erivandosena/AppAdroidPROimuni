@@ -46,6 +46,8 @@ interface IRealm {
 
     <T extends RealmObject> List<T> findAll(String campo, String valor, Class<T> clazz);
 
+    <T extends RealmObject> List<T> findNotAll(String[] campo, Long[] valor, Class<T> clazz);
+
     <T extends RealmObject> List<T> findAllOrderBy(String orderBy, Class<T> clazz);
 
     <T extends RealmObject> List<T> findAllOrderBy(String campo, Long valor, String orderBy, Class<T> clazz);

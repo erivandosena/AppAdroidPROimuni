@@ -15,23 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "1059359173737-v6avolfo7sornitotvqv6d1a7r9sohd4.apps.googleusercontent.com",
+          "client_id": "1059359173737-e7629o1mnglhdskhvlqicn8p7s8f341u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "br.com.erivando.vacinaskids",
-            "certificate_hash": "f4bd76332ff4db5a077a8cc803ddfcd3b26a2677"
+            "certificate_hash": "deec56438c58c3c05e228b4a5859a5756d6427bd"
           }
         },
         {
-          "client_id": "1059359173737-luigqpcrism843l6dt5d89ufute87msm.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "br.com.erivando.vacinaskids",
-            "certificate_hash": "1e5b9c058a7c01ebd4bebabe02c0499a943d8336"
-          }
-        },
-        {
-          "client_id": "1059359173737-510bnpsu2m7ja43afbn4rjr9j6bfkdmt.apps.googleusercontent.com",
+          "client_id": "1059359173737-jicsue1j7667571ij11tp2728g8e430u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -48,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1059359173737-aebv5pkorffveesobrb75qnsvr0snr6u.apps.googleusercontent.com",
+              "client_id": "1059359173737-jicsue1j7667571ij11tp2728g8e430u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

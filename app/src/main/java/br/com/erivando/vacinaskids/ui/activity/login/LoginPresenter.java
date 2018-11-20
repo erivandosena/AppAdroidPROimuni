@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -139,7 +140,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
         try {
             if (getIDataManager().validaLoginUsuario(login, senha)) {
-                Usuario usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login, "usuaSenha", senha});
+                usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login, "usuaSenha", senha});
                 String tokenUsuario = UUID.randomUUID().toString().replace("-", "");
                 getIDataManager().setAccessToken(tokenUsuario);
                 getIDataManager().updateUserInfo(
@@ -161,6 +162,31 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             getMvpView().hideLoading();
         }
 
+    }
+
+    public Usuario onObtemLocalLogin(String login, String senha) {
+        //validando login do usuário
+        if (login == null || login.isEmpty()) {
+            getMvpView().onError(R.string.text_valida_login);
+            return null;
+        }
+        if (senha == null || senha.isEmpty()) {
+            getMvpView().onError(R.string.text_valida_senha);
+            return null;
+        }
+        getMvpView().showLoading();
+
+        try {
+            if (getIDataManager().validaLoginUsuario(login, senha)) {
+                usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login, "usuaSenha", senha});
+                return usuario;
+            } else {
+                getMvpView().onError(R.string.text_valida_usuario);
+                return null;
+            }
+        }finally {
+            getMvpView().hideLoading();
+        }
     }
 
     @Override
@@ -250,6 +276,8 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                     public void onError(FacebookException exception) {
                         getMvpView().hideLoading();
                         Toast.makeText(AppAplicacao.contextApp, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
+                        Log.e("Login Facebook:", exception.getMessage());
+                        exception.printStackTrace();
                     }
                 });
             }
@@ -371,7 +399,9 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             // O código de status ApiException indica o motivo detalhado da falha.
             // Por favor, consulte a referência da classe GoogleSignInStatusCodes para
             // mais informações. e.getStatusCode()
+            Log.e("Login Google: ", e.getMessage());
             Toast.makeText(AppAplicacao.contextApp, R.string.google_cancel_login, Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         } finally {
             getMvpView().hideLoading();
         }
@@ -405,6 +435,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             }
             getResultsFromApi(view);
         } catch (Exception e) {
+            Log.e("enviaSenhaPorEmail: ", e.getMessage());
             e.printStackTrace();
             return;
         }
@@ -533,6 +564,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         }
 
         private String getDataFromApi() throws IOException {
+            Usuario usuario = getIDataManager().obtemUsuario();
             // Obtendo valores para, email, assunto e mensagem
             String user = "me";
             String to = usuario.getUsuaEmail();
@@ -624,6 +656,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         @Override
         protected void onCancelled() {
             getMvpView().hideLoading();
+
             if (lastError != null) {
                 if (lastError instanceof GooglePlayServicesAvailabilityIOException) {
                     showGooglePlayServicesAvailabilityErrorDialog(((GooglePlayServicesAvailabilityIOException) lastError).getConnectionStatusCode());
@@ -631,10 +664,13 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                     getMvpView().getStartActivityForResult(((UserRecoverableAuthIOException) lastError).getIntent(), REQUEST_AUTHORIZATION);
                 } else {
                     showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_google_oauth) + "\n" + lastError);
+                    Log.e("erro_google_oauth: ", String.valueOf(lastError.getMessage()));
                 }
             } else {
                 showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_request));
+                Log.e("erro_request: ", lastError.getMessage());
             }
+
         }
     }
 }

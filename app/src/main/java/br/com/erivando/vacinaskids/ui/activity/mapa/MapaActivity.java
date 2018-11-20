@@ -1,14 +1,19 @@
 package br.com.erivando.vacinaskids.ui.activity.mapa;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -16,17 +21,24 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +55,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -56,6 +69,8 @@ import java.util.List;
 import br.com.erivando.vacinaskids.R;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.ui.activity.main.MainActivity;
+import br.com.erivando.vacinaskids.ui.application.AppAplicacao;
+import br.com.erivando.vacinaskids.util.Uteis;
 import br.com.erivando.vacinaskids.util.geolocalizacao.GooglePlacesReadTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -85,6 +100,7 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
     private double mLatitudePlaces;
     private double mLongitudePlaces;
     private boolean statusChangedMapa;
+    private Drawable iconeDrawable;
 
     @BindView(R.id.toolbar_mapa)
     Toolbar toolbar;
@@ -119,6 +135,8 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
         collapsingToolbar.setTitle(getResources().getString(R.string.text_mapa_titulo));
 
         getActivityComponent().inject(this);
+
+        iconeDrawable = getResources().getDrawable(R.drawable.ic_launcher_round);
 
         buttonPesquisa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -270,8 +288,11 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
             }
             markerOptions.position(latLng);
             markerOptions.title("Você");
-            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round));
-            markerOptions.snippet((subLocality != null ? subLocality + "\n" + (locality != null ? locality : "") + " - " + (adminArea != null ? adminArea : "") : "Local atual")).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round));
+            markerOptions.snippet((subLocality != null ? subLocality + "\n" + (locality != null ? locality : "") + " - " + (adminArea != null ? adminArea : "") : "Local atual"));
+            BitmapDescriptor markerIcon = getMarkerIconFromDrawable(iconeDrawable);
+            if(markerIcon != null) {
+                markerOptions.icon(markerIcon);
+            }
             mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
         } catch (IOException e) {
             e.printStackTrace();
@@ -371,6 +392,18 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
                 mGoogleMap.stopAnimation();
             }
         });
+    }
+
+    private BitmapDescriptor getMarkerIconFromDrawable(Drawable drawable) {
+        Canvas canvas = new Canvas();
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        canvas.setBitmap(bitmap);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+        int larguraIcone = 120;
+        int alturaIcone = 120;
+        Bitmap smallMarker = Bitmap.createScaledBitmap(bitmap, larguraIcone, alturaIcone, false);
+        return BitmapDescriptorFactory.fromBitmap(smallMarker);
     }
 
     private void loopAnimateCamera(final List<CameraUpdate> updates) {

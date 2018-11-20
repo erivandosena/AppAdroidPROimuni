@@ -23,3 +23,4 @@
 -keepattributes *Annotation*
 -keep @**annotation** class* {*;}
 -keepattributes Exceptions, InnerClasses, MethodParameters, Signature, EnclosingMethod, RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+-keepattributes Signature

@@ -120,4 +120,9 @@ public class Calendario extends RealmObject implements Comparable<Calendario> {
     public int compareTo(@NonNull Calendario o) {
         return o.id.intValue() - this.id.intValue();
     }
+
+    @Override
+    public String toString() {
+        return "["+ getVacina().getVaciNome()+", "+getDose().getDoseDescricao()+", "+getIdade().getIdadDescricao().toLowerCase()+"]";
+    }
 }

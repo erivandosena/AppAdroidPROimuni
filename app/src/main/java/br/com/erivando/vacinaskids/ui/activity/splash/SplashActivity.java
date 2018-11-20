@@ -1,14 +1,18 @@
 package br.com.erivando.vacinaskids.ui.activity.splash;
 
 import android.app.ActivityManager;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.os.SystemClock;
 
 import javax.inject.Inject;
 
 import br.com.erivando.vacinaskids.R;
+import br.com.erivando.vacinaskids.broadcast.Notificacao;
 import br.com.erivando.vacinaskids.mvp.base.BaseActivity;
 import br.com.erivando.vacinaskids.service.Servico;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginActivity;
@@ -30,8 +34,13 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
     @Inject
     SplashMvpPresenter<SplashMvpView> mPresenter;
 
+    AlarmManager alarmManager;
+    PendingIntent pendingIntent;
+
     private Servico mServico;
     private Intent intent;
+
+    private Context context;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, SplashActivity.class);
@@ -50,10 +59,13 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
         mPresenter.onAttach(SplashActivity.this);
 
-        mServico = new Servico(this);
-        intent = new Intent(this, mServico.getClass());
-        if (!isMyServiceRunning(mServico.getClass())) {
-            startService(intent);
+        this.context = getContextActivity();
+        Intent alarm = new Intent(this.context, Notificacao.class);
+        boolean alarmRunning = (PendingIntent.getBroadcast(this.context, 0, alarm, PendingIntent.FLAG_NO_CREATE) != null);
+        if(alarmRunning == false) {
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this.context, 0, alarm, 0);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), (45000 * 1440)/2L, pendingIntent);//(60000 * 1440)/2L, pendingIntent); //1800000 milliseconds, or every 30 minutes.
         }
     }
 
@@ -76,12 +88,12 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
     @Override
     public void startServico() {
+       // setAlarm();
     }
 
     @Override
     protected void onDestroy() {
         mPresenter.onDetach();
-        stopService(intent);
         super.onDestroy();
     }
 
@@ -108,4 +120,5 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
         }
         return false;
     }
+
 }

@@ -84,4 +84,10 @@ android:showAsAction
         android:title="@string/restore"
         app:showAsAction="ifRoom|withText" />
 
+    <item
+        android:id="@+id/action_configuracoes"
+        android:icon="@android:drawable/ic_popup_reminder"
+        android:title="@string/config"
+        app:showAsAction="ifRoom|withText" />
+
 </menu>

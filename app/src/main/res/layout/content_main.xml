@@ -21,17 +21,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_design"
+    android:background="@color/colorPrimaryDark"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.activity.main.MainActivity">
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:cardCornerRadius="@dimen/card_radius"
-        app:cardElevation="@dimen/card_elevation">
-
 
     <TableLayout
         android:layout_width="match_parent"
@@ -47,16 +39,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:layout_weight="0.5"
-                android:background="@color/cardview_light_background">
+                android:layout_weight="0.5">
 
                 <ImageButton
                     android:id="@+id/btn_cartao_vacinal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_centerInParent="true"
                     android:background="@color/transparent"
-                    android:contentDescription="@null"
+                    android:layout_marginTop="40dp"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_gerenciar" />
 
                 <TextView
@@ -66,6 +58,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
+                    android:textColor="@color/white"
                     android:text="@string/menu_item1" />
 
             </RelativeLayout>
@@ -74,16 +67,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:layout_weight="0.5"
-                android:background="@color/cardview_light_background">
+                android:layout_weight="0.5">
 
                 <ImageButton
                     android:id="@+id/btn_crianca"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_centerInParent="true"
                     android:background="@color/transparent"
-                    android:contentDescription="@null"
+                    android:layout_marginTop="40dp"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_idades" />
 
                 <TextView
@@ -93,6 +86,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
+                    android:textColor="@color/white"
                     android:text="@string/menu_item2" />
 
             </RelativeLayout>
@@ -108,16 +102,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:layout_weight="0.5"
-                android:background="@color/cardview_light_background">
+                android:layout_weight="0.5">
 
                 <ImageButton
                     android:id="@+id/btn_vacina"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_centerInParent="true"
                     android:background="@color/transparent"
-                    android:contentDescription="@null"
+                    android:layout_marginTop="40dp"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_vacina" />
 
                 <TextView
@@ -127,6 +121,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
+                    android:textColor="@color/white"
                     android:text="@string/menu_item3" />
 
             </RelativeLayout>
@@ -135,16 +130,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:layout_weight="0.5"
-                android:background="@color/cardview_light_background">
+                android:layout_weight="0.5">
 
                 <ImageButton
                     android:id="@+id/btn_calendario_vacinal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_centerInParent="true"
                     android:background="@color/transparent"
-                    android:contentDescription="@null"
+                    android:layout_marginTop="40dp"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_cartao" />
 
                 <TextView
@@ -154,6 +149,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
+                    android:textColor="@color/white"
                     android:text="@string/menu_item4" />
 
             </RelativeLayout>
@@ -169,16 +165,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:layout_weight="0.5"
-                android:background="@color/cardview_light_background">
+                android:layout_weight="0.5">
 
                 <ImageButton
                     android:id="@+id/btn_mapa_postos_vacina"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_centerInParent="true"
                     android:background="@color/transparent"
-                    android:contentDescription="@null"
+                    android:layout_marginTop="40dp"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_mapa" />
 
                 <TextView
@@ -188,6 +184,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
+                    android:textColor="@color/white"
                     android:text="@string/menu_item5" />
 
             </RelativeLayout>
@@ -196,15 +193,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:layout_weight="0.5"
-                android:background="@color/cardview_light_background">
+                android:layout_weight="0.5">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageButton
+                    android:id="@+id/btn_curiosidades"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_centerInParent="true"
                     android:background="@color/transparent"
-                    android:contentDescription="@null"
+                    android:layout_marginTop="40dp"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_curiosidades" />
 
                 <TextView
@@ -214,13 +212,12 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
+                    android:textColor="@color/white"
                     android:text="@string/menu_item6" />
 
             </RelativeLayout>
         </TableRow>
 
     </TableLayout>
-
-    </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>

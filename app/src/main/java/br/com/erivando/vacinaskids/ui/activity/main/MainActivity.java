@@ -57,6 +57,7 @@ import br.com.erivando.vacinaskids.ui.activity.login.LoginActivity;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginMvpPresenter;
 import br.com.erivando.vacinaskids.ui.activity.login.LoginMvpView;
 import br.com.erivando.vacinaskids.ui.activity.mapa.MapaActivity;
+import br.com.erivando.vacinaskids.ui.activity.notificacao.NotificacaoActivity;
 import br.com.erivando.vacinaskids.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.vacinaskids.ui.activity.vacina.VacinaActivity;
 import br.com.erivando.vacinaskids.ui.fragment.sobre.Sobre;
@@ -254,6 +255,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             case R.id.action_share:
                 onCompartilhaApp();
                 return true;
+            case R.id.action_configuracoes:
+                openConfiguracoesActivity();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -390,6 +394,12 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     public void openEditaCartaoActivity(String acao) {
         Intent intent = CartaoListaActvity.getStartIntent(MainActivity.this);
         intent.putExtra("cartaoLista", acao);
+        startActivity(intent);
+        finish();
+    }
+
+    public void openConfiguracoesActivity() {
+        Intent intent = NotificacaoActivity.getStartIntent(MainActivity.this);
         startActivity(intent);
         finish();
     }
