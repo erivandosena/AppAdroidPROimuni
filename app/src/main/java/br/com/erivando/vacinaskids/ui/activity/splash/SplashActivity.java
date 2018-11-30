@@ -65,7 +65,7 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
         if(alarmRunning == false) {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(this.context, 0, alarm, 0);
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), (45000 * 1440)/2L, pendingIntent);//(60000 * 1440)/2L, pendingIntent); //1800000 milliseconds, or every 30 minutes.
+            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), (50000 * 1440)/2L, pendingIntent);//(60000 * 1440)/2L, pendingIntent); //1800000 milliseconds, or every 30 minutes.
         }
     }
 

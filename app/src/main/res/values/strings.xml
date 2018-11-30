@@ -172,4 +172,7 @@
     <string name="text_configuracoes_titulo">Configurações do Aplicativo</string>
     <string name="config">Configurações</string>
 
+    <!-- PDF -->
+    <string name="gera_pdf">"Montando seu Cartão Vacinal em PDF, aguarde...</string>
+
 </resources>

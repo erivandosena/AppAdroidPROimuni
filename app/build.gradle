@@ -95,12 +95,14 @@ android {
             enableSplit = true
         }
     }
-    dexOptions {
-        incremental true
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
     }
 }
 
 dependencies {
+    /* Android-PdfMyXml */
+    implementation 'com.github.HendrixString:Android-PdfMyXml:1.0.8'
     /* smart-scheduler-android */
     implementation 'io.hypertrack:smart-scheduler:0.0.14'
     /* Google Maps */
