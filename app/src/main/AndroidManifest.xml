@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.erivando.vacinaskids">
+    package="br.com.erivando.proimuni">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
-        android:name=".ui.application.AppAplicacao"
+        android:name="br.com.erivando.proimuni.ui.application.AppAplicacao"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
@@ -24,9 +24,9 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.Proimuni">
         <activity
-            android:name=".ui.activity.splash.SplashActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.splash.SplashActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen"
@@ -38,17 +38,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.login.LoginActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.login.LoginActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <data android:scheme="@string/facebook_login_protocol_scheme" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.main.MainActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.main.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -61,83 +61,83 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.usuario.CadastroUsuarioActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.activity.crianca.CriancaActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.crianca.CriancaActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.activity.cartao.CartaoActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.cartao.CartaoActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.activity.calendario.CalendarioActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.calendario.CalendarioActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.activity.crianca.CriancaListaActvity"
+            android:name="br.com.erivando.proimuni.ui.activity.crianca.CriancaListaActvity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.activity.cartao.CartaoListaActvity"
+            android:name="br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.activity.vacina.VacinaActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.vacina.VacinaActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.activity.imunizacao.ImunizacaoActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.activity.vacina.VacinaDetalheActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.vacina.VacinaDetalheActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.activity.cartao.CartaoDetalheActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.cartao.CartaoDetalheActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.fragment.sobre.Sobre"
+            android:name="br.com.erivando.proimuni.ui.fragment.sobre.Sobre"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.activity.mapa.MapaActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.mapa.MapaActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name=".ui.activity.notificacao.NotificacaoActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.notificacao.NotificacaoActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
 
         <!--
@@ -183,12 +183,12 @@
         </provider>
 
         <service
-            android:name=".service.Servico"
+            android:name="br.com.erivando.proimuni.service.Servico"
             android:exported="false"
             android:icon="@drawable/ic_launcher_round"
             android:label="@string/app_name" />
 
-        <receiver android:name=".broadcast.Notificacao">
+        <receiver android:name="br.com.erivando.proimuni.broadcast.Notificacao">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

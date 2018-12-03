@@ -16,7 +16,7 @@
 ~ limitações sob a licença.
 -->
 
-<br.com.erivando.vacinaskids.util.HeaderView xmlns:android="http://schemas.android.com/apk/res/android"
+<br.com.erivando.proimuni.util.HeaderView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -35,4 +35,4 @@
         android:textColor="@android:color/white"
         android:textSize="16sp" />
 
-</br.com.erivando.vacinaskids.util.HeaderView>
+</br.com.erivando.proimuni.util.HeaderView>

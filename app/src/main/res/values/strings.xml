@@ -96,6 +96,7 @@
     <string name="facebook_cancel_login">A operação foi cancelada</string>
     <string name="facebook_error_fabebook_login">Ocorreu um erro ao entrar</string>
     <string name="firebase_logout">Fechar Sessão</string>
+    <string name="btn_login_facebook">Entrar com Facebook</string>
     <!--  Google Login. -->
     <string name="google_cancel_login">A operação foi cancelada</string>
     <string name="google_falha_conexao">Conexão falhou!</string>
@@ -114,6 +115,8 @@
     <string name="text_btn_ok">OK</string>
     <string name="aviso_sem_internet">Sem conexão com à Internet!</string>
     <string name="aviso_play_services_install">Este aplicativo requer o Google Play Services. Por favor instale o Google Play Services no seu dispositivo e tente novamente.</string>
+    <string name="btn_login_google">Entrar com Google</string>
+
     <!-- Cadastro Criança -->
     <string name="erro_text_data">Informe uma data válida</string>
     <string name="text_crianca_titulo">Dados da Criança</string>
@@ -174,5 +177,6 @@
 
     <!-- PDF -->
     <string name="gera_pdf">"Montando seu Cartão Vacinal em PDF, aguarde...</string>
+
 
 </resources>

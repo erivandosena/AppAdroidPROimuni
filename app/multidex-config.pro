@@ -1,2 +1,2 @@
 # All classes in the package
--keep class br.com.erivando.vacinaskids.ui.** { *; }
+-keep class br.com.erivando.proimuni.ui.** { *; }

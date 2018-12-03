@@ -23,7 +23,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.activity.main.MainActivity">
+    tools:context="br.com.erivando.proimuni.ui.activity.main.MainActivity">
 
     <TableLayout
         android:layout_width="match_parent"

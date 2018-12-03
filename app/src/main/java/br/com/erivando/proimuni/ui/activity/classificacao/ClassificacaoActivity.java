@@ -1,0 +1,25 @@
+package br.com.erivando.proimuni.ui.activity.classificacao;
+
+import android.content.Context;
+
+import br.com.erivando.proimuni.mvp.base.BaseActivity;
+
+/**
+ * Projeto:     VacinasKIDS
+ * Autor:       Erivando Sena
+ * Data/Hora:   09 de Agosto de 2018 as 10:59
+ * Local:       Fortaleza/CE
+ * E-mail:      erivandoramos@bol.com.br
+ */
+
+public class ClassificacaoActivity extends BaseActivity implements ClassificacaoMvpView {
+    @Override
+    protected void setUp() {
+
+    }
+
+    @Override
+    public Context getContextActivity() {
+        return ClassificacaoActivity.this;
+    }
+}

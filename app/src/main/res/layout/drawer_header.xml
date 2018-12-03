@@ -23,7 +23,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <br.com.erivando.vacinaskids.custom.imagem.RoundedImageView
+    <br.com.erivando.proimuni.imagem.RoundedImageView
         android:id="@+id/img_imagem_perfil"
         android:layout_width="64dp"
         android:layout_height="64dp"

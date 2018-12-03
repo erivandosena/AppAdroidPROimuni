@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Padrões Android. -->
-    <color name="colorPrimary">#488dba</color>
-    <color name="colorPrimaryDark">#79abcc</color>
-    <color name="colorAccent">#03A9F4</color>
+    <color name="colorPrimary">#39c2ff</color>
+    <color name="colorPrimaryDark">#35a6e8</color>
+    <color name="colorAccent">#bfbfbf</color>
 
     <!-- Personalizações. -->
     <color name="colorPrimaryLight">#BBDEFB</color>
@@ -27,5 +27,16 @@
     <color name="facebook">#3b5998</color>
     <color name="shadow">#d0d8dc</color>
     <color name="bg_color">#f7f7f7</color>
+
+    <!-- Paleta de Cores PROimuni -->
+    <color name="startColorBackground">#e9e9f0</color>
+    <color name="endColorBackground">#dbdbdb</color>
+    <color name="startColorSplash">#24eded</color>
+    <color name="endColorSplash">#35a6e8</color>
+    <color name="bntColorPressed">#35a6e8</color>
+    <color name="bntColorFocused">#39c2ff</color>
+    <color name="textColorBlue">#39c2ff</color>
+    <color name="textColorGrey">#7e7e7e</color>
+    <color name="textColorWhite">#ffffff</color>
 
 </resources>

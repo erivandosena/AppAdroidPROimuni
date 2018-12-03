@@ -6,21 +6,22 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'vascinas'
-            keyPassword 'vascina'
-            storeFile file('C:/Users/Erivando/Documents/Google Drive/PROJETO-ACADEMICO/Projeto com Thaís/Certificado App/VacinasKids.jks')
-            storePassword 'vascina'
+            keyAlias 'proimuni'
+            keyPassword 'proimuni'
+            storeFile file('C:\\Users\\Erivando\\Documents\\Google Drive\\PROJETO-ACADEMICO\\Projeto com Thaís\\Certificado App\\Proimuni.jks')
+            storePassword 'proimuni'
         }
     }
     compileSdkVersion 27
     defaultConfig {
-        applicationId "br.com.erivando.vacinaskids"
+        applicationId "br.com.erivando.proimuni"
         minSdkVersion 15
         targetSdkVersion 27
         /* Você especifica o código da versão do seu aplicativo apenas no módulo base. */
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
+        generatedDensities = []
         /* Devido exceder o limite de 64K nos métodos (ao utilizar Firebase, Google Play, etc.) */
         multiDexEnabled true
         signingConfig signingConfigs.config
@@ -43,7 +44,7 @@ android {
             // Ativar pré-dexing para produzir um APK que possa ser testado em
             // Android 5.0+ sem os demorados processos de construção do DEX.
             minSdkVersion 15
-            applicationId 'br.com.erivando.vacinaskids'
+            applicationId 'br.com.erivando.proimuni'
             signingConfig signingConfigs.config
             targetSdkVersion 27
             versionCode 1
@@ -53,7 +54,7 @@ android {
             dimension 'beta'
             // O minSdkVersion real para a versão de produção.
             minSdkVersion 15
-            applicationId 'br.com.erivando.vacinaskids'
+            applicationId 'br.com.erivando.proimuni'
             signingConfig signingConfigs.config
             targetSdkVersion 27
             versionCode 1
@@ -73,9 +74,8 @@ android {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/mimetypes.default'
     }
-    // Ao criar pacotes de aplicativos para Android, o bloco de divisões é ignorado.
-    splits {
-
+    aaptOptions {
+        additionalParameters "--no-version-vectors"
     }
     // Em vez disso, use o bloco de bundles para controlar os tipos de APKs de
     // configuração que você deseja que seu pacote de aplicativos ofereça suporte.

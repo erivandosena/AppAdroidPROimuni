@@ -137,7 +137,7 @@
                         android:name="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
                         android:layout_height="480dp"
-                        tools:context=".ui.activity.mapa.MapaActivity" />
+                        tools:context="br.com.erivando.proimuni.ui.activity.mapa.MapaActivity" />
 
 
                 </LinearLayout>

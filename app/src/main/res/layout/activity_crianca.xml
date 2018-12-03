@@ -82,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <br.com.erivando.vacinaskids.custom.imagem.RoundedImageButton
+                    <br.com.erivando.proimuni.imagem.RoundedImageButton
                         android:id="@+id/img_crianca_foto"
                         android:layout_width="100dp"
                         android:layout_height="100dp"

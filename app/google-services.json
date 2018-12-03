@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "1059359173737",
-    "firebase_url": "https://vacinas-kids.firebaseio.com",
-    "project_id": "vacinas-kids",
-    "storage_bucket": "vacinas-kids.appspot.com"
+    "project_number": "177880380924",
+    "firebase_url": "https://proimuni-f4043.firebaseio.com",
+    "project_id": "proimuni-f4043",
+    "storage_bucket": "proimuni-f4043.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1059359173737:android:be0ce06f95dd9cf5",
+        "mobilesdk_app_id": "1:177880380924:android:e0b37ecf647b9149",
         "android_client_info": {
-          "package_name": "br.com.erivando.vacinaskids"
+          "package_name": "br.com.erivando.proimuni"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1059359173737-e7629o1mnglhdskhvlqicn8p7s8f341u.apps.googleusercontent.com",
+          "client_id": "177880380924-cs5dsn26fb6uq7nns4od8jtur4j1aqlf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "br.com.erivando.vacinaskids",
-            "certificate_hash": "deec56438c58c3c05e228b4a5859a5756d6427bd"
+            "package_name": "br.com.erivando.proimuni",
+            "certificate_hash": "2c2bd1ebb9a2c56d85a59c3788af1da80fb08ed1"
           }
         },
         {
-          "client_id": "1059359173737-jicsue1j7667571ij11tp2728g8e430u.apps.googleusercontent.com",
+          "client_id": "177880380924-v93hobgak4n1kv0o7nu86equr89uav42.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDL6QJ2bIdajnGjaGWzdCTlCFNbEMx0BRY"
+          "current_key": "AIzaSyB32v-g5NTIawHhRoJVqZ8ACWfrFam1Lpc"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1059359173737-jicsue1j7667571ij11tp2728g8e430u.apps.googleusercontent.com",
+              "client_id": "177880380924-v93hobgak4n1kv0o7nu86equr89uav42.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

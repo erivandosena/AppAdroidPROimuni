@@ -20,10 +20,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_design"
+    android:background="@drawable/background_gradient"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="10dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent">
@@ -33,174 +32,142 @@
         android:layout_height="match_parent"
         android:scrollbars="none">
 
-        <android.support.v7.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="5dp"
-            app:cardCornerRadius="7dp"
-            app:cardElevation="22dp">
+            android:layout_margin="50dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_logo"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/ic_proimuni_logo_branco"
+                android:contentDescription="@null" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/activity_vertical_margin"
-                android:paddingRight="@dimen/activity_vertical_margin">
-
-                <ImageView
-                    android:id="@+id/img_logo"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_launcher_round" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="5dp"
-                    android:textColorHint="@color/gray"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/textColorGrey"
                     app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/text_usua_login"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/input_border_bottom"
-                        android:cursorVisible="true"
-                        android:drawableStart="@drawable/ic_login_usuario"
                         android:hint="@string/text_usuario_nome"
-                        android:inputType="text"
-                        android:maxLength="50"
-                        android:textColor="@color/black_effective"
-                        android:textSize="18sp"
-                        android:drawableLeft="@drawable/ic_login_usuario" />
+                        android:inputType="text" />
                 </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:textColorHint="@color/gray"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/textColorGrey"
                     app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
-                    app:passwordToggleEnabled="true">
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/textColorGrey">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/text_usua_senha"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/input_border_bottom"
-                        android:cursorVisible="true"
-                        android:drawableStart="@drawable/ic_login_senha"
                         android:hint="@string/text_usuario_senha"
-                        android:inputType="textPassword"
-                        android:maxLength="50"
-                        android:textColor="@color/black_effective"
-                        android:textSize="18sp"
-                        android:drawableLeft="@drawable/ic_login_senha" />
+                        android:inputType="textPassword" />
                 </android.support.design.widget.TextInputLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_btn_lembrar_senha"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="10dp"
-                        android:autoLink="web"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:linksClickable="true"
-                        android:text="@string/btn_login_lembrar_senha"
-                        android:textAlignment="center"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/navy_blue"
-                        android:textColorHighlight="@color/red_dark2"
-                        android:textColorLink="@color/red_dark"
-                        android:layout_marginRight="10dp" />
-
-                    <TextView
-                        android:id="@+id/btn_cadastro_usuario"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:autoLink="web"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:linksClickable="true"
-                        android:text="@string/btn_login_fazer_cadastro"
-                        android:textAlignment="center"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/navy_blue"
-                        android:textColorHighlight="@color/red_dark2"
-                        android:textColorLink="@color/red_dark"
-                        android:layout_marginLeft="10dp" />
-
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/btn_login_usuario"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/botao_interativo"
-                    android:text="@string/btn_login_usuario"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="1dp"
-                    android:text="@string/text_login_redes_sociais"
-                    android:textAlignment="center"
-                    android:textColor="@color/black_effective" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|bottom"
-                    android:layout_margin="1dp"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/btn_google_login"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="start"
-                        android:layout_marginEnd="10dp"
-                        android:background="@color/transparent"
-                        android:contentDescription="@null"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_google_plus"
-                        android:layout_marginRight="10dp" />
-
-                    <ImageButton
-                        android:id="@+id/btn_facebook_login"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="start"
-                        android:layout_marginStart="10dp"
-                        android:background="@color/transparent"
-                        android:contentDescription="@null"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_facebook"
-                        android:layout_marginLeft="10dp" />
-
-                </LinearLayout>
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/btn_login_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/botao_interativo"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/btn_login_usuario"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_btn_lembrar_senha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top|start"
+                    android:autoLink="web"
+                    android:clickable="true"
+                    android:linksClickable="true"
+                    android:text="@string/btn_login_lembrar_senha"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/textColorGrey"
+                    android:textColorLink="@color/textColorWhite" />
+
+
+                <TextView
+                    android:id="@+id/btn_cadastro_usuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="-22dp"
+                    android:autoLink="web"
+                    android:clickable="true"
+                    android:linksClickable="true"
+                    android:text="@string/btn_login_fazer_cadastro"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/textColorGrey"
+                    android:textColorLink="@color/textColorWhite" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_google_login"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/botao_interativo"
+                android:drawableLeft="@drawable/ic_btn_google"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/btn_login_google"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_facebook_login"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/botao_interativo"
+                android:drawableLeft="@drawable/ic_btn_facebook"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/btn_login_facebook"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
 
     </ScrollView>
 
