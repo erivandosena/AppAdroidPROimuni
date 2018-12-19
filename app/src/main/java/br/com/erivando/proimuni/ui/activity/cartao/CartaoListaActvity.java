@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -37,17 +38,20 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
     @Inject
     CartaoMvpPresenter<CartaoMvpView> presenterCartao;
 
-    @BindView(R.id.toolbar_cartao_lista)
-    Toolbar toolbar;
+    //@BindView(R.id.toolbar_cartao_lista)
+    //Toolbar toolbar;
 
-    @BindView(R.id.collapsing_toolbar_cartao_lista)
-    CollapsingToolbarLayout collapsingToolbar;
+    //@BindView(R.id.collapsing_toolbar_cartao_lista)
+    //CollapsingToolbarLayout collapsingToolbar;
 
-    @BindView(R.id.fab)
+    @BindView(R.id.fab_cartao_add)
     FloatingActionButton fabFloatingActionButton;
 
     @BindView(R.id.cartao_recyclerView)
     RecyclerView cartao_recycler_view;
+
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
 
     private List<Cartao> listaCartoes;
 
@@ -63,6 +67,7 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartao_lista);
         setUnBinder(ButterKnife.bind(this));
+        /*
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -72,6 +77,9 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
             }
         });
         collapsingToolbar.setTitle(getResources().getString(R.string.text_lista_cartao_titulo));
+        */
+
+        textViewTituloToobar.setText(getResources().getString(R.string.text_lista_calendario_titulo));
 
         getActivityComponent().inject(this);
         presenterCartao.onAttach(this);
@@ -90,7 +98,12 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
         cartao_recycler_view.setAdapter(adapter);
     }
 
-    @OnClick(R.id.fab)
+    @OnClick(R.id.btn_nav_voltar)
+    public void onClickVoltar(View v) {
+        onBackPressed();
+    }
+
+    @OnClick(R.id.fab_cartao_add)
     public void onClick(View view) {
         if (view == fabFloatingActionButton) {
             openCartaoActivity();

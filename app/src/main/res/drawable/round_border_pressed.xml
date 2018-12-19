@@ -23,9 +23,9 @@
     <solid android:color="@color/bntColorPressed" />
 
     <corners
-        android:bottomLeftRadius="@dimen/activity_vertical_margin"
-        android:bottomRightRadius="@dimen/activity_vertical_margin"
-        android:topLeftRadius="@dimen/activity_horizontal_margin"
-        android:topRightRadius="@dimen/activity_horizontal_margin" />
+        android:bottomLeftRadius="@dimen/browser_actions_context_menu_min_padding"
+        android:bottomRightRadius="@dimen/browser_actions_context_menu_min_padding"
+        android:topLeftRadius="@dimen/browser_actions_context_menu_min_padding"
+        android:topRightRadius="@dimen/browser_actions_context_menu_min_padding" />
 
 </shape>

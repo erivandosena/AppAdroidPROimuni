@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
@@ -26,6 +27,7 @@ import static br.com.erivando.proimuni.util.Uteis.PERMISSOES;
 import static br.com.erivando.proimuni.util.Uteis.TODAS_PERMISSOES;
 import static br.com.erivando.proimuni.util.Uteis.base64ParaBitmap;
 import static br.com.erivando.proimuni.util.Uteis.hasPermissoes;
+import static br.com.erivando.proimuni.util.Uteis.statusBarTransparente;
 
 /**
  * Projeto:     VacinasKIDS
@@ -40,11 +42,11 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     @Inject
     CadastroUsuarioMvpPresenter<CadastroUsuarioMvpView> presenter;
 
-    @BindView(R.id.toolbar_usuario)
-    Toolbar toolbar;
+   // @BindView(R.id.toolbar_usuario)
+   // Toolbar toolbar;
 
-    @BindView(R.id.collapsing_toolbar_usuario)
-    CollapsingToolbarLayout collapsingToolbar;
+   // @BindView(R.id.collapsing_toolbar_usuario)
+   // CollapsingToolbarLayout collapsingToolbar;
 
     @BindView(R.id.text_cad_nome)
     EditText nomeEditText;
@@ -68,6 +70,9 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     private Long id;
     private Bitmap imagemBitmapFoto;
 
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
+
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, CadastroUsuarioActivity.class);
         return intent;
@@ -79,15 +84,19 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
         setContentView(R.layout.activity_cadastro_usuario);
 
         setUnBinder(ButterKnife.bind(this));
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openLoginOuMainActivity();
-            }
-        });
-        collapsingToolbar.setTitle(getResources().getString(R.string.text_usuario_titulo));
+        //toolbar.setTitle(getResources().getString(R.string.text_usuario_titulo));
+       // setSupportActionBar(toolbar);
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      //      @Override
+       //     public void onClick(View v) {
+       //         openLoginOuMainActivity();
+        //    }
+      //  });
+
+        //collapsingToolbar.setTitle(getResources().getString(R.string.text_usuario_titulo));
+
+        textViewTituloToobar.setText(getResources().getString(R.string.text_usuario_titulo));
 
         getActivityComponent().inject(this);
 
@@ -101,7 +110,7 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     }
 
 
-    //@OnClick(R.id.btn_nav_voltar)
+    @OnClick(R.id.btn_nav_voltar)
     @Override
     public void openLoginOuMainActivity() {
         Intent intent = new Intent();
@@ -148,6 +157,7 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     @Override
     protected void setUp() {
         //habilitaTelaCheia(this);
+        //statusBarTransparente(this);
         usuario = presenter.onUsuarioCadastrado();
         if (usuario != null) {
             id = usuario.getId();

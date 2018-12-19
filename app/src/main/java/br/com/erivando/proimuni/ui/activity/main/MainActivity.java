@@ -1,5 +1,6 @@
 package br.com.erivando.proimuni.ui.activity.main;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,15 +20,16 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,7 +40,6 @@ import javax.inject.Inject;
 import br.com.erivando.proimuni.BuildConfig;
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.backup.RealmBackupRestore;
-import br.com.erivando.proimuni.imagem.RoundedImageView;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.calendario.CalendarioActivity;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity;
@@ -78,8 +79,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Inject
     ImunizacaoMvpPresenter<ImunizacaoMvpView> imunizacaoPresenter;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    //@BindView(R.id.toolbar)
+    //Toolbar toolbar;
 
     @BindView(R.id.drawer_view)
     DrawerLayout drawer;
@@ -90,20 +91,29 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @BindView(R.id.text_versao_app)
     TextView versaoAppTextView;
 
-    @BindView(R.id.btn_calendario_vacinal)
-    ImageButton calendarioImageButton;
+    @BindView(R.id.btn_cartao)
+    Button cartaoImageButton;
 
-    @BindView(R.id.btn_cartao_vacinal)
-    ImageButton cartaoImageButton;
-
-    @BindView(R.id.btn_crianca)
-    ImageButton criancaImageButton;
+    //@BindView(R.id.btn_crianca)
+    //ImageButton criancaImageButton;
 
     @BindView(R.id.btn_vacina)
-    ImageButton vacinaImageButton;
+    Button vacinaImageButton;
 
-    @BindView(R.id.btn_mapa_postos_vacina)
-    ImageButton mapaImageButton;
+    @BindView(R.id.btn_calendario)
+    Button calendarioImageButton;
+
+    @BindView(R.id.btn_posto)
+    Button postoImageButton;
+
+    @BindView(R.id.btn_drawer)
+    ImageButton buttonBarDrawerToggle;
+
+    @BindView(R.id.imagem_menu)
+    RoundedImageView roundedImageMenu;
+
+    @BindView(R.id.text_menu)
+    TextView textViewMenu;
 
     private TextView nomeTextView;
 
@@ -111,19 +121,21 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     private RoundedImageView perfilImageView;
 
-    private ActionBarDrawerToggle drawerToggle;
-
     private RealmBackupRestore backupRestore;
+
+    private ImageButton buttonBarDrawerToggleClose;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         return intent;
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         getActivityComponent().inject(this);
@@ -135,41 +147,64 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         backupRestore = new RealmBackupRestore(this);
 
         setUp();
+
+        buttonBarDrawerToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!drawer.isDrawerOpen(GravityCompat.START))
+                    drawer.openDrawer(Gravity.START);
+                else
+                    drawer.closeDrawer(Gravity.END);
+            }
+        });
+
+        buttonBarDrawerToggleClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!drawer.isDrawerOpen(Gravity.END))
+                    drawer.closeDrawer(Gravity.START);
+                 else
+                    drawer.closeDrawer(Gravity.END);
+            }
+        });
+
     }
 
-    @OnClick(R.id.btn_calendario_vacinal)
-    public void onCalendarioVacinal() {
-        openCalendarioVacinal();
-    }
-
-    @OnClick(R.id.btn_cartao_vacinal)
+    @OnClick(R.id.btn_cartao)
     public void onCartaoVacinal() {
         openCartaoListaActivity("cartao");
     }
 
-    @OnClick(R.id.btn_crianca)
-    public void onCrianca() {
-        openCriancaListaActivity("edita");
-    }
+    //@OnClick(R.id.btn_crianca)
+    //public void onCrianca() {
+    //    openCriancaListaActivity("edita");
+    //}
 
     @OnClick(R.id.btn_vacina)
     public void onVacina() {
         openVacinaActivity();
     }
 
-    @OnClick(R.id.btn_mapa_postos_vacina)
+    @OnClick(R.id.btn_calendario)
+    public void onCalendarioVacinal() {
+        openCalendarioVacinal();
+    }
+
+    @OnClick(R.id.btn_posto)
     public void onMapa() {
         openMapaPostosVacinacao();
     }
 
-
     @Override
     protected void setUp() {
-        setSupportActionBar(toolbar);
+
+       // setSupportActionBar(toolbar);
+
+        /*
         drawerToggle = new ActionBarDrawerToggle(
                 this,
                 drawer,
-                toolbar,
+                //toolbar,
                 R.string.open_drawer,
                 R.string.close_drawer) {
             @Override
@@ -183,15 +218,18 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                 super.onDrawerClosed(drawerView);
             }
         };
+
         drawer.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
+        */
+
         setupNavMenu();
         presenter.onNavMenuCreated();
         setupCardContainerView();
 
-
        // Intent msgIntent = new Intent(MainActivity.this, Servico.class);
        // startService(msgIntent);
+
     }
 
     @Override
@@ -281,6 +319,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         perfilImageView = headerLayout.findViewById(R.id.img_imagem_perfil);
         nomeTextView = headerLayout.findViewById(R.id.text_nome_perfil);
         emailTextView = headerLayout.findViewById(R.id.text_email_perfil);
+        buttonBarDrawerToggleClose = headerLayout.findViewById(R.id.btn_drawer_close);
 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -420,6 +459,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void updateUserName(String currentUserName) {
         nomeTextView.setText(currentUserName);
+        textViewMenu.setText(currentUserName);
     }
 
     @Override
@@ -434,6 +474,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             InputStream in = (InputStream) imageURL.getContent();
             Bitmap bitmap = BitmapFactory.decodeStream(in);
             perfilImageView.setImageBitmap(bitmap);
+            roundedImageMenu.setImageBitmap(bitmap);
         } catch (IOException e) {
             e.printStackTrace();
         }

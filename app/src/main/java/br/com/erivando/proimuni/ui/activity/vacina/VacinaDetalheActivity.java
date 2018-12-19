@@ -35,14 +35,22 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
     public static final String EXTRA_NOME = "vacina_nome";
     public static final String EXTRA_DESC = "vacina_descricao";
     public static final String EXTRA_ADMIN = "vacina_admin";
+
     @BindView(R.id.text_vacina_descricao)
     public TextView mTexVacinaDescricao;
+
     @BindView(R.id.text_vacina_administracao)
     public TextView mTexVacinaAdministracao;
+
     @BindView(R.id.fab_vacina_share)
     public FloatingActionButton floatingActionButtonVacinaShare;
+
     @Inject
     VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
+
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
+
     private String vacinaNome;
     private String vacinaDesc;
     private String vacinaAdmin;
@@ -68,6 +76,7 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
         vacinaDesc = intent.getStringExtra(EXTRA_DESC);
         vacinaAdmin = intent.getStringExtra(EXTRA_ADMIN);
 
+        /*
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -81,6 +90,9 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
 
         CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(vacinaNome);
+        */
+        textViewTituloToobar.setText(vacinaNome);
+
         mTexVacinaDescricao.setText(vacinaDesc);
         mTexVacinaAdministracao.setText(vacinaAdmin);
 
@@ -111,6 +123,11 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
     protected void setUp() {
     }
 
+    @OnClick(R.id.btn_nav_voltar)
+    public void onClickVoltar(View v) {
+        onBackPressed();
+    }
+
     @Override
     public void onDestroy() {
         vacinaPresenter.onDetach();
@@ -129,8 +146,8 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
     }
 
     private void loadBackdrop() {
-        final ImageView imageView = findViewById(R.id.backdrop);
-        Glide.with(this).load(R.drawable.ic_vacina).apply(RequestOptions.centerCropTransform()).into(imageView);
+        //final ImageView imageView = findViewById(R.id.backdrop);
+        //Glide.with(this).load(R.drawable.ic_vacina).apply(RequestOptions.centerCropTransform()).into(imageView);
     }
 
     @Override

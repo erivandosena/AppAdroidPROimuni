@@ -1,16 +1,23 @@
 package br.com.erivando.proimuni.mvp.base;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import br.com.erivando.proimuni.di.component.ActivityComponent;
+import br.com.erivando.proimuni.di.component.DaggerActivityComponent;
+import br.com.erivando.proimuni.di.module.ActivityModule;
 import br.com.erivando.proimuni.mvp.MvpView;
+import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import br.com.erivando.proimuni.util.CommonUtils;
 import butterknife.Unbinder;
 
@@ -34,8 +41,39 @@ public abstract class BaseFragment extends Fragment implements MvpView {
             baseActivity.setStatusBarTranslucent(false);
         else
             baseActivity.setStatusBarTranslucent(true);
+
         super.onCreate(savedInstanceState);
+
         setHasOptionsMenu(false);
+
+        if (Build.VERSION.SDK_INT >= 19) {
+            baseActivity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+
+        if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
+            setWindowFlag(getActivity(), WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
+        }
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            setWindowFlag(getActivity(), WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
+            baseActivity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+
+
+    }
+
+    public static void setWindowFlag(Activity activity, final int bits, boolean state){
+        Window win = activity.getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+
+        if (state)
+        {
+            winParams.flags |= bits;
+        }
+        else
+        {
+            winParams.flags &= ~bits;
+        }
     }
 
     @Override

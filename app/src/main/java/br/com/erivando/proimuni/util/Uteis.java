@@ -23,6 +23,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.util.Base64;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -85,6 +86,18 @@ public class Uteis {
      */
     public static void habilitaTelaCheia(Context context) {
         ((Activity) context).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+
+    public static void statusBarTransparente(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window window = ((Activity) context).getWindow();
+
+           //window.requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);//or add in style.xml
+
+
+            window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
     }
 
     /**

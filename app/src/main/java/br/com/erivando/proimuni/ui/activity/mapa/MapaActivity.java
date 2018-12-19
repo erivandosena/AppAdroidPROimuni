@@ -63,6 +63,7 @@ import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.util.geolocalizacao.GooglePlacesReadTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Projeto:     VacinasKIDS
@@ -91,17 +92,20 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
     private boolean statusChangedMapa;
     private Drawable iconeDrawable;
 
-    @BindView(R.id.toolbar_mapa)
-    Toolbar toolbar;
+    //@BindView(R.id.toolbar_mapa)
+    //Toolbar toolbar;
 
-    @BindView(R.id.collapsing_toolbar_mapa)
-    CollapsingToolbarLayout collapsingToolbar;
+    //@BindView(R.id.collapsing_toolbar_mapa)
+    //CollapsingToolbarLayout collapsingToolbar;
 
     @BindView(R.id.btn_pesquisa)
     Button buttonPesquisa;
 
     @BindView(R.id.text_pesquisa)
     TextView textPesquisa;
+
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, MapaActivity.class);
@@ -113,6 +117,7 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_mapa);
         setUnBinder(ButterKnife.bind(this));
+        /*
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -122,6 +127,8 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
             }
         });
         collapsingToolbar.setTitle(getResources().getString(R.string.text_mapa_titulo));
+        */
+        textViewTituloToobar.setText(getResources().getString(R.string.text_mapa_titulo));
 
         getActivityComponent().inject(this);
 
@@ -141,6 +148,11 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
             // Obtenha o SupportMapFragment e seja notificado quando o mapa estiver pronto para ser usado.
             initMapaLocalizacao();
         }
+    }
+
+    @OnClick(R.id.btn_nav_voltar)
+    public void onClickVoltar(View v) {
+        onBackPressed();
     }
 
     private void initMapaLocalizacao() {

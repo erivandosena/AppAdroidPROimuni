@@ -3,9 +3,12 @@ package br.com.erivando.proimuni.ui.activity.login;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,6 +29,7 @@ import butterknife.OnClick;
 
 import static br.com.erivando.proimuni.ui.activity.login.LoginPresenter.RC_SIGN_IN;
 import static br.com.erivando.proimuni.util.Uteis.habilitaTelaCheia;
+import static br.com.erivando.proimuni.util.Uteis.statusBarTransparente;
 
 /**
  * Projeto:     VacinasKIDS
@@ -52,6 +56,10 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     @BindView(R.id.btn_google_login)
     Button googleLogin;
 
+    @BindView(R.id.btn_cadastro_usuario)
+    Button buttonCadastroUsuario;
+
+
     @BindView(R.id.tv_btn_lembrar_senha)
     TextView lembrarSenhaTextView;
 
@@ -72,6 +80,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         presenter.onAttach(LoginActivity.this);
 
         setUp();
+
     }
 
     @OnClick(R.id.btn_login_usuario)
@@ -123,13 +132,15 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     }
 
     @OnClick(R.id.btn_cadastro_usuario)
-    public void openCadastroUsuarioActivity() {
-        if (presenter.onVerificaUsuarioCadastrado()) {
-            Intent intent = CadastroUsuarioActivity.getStartIntent(LoginActivity.this);
-            startActivity(intent);
-            finish();
-        } else {
-            onError(R.string.erro_text_usuario_existente);
+    public void openCadastroUsuarioActivity(View v) {
+        if (v == buttonCadastroUsuario) {
+            if (presenter.onVerificaUsuarioCadastrado()) {
+                Intent intent = CadastroUsuarioActivity.getStartIntent(LoginActivity.this);
+                startActivity(intent);
+                finish();
+            } else {
+                onError(R.string.erro_text_usuario_existente);
+            }
         }
     }
 
@@ -151,7 +162,8 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
     @Override
     protected void setUp() {
-        habilitaTelaCheia(this);
+        //habilitaTelaCheia(this);
+        //statusBarTransparente(this);
         presenter.onCreateGoogleLogin();
         presenter.onCreateFacebookLogin();
         presenter.onCreateGoogleAccountCredential();

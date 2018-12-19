@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
@@ -59,11 +60,14 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     @Inject
     CadastroUsuarioMvpPresenter<CadastroUsuarioMvpView> presenterUsuario;
 
-    @BindView(R.id.toolbar_crianca)
-    Toolbar toolbar;
+   // @BindView(R.id.toolbar_crianca)
+   // Toolbar toolbar;
 
-    @BindView(R.id.collapsing_toolbar_crianca)
-    CollapsingToolbarLayout collapsingToolbar;
+  //  @BindView(R.id.collapsing_toolbar_crianca)
+ //   CollapsingToolbarLayout collapsingToolbar;
+
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
 
     @BindView(R.id.text_cad_nome)
     EditText nomeEditText;
@@ -98,6 +102,7 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
         setContentView(R.layout.activity_crianca);
 
         setUnBinder(ButterKnife.bind(this));
+        /*
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -107,6 +112,8 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
             }
         });
         collapsingToolbar.setTitle(getResources().getString(R.string.text_crianca_titulo));
+        */
+        textViewTituloToobar.setText(getResources().getString(R.string.text_crianca_titulo));
 
         getActivityComponent().inject(this);
 
@@ -154,6 +161,11 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
                 datePickerDialog.show();
             }
         });
+    }
+
+    @OnClick(R.id.btn_nav_voltar)
+    public void onClickVoltar(View v) {
+        onBackPressed();
     }
 
     @OnClick(R.id.img_crianca_foto)

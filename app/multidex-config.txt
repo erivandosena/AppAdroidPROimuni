@@ -1,1 +1,1 @@
-br/com/erivando/vacinaskids/ui/login/LoginPresenter.class
+br/com/erivando/proimuni/ui/login/LoginPresenter.class

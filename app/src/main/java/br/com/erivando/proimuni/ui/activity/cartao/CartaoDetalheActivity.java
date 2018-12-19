@@ -74,17 +74,20 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
     ImunizacaoMvpPresenter<ImunizacaoMvpView> imunizacaoPresenter;
 
 
-    @BindView(R.id.fab)
+    @BindView(R.id.fab_cartao_print)
     FloatingActionButton fabFloatingActionButton;
 
-    @BindView(R.id.image_cartao_vacinal)
-    public ImageView mImagemCartao;
+    //@BindView(R.id.image_cartao_vacinal)
+    //public ImageView mImagemCartao;
 
     @BindView(R.id.text_nome_crianca)
     public TextView mTextCrianca;
 
     @BindView(R.id.text_idade_crianca)
     public TextView mTextIdade;
+
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
 
     private Cartao cartao;
     private Intent intent;
@@ -101,6 +104,8 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartao_detalhe);
 
+        setUnBinder(ButterKnife.bind(this));
+        /*
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -113,10 +118,12 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         });
         CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(getResources().getString(R.string.menu_item1));
+        */
+
+        textViewTituloToobar.setText(getResources().getString(R.string.menu_item1));
 
         getActivityComponent().inject(this);
 
-        setUnBinder(ButterKnife.bind(this));
 
         presenter.onAttach(this);
 
@@ -125,7 +132,7 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         setUp();
     }
 
-    @OnClick(R.id.fab)
+    @OnClick(R.id.fab_cartao_print)
     public void onClick(View view) {
         //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
         if (view == fabFloatingActionButton) {
@@ -133,6 +140,10 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         }
     }
 
+    @OnClick(R.id.btn_nav_voltar)
+    public void onClickVoltar(View v) {
+        onBackPressed();
+    }
 
     @Override
     protected void setUp() {
@@ -143,8 +154,8 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
                 startActivity(CartaoListaActvity.getStartIntent(this).putExtra("cartaoLista", "cartao"));
                 finish();
             } else {
-                if (cartao.getCrianca().getCriaFoto() != null)
-                    mImagemCartao.setImageBitmap(Uteis.base64ParaBitmap(cartao.getCrianca().getCriaFoto()));
+                //if (cartao.getCrianca().getCriaFoto() != null)
+                   // mImagemCartao.setImageBitmap(Uteis.base64ParaBitmap(cartao.getCrianca().getCriaFoto()));
                 mTextCrianca.setText(cartao.getCrianca().getCriaNome());
                 mTextIdade.setText("Idade: " + Uteis.obtemIdadeCompleta(cartao.getCrianca().getCriaNascimento()));
             }

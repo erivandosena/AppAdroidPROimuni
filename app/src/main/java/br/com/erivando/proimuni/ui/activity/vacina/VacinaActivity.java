@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,9 @@ import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.fragment.vacina.VacinaPrivadaFragment;
 import br.com.erivando.proimuni.ui.fragment.vacina.VacinaPublicaFragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Projeto:     VacinasKIDS
@@ -36,6 +40,15 @@ public class VacinaActivity extends BaseActivity implements VacinaMvpView {
     @Inject
     VacinaMvpPresenter<VacinaMvpView> presenter;
 
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
+
+    @BindView(R.id.viewpager)
+    ViewPager viewPager;
+
+    @BindView(R.id.tabs)
+    TabLayout tabLayout;
+
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, VacinaActivity.class);
         return intent;
@@ -46,7 +59,11 @@ public class VacinaActivity extends BaseActivity implements VacinaMvpView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vacina);
 
+        setUnBinder(ButterKnife.bind(this));
+
+        /*
         final Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(getResources().getString(R.string.text_vacinas_titulo));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -58,10 +75,12 @@ public class VacinaActivity extends BaseActivity implements VacinaMvpView {
         });
         CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(getResources().getString(R.string.text_vacinas_titulo));
+        */
 
         getActivityComponent().inject(this);
 
-//        setUnBinder(ButterKnife.bind(this));
+
+        textViewTituloToobar.setText(getResources().getString(R.string.text_vacinas_titulo));
 
         presenter.onAttach(this);
 
@@ -71,12 +90,15 @@ public class VacinaActivity extends BaseActivity implements VacinaMvpView {
     }
 
     private void initViews() {
-        ViewPager viewPager = findViewById(R.id.viewpager);
         if (viewPager != null) {
             setupViewPager(viewPager);
         }
-        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @OnClick(R.id.btn_nav_voltar)
+    public void onClickVoltar(View v) {
+        onBackPressed();
     }
 
     @Override

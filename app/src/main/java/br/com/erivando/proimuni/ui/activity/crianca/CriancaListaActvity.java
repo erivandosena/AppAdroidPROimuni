@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -37,17 +38,20 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
     @Inject
     CriancaMvpPresenter<CriancaMvpView> presenterCrianca;
 
-    @BindView(R.id.toolbar_crianca_lista)
-    Toolbar toolbar;
+   // @BindView(R.id.toolbar_crianca_lista)
+    //Toolbar toolbar;
 
-    @BindView(R.id.collapsing_toolbar_crianca_lista)
-    CollapsingToolbarLayout collapsingToolbar;
+    //@BindView(R.id.collapsing_toolbar_crianca_lista)
+   // CollapsingToolbarLayout collapsingToolbar;
 
-    @BindView(R.id.fab)
+    @BindView(R.id.fab_crianca_add)
     FloatingActionButton fabFloatingActionButton;
 
     @BindView(R.id.crianca_recyclerView)
     RecyclerView crianca_recycler_view;
+
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
 
     private List<Crianca> listaCriancas;
 
@@ -63,6 +67,7 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crianca_lista);
         setUnBinder(ButterKnife.bind(this));
+        /*
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -72,6 +77,9 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
             }
         });
         collapsingToolbar.setTitle(getResources().getString(R.string.text_lista_crianca_titulo));
+        */
+
+        textViewTituloToobar.setText(getResources().getString(R.string.text_lista_crianca_titulo));
 
         getActivityComponent().inject(this);
 
@@ -84,12 +92,17 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
         setUp();
     }
 
-    @OnClick(R.id.fab)
+    @OnClick(R.id.fab_crianca_add)
     public void onClick(View view) {
         //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
         if (view == fabFloatingActionButton) {
             openCriancaActivity();
         }
+    }
+
+    @OnClick(R.id.btn_nav_voltar)
+    public void onClickVoltar(View v) {
+        onBackPressed();
     }
 
     @Override

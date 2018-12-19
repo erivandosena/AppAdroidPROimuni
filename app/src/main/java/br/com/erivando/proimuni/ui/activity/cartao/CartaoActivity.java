@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -43,14 +44,17 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView {
     @Inject
     CriancaMvpPresenter<CriancaMvpView> presenterCrianca;
 
-    @BindView(R.id.toolbar_cartao)
-    Toolbar toolbar;
+ //   @BindView(R.id.toolbar_cartao)
+   // Toolbar toolbar;
 
-    @BindView(R.id.collapsing_toolbar_cartao)
-    CollapsingToolbarLayout collapsingToolbar;
+   // @BindView(R.id.collapsing_toolbar_cartao)
+  //  CollapsingToolbarLayout collapsingToolbar;
 
     @BindView(R.id.crianca)
     Spinner comboCartao;
+
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
 
     private Intent intent;
     private Cartao cartao;
@@ -68,6 +72,7 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartao);
         setUnBinder(ButterKnife.bind(this));
+        /*
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -77,7 +82,9 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView {
             }
         });
         collapsingToolbar.setTitle(getResources().getString(R.string.text_cartao_titulo));
+        */
 
+        textViewTituloToobar.setText(getResources().getString(R.string.text_cartao_titulo));
         getActivityComponent().inject(this);
         presenter.onAttach(this);
 
@@ -90,6 +97,11 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView {
         getCrianca();
 
         setUp();
+    }
+
+    @OnClick(R.id.btn_nav_voltar)
+    public void onClickVoltar(View v) {
+        onBackPressed();
     }
 
     @OnClick(R.id.btn_cadadastar_cartao)

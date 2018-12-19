@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,12 @@ import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.idade.IdadeMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.idade.IdadeMvpView;
+import br.com.erivando.proimuni.ui.activity.login.LoginActivity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.adapter.CalendarioRVA;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.realm.RealmList;
 
 /**
@@ -44,11 +47,18 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
     @Inject
     IdadeMvpPresenter<IdadeMvpView> idadePresenter;
 
-    @BindView(R.id.toolbar_calendario)
-    Toolbar toolbar;
+   // @BindView(R.id.toolbar)
+   // Toolbar toolbar;
 
-    @BindView(R.id.collapsing_toolbar_calendario)
-    CollapsingToolbarLayout collapsingToolbar;
+   // @BindView(R.id.collapsing_toolbar_calendario)
+   // CollapsingToolbarLayout collapsingToolbar;
+
+    // @BindView(R.id.collapsing_toolbar_calendario)
+    // CollapsingToolbarLayout collapsingToolbar;
+
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
+
 
     List<Idade> idades;
     List<Calendario> calendarios;
@@ -63,17 +73,19 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario);
-       setUnBinder(ButterKnife.bind(this));
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        collapsingToolbar.setTitle(getResources().getString(R.string.text_lista_calendario_titulo));
+        setUnBinder(ButterKnife.bind(this));
+        //setSupportActionBar(toolbar);
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setTitle(getResources().getString(R.string.text_lista_calendario_titulo));
+      //  toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+       //     @Override
+       //     public void onClick(View v) {
+        //        onBackPressed();
+       //     }
+       // });
+       // collapsingToolbar.setTitle(getResources().getString(R.string.text_lista_calendario_titulo));
 
+        textViewTituloToobar.setText(getResources().getString(R.string.text_lista_calendario_titulo));
         getActivityComponent().inject(this);
 
         presenter.onAttach(this);
@@ -81,6 +93,10 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
         setUp();
     }
 
+    @OnClick(R.id.btn_nav_voltar)
+    public void onClickVoltar(View v) {
+        onBackPressed();
+    }
 
     @Override
     protected void setUp() {

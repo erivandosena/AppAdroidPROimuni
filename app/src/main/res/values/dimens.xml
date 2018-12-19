@@ -12,7 +12,12 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="card_margin">10dp</dimen>
     <dimen name="card_radius">5dp</dimen>
+    <dimen name="card_menu_radius">25dp</dimen>
+    <dimen name="card_menu_margin">5dp</dimen>
+    <dimen name="card_menu_wh">110dp</dimen>
     <dimen name="card_elevation">6dp</dimen>
+    <dimen name="card_menu_elevation">5dp</dimen>
+    <dimen name="card_menu_padding">5dp</dimen>
     <dimen name="tabsHeight">48dp</dimen>
     <dimen name="list_item_avatar_size">40dp</dimen>
     <dimen name="detail_backdrop_height">256dp</dimen>
@@ -21,4 +26,6 @@
     <dimen name="header_view_end_margin_right">14dp</dimen>
     <dimen name="header_view_start_margin_bottom">14dp</dimen>
     <dimen name="appbar_layout_height">180dp</dimen>
+    <dimen name="appbar_toobar_height">75dp</dimen>
+    <dimen name="appbar_text_margin">10dp</dimen>
 </resources>

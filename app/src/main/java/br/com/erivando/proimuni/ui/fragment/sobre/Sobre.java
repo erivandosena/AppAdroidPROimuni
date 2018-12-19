@@ -16,6 +16,7 @@ import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 ;
 
@@ -35,11 +36,14 @@ public class Sobre extends BaseActivity implements SobreMvpView {
     @BindView(R.id.text_sobre_versao_app)
     TextView versaoAppSobreTextView;
 
-    @BindView(R.id.toolbar_sobre)
-    Toolbar toolbar;
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
 
-    @BindView(R.id.collapsing_toolbar_sobre)
-    CollapsingToolbarLayout collapsingToolbar;
+    //@BindView(R.id.toolbar_sobre)
+    //Toolbar toolbar;
+
+    //@BindView(R.id.collapsing_toolbar_sobre)
+    //CollapsingToolbarLayout collapsingToolbar;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, Sobre.class);
@@ -55,6 +59,9 @@ public class Sobre extends BaseActivity implements SobreMvpView {
         setUnBinder(ButterKnife.bind(this));
         presenter.onAttach(this);
 
+        textViewTituloToobar.setText(getResources().getString(R.string.text_sobre_titulo));
+
+        /*
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -64,12 +71,17 @@ public class Sobre extends BaseActivity implements SobreMvpView {
             }
         });
         collapsingToolbar.setTitle(getResources().getString(R.string.text_sobre_titulo));
+        */
     }
 
     @Override
     protected void setUp() {
     }
 
+    @OnClick(R.id.btn_nav_voltar)
+    public void onClickVoltar(View v) {
+        onBackPressed();
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

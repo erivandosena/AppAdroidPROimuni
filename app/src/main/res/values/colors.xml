@@ -3,40 +3,29 @@
     <!-- Padrões Android. -->
     <color name="colorPrimary">#39c2ff</color>
     <color name="colorPrimaryDark">#35a6e8</color>
-    <color name="colorAccent">#bfbfbf</color>
+    <color name="colorAccent">#24eded</color>
 
-    <!-- Personalizações. -->
-    <color name="colorPrimaryLight">#BBDEFB</color>
-    <color name="primary_text">#212121</color>
-    <color name="secondary_text">#757575</color>
-    <color name="black">#000000</color>
-    <color name="white">#FFFFFF</color>
-    <color name="black_effective">#2a2a2a</color>
-    <color name="light_gray">#dbdbdb</color>
-    <color name="gray">#7e7e7e</color>
-    <color name="dark_gray">#696969</color>
-    <color name="red_dark">#097bc6</color>
-    <color name="red_dark2">#2974a6</color>
-    <color name="cyan_light">#c9ebee</color>
-    <color name="cyan">#b5e3e7</color>
-    <color name="cyan_dark">#70BDC6</color>
-    <color name="navy_blue">#488dba</color>
-    <color name="navy_blue_dark">#79abcc</color>
-    <color name="transparent">#00000000</color>
-    <color name="google">#d34836</color>
-    <color name="facebook">#3b5998</color>
-    <color name="shadow">#d0d8dc</color>
-    <color name="bg_color">#f7f7f7</color>
+    <!-- Paleta de cores PROimuni -->
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorGray">#696969</color>
+    <color name="colorBlueLight">#9bb5d6</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#2a2a2a</color>
+    <color name="colorGrayLight">#dbdbdb</color>
+    <color name="colorGoogle">#d34836</color>
+    <color name="colorFacebook">#3b5998</color>
+    <color name="colorPurple">#8b5bfe</color>
+    <color name="colorPurpleLight">#6890fe</color>
 
-    <!-- Paleta de Cores PROimuni -->
-    <color name="startColorBackground">#e9e9f0</color>
-    <color name="endColorBackground">#dbdbdb</color>
-    <color name="startColorSplash">#24eded</color>
-    <color name="endColorSplash">#35a6e8</color>
-    <color name="bntColorPressed">#35a6e8</color>
-    <color name="bntColorFocused">#39c2ff</color>
-    <color name="textColorBlue">#39c2ff</color>
-    <color name="textColorGrey">#7e7e7e</color>
-    <color name="textColorWhite">#ffffff</color>
-
+    <!-- Paleta de cores controles -->
+    <color name="startColorBackground">#bfbfbf</color>
+    <color name="endColorBackground">#e9e9f0</color>
+    <color name="startColorSplash">@color/colorPrimaryDark</color>
+    <color name="endColorSplash">@color/colorAccent</color>
+    <color name="bntColorDefault">@color/colorPrimaryDark</color>
+    <color name="bntColorPressed">#3580e8</color>
+    <color name="bntColorFocused">@color/colorPrimary</color>
+    <color name="textColorBlue">@color/colorPrimary</color>
+    <color name="textColorGray">#7e7e7e</color>
+    <color name="textColorWhite">@color/colorWhite</color>
 </resources>

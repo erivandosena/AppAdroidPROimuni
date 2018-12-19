@@ -60,13 +60,18 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
     ImunizacaoMvpPresenter<ImunizacaoMvpView> presenter;
     @Inject
     VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+
+   // @BindView(R.id.toolbar)
+   // Toolbar toolbar;
 
     // @BindView(R.id.toolbar_header_view)
     // HeaderView toolbarHeaderView;
-    @BindView(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout collapsingToolbar;
+    //@BindView(R.id.collapsing_toolbar)
+    //CollapsingToolbarLayout collapsingToolbar;
+
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
+
     @BindView(R.id.float_header_view)
     HeaderView floatHeaderView;
     Intent intent;
@@ -87,6 +92,7 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
         setContentView(R.layout.activity_imunizacao_detalhe);
 
         setUnBinder(ButterKnife.bind(this));
+        /*
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -98,7 +104,9 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
         });
         collapsingToolbar.setTitle(getResources().getString(R.string.text_imunizacao_titulo));
         //toolbarHeaderView.bindTo("BCG", "Pentavalente");
+        */
 
+        textViewTituloToobar.setText(getResources().getString(R.string.text_imunizacao_titulo));
         getActivityComponent().inject(this);
 
         presenter.onAttach(this);
@@ -166,6 +174,11 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
             floatHeaderView.bindTo(null, vacina.getVaciNome());
             mTexVacinaDescricao.setText(vacina.getVaciDescricao());
         }
+    }
+
+    @OnClick(R.id.btn_nav_voltar)
+    public void onClickVoltar(View v) {
+        onBackPressed();
     }
 
     @OnClick(R.id.btn_registra_imunizacao)

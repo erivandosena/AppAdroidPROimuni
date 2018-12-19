@@ -22,6 +22,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -76,11 +77,14 @@ public class NotificacaoActivity extends BaseActivity implements NotificacaoMvpV
     @Inject
     NotificacaoMvpPresenter<NotificacaoMvpView> presenter;
 
-    @BindView(R.id.toolbar_configuracoes)
-    Toolbar toolbar;
+    //@BindView(R.id.toolbar_configuracoes)
+    //Toolbar toolbar;
 
-    @BindView(R.id.collapsing_toolbar_configuracoes)
-    CollapsingToolbarLayout collapsingToolbar;
+    //@BindView(R.id.collapsing_toolbar_configuracoes)
+    //CollapsingToolbarLayout collapsingToolbar;
+
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
 
     // Notificação
     private Notification repeatedNotificationInicial;
@@ -129,6 +133,7 @@ public class NotificacaoActivity extends BaseActivity implements NotificacaoMvpV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracoes);
         setUnBinder(ButterKnife.bind(this));
+        /*
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -138,6 +143,9 @@ public class NotificacaoActivity extends BaseActivity implements NotificacaoMvpV
             }
         });
         collapsingToolbar.setTitle(getResources().getString(R.string.text_configuracoes_titulo));
+        */
+
+        textViewTituloToobar.setText(getResources().getString(R.string.text_configuracoes_titulo));
 
         getActivityComponent().inject(this);
         presenter.onAttach(this);
@@ -149,6 +157,11 @@ public class NotificacaoActivity extends BaseActivity implements NotificacaoMvpV
 
     @Override
     protected void setUp() {
+    }
+
+    @OnClick(R.id.btn_nav_voltar)
+    public void onClickVoltar(View v) {
+        onBackPressed();
     }
 
     @Override

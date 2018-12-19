@@ -32,7 +32,7 @@
     <!-- Usuário -->
     <string name="text_usuario_titulo">Dados do Usuário</string>
     <string name="text_nome_completo">Nome completo</string>
-    <string name="text_usuario_login">Nome único do usuário</string>
+    <string name="text_usuario_login">Nome de usuário</string>
     <string name="text_usuario_nome">Usuário</string>
     <string name="text_usuario_email">E-mail</string>
     <string name="text_usuario_senha">Senha</string>
@@ -50,8 +50,8 @@
     <string name="erro_text_repeteSenha">Repita a senha</string>
     <string name="erro_text_senhaInvalida">Senhas não coincidem</string>
     <string name="btn_login_usuario">Entrar</string>
-    <string name="btn_login_lembrar_senha">Lembrar senha</string>
-    <string name="btn_login_fazer_cadastro">Fazer cadastro</string>
+    <string name="btn_login_lembrar_senha">Esqueceu sua senha?</string>
+    <string name="btn_login_fazer_cadastro">Criar Usuário</string>
     <string name="text_login_redes_sociais">Entrar com</string>
     <string name="text_valida_login">Informe o usuário</string>
     <string name="text_valida_senha">Informe a senha</string>
@@ -84,11 +84,11 @@
     <string name="proj_autor">Desenvolvedor: \nErivando Sena | erivandosena@gmail.com</string>
     <string name="text_sobre_titulo">Sobre o Aplicativo</string>
     <!-- Menu principal. -->
-    <string name="menu_item1">Cartão Vacinal</string>
+    <string name="menu_item1">Cartão</string>
     <string name="menu_item2">Criança</string>
     <string name="menu_item3">Vacinas</string>
-    <string name="menu_item4">Calendário Vacinal</string>
-    <string name="menu_item5">Localizar Postos</string>
+    <string name="menu_item4">Calendário</string>
+    <string name="menu_item5">Postos</string>
     <string name="menu_item6">Curiosidades</string>
     <!--  facebook Login. -->
     <string name="facebook_app_id">1858097654229517</string>

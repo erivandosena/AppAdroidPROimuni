@@ -15,13 +15,13 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "br.com.erivando.proimuni"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 27
         /* Você especifica o código da versão do seu aplicativo apenas no módulo base. */
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
-        generatedDensities = []
+        //generatedDensities = []
         /* Devido exceder o limite de 64K nos métodos (ao utilizar Firebase, Google Play, etc.) */
         multiDexEnabled true
         signingConfig signingConfigs.config
@@ -43,7 +43,7 @@ android {
             dimension 'beta'
             // Ativar pré-dexing para produzir um APK que possa ser testado em
             // Android 5.0+ sem os demorados processos de construção do DEX.
-            minSdkVersion 15
+            minSdkVersion 19
             applicationId 'br.com.erivando.proimuni'
             signingConfig signingConfigs.config
             targetSdkVersion 27
@@ -53,7 +53,7 @@ android {
         producao {
             dimension 'beta'
             // O minSdkVersion real para a versão de produção.
-            minSdkVersion 15
+            minSdkVersion 19
             applicationId 'br.com.erivando.proimuni'
             signingConfig signingConfigs.config
             targetSdkVersion 27
@@ -77,8 +77,6 @@ android {
     aaptOptions {
         additionalParameters "--no-version-vectors"
     }
-    // Em vez disso, use o bloco de bundles para controlar os tipos de APKs de
-    // configuração que você deseja que seu pacote de aplicativos ofereça suporte.
     bundle {
         language {
             // Especifica que o pacote de aplicativos não deve suportar os APKs de
@@ -113,6 +111,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     /* CircleImageView */
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
     /* Android MultiDex */
     implementation 'com.android.support:multidex:1.0.3'
     /* GMail/Google APIs/OAuth */
@@ -148,8 +147,11 @@ dependencies {
     implementation 'com.google.dagger:dagger-android-support:2.15'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.15'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.15'
+    /* Material Components for Android */
+    //implementation 'com.google.android.material:material:1.0.0'
     /* Outras Dependencias Android */
-    implementation 'com.android.support:support-annotations:28.0.0'
+    implementation 'com.android.support:support-media-compat:27.1.1'
+    implementation 'com.android.support:support-annotations:27.1.1'
     implementation 'com.android.support:transition:27.1.1'
     implementation 'com.android.support:support-vector-drawable:27.1.1'
     implementation 'com.android.support:animated-vector-drawable:27.1.1'
@@ -158,8 +160,8 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     /* Dependencias Padrões Android */
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    // implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'

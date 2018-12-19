@@ -18,6 +18,7 @@ import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import butterknife.ButterKnife;
 
 import static br.com.erivando.proimuni.util.Uteis.habilitaTelaCheia;
+import static br.com.erivando.proimuni.util.Uteis.statusBarTransparente;
 
 /**
  * Projeto:     VacinasKIDS
@@ -104,6 +105,7 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
             StrictMode.setThreadPolicy(policy);
         }
         habilitaTelaCheia(this);
+        //statusBarTransparente(this);
     }
 
     @Override

@@ -18,48 +18,103 @@
 
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/cl_root_view"
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipChildren="false">
+        android:fitsSystemWindows="true"
+        tools:context=".ui.activity.main.MainActivity">
 
-        <LinearLayout
-            android:id="@+id/activity_main"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@drawable/background_toobar"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:elevation="4dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageButton
+                android:id="@+id/btn_drawer"
+                style="@style/Button.ImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_menu" />
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="280dp"
+                android:layout_marginLeft="-140dp"
+                android:layout_marginTop="-125dp"
+                android:background="@drawable/ic_proimuni_logo_background"
+                android:backgroundTint="@color/colorBlueLight" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <android.support.design.widget.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:elevation="5dp">
-
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    style="@style/Toolbar"
-                    app:layout_collapseMode="pin"
-                    app:layout_scrollFlags="scroll|enterAlways|snap"
-                    app:subtitleTextColor="@color/white"
-                    app:title="@string/app_name"
-                    app:titleTextAppearance="@style/Toolbar.TitleText"
-                    app:titleTextColor="@color/white" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/light_gray" />
-
-            </android.support.design.widget.AppBarLayout>
+            android:layout_marginTop="70dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <include layout="@layout/content_main" />
 
+        </android.support.v4.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:elevation="4dp"
+            app:layout_anchor="@+id/appBarLayout"
+            app:layout_anchorGravity="bottom|center">
+
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imagem_menu"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_launcher_background"
+                app:riv_border_color="@color/colorGrayLight"
+                app:riv_border_width="1.5dip"
+                app:riv_corner_radius="0dip"
+                app:riv_mutate_background="true"
+                app:riv_oval="true"
+                app:riv_tile_mode="clamp" />
+
+                <!--
+                android:id="@+id/imagem_menu"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_launcher_round"
+                android:tint="@android:color/transparent" />
+                -->
+
+            <TextView
+                android:id="@+id/text_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textAlignment="center"
+                android:textColor="@color/colorGray" />
+
         </LinearLayout>
+
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
@@ -68,11 +123,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/white"
+        android:background="@color/colorWhite"
         app:headerLayout="@layout/drawer_header"
-        app:itemBackground="@color/white"
-        app:itemIconTint="@color/black_effective"
-        app:itemTextColor="@color/black_effective"
+        app:itemBackground="@color/colorWhite"
+        app:itemIconTint="@color/colorBlack"
+        app:itemTextColor="@color/colorBlack"
         app:menu="@menu/drawer">
 
         <TextView

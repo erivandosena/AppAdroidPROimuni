@@ -1,9 +1,11 @@
 package br.com.erivando.proimuni.mvp.base;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +14,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -51,13 +54,40 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
             setStatusBarTranslucent(false);
         else
             setStatusBarTranslucent(true);
+
         super.onCreate(savedInstanceState);
+
+        if (Build.VERSION.SDK_INT >= 19) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+
+        if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
+            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
+        }
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
 
         activityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((AppAplicacao) getApplication()).getComponent())
                 .build();
+    }
 
+    public static void setWindowFlag(Activity activity, final int bits, boolean state){
+        Window win = activity.getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+
+        if (state)
+        {
+            winParams.flags |= bits;
+        }
+        else
+        {
+            winParams.flags &= ~bits;
+        }
     }
 
     public ActivityComponent getActivityComponent() {
@@ -101,7 +131,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         View sbView = snackbar.getView();
         TextView textView = sbView
                 .findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(ContextCompat.getColor(this, R.color.white));
+        textView.setTextColor(ContextCompat.getColor(this, R.color.colorWhite));
         snackbar.show();
     }
 
