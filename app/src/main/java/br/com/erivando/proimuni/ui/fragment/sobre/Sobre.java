@@ -33,8 +33,8 @@ public class Sobre extends BaseActivity implements SobreMvpView {
     @Inject
     SobreMvpPresenter<SobreMvpView> presenter;
 
-    @BindView(R.id.text_sobre_versao_app)
-    TextView versaoAppSobreTextView;
+    //@BindView(R.id.text_sobre_versao_app)
+    //TextView versaoAppSobreTextView;
 
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
@@ -90,8 +90,8 @@ public class Sobre extends BaseActivity implements SobreMvpView {
 
     @Override
     public void updateAppVersion() {
-        String version = getString(R.string.versao_app) + ": " + BuildConfig.VERSION_NAME;
-        versaoAppSobreTextView.setText(version);
+        //String version = getString(R.string.versao_app) + ": " + BuildConfig.VERSION_NAME;
+        //versaoAppSobreTextView.setText(version);
     }
 
     @Override

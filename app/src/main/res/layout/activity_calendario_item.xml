@@ -17,16 +17,24 @@
 -->
 
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="320dp"
     android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="15dp"
     android:orientation="horizontal"
-    android:layout_margin="15dp"
-    app:cardCornerRadius="5dp"
-    app:cardUseCompatPadding="true">
+    card_view:cardBackgroundColor="@color/colorBlue"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="2dp"
+    card_view:cardMaxElevation="1dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:contentPadding="@dimen/card_menu_padding">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="?android:selectableItemBackground"
         android:orientation="vertical"
@@ -34,43 +42,66 @@
 
         <ImageView
             android:id="@+id/image_item"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
+            android:background="@drawable/ic_vacina"
+            android:backgroundTint="@color/colorWhite"
             android:contentDescription="@null"
             android:padding="5dp"
-            android:scaleType="center"
-            android:src="@drawable/ic_vacina" />
+            android:scaleType="fitCenter" />
 
         <TextView
             android:id="@+id/texto_titulo_vacina"
+            style="@style/TextStyle.Titulo.Lista"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
             android:maxLines="2"
             android:padding="5dp"
             android:text="@null"
-            android:theme="@style/TextStyle.Heading" />
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite" />
 
         <TextView
             android:id="@+id/texto_titulo_dose"
+            style="@style/TextStyle.SubTitulo.Lista"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:text="@null" />
+            android:text="@null"
+            android:textColor="@color/colorWhite" />
 
         <TextView
             android:id="@+id/texto_titulo_rede"
+            style="@style/TextStyle.SubTitulo.Lista"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:text="@null" />
+            android:text="@null"
+            android:textColor="@color/colorWhite" />
 
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right"
+            android:background="@color/colorTransparent"
+            android:contentDescription="@null"
+            android:padding="2dp"
+            android:scaleType="fitCenter"
+            card_view:srcCompat="@drawable/ic_plus" />
+
+        <!--
+        <Button
+            android:id="@+id/btn_info"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right"
+            android:background="@drawable/botao_padrao"
+            android:backgroundTint="@color/colorGrayLight"
+            android:text="@string/text_btn_info"
+            android:textColor="@color/colorGray" tools:targetApi="lollipop"/>
+            -->
 
     </LinearLayout>
 

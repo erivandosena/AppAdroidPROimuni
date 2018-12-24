@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,7 +76,7 @@ import butterknife.OnClick;
 public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private static final String GOOGLE_API_KEY = "AIzaSyB32v-g5NTIawHhRoJVqZ8ACWfrFam1Lpc";
+    private static final String GOOGLE_API_KEY = "AIzaSyB32v-g5NTIawHhRoJVqZ8ACWfrFam1Lpc"; // https://developers.google.com/maps/documentation/static-maps/get-api-key
 
     GoogleMap mGoogleMap;
     SupportMapFragment mapFrag;
@@ -98,8 +99,8 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
     //@BindView(R.id.collapsing_toolbar_mapa)
     //CollapsingToolbarLayout collapsingToolbar;
 
-    @BindView(R.id.btn_pesquisa)
-    Button buttonPesquisa;
+    @BindView(R.id.btn_pesquisa_posto)
+    ImageButton buttonPesquisa;
 
     @BindView(R.id.text_pesquisa)
     TextView textPesquisa;
@@ -132,7 +133,7 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
 
         getActivityComponent().inject(this);
 
-        iconeDrawable = getResources().getDrawable(R.drawable.ic_launcher_round);
+        iconeDrawable = getResources().getDrawable(R.drawable.ic_local_app);
 
         buttonPesquisa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,6 +211,7 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
             toPass[0] = mGoogleMap;
             toPass[1] = googlePlacesUrl.toString();
             googlePlacesReadTask.execute(toPass);
+            //Log.i("LINK ", toPass[1].toString());
         }
     }
 

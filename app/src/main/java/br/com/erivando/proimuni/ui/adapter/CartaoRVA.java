@@ -17,6 +17,7 @@ import br.com.erivando.proimuni.imagem.RoundedImageView;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoActivity;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoDetalheActivity;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity;
+import br.com.erivando.proimuni.util.Uteis;
 
 import static br.com.erivando.proimuni.util.Uteis.obtemIdadePorDiaOuMesOuAno;
 
@@ -52,7 +53,12 @@ public class CartaoRVA extends RecyclerView.Adapter<CartaoRVA.SingleItemRowHolde
     public void onBindViewHolder(@NonNull CartaoRVA.SingleItemRowHolder holder, int position) {
         cartao = cartaoList.get(position);
 
-        holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_gerenciar));
+        if (cartao.getCrianca().getCriaFoto() != null)
+            holder.imageView.setImageBitmap(Uteis.base64ParaBitmap(cartao.getCrianca().getCriaFoto()));
+        else
+            holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_launcher_round));
+
+        //holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_gerenciar));
         holder.tvTitle.setText(cartao.getCrianca().getCriaNome());
         holder.tvSubtitle.setText(obtemIdadePorDiaOuMesOuAno(cartao.getCrianca().getCriaNascimento()));
         holder.idCartao = cartao.getId();
@@ -73,9 +79,9 @@ public class CartaoRVA extends RecyclerView.Adapter<CartaoRVA.SingleItemRowHolde
         public SingleItemRowHolder(View view) {
             super(view);
 
-            imageView = view.findViewById(R.id.image);
-            tvTitle = view.findViewById(R.id.text_cartao_tit_vacina);
-            tvSubtitle = view.findViewById(R.id.text_sub_titulo);
+            imageView = view.findViewById(R.id.image_cartao);
+            tvTitle = view.findViewById(R.id.text_titulo_cartao);
+            tvSubtitle = view.findViewById(R.id.text_sub_titulo_cartao);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -7,12 +7,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,6 +34,8 @@ import br.com.erivando.proimuni.database.model.Dose;
 import br.com.erivando.proimuni.database.model.Idade;
 import br.com.erivando.proimuni.database.model.Imunizacao;
 import br.com.erivando.proimuni.database.model.Vacina;
+import br.com.erivando.proimuni.imagem.RoundedImageButton;
+import br.com.erivando.proimuni.imagem.RoundedImageView;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.calendario.CalendarioMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.calendario.CalendarioMvpView;
@@ -80,14 +81,20 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
     //@BindView(R.id.image_cartao_vacinal)
     //public ImageView mImagemCartao;
 
-    @BindView(R.id.text_nome_crianca)
+    @BindView(R.id.text_titulo_crianca_cartao)
     public TextView mTextCrianca;
 
-    @BindView(R.id.text_idade_crianca)
+    @BindView(R.id.text_sub_titulo_crianca_cartao)
     public TextView mTextIdade;
 
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
+
+    @BindView(R.id.image_crianca_cartao)
+    RoundedImageView  roundedImageViewCrianca;
+
+    @BindView(R.id.card_view_cartao)
+    public CardView cardViewCartaoCrianca;
 
     private Cartao cartao;
     private Intent intent;
@@ -120,7 +127,7 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         collapsingToolbar.setTitle(getResources().getString(R.string.menu_item1));
         */
 
-        textViewTituloToobar.setText(getResources().getString(R.string.menu_item1));
+        textViewTituloToobar.setText(getResources().getString(R.string.menu_cartao));
 
         getActivityComponent().inject(this);
 
@@ -154,10 +161,10 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
                 startActivity(CartaoListaActvity.getStartIntent(this).putExtra("cartaoLista", "cartao"));
                 finish();
             } else {
-                //if (cartao.getCrianca().getCriaFoto() != null)
-                   // mImagemCartao.setImageBitmap(Uteis.base64ParaBitmap(cartao.getCrianca().getCriaFoto()));
+                if (cartao.getCrianca().getCriaFoto() != null)
+                    roundedImageViewCrianca.setImageBitmap(Uteis.base64ParaBitmap(cartao.getCrianca().getCriaFoto()));
                 mTextCrianca.setText(cartao.getCrianca().getCriaNome());
-                mTextIdade.setText("Idade: " + Uteis.obtemIdadeCompleta(cartao.getCrianca().getCriaNascimento()));
+                mTextIdade.setText("IDADE: " + Uteis.obtemIdadeCompleta(cartao.getCrianca().getCriaNascimento()));
             }
         }
 
@@ -189,6 +196,11 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         VacinaRVA adapter = new VacinaRVA(listaVacinas, listaDoses, listaIdades, listaImunizacoes, cartao, this);
         my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         my_recycler_view.setAdapter(adapter);
+
+        cardViewCartaoCrianca.setCardBackgroundColor(getResources().getColor((R.color.colorPurpleLight)));
+        cardViewCartaoCrianca.setRadius(20f);
+        cardViewCartaoCrianca.setCardElevation(2f);
+        cardViewCartaoCrianca.setUseCompatPadding(true);
     }
 
     @Override
@@ -265,7 +277,7 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
                 new AlertDialog.Builder(CartaoDetalheActivity.this)
                         .setIcon(R.drawable.ic_launcher_round)
                         .setTitle(getResources().getString(R.string.app_name))
-                        .setMessage("Cartão Vacinal exportado para PDF com sucesso!")
+                        .setMessage("Cartão Vacinal exportado em foramto PDF com sucesso!")
                         .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

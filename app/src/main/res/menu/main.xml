@@ -43,51 +43,27 @@ android:showAsAction
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_edita_usuario"
+        android:id="@+id/nav_item_usuario"
         android:icon="@drawable/ic_usuario"
-        android:title="@string/edita_usuario"
+        android:title="@string/menu_usuario"
         app:showAsAction="ifRoom|withText" />
 
     <item
-        android:id="@+id/action_edita_crianca"
+        android:id="@+id/nav_item_crianca"
         android:icon="@drawable/ic_criancas_cadastro"
-        android:title="@string/menu_item2"
+        android:title="@string/menu_crianca"
         app:showAsAction="ifRoom|withText" />
 
     <item
-        android:id="@+id/action_edita_cartao"
+        android:id="@+id/nav_item_cartao"
         android:icon="@drawable/ic_gerenciar"
-        android:title="@string/menu_item1"
+        android:title="@string/menu_cartao"
         app:showAsAction="ifRoom|withText" />
 
     <item
-        android:id="@+id/action_postos"
+        android:id="@+id/nav_item_posto"
         android:icon="@drawable/ic_mapa"
-        android:title="@string/local_mapa"
+        android:title="@string/menu_posto"
         app:showAsAction="never|withText" />
-
-    <item
-        android:id="@+id/action_share"
-        android:icon="@drawable/avd_share"
-        android:title="@string/share"
-        app:showAsAction="ifRoom|withText" />
-
-    <item
-        android:id="@+id/action_backup"
-        android:icon="@android:drawable/stat_notify_sdcard"
-        android:title="@string/backup"
-        app:showAsAction="ifRoom|withText" />
-
-    <item
-        android:id="@+id/action_restore"
-        android:icon="@android:drawable/ic_menu_rotate"
-        android:title="@string/restore"
-        app:showAsAction="ifRoom|withText" />
-
-    <item
-        android:id="@+id/action_configuracoes"
-        android:icon="@android:drawable/ic_popup_reminder"
-        android:title="@string/config"
-        app:showAsAction="ifRoom|withText" />
 
 </menu>

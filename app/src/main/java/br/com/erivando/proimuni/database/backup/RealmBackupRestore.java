@@ -55,13 +55,13 @@ public class RealmBackupRestore {
                 try {
                     EXPORT_REALM_PATH.mkdirs();
 
-                    //criar um arquivo de backup
+                    //criar um arquivo de menu_backup_copia
                     exportRealmFile = new File(EXPORT_REALM_PATH, EXPORT_REALM_FILE_NAME);
 
-                    //se o arquivo de backup já existir, exclua-o
+                    //se o arquivo de menu_backup_copia já existir, exclua-o
                     exportRealmFile.delete();
 
-                    // copiar o Realm atual para o arquivo de backup
+                    // copiar o Realm atual para o arquivo de menu_backup_copia
                     realm.writeCopyTo(exportRealmFile);
 
                 } catch (IOException e) {

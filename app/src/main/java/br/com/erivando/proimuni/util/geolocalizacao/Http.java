@@ -29,7 +29,7 @@ public class Http {
             httpData = stringBuffer.toString();
             bufferedReader.close();
         } catch (Exception e) {
-            Log.d("Exception - reading Http url", e.toString());
+            e.printStackTrace();
         } finally {
             inputStream.close();
             httpURLConnection.disconnect();

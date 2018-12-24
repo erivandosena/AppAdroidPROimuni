@@ -51,10 +51,13 @@ public class CriancaRVA extends RecyclerView.Adapter<CriancaRVA.SingleItemRowHol
     public void onBindViewHolder(@NonNull CriancaRVA.SingleItemRowHolder holder, int position) {
         crianca = criancaList.get(position);
 
+        /*
         if (crianca.getCriaFoto() != null)
             holder.imageView.setImageBitmap(Uteis.base64ParaBitmap(crianca.getCriaFoto()));
         else
             holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_launcher_round));
+        */
+
         holder.tvTitle.setText(crianca.getCriaNome());
         holder.tvSubtitle.setText(obtemIdadeCompleta(crianca.getCriaNascimento()));
         holder.idCrianca =crianca.getId();
@@ -75,9 +78,9 @@ public class CriancaRVA extends RecyclerView.Adapter<CriancaRVA.SingleItemRowHol
         public SingleItemRowHolder(View view) {
             super(view);
 
-            this.imageView = view.findViewById(R.id.image);
-            this.tvTitle = view.findViewById(R.id.text_crianca_tit_vacina);
-            this.tvSubtitle = view.findViewById(R.id.text_sub_titulo);
+            this.imageView = view.findViewById(R.id.image_crianca);
+            this.tvTitle = view.findViewById(R.id.text_titulo_crianca);
+            this.tvSubtitle = view.findViewById(R.id.text_sub_titulo_crianca);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

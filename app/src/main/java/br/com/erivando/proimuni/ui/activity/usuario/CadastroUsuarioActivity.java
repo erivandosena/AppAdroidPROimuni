@@ -4,18 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import javax.inject.Inject;
 
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.model.Usuario;
+import br.com.erivando.proimuni.imagem.RoundedImageButton;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.login.LoginActivity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
@@ -27,7 +28,6 @@ import static br.com.erivando.proimuni.util.Uteis.PERMISSOES;
 import static br.com.erivando.proimuni.util.Uteis.TODAS_PERMISSOES;
 import static br.com.erivando.proimuni.util.Uteis.base64ParaBitmap;
 import static br.com.erivando.proimuni.util.Uteis.hasPermissoes;
-import static br.com.erivando.proimuni.util.Uteis.statusBarTransparente;
 
 /**
  * Projeto:     VacinasKIDS
@@ -42,11 +42,11 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     @Inject
     CadastroUsuarioMvpPresenter<CadastroUsuarioMvpView> presenter;
 
-   // @BindView(R.id.toolbar_usuario)
-   // Toolbar toolbar;
+    // @BindView(R.id.toolbar_usuario)
+    // Toolbar toolbar;
 
-   // @BindView(R.id.collapsing_toolbar_usuario)
-   // CollapsingToolbarLayout collapsingToolbar;
+    // @BindView(R.id.collapsing_toolbar_usuario)
+    // CollapsingToolbarLayout collapsingToolbar;
 
     @BindView(R.id.text_cad_nome)
     EditText nomeEditText;
@@ -63,8 +63,14 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     @BindView(R.id.text_cad_repete_senha)
     EditText repSenhaEditText;
 
+    @BindView(R.id.text_senha_toggle)
+    TextView textViewSenhaToggle;
+
+    @BindView(R.id.text_repete_senha_toggle)
+    TextView textViewRepeteSenhaToggle;
+
     @BindView(R.id.img_usuario_foto)
-    ImageButton fotoImageButton;
+    RoundedImageButton fotoImageButton;
 
     private Usuario usuario;
     private Long id;
@@ -85,14 +91,14 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
 
         setUnBinder(ButterKnife.bind(this));
         //toolbar.setTitle(getResources().getString(R.string.text_usuario_titulo));
-       // setSupportActionBar(toolbar);
-      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-      //      @Override
-       //     public void onClick(View v) {
-       //         openLoginOuMainActivity();
+        // setSupportActionBar(toolbar);
+        //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        //      @Override
+        //     public void onClick(View v) {
+        //         openLoginOuMainActivity();
         //    }
-      //  });
+        //  });
 
         //collapsingToolbar.setTitle(getResources().getString(R.string.text_usuario_titulo));
 
@@ -143,7 +149,7 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     @OnClick(R.id.btn_cadadastar_usuario)
     public void onCadasrarClick(View v) {
         if (imagemBitmapFoto == null && usuario != null)
-            if(usuario.getUsuaFoto() != null)
+            if (usuario.getUsuaFoto() != null)
                 imagemBitmapFoto = base64ParaBitmap(usuario.getUsuaFoto());
         presenter.onCadasrarClick(id, nomeEditText.getText().toString(), loginEditText.getText().toString(), emailEditText.getText().toString(), senhaEditText.getText().toString(), repSenhaEditText.getText().toString(), imagemBitmapFoto);
     }
@@ -156,6 +162,87 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
 
     @Override
     protected void setUp() {
+        textViewSenhaToggle.setVisibility(View.GONE);
+        textViewRepeteSenhaToggle.setVisibility(View.GONE);
+
+        final String texto_mostra_toggle = getResources().getString(R.string.text_mostra_senha_toggle);
+        final String texto_oculta_toggle = getResources().getString(R.string.text_oculta_senha_toggle);
+
+        textViewSenhaToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (texto_mostra_toggle.equalsIgnoreCase(textViewSenhaToggle.getText().toString())) {
+                    textViewSenhaToggle.setText(texto_oculta_toggle);
+                    senhaEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    senhaEditText.setSelection(senhaEditText.length());
+                } else {
+                    textViewSenhaToggle.setText(texto_mostra_toggle);
+                    senhaEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    senhaEditText.setSelection(senhaEditText.length());
+                    //senhaEditText.setTextAppearance(CadastroUsuarioActivity.this, R.style.TextStyle_TextInputEdit_Texto);
+                }
+            }
+        });
+
+        senhaEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (senhaEditText.getText().length() > 0) {
+                    textViewSenhaToggle.setVisibility(View.VISIBLE);
+                } else {
+                    textViewSenhaToggle.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        textViewRepeteSenhaToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (texto_mostra_toggle.equalsIgnoreCase(textViewRepeteSenhaToggle.getText().toString())) {
+                    textViewRepeteSenhaToggle.setText(texto_oculta_toggle);
+                    repSenhaEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    repSenhaEditText.setSelection(repSenhaEditText.length());
+                } else {
+                    textViewRepeteSenhaToggle.setText(texto_mostra_toggle);
+                    repSenhaEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    repSenhaEditText.setSelection(repSenhaEditText.length());
+                }
+            }
+        });
+
+        repSenhaEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (repSenhaEditText.getText().length() > 0) {
+                    textViewRepeteSenhaToggle.setVisibility(View.VISIBLE);
+                } else {
+                    textViewRepeteSenhaToggle.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         //habilitaTelaCheia(this);
         //statusBarTransparente(this);
         usuario = presenter.onUsuarioCadastrado();

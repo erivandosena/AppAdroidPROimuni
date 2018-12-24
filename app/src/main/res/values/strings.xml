@@ -7,6 +7,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Cabeçalho de navegação</string>
     <string name="action_settings">Configurações</string>
+
     <!-- Strings do Aplicativo. -->
     <string name="app_slogan">Proteção de quem você ama a um clique de você!</string>
     <string name="app_mensagem_indicacao">é um aplicativo incrível que ajuda no calendário do cartão de vacinação das crianças.\n\nBaixe gratuitamente:</string>
@@ -14,29 +15,57 @@
     <string name="legenda_action_snackbar">Substitua por sua própria ação</string>
     <string name="button_action_snackbar">Ação</string>
     <string name="versao_app">Versão</string>
-    <!-- Menus Drawer. -->
-    <string name="sobre">Sobre o App</string>
-    <string name="avaliacao">Avaliação do App</string>
-    <string name="logout">Sair</string>
-    <!-- Drawer. -->
+
+    <!-- Menus Drawer -->
     <string name="open_drawer">Abre gaveta</string>
     <string name="close_drawer">Fecha gaveta</string>
+
+    <!-- Menu principal -->
+    <string name="menu_usuario">Usuário</string>
+    <string name="menu_crianca">Criança</string>
+    <string name="menu_cartao">Cartão</string>
+    <string name="menu_vacina">Vacinas</string>
+    <string name="menu_calendario">Calendário</string>
+    <string name="menu_posto">Postos</string>
+    <string name="menu_curiosidade">Curiosidades</string>
+    <string name="menu_backup_copia">Salvar dados</string>
+    <string name="menu_backup_restaura">Recuperar dados</string>
+    <string name="menu_config">Configurações</string>
+    <string name="menu_compartilhar">Compartilhar App</string>
+    <string name="menu_avaliacao">Avaliar App</string>
+    <string name="menu_sobre">Sobre o App</string>
+    <string name="menu_logout">Sair</string>
+
     <!-- Menus Toolbar. -->
     <string name="clear">Limpar</string>
-    <string name="edita_usuario">Usuário</string>
-    <string name="local_mapa">Postos de Saúde</string>
-    <string name="share">Compartilhar</string>
     <string name="mensagen_avaliacao_app">Por favor, avalie este aplicativo na Play Store.</string>
     <string name="botao_ok_avaliacao_app"><Data><![CDATA[ <strong>Sim, eu quero!</strong> ]]></Data></string>
     <string name="botao_cancel_avaliacao_app">Depois</string>
-    <!-- Usuário -->
-    <string name="text_usuario_titulo">Dados do Usuário</string>
-    <string name="text_nome_completo">Nome completo</string>
-    <string name="text_usuario_login">Nome de usuário</string>
+
+    <!-- Login -->
     <string name="text_usuario_nome">Usuário</string>
-    <string name="text_usuario_email">E-mail</string>
+    <string name="hint_usuario_nome">Nome de usuário</string>
     <string name="text_usuario_senha">Senha</string>
-    <string name="text_usuario_repete_senha">Repetir a senha</string>
+    <string name="hint_usuario_senha">Senha de usuário</string>
+    <string name="btn_login_lembrar_senha">Esqueceu sua senha?</string>
+    <string name="btn_login_google">Entrar com Google</string>
+    <string name="btn_login_facebook">Entrar com Facebook</string>
+    <string name="btn_login_usuario">Entrar</string>
+    <string name="btn_login_fazer_cadastro">Criar Conta</string>
+    <string name="text_mostra_senha_toggle">Mostrar</string>
+    <string name="text_oculta_senha_toggle">Ocultar</string>
+
+    <!-- Usuário -->
+    <string name="text_usuario_titulo">Perfil do usuário</string>
+    <string name="text_nome_completo">Nome</string>
+    <string name="hint_nome_completo">Informe nome e sobrenome</string>
+    <string name="text_usuario_login">Usuário</string>
+    <string name="hint_usuario_login">Informe um nome</string>
+    <string name="text_usuario_email">E-mail</string>
+    <string name="hint_usuario_email">Informe o E-mail</string>
+    <string name="hint_cad_usuario_senha">Informe a senha</string>
+    <string name="text_usuario_repete_senha">Repete senha</string>
+    <string name="hint_text_usuario_repete_senha">Confirme a senha</string>
     <string name="btn_salvar">Salvar</string>
     <string name="btn_voltar">Voltar</string>
     <string name="text_valida_cadastro">Não foi possível salvar!</string>
@@ -49,14 +78,12 @@
     <string name="erro_text_senha">Informe a senha</string>
     <string name="erro_text_repeteSenha">Repita a senha</string>
     <string name="erro_text_senhaInvalida">Senhas não coincidem</string>
-    <string name="btn_login_usuario">Entrar</string>
-    <string name="btn_login_lembrar_senha">Esqueceu sua senha?</string>
-    <string name="btn_login_fazer_cadastro">Criar Usuário</string>
     <string name="text_login_redes_sociais">Entrar com</string>
     <string name="text_valida_login">Informe o usuário</string>
     <string name="text_valida_senha">Informe a senha</string>
     <string name="text_valida_email">Informe um e-mail válido</string>
     <string name="text_valida_usuario">Nome de usuário ou senha não conferem</string>
+
     <!-- Cadastro foto. -->
     <string name="texto_aviso_cadastro_foto">Adicione uma imagem</string>
     <string name="texto_cadastro_opcao_camera">Obter da Câmera</string>
@@ -68,35 +95,43 @@
     <string name="texto_aviso_erro_processo_imagem">Erro ao carregar imagem, selecione uma imagem menor.</string>
     <string name="texto_aviso_erro_aquisicao_imagem">Nenhuma imagem adquirida.</string>
     <string name="texto_aviso_erro_sistema_desatualizado">Impossível obter imagem, atualize o sistema!</string>
+
     <!-- App Message. -->
     <string name="some_error">Algum erro ocorreu!</string>
     <string name="api_retry_error"> Por favor, tente novamente!</string>
     <string name="api_default_error">Algo errado aconteceu!</string>
     <string name="connection_error">Conexão com a Internet perdida!</string>
+
     <!--App perfil. -->
     <string name="perfil_nome" />
     <string name="perfil_email" />
+
     <!-- Sobre. -->
-    <string name="proj_info">Tecnologia: \nPossui desenvolvimento nativo da plataforma Android compatível a partir da versão 4.0.3 (API 15) a versão 8.1.0 (API 27). Utiliza linguagem de programação compatível com o Java 8 JDK. Implementa arquitetura MVP, utilizando tecnologias Dagger 2, Realm 3, RxJava, FastAndroidNetworking.</string>
-    <string name="proj_nome">Projeto: \nDesenvolvimento de Aplicativo Móvel sobre Vacinação Infantil para Pais de Crianças e Adolescentes</string>
-    <string name="proj_repo">Repositório: \nhttps://bitbucket.org/erivandoramos/vacinaskids/src/</string>
-    <string name="proj_participantes">Participantes: \nthaispaula73@gmail.com \ncunhacos@gmail.com \nnirlagomesg@gmail.com \njhsfelix@gmail.com</string>
-    <string name="proj_autor">Desenvolvedor: \nErivando Sena | erivandosena@gmail.com</string>
     <string name="text_sobre_titulo">Sobre o Aplicativo</string>
-    <!-- Menu principal. -->
-    <string name="menu_item1">Cartão</string>
-    <string name="menu_item2">Criança</string>
-    <string name="menu_item3">Vacinas</string>
-    <string name="menu_item4">Calendário</string>
-    <string name="menu_item5">Postos</string>
-    <string name="menu_item6">Curiosidades</string>
+    <string name="proj_titulo">Projeto</string>
+    <string name="proj_info">O PROIMUNI é produto da dissertação de mestrado do Programa de Pós-graduação em Enfermagem da Universidade Federal do Ceará. \nO objetivo do app é o gerenciamento de vacinas infantis oferecidas na rede pública e privada. \nO app permite gerenciar mais de um cartão, incluir fotos de perfil, registrar as doses das vacinas, receber notificações com lembretes das datas e doses,  ter acesso a informações detalhadas de cada vacina, exportar a carteira de vacinação para PDF e compartilhar seus registros. \nO PROIMUNI disponibiza a função de geolocalizacao para pesquisa de unidades de saúde que ofereçam o serviço de vacinação. \nMatenha seu calendário vacinal em dia. Comece a usufruir do PROIMUNI!</string>
+    <string name="tecn_titulo">Tecnologia</string>
+    <string name="tecn_info">Desenvolvido em plataforma nativa Android, compatível com dispositivos que utilizam versão 4.0.3(API 15) a versão 8.1.0(API 27). Utiliza linguagem de programação Java 8. Implementa arquitetura MVP na codificação das regras de negócio, aplica frameworks Dagger 2 para injeção de dependência e Realm 3 para persistência dos dados.</string>
+    <string name="cont_titulo">Contato</string>
+    <string name="cont_info">proimuni@gmail.com</string>
+    <string name="auto_titulo">Desenvolvedor</string>
+    <string name="auto_info">Erivando Sena | erivandoramos@bol.com.br</string>
+    <!--
+    <string name="repo_titulo">Repositório</string>
+    <string name="repo_info">https://bitbucket.org/erivandoramos/vacinaskids/src/</string>
+    -->
+    <!--
+    <string name="envo_titulo">Participantes</string>
+    <string name="envo_info">thaispaula73@gmail.com \ncunhacos@gmail.com \nnirlagomesg@gmail.com \njhsfelix@gmail.com</string>
+    -->
+
     <!--  facebook Login. -->
     <string name="facebook_app_id">1858097654229517</string>
     <string name="facebook_login_protocol_scheme">fb1858097654229517</string>
     <string name="facebook_cancel_login">A operação foi cancelada</string>
     <string name="facebook_error_fabebook_login">Ocorreu um erro ao entrar</string>
     <string name="firebase_logout">Fechar Sessão</string>
-    <string name="btn_login_facebook">Entrar com Facebook</string>
+
     <!--  Google Login. -->
     <string name="google_cancel_login">A operação foi cancelada</string>
     <string name="google_falha_conexao">Conexão falhou!</string>
@@ -107,7 +142,7 @@
     <string name="erro_request">Requisição cancelada.</string>
     <string name="erro_google_oauth">Erro ao processar informações:</string>
     <string name="envio_senha_email">Verifique sua caixa de entrada.</string>
-    <string name="envio_senha">Senha enviada para a conta do e-mail:</string>
+    <string name="envio_senha">Senha enviada para o e-mail:</string>
     <string name="resultado_google_oauth">Nenhum resultado retornado.</string>
     <string name="texto_envio_senha">Segue a senha solicitada:</string>
     <string name="texto_email_senha">Prezado(a) </string>
@@ -115,19 +150,20 @@
     <string name="text_btn_ok">OK</string>
     <string name="aviso_sem_internet">Sem conexão com à Internet!</string>
     <string name="aviso_play_services_install">Este aplicativo requer o Google Play Services. Por favor instale o Google Play Services no seu dispositivo e tente novamente.</string>
-    <string name="btn_login_google">Entrar com Google</string>
 
     <!-- Cadastro Criança -->
+    <string name="hint_nome_crianca">Informe o nome</string>
+    <string name="text_nascimento">Nascimento</string>
+    <string name="hint_text_nascimento">Informe data de Nascimento</string>
+    <string name="text_nome_responsavel">Responsável</string>
+    <string name="text_sexo">Gênero</string>
     <string name="erro_text_data">Informe uma data válida</string>
-    <string name="text_crianca_titulo">Dados da Criança</string>
-    <string name="text_cartao_titulo">Dados do Cartão</string>
+    <string name="text_crianca_titulo">Perfil da criança</string>
+    <string name="text_cartao_titulo">Cartão de vacina</string>
     <string name="text_valida_sexo">Informe o sexo</string>
     <string name="text_valida_crianca">Informe uma criança</string>
-    <string name="text_nascimento">Data do Nascimento</string>
-    <string name="text_responsavel">Responsável</string>
     <string name="text_crianca">Criança</string>
     <string name="text_vacina">Vacina</string>
-    <string name="text_sexo">Sexo</string>
     <string name="texto_aviso_usuario_nao_cadastrado">É necessário cadastrar o usuário!</string>
     <string name="texto_aviso_crianca_nao_cadastrada">É necessário cadastrar uma crianca!</string>
     <string name="texto_aviso_cartao_nao_cadastrado">É necessário cadastrar um cartão!</string>
@@ -135,8 +171,7 @@
     <string name="text_lista_crianca_titulo">Selecione a Criança</string>
     <string name="text_lista_cartao_titulo">Selecione o Cartão</string>
     <string name="text_lista_calendario_titulo">Calendário Vacinal</string>
-    <string name="backup">Copiar Dados</string>
-    <string name="restore">Restaurar Dados</string>
+
     <!-- Tabs -->
     <string name="title_tab1">Rede Pública</string>
     <string name="title_tab2">Rede Privada</string>
@@ -145,38 +180,36 @@
     <string name="vacina_administracao">Administração</string>
 
     <!-- Imunização -->
-    <string name="text_nome_agente">Nome do agente de saúde</string>
-    <string name="text_nome_unidade">Nome da unidade de saúde</string>
-    <string name="text_lote_vacina">Lote da vacina</string>
-    <string name="text_data_imunizacao">Data da imunização</string>
+    <string name="text_nome_agente">Profissional</string>
+    <string name="hint_nome_agente">Informe nome do aplicador da dose</string>
+    <string name="text_nome_unidade">Posto</string>
+    <string name="hint_nome_unidade">Infrome nome da unidade de saúde</string>
+    <string name="text_lote_vacina">Lote</string>
+    <string name="hint_lote_vacina">Informe número de lote da vacina</string>
+    <string name="text_data_imunizacao">Data</string>
+    <string name="hint_data_imunizacao">Informe data da imunização</string>
     <string name="text_imunizacao_titulo">Imunização</string>
-
-    <!-- Cadastro Imunização -->
-    <string name="text_valida_agente">Informe o nome do profissional da saúde</string>
-    <string name="text_valida_posto">Informe o nome da unidade de saúde</string>
-    <string name="text_valida_lote">Informe a referência do lote</string>
     <string name="btn_imunizar">Imunizar</string>
 
     <!-- MapaActivity -->
     <string name="error_location_provider">Erro de localização</string>
-    <string name="text_mapa_titulo">Postos de Saúde</string>
+    <string name="text_mapa_titulo">Localizar postos de saúde</string>
     <string name="text_pesuisa_mapa">Faça uma pesquisa</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">"Mapa "</string>
-    <string name="btn_localizar_postos">Localizar</string>
+    <string name="hint_localizar_postos">Bairro</string>
     <string name="erro_text_pesquisa_posto">Informe um bairro</string>
     <string name="title_vacinaskids_dynamic_feature">Módulo Vacinas Kids</string>
     <string name="title_dynamic_feature2">Module Title</string>
 
     <!-- Notificação -->
 
-    <string name="btn_ativa_notificacao">Ativar Notificações</string>
-    <string name="btn_desativa_notificacao">Desativar Notificações</string>
+    <string name="btn_ativa_notificacao">Ativa Notificações</string>
+    <string name="btn_desativa_notificacao">Desativa Notificações</string>
     <string name="text_configuracoes_titulo">Configurações do Aplicativo</string>
-    <string name="config">Configurações</string>
 
     <!-- PDF -->
     <string name="gera_pdf">"Montando seu Cartão Vacinal em PDF, aguarde...</string>
-
+    <string name="text_btn_info">Saber mais</string>
 
 </resources>

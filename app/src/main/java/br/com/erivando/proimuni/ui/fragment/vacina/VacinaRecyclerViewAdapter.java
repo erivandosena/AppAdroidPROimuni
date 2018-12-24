@@ -3,13 +3,13 @@ package br.com.erivando.proimuni.ui.fragment.vacina;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
@@ -17,6 +17,7 @@ import java.util.List;
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaDetalheActivity;
+import butterknife.BindView;
 
 /**
  * Projeto:     VacinasKIDS
@@ -30,11 +31,16 @@ public class VacinaRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> 
     private final TypedValue mTypedValue = new TypedValue();
     private int mBackground;
     private List<Vacina> mVacinaValues;
+    Context context;
+
+    //@BindView(R.id.card_view_vacina)
+    // CardView cardViewColorVacina;
 
     public VacinaRecyclerViewAdapter(Context context, List<Vacina> items) {
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mBackground = mTypedValue.resourceId;
         mVacinaValues = items;
+        this.context = context;
     }
 
     @NonNull
@@ -48,9 +54,11 @@ public class VacinaRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mBoundStringNome = mVacinaValues.get(position).getVaciNome();
+        holder.mBoundStringRede = mVacinaValues.get(position).getVaciRede();
         holder.mBoundStringDesc = mVacinaValues.get(position).getVaciDescricao();
         holder.mBoundStringAdmin = mVacinaValues.get(position).getVaciAdministracao();
-        holder.mTextView.setText(mVacinaValues.get(position).getVaciNome());
+        holder.mTextViewNome.setText(mVacinaValues.get(position).getVaciNome());
+        holder.mTextViewDescricao.setText(mVacinaValues.get(position).getVaciDescricao());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,15 +66,19 @@ public class VacinaRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> 
                 Context context = v.getContext();
                 Intent intent = new Intent(context, VacinaDetalheActivity.class);
                 intent.putExtra(VacinaDetalheActivity.EXTRA_NOME, holder.mBoundStringNome);
+                intent.putExtra(VacinaDetalheActivity.EXTRA_REDE, holder.mBoundStringRede);
                 intent.putExtra(VacinaDetalheActivity.EXTRA_DESC, holder.mBoundStringDesc);
                 intent.putExtra(VacinaDetalheActivity.EXTRA_ADMIN, holder.mBoundStringAdmin);
-
                 context.startActivity(intent);
             }
         });
 
-        RequestOptions options = new RequestOptions();
-        Glide.with(holder.mImageView.getContext()).load(R.drawable.ic_vacina).apply(options.fitCenter()).into(holder.mImageView);
+
+        if ("Pública".equalsIgnoreCase(mVacinaValues.get(position).getVaciRede()))
+            holder.cardViewColorVacina.setCardBackgroundColor(context.getResources().getColor((R.color.colorPink)));
+
+        if ("Privada".equalsIgnoreCase(mVacinaValues.get(position).getVaciRede()))
+            holder.cardViewColorVacina.setCardBackgroundColor(context.getResources().getColor((R.color.colorPurple)));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package br.com.erivando.proimuni.ui.activity.vacina;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -115,6 +116,11 @@ public class VacinaActivity extends BaseActivity implements VacinaMvpView {
     public void onBackPressed() {
         super.onBackPressed();
         openMainActivity();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     public void openMainActivity() {

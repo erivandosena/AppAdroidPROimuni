@@ -51,7 +51,7 @@ public class PlacesDisplayTask extends AsyncTask<Object, Integer, List<HashMap<S
                 markerOptions.position(latLng);
                 markerOptions.title(placeName + " : " + vicinity);
                 // mMap.addMarker(markerOptions);
-                mMap.addMarker(markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_vacina_marker)));
+                mMap.addMarker(markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_local_posto_saude)));
             }
         }
     }

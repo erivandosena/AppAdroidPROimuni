@@ -13,12 +13,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.Menu;
@@ -27,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -53,6 +51,7 @@ import br.com.erivando.proimuni.ui.activity.mapa.MapaActivity;
 import br.com.erivando.proimuni.ui.activity.notificacao.NotificacaoActivity;
 import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaActivity;
+import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import br.com.erivando.proimuni.ui.fragment.sobre.Sobre;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -135,9 +134,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_main);
-
         getActivityComponent().inject(this);
 
         setUnBinder(ButterKnife.bind(this));
@@ -167,7 +165,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                     drawer.closeDrawer(Gravity.END);
             }
         });
-
+        hideLoading();
     }
 
     @OnClick(R.id.btn_cartao)
@@ -249,6 +247,12 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -265,28 +269,13 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             ((Animatable) drawable).start();
         }
         switch (item.getItemId()) {
-            case R.id.action_edita_usuario:
-                openCadastroUsuarioActivity();
+            case R.id.nav_item_usuario:
                 return true;
-            case R.id.action_edita_crianca:
-                openCriancaListaActivity("edita");
+            case R.id.nav_item_crianca:
                 return true;
-            case R.id.action_edita_cartao:
-                openEditaCartaoActivity("edita");
+            case R.id.nav_item_cartao:
                 return true;
-            case R.id.action_postos:
-                return true;
-            case R.id.action_backup:
-                executaBackup();
-                return true;
-            case R.id.action_restore:
-                executaRestauracao();
-                return true;
-            case R.id.action_share:
-                onCompartilhaApp();
-                return true;
-            case R.id.action_configuracoes:
-                openConfiguracoesActivity();
+            case R.id.nav_item_posto:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -327,12 +316,46 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         drawer.closeDrawer(GravityCompat.START);
                         switch (item.getItemId()) {
-                            case R.id.nav_item_about:
-                                presenter.onDrawerOptionAboutClick();
-                                //showAboutFragment();
+                            case R.id.nav_item_usuario:
+                                openCadastroUsuarioActivity();
                                 return true;
-                            case R.id.nav_item_rate_us:
+                            case R.id.nav_item_crianca:
+                                openCriancaListaActivity("edita");
+                                return true;
+                            /*
+                            case R.id.nav_item_cartao:
+                                openEditaCartaoActivity("edita");
+                                return true;
+                            case R.id.nav_item_vacina:
+                                openVacinaActivity();
+                                return true;
+                            case R.id.nav_item_calendario:
+                                openCalendarioVacinal();
+                                return true;
+                            case R.id.nav_item_posto:
+                                openMapaPostosVacinacao();
+                                return true;
+                            */
+                            case R.id.nav_item_backup:
+                                executaBackup();
+                                return true;
+                            case R.id.nav_item_restauracao:
+                                executaRestauracao();
+                                return true;
+                            case R.id.nav_item_configuracao:
+                                openConfiguracoesActivity();
+                                return true;
+                            case R.id.nav_item_compartilhar:
+                                onCompartilhaApp();
+                                return true;
+                            case R.id.nav_item_avaliacao:
                                 presenter.onDrawerRateUsClick();
+                                return true;
+                            case R.id.nav_item_curiosidade:
+                                Toast.makeText(AppAplicacao.contextApp, "Ainda não implementado! :(", Toast.LENGTH_SHORT).show();
+                                return true;
+                            case R.id.nav_item_sobre:
+                                presenter.onDrawerOptionAboutClick();
                                 return true;
                             case R.id.nav_item_logout:
                                 presenter.onDrawerOptionLogoutClick();
@@ -392,6 +415,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void openLoginActivity() {
         startActivity(LoginActivity.getStartIntent(this));
+
         finish();
     }
 
@@ -516,6 +540,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void onFragmentDetached(String tag) {
+        /*
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragmentSobre = fragmentManager.findFragmentByTag(tag);
         if (fragmentSobre != null) {
@@ -540,6 +565,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             unlockDrawer();
         }
 
+*/
     }
 
     private void executaBackup() {

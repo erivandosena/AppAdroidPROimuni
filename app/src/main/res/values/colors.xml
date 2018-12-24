@@ -7,25 +7,32 @@
 
     <!-- Paleta de cores PROimuni -->
     <color name="colorTransparent">#00000000</color>
-    <color name="colorGray">#696969</color>
-    <color name="colorBlueLight">#9bb5d6</color>
-    <color name="colorWhite">#FFFFFF</color>
-    <color name="colorBlack">#2a2a2a</color>
+    <color name="colorGray">#7e7e7e</color>
     <color name="colorGrayLight">#dbdbdb</color>
-    <color name="colorGoogle">#d34836</color>
-    <color name="colorFacebook">#3b5998</color>
-    <color name="colorPurple">#8b5bfe</color>
+    <color name="colorGrayFine">#bfbfbf</color>
+    <color name="colorGrayFineLight">#e9e9f0</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#2a2a2a</color>
+    <color name="colorRedGoogle">#d34836</color>
+    <color name="colorBlueFacebook">#3b5998</color>
+    <color name="colorBlue">#3583ff</color>
+    <color name="colorBlueFine">#3580e8</color>
+    <color name="colorBlueFineLight">#9bb5d6</color>
+    <color name="colorPurple">#8c61ff</color>
     <color name="colorPurpleLight">#6890fe</color>
-
+    <color name="colorPink">#f162a9</color>
+    <color name="colorGreen">#79e298</color>
+    <color name="colorYellow">#e7c77e</color>
+    
     <!-- Paleta de cores controles -->
-    <color name="startColorBackground">#bfbfbf</color>
-    <color name="endColorBackground">#e9e9f0</color>
+    <color name="startColorBackground">@color/colorGrayFine</color>
+    <color name="endColorBackground">@color/colorGrayFineLight</color>
     <color name="startColorSplash">@color/colorPrimaryDark</color>
     <color name="endColorSplash">@color/colorAccent</color>
     <color name="bntColorDefault">@color/colorPrimaryDark</color>
-    <color name="bntColorPressed">#3580e8</color>
+    <color name="bntColorPressed">@color/colorBlueFine</color>
     <color name="bntColorFocused">@color/colorPrimary</color>
     <color name="textColorBlue">@color/colorPrimary</color>
-    <color name="textColorGray">#7e7e7e</color>
+    <color name="textColorGray">@color/colorGray</color>
     <color name="textColorWhite">@color/colorWhite</color>
 </resources>

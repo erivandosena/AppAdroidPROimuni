@@ -38,48 +38,39 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fab_margin"
-                app:cardCornerRadius="@dimen/card_radius"
-                app:cardElevation="@dimen/card_elevation">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="5dp"
-                    android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|bottom"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
 
                     <Button
                         android:id="@+id/btn_on_notificacao"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_margin="5dp"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
                         android:background="@drawable/botao_padrao"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
                         android:text="@string/btn_ativa_notificacao"
                         android:textColor="@color/colorWhite"/>
 
                     <Button
                         android:id="@+id/btn_off_notificacao"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_margin="5dp"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
                         android:background="@drawable/botao_padrao"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
                         android:text="@string/btn_desativa_notificacao"
-                        android:textColor="@color/colorWhite">
+                        android:textColor="@color/colorWhite" />
 
-                        <requestFocus />
-                    </Button>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

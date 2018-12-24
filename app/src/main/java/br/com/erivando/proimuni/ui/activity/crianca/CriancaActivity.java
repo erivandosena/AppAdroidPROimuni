@@ -29,6 +29,7 @@ import javax.inject.Inject;
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.model.Crianca;
 import br.com.erivando.proimuni.database.model.Usuario;
+import br.com.erivando.proimuni.imagem.RoundedImageButton;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioActivity;
@@ -69,10 +70,10 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
 
-    @BindView(R.id.text_cad_nome)
+    @BindView(R.id.nome_crianca)
     EditText nomeEditText;
 
-    @BindView(R.id.text_nascimento)
+    @BindView(R.id.nascimento)
     EditText nascimentoEditText;
 
     @BindView(R.id.responsavel)
@@ -82,7 +83,7 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     Spinner comboSexo;
 
     @BindView(R.id.img_crianca_foto)
-    ImageButton fotoImageButton;
+    RoundedImageButton fotoImageButton;
 
     private Intent intent;
     private ArrayAdapter<String> adapterResponsavel;

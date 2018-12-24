@@ -1,7 +1,9 @@
 package br.com.erivando.proimuni.ui.fragment.vacina;
 
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import br.com.erivando.proimuni.mvp.base.BaseViewHolder;
@@ -21,13 +23,21 @@ public class ViewHolder extends BaseViewHolder {
 
     public final View mView;
     public String mBoundStringNome;
+    public String mBoundStringRede;
     public String mBoundStringDesc;
     public String mBoundStringAdmin;
-    @BindView(R.id.avatar)
-    public ImageView mImageView;
 
-    @BindView(android.R.id.text1)
-    public TextView mTextView;
+    //@BindView(R.id.avatar)
+   //public ImageView mImageView;
+
+    @BindView(R.id.card_view_vacina)
+    public CardView cardViewColorVacina;
+
+    @BindView(R.id.nome_vacina)
+    public TextView mTextViewNome;
+
+    @BindView(R.id.descricao_vacina)
+    public TextView mTextViewDescricao;
 
     public ViewHolder(View itemView) {
         super(itemView);
@@ -37,12 +47,13 @@ public class ViewHolder extends BaseViewHolder {
 
     @Override
     protected void clear() {
-        mImageView.setImageDrawable(null);
-        mTextView.setText("");
+        //mImageView.setImageDrawable(null);
+        mTextViewNome.setText("");
+        mTextViewDescricao.setText("");
     }
 
     @Override
     public String toString() {
-        return super.toString() + " '" + mTextView.getText();
+        return super.toString() + " '" + mTextViewNome.getText();
     }
 }

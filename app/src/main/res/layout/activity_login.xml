@@ -38,12 +38,12 @@
                 android:id="@+id/img_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="20dp"
                 android:contentDescription="@null"
-                app:layout_collapseMode="parallax"
                 android:scaleType="fitCenter"
                 android:tint="@color/colorWhite"
+                app:layout_collapseMode="parallax"
                 app:srcCompat="@drawable/ic_launcher_splash" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -59,92 +59,91 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="50dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp"
+            android:foregroundGravity="top"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="vertical">
 
-                <android.support.design.widget.TextInputLayout
+                <TextView
+                    style="@style/TextStyle.TextView.Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_usuario_nome" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/text_usua_login"
+                    style="@style/TextStyle.TextInputEdit.Texto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textColorHint="@color/textColorGray"
-                    app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
-                    <!-- style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"> -->
+                    android:drawableLeft="@drawable/ic_login_usuario"
+                    android:hint="@string/hint_usuario_nome"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:maxLength="30" />
+
+                <TextView
+                    style="@style/TextStyle.TextView.Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_usuario_senha" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/text_usua_login"
-                        style="@style/TextStyle.EditText.Normal"
+                        android:id="@+id/text_usua_senha"
+                        style="@style/TextStyle.TextInputEdit.Texto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/text_usuario_nome"
-                        android:inputType="text"
-                        android:paddingTop="12dp"
-                        android:paddingBottom="12dp" />
+                        android:drawableLeft="@drawable/ic_login_senha"
+                        android:hint="@string/hint_usuario_senha"
+                        android:inputType="textPassword"
+                        android:maxLength="15" />
 
-                </android.support.design.widget.TextInputLayout>
+                    <TextView
+                        android:id="@+id/text_senha_toggle"
+                        style="@style/TextStyle.TextView.Texto.Toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/text_mostra_senha_toggle" />
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="-10dp"
+                    android:layout_marginTop="-12dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tv_btn_lembrar_senha"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="bottom|end"
-                        android:layout_marginRight="5dp"
-                        android:autoLink="web"
+                        style="@style/TextStyle.TextView.Label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:clickable="true"
+                        android:gravity="right"
                         android:linksClickable="true"
                         android:text="@string/btn_login_lembrar_senha"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textAllCaps="false"
                         android:textColor="@color/textColorGray"
-                        android:textColorLink="@color/textColorWhite"
-                        style="TextAppearance.Text.Regular"/>
+                        android:textSize="14sp" />
                 </LinearLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_gravity="center"
-                    android:textColorHint="@color/textColorGray"
-                    app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
-                    app:passwordToggleEnabled="true">
-                    <!-- style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"> -->
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/text_usua_senha"
-                        style="@style/TextStyle.EditText.Normal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/text_usuario_senha"
-                        android:inputType="textPassword"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp" />
-
-                </android.support.design.widget.TextInputLayout>
 
                 <Button
                     android:id="@+id/btn_login_usuario"
-                    android:layout_width="110dp"
+                    style="@style/Button.Padrao"
+                    android:layout_width="130dp"
                     android:layout_height="36dp"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/botao_padrao"
-                    android:text="@string/btn_login_usuario"
-                    android:textColor="@color/colorWhite" />
+                    android:layout_gravity="center"
+                    android:text="@string/btn_login_usuario" />
 
             </LinearLayout>
 
@@ -157,39 +156,26 @@
 
                 <Button
                     android:id="@+id/btn_google_login"
+                    style="@style/Button.Padrao"
                     android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_margin="5dp"
                     android:background="@drawable/botao_google"
                     android:drawableLeft="@drawable/ic_btn_google"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:text="@string/btn_login_google"
-                    android:textColor="@color/colorWhite" />
+                    android:text="@string/btn_login_google" />
 
                 <Button
                     android:id="@+id/btn_facebook_login"
+                    style="@style/Button.Padrao"
                     android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_margin="5dp"
                     android:background="@drawable/botao_facebook"
                     android:drawableLeft="@drawable/ic_btn_facebook"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:text="@string/btn_login_facebook"
-                    android:textColor="@color/colorWhite" />
+                    android:text="@string/btn_login_facebook" />
 
                 <Button
                     android:id="@+id/btn_cadastro_usuario"
+                    style="@style/Button.Padrao"
                     android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/botao_padrao"
-                    android:drawableLeft="@drawable/ic_btn_usuario"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:text="@string/btn_login_fazer_cadastro"
-                    android:textColor="@color/colorWhite" />
+                    android:drawableLeft="@drawable/ic_add_usuario"
+                    android:text="@string/btn_login_fazer_cadastro" />
             </LinearLayout>
 
         </LinearLayout>

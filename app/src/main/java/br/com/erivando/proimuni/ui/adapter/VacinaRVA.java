@@ -45,6 +45,9 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
     private Context mContext;
     private ProgressDialog progressDialog;
 
+    protected CardView cardView;
+
+
     private int limiteRemove;
 
     public VacinaRVA(List<Vacina> vacinaList, List<Dose> doseList, List<Idade> idadeList, List<Imunizacao> imunizacaoList, Cartao cartao, Context mContext) {
@@ -54,12 +57,14 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
         this.imunizacaoList = imunizacaoList;
         this.cartao = cartao;
         this.mContext = mContext;
+
     }
 
     @Override
     public VacinaRVA.SingleItemRowHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_cartao_detalhe_item, null);
-        VacinaRVA.SingleItemRowHolder mh = new VacinaRVA.SingleItemRowHolder(v);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_cartao_detalhe_item, null);
+        VacinaRVA.SingleItemRowHolder mh = new VacinaRVA.SingleItemRowHolder(view);
+        this.cardView = view.findViewById(R.id.card_view_cartao_vacina);
         return mh;
     }
 
@@ -384,34 +389,51 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
     }
 
     private void aplicaStatusVacina(Long mesesIdadeCrianca, Long semanas, VacinaRVA.SingleItemRowHolder holder) {
+        /*
         int vacinaAvencer = R.drawable.ic_vacina;
         int vacinaEmDias = R.drawable.ic_vacina_imunizada;
         int vacinaVencendo = R.drawable.ic_vacina_aviso;
         int vacinaVencida = R.drawable.ic_vacina_vencida;
+        */
 
-        holder.imageVacina.setImageResource(vacinaAvencer);
+        int vacinaCinzaAvencer = mContext.getResources().getColor((R.color.colorGray));
+        int vacinaVerdeEmdia = mContext.getResources().getColor((R.color.colorGreen));
+        int vacinaAmareloVencendo = mContext.getResources().getColor((R.color.colorYellow));
+        int vacinaVermelhoVencido = mContext.getResources().getColor((R.color.colorPink));
+
+        //holder.imageVacina.setImageResource(vacinaAvencer);
+        cardView.setCardBackgroundColor(vacinaCinzaAvencer);
         if(mesesIdadeCrianca == null && semanas == null) {
             if (!imunizacaoList.isEmpty()) {
-                holder.imageVacina.setImageResource(vacinaEmDias);
+                //holder.imageVacina.setImageResource(vacinaEmDias);
+                cardView.setCardBackgroundColor(vacinaVerdeEmdia);
             }
         } else {
             if (mesesIdadeCrianca == semanas) {
-                holder.imageVacina.setImageResource(vacinaVencendo);
+                //holder.imageVacina.setImageResource(vacinaVencendo);
+                cardView.setCardBackgroundColor(vacinaAmareloVencendo);
             }
             if (mesesIdadeCrianca > semanas) {
-                holder.imageVacina.setImageResource(vacinaVencida);
+                //holder.imageVacina.setImageResource(vacinaVencida);
+                cardView.setCardBackgroundColor(vacinaVermelhoVencido);
             }
             if ("9 a 14 anos".equals(mesesIdadeCrianca)) {
                 if (mesesIdadeCrianca > semanas && mesesIdadeCrianca <= semanas + 60L) {
-                    holder.imageVacina.setImageResource(vacinaVencida);
+                    //holder.imageVacina.setImageResource(vacinaVencida);
+                    cardView.setCardBackgroundColor(vacinaVermelhoVencido);
                 }
             }
             if ("11 a 14 anos".equals(mesesIdadeCrianca)) {
                 if (mesesIdadeCrianca > semanas && mesesIdadeCrianca <= semanas + 36L) {
-                    holder.imageVacina.setImageResource(vacinaVencida);
+                   // holder.imageVacina.setImageResource(vacinaVencida);
+                    cardView.setCardBackgroundColor(vacinaVermelhoVencido);
                 }
             }
         }
+
+        cardView.setRadius(20f);
+        cardView.setCardElevation(2f);
+        cardView.setUseCompatPadding(true);
     }
 
     private boolean verificaCartao(Imunizacao imunizacao) {
@@ -436,8 +458,8 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
     }
 
     public class SingleItemRowHolder extends RecyclerView.ViewHolder {
-        protected CardView cardView;
-        protected ImageView imageVacina;
+        //protected CardView cardView;
+        //protected ImageView imageVacina;
         protected TextView textVacina;
         protected TextView textDose;
         protected TextView textIdade;
@@ -450,8 +472,8 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
 
         public SingleItemRowHolder(View view) {
             super(view);
-            this.cardView = view.findViewById(R.id.card_view);
-            this.imageVacina = view.findViewById(R.id.imagem_vacina);
+            //this.cardView = view.findViewById(R.id.card_view_cartao_vacina);
+            //this.imageVacina = view.findViewById(R.id.imagem_vacina);
             this.textVacina = view.findViewById(R.id.text_vacina);
             this.textDose = view.findViewById(R.id.text_dose);
             this.textIdade = view.findViewById(R.id.text_idade);

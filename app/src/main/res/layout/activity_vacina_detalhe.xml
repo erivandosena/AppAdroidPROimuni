@@ -14,7 +14,8 @@
   ~ limitations under the License.
 -->
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -27,6 +28,24 @@
 
         <include layout="@layout/content_toobar" />
 
+        <LinearLayout
+            android:id="@+id/layout_vacina_toobar"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/background_gradient_appbar"
+            android:gravity="center|start"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text_vacina_toobar"
+                style="@style/TextStyle.Titulo.Lista"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="@string/app_name"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -37,65 +56,39 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="20dp"
             android:orientation="vertical"
-            android:paddingTop="24dp">
+            android:paddingBottom="20dp">
 
-            <android.support.v7.widget.CardView
+            <TextView
+                style="@style/TextStyle.Titulo.Texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fab_margin">
+                android:text="@string/vacina_descricao" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TextAppearance.AppCompat.Title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/vacina_descricao"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                    <TextView
-                        android:id="@+id/text_vacina_descricao"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@null" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
+            <TextView
+                android:id="@+id/text_vacina_descricao"
+                style="@style/TextStyle.Paragrafo.Texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/fab_margin"
-                android:layout_marginRight="@dimen/fab_margin"
-                android:layout_marginBottom="@dimen/fab_margin">
+                android:layout_marginBottom="15dp"
+                android:text="@null" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+            <TextView
+                style="@style/TextStyle.Titulo.Texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/vacina_administracao" />
 
-                    <TextView
-                        style="@style/TextAppearance.AppCompat.Title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/vacina_administracao"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                    <TextView
-                        android:id="@+id/text_vacina_administracao"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@null" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+            <TextView
+                android:id="@+id/text_vacina_administracao"
+                style="@style/TextStyle.Paragrafo.Texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="@null" />
 
         </LinearLayout>
-
 
     </android.support.v4.widget.NestedScrollView>
 
@@ -106,8 +99,8 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:focusable="true"
-        app:srcCompat="@android:drawable/ic_menu_share"
         app:layout_anchor="@id/appBarLayout"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:layout_anchorGravity="bottom|right|end"
+        app:srcCompat="@drawable/ic_share_white" />
 
 </android.support.design.widget.CoordinatorLayout>

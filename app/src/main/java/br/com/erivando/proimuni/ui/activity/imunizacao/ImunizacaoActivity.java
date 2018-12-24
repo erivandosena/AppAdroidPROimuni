@@ -54,8 +54,8 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
     public TextView mTextData;
     @BindView(R.id.btn_registra_imunizacao)
     public Button mRegistrar;
-    @BindView(R.id.text_imunizacao_vacina_descricao)
-    public TextView mTexVacinaDescricao;
+    //@BindView(R.id.text_imunizacao_vacina_descricao)
+    //public TextView mTexVacinaDescricao;
     @Inject
     ImunizacaoMvpPresenter<ImunizacaoMvpView> presenter;
     @Inject
@@ -72,8 +72,9 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
 
-    @BindView(R.id.float_header_view)
-    HeaderView floatHeaderView;
+   // @BindView(R.id.float_header_view)
+    //HeaderView floatHeaderView;
+
     Intent intent;
 
     private Long idVacina;
@@ -106,7 +107,7 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
         //toolbarHeaderView.bindTo("BCG", "Pentavalente");
         */
 
-        textViewTituloToobar.setText(getResources().getString(R.string.text_imunizacao_titulo));
+
         getActivityComponent().inject(this);
 
         presenter.onAttach(this);
@@ -147,10 +148,6 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
             idIdade = intent.getLongExtra("idade", 0L);
             idCartao = intent.getLongExtra("cartao", 0L);
 
-            Log.e("ID_VACINA ", idVacina.toString());
-            Log.e("ID_DOSE ", idDose.toString());
-            Log.e("ID_CARTAO ", idCartao.toString());
-
             if (presenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{idVacina, idDose, idCartao}) != null) {
                 new AlertDialog.Builder(this)
                         .setIcon(R.drawable.ic_launcher_round)
@@ -171,8 +168,9 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
             }
 
             Vacina vacina = vacinaPresenter.onVacinaCadastrada(idVacina);
-            floatHeaderView.bindTo(null, vacina.getVaciNome());
-            mTexVacinaDescricao.setText(vacina.getVaciDescricao());
+            //floatHeaderView.bindTo(null, vacina.getVaciNome());
+            //mTexVacinaDescricao.setText(vacina.getVaciDescricao());
+            textViewTituloToobar.setText(vacina.getVaciNome());
         }
     }
 

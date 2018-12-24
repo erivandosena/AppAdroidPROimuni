@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Tema base do aplicativo. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -7,12 +7,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- Tema PROimuni -->
     <style name="AppTheme.Proimuni" parent="Theme.AppCompat.Light.NoActionBar">
@@ -29,7 +23,21 @@
         <item name="android:typeface">normal</item>
         <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_seta_voltar</item>
+        <!-- <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>  -->
+        <item name="android:windowDisablePreview">true</item>
+
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 
     <style name="Toolbar" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:layout_width">match_parent</item>
@@ -43,13 +51,10 @@
         <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorPrimaryDark">@color/colorWhite</item>
         <item name="android:windowBackground">@color/colorWhite</item>
+        <item name="android:windowDisablePreview">true</item>
     </style>
 
     <style name="TextStyle">
-        <item name="android:layout_marginTop">2dp</item>
-        <item name="android:layout_marginBottom">2dp</item>
-        <item name="android:layout_marginLeft">2dp</item>
-        <item name="android:layout_marginRight">2dp</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
@@ -57,12 +62,92 @@
         <item name="fontPath">fonts/montserrat/Montserrat-Regular.ttf</item>
     </style>
 
-    <style name="TextStyle.EditText" parent="TextStyle">
+    <style name="TextAppearance.Text.Bold" parent="android:TextAppearance">
+        <item name="fontPath">fonts/montserrat/Montserrat-Bold.ttf</item>
+    </style>
+
+    <style name="TextStyle.Titulo.Lista" parent="TextStyle">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
+    </style>
+
+    <style name="TextStyle.TituloMedio.Lista" parent="TextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
+    </style>
+
+    <style name="TextStyle.SubTitulo.Lista" parent="TextStyle">
+        <item name="android:textSize">12sp</item>
         <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
     </style>
 
-    <style name="TextAppearance.Text.Bold" parent="android:TextAppearance">
-        <item name="fontPath">fonts/montserrat/Montserrat-Bold.ttf</item>
+    <style name="TextStyle.Titulo.Texto" parent="TextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textColorGray</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
+    </style>
+
+    <style name="TextStyle.Paragrafo.Texto" parent="TextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/textColorGray</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
+    </style>
+
+    <style name="TextStyle.TextView.Label" parent="TextStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/textColorGray</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_marginBottom">-2dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
+    </style>
+
+    <style name="TextStyle.TextInputEdit.Texto" parent="TextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textColorHint">@color/colorGrayLight</item>
+        <item name="android:background">@drawable/round_border_text_input</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
+    </style>
+
+    <style name="TextStyle.TextView.Texto.Toggle" parent="TextStyle">
+        <item name="android:textSize">10sp</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:padding">7dp</item>
+        <item name="android:inputType">textCapWords</item>
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
+    </style>
+
+    <style name="TextStyle.Spinner.DropDown" parent="Base.Widget.AppCompat.Spinner">
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:background">@drawable/round_border_text_input</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
+    </style>
+
+    <style name="Button.Padrao" parent="Widget.AppCompat.Button">
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:background">@drawable/botao_padrao</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:drawableTint" tools:targetApi="m">@color/colorWhite</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
+    </style>
+
+    <style name="TextStyle.EditText" parent="TextStyle">
+        <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
     </style>
 
     <style name="TextStyle.Heading" parent="TextStyle">
@@ -130,4 +215,11 @@
         <item name="android:maxLength">35</item>
     </style>
 
+    <!-- Animacoes de telas -->
+    <style name="ActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_close_exit</item>
+    </style>
 </resources>

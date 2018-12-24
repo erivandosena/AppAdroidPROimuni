@@ -20,7 +20,7 @@
     android:padding="10dp"
     android:shape="rectangle">
 
-    <solid android:color="@color/colorGoogle" />
+    <solid android:color="@color/colorRedGoogle" />
 
     <corners
         android:bottomLeftRadius="@dimen/browser_actions_context_menu_min_padding"

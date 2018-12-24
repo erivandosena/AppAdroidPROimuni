@@ -7,10 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.os.SystemClock;
 
 import javax.inject.Inject;
 
 import br.com.erivando.proimuni.R;
+import br.com.erivando.proimuni.broadcast.Notificacao;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.service.Servico;
 import br.com.erivando.proimuni.ui.activity.login.LoginActivity;
@@ -59,15 +61,17 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
         mPresenter.onAttach(SplashActivity.this);
 
         this.context = getContextActivity();
-        /*
+
+
         Intent alarm = new Intent(this.context, Notificacao.class);
         boolean alarmRunning = (PendingIntent.getBroadcast(this.context, 0, alarm, PendingIntent.FLAG_NO_CREATE) != null);
-        if(alarmRunning == false) {
+        if (alarmRunning == false) {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(this.context, 0, alarm, 0);
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), (50000 * 1440)/2L, pendingIntent);//(60000 * 1440)/2L, pendingIntent); //1800000 milliseconds, or every 30 minutes.
+            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), (50000 * 1440) / 2L, pendingIntent);//(60000 * 1440)/2L, pendingIntent); //1800000 milliseconds, or every 30 minutes.
         }
-        */
+
+
     }
 
     /**
@@ -82,6 +86,7 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
     @Override
     public void openMainActivity() {
+        showLoading();
         Intent intent = MainActivity.getStartIntent(SplashActivity.this);
         startActivity(intent);
         finish();
@@ -89,7 +94,7 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
     @Override
     public void startServico() {
-       // setAlarm();
+        // setAlarm();
     }
 
     @Override
@@ -99,13 +104,18 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
     protected void setUp() {
         if (android.os.Build.VERSION.SDK_INT > 15) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
         habilitaTelaCheia(this);
-        //statusBarTransparente(this);
+        statusBarTransparente(this);
     }
 
     @Override

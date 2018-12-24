@@ -136,7 +136,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             getMvpView().onError(R.string.text_valida_senha);
             return;
         }
-        getMvpView().showLoading();
+        //getMvpView().showLoading();
 
         try {
             if (getIDataManager().validaLoginUsuario(login, senha)) {
@@ -159,7 +159,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                 getMvpView().onError(R.string.text_valida_usuario);
             }
         } finally {
-            getMvpView().hideLoading();
+            //getMvpView().hideLoading();
         }
 
     }
@@ -204,7 +204,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         isLoggedIn = accessToken != null && !accessToken.isExpired();
 
         try {
-            getMvpView().showLoading();
+            //getMvpView().showLoading();
             if (isLoggedIn) {
                 getMvpView().openMainActivity();
             } else {
@@ -268,21 +268,20 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
                     @Override
                     public void onCancel() {
-                        getMvpView().hideLoading();
+                       // getMvpView().hideLoading();
                         Toast.makeText(AppAplicacao.contextApp, R.string.facebook_cancel_login, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
-                        getMvpView().hideLoading();
+                        //getMvpView().hideLoading();
                         Toast.makeText(AppAplicacao.contextApp, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
-                        Log.e("Login Facebook:", exception.getMessage());
                         exception.printStackTrace();
                     }
                 });
             }
         } finally {
-            getMvpView().hideLoading();
+            //getMvpView().hideLoading();
         }
     }
 
@@ -399,11 +398,11 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             // O código de status ApiException indica o motivo detalhado da falha.
             // Por favor, consulte a referência da classe GoogleSignInStatusCodes para
             // mais informações. e.getStatusCode()
-            Log.e("Login Google: ", e.getMessage());
+            //Log.e("Login Google: ", e.getMessage());
             Toast.makeText(AppAplicacao.contextApp, R.string.google_cancel_login, Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } finally {
-            getMvpView().hideLoading();
+           // getMvpView().hideLoading();
         }
     }
 
@@ -435,7 +434,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             }
             getResultsFromApi(view);
         } catch (Exception e) {
-            Log.e("enviaSenhaPorEmail: ", e.getMessage());
+            //Log.e("enviaSenhaPorEmail: ", e.getMessage());
             e.printStackTrace();
             return;
         }
@@ -664,11 +663,11 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                     getMvpView().getStartActivityForResult(((UserRecoverableAuthIOException) lastError).getIntent(), REQUEST_AUTHORIZATION);
                 } else {
                     showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_google_oauth) + "\n" + lastError);
-                    Log.e("erro_google_oauth: ", String.valueOf(lastError.getMessage()));
+                    //Log.e("erro_google_oauth: ", String.valueOf(lastError.getMessage()));
                 }
             } else {
                 showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_request));
-                Log.e("erro_request: ", lastError.getMessage());
+                //Log.e("erro_request: ", lastError.getMessage());
             }
 
         }

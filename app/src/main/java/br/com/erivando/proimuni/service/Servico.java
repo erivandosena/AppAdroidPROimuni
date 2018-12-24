@@ -386,7 +386,7 @@ public class Servico extends Service {
         listaMsgAgrupada.add(textBig);
         Collections.sort(listaMsgAgrupada, Collections.reverseOrder());
 
-        Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_gerenciar);
+        Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_cartao);
         List<String> textoLongo = new ArrayList<String>();
 
         NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();

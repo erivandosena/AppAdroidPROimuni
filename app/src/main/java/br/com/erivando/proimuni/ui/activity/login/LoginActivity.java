@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -50,6 +53,9 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     @BindView(R.id.text_usua_senha)
     EditText senhaEditText;
 
+    @BindView(R.id.text_senha_toggle)
+    TextView textViewSenhaToggle;
+
     @BindView(R.id.btn_facebook_login)
     Button facebookLogin;
 
@@ -58,7 +64,6 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
     @BindView(R.id.btn_cadastro_usuario)
     Button buttonCadastroUsuario;
-
 
     @BindView(R.id.tv_btn_lembrar_senha)
     TextView lembrarSenhaTextView;
@@ -71,6 +76,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_login);
 
         getActivityComponent().inject(this);
@@ -126,6 +132,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
     @Override
     public void openMainActivity() {
+        showLoading();
         Intent intent = MainActivity.getStartIntent(LoginActivity.this);
         startActivity(intent);
         finish();
@@ -162,6 +169,48 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
     @Override
     protected void setUp() {
+        textViewSenhaToggle.setVisibility(View.GONE);
+
+        final String texto_mostra_toggle = getResources().getString(R.string.text_mostra_senha_toggle);
+        final String texto_oculta_toggle = getResources().getString(R.string.text_oculta_senha_toggle);
+
+        textViewSenhaToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (texto_mostra_toggle.equalsIgnoreCase(textViewSenhaToggle.getText().toString())) {
+                    textViewSenhaToggle.setText(texto_oculta_toggle);
+                    senhaEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    senhaEditText.setSelection(senhaEditText.length());
+                } else {
+                    textViewSenhaToggle.setText(texto_mostra_toggle);
+                    senhaEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    senhaEditText.setSelection(senhaEditText.length());
+                }
+            }
+        });
+
+        senhaEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (senhaEditText.getText().length() > 0) {
+                    textViewSenhaToggle.setVisibility(View.VISIBLE);
+                } else {
+                    textViewSenhaToggle.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         //habilitaTelaCheia(this);
         //statusBarTransparente(this);
         presenter.onCreateGoogleLogin();

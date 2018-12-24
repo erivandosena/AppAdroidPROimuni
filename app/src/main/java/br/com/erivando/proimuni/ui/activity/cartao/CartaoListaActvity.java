@@ -79,7 +79,7 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
         collapsingToolbar.setTitle(getResources().getString(R.string.text_lista_cartao_titulo));
         */
 
-        textViewTituloToobar.setText(getResources().getString(R.string.text_lista_calendario_titulo));
+        textViewTituloToobar.setText(getResources().getString(R.string.text_lista_cartao_titulo));
 
         getActivityComponent().inject(this);
         presenterCartao.onAttach(this);

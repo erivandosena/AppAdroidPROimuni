@@ -23,11 +23,12 @@
         android:roundIcon="@drawable/ic_launcher_round"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:hardwareAccelerated="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Proimuni">
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.splash.SplashActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan">
@@ -39,7 +40,7 @@
         </activity>
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.login.LoginActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan">
@@ -49,7 +50,7 @@
         </activity>
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.main.MainActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -61,80 +62,80 @@
         </activity>
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.crianca.CriancaActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.cartao.CartaoActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.calendario.CalendarioActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.crianca.CriancaListaActvity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.vacina.VacinaActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.vacina.VacinaDetalheActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.cartao.CartaoDetalheActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="br.com.erivando.proimuni.ui.fragment.sobre.Sobre"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.mapa.MapaActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name="br.com.erivando.proimuni.ui.activity.notificacao.NotificacaoActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />

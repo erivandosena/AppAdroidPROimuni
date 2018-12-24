@@ -16,7 +16,8 @@
 ~ limitações sob a licença.
 -->
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -24,6 +25,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_gradient_appbar"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -38,83 +40,34 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|bottom"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
 
-            <android.support.v7.widget.CardView
+            <TextView
+                style="@style/TextStyle.TextView.Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_crianca" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/crianca"
+                style="@style/TextStyle.Spinner.DropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fab_margin"
-                app:cardCornerRadius="@dimen/card_radius"
-                app:cardElevation="@dimen/card_elevation">
+                android:spinnerMode="dropdown" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <br.com.erivando.proimuni.imagem.RoundedImageButton
-                        android:id="@+id/img_cartao_foto"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@color/colorTransparent"
-                        android:padding="5dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_gerenciar"
-                        android:tint="@android:color/transparent" />
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
+            <Button
+                android:id="@+id/btn_cadadastar_cartao"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/fab_margin"
-                android:layout_marginRight="@dimen/fab_margin"
-                android:layout_marginBottom="@dimen/fab_margin"
-                android:focusable="true"
-                app:cardCornerRadius="@dimen/card_radius"
-                app:cardElevation="@dimen/card_elevation">
+                style="@style/Button.Padrao"
+                android:text="@string/btn_salvar" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TextAppearence.App.TextInputLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_crianca"
-                        android:textColor="@color/colorGray" />
-
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/crianca"
-                        style="@style/Widget.AppCompat.Spinner.Underlined"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:spinnerMode="dropdown"
-                        android:textColor="@color/colorBlack" />
-
-                    <Button
-                        android:id="@+id/btn_cadadastar_cartao"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/botao_padrao"
-                        android:text="@string/btn_salvar"
-                        android:textColor="@color/colorWhite" />
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

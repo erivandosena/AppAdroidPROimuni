@@ -39,15 +39,15 @@ public class ImunizacaoPresenter<V extends ImunizacaoMvpView> extends BasePresen
     public void onCadasrarClick(Long id, String imunData, String imunAgente, String imunPosto, String imunLote, Long idVacina, Long idDose, Long idIdade, final Long idCartao) {
 
         if (imunAgente == null || imunAgente.isEmpty()) {
-            getMvpView().onError(R.string.text_valida_agente);
+            getMvpView().onError(R.string.hint_nome_agente);
             return;
         }
         if (imunPosto == null || imunPosto.isEmpty()) {
-            getMvpView().onError(R.string.text_valida_posto);
+            getMvpView().onError(R.string.hint_nome_unidade);
             return;
         }
         if (imunLote == null || imunLote.isEmpty()) {
-            getMvpView().onError(R.string.text_valida_lote);
+            getMvpView().onError(R.string.hint_lote_vacina);
             return;
         }
 

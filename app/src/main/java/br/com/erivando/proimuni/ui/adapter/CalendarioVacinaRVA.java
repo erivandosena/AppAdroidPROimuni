@@ -1,6 +1,7 @@
 package br.com.erivando.proimuni.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import br.com.erivando.proimuni.database.model.Dose;
 import br.com.erivando.proimuni.database.model.Idade;
 import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.R;
+import br.com.erivando.proimuni.ui.activity.vacina.VacinaDetalheActivity;
 import io.realm.RealmList;
 
 /**
@@ -28,13 +30,11 @@ public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRV
     private RealmList<Vacina> vacinaList;
     private RealmList<Dose> doseList;
     private RealmList<Idade> idadeList;
-    private Context mContext;
 
     public CalendarioVacinaRVA(RealmList<Vacina> vacinaList, RealmList<Dose> doseList, RealmList<Idade> idadeList, Context mContext) {
         this.vacinaList = vacinaList;
         this.doseList = doseList;
         this.idadeList = idadeList;
-        this.mContext = mContext;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRV
     }
 
     @Override
-    public void onBindViewHolder(SingleItemRowHolder holder, int i) {
+    public void onBindViewHolder(SingleItemRowHolder holder, final int i) {
         Vacina singleItemVacina = vacinaList.get(i);
         Dose singleItemDose = doseList.get(i);
         Idade singleItemIdade = idadeList.get(i);
@@ -59,6 +59,21 @@ public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRV
         holder.textTituloVacina.setText(singleItemVacina.getVaciNome());
         holder.textTituloDose.setText(singleItemDose.getDoseDescricao());
         holder.textTituloRede.setText(rede + " " + singleItemVacina.getVaciRede());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, VacinaDetalheActivity.class);
+                intent.putExtra(VacinaDetalheActivity.EXTRA_NOME, vacinaList.get(i).getVaciNome());
+                intent.putExtra(VacinaDetalheActivity.EXTRA_REDE, vacinaList.get(i).getVaciRede());
+                intent.putExtra(VacinaDetalheActivity.EXTRA_DESC, vacinaList.get(i).getVaciDescricao());
+                intent.putExtra(VacinaDetalheActivity.EXTRA_ADMIN, vacinaList.get(i).getVaciAdministracao());
+                intent.putExtra("Activity", "Calendário");
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -80,12 +95,14 @@ public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRV
             this.textTituloDose = view.findViewById(R.id.texto_titulo_dose);
             this.textTituloRede = view.findViewById(R.id.texto_titulo_rede);
 
+            /*
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), textTituloVacina.getText(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(v.getContext(), textTituloVacina.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
+            */
 
         }
 
