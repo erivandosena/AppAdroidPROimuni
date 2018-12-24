@@ -1,6 +1,6 @@
 # Sobre o PROJETO do Aplicativo #
 
-O aplicativo VacinasKids é desenvolvido nativamente para uso em dispositivos moveis que utilizem a plataforma Android compatível apenas com o sistema operacional Android versão 4.0.3 (API 15) ou superiores até versão 8.1.0 (API 27).  
+O aplicativo PROIMUNI é desenvolvido nativamente para uso em dispositivos moveis que utilizem a plataforma Android compatível apenas com o sistema operacional Android versão 4.0.3 (API 15) ou superiores até versão 8.1.0 (API 27).  
 
 Projeto seguirá padrões de desenvolvimento de software e metodologias ágeis, durante a fase de preparação do ambiente de desenvolvimento utilizando os recursos da IDE Android Studio versão 3.1.3 instalado em um computador desktop com configuração de hardware contendo processador Intel Core i5, 2.00GHz, 8.0GB de memória RAM e sistema operacional com licença Windows 10 Professional 64Bits com suporte a tecnologia de virtualização Intel Virtualization Technology (VT-x).  
 
@@ -39,7 +39,7 @@ https://pt.wikipedia.org/wiki/Android_Studio
 * Requer autorização obrigatória da câmera e acesso a memória interna, armazenamento externo do dispositivo e de localização(GPS).
 * Banco de dados SQLite com informações criptografadas.
 * Testes não realizados em dispositivos com Android P.
-* Instalação não gerenciada para testes através do endereço: https://goo.gl/MMoyHG
+* Instalação não gerenciada para testes através do endereço: https://goo.gl/aXpXcF
 
 ### Diretrizes de contribuição ###
 
@@ -56,4 +56,3 @@ https://pt.wikipedia.org/wiki/Android_Studio
 	Profª. Nirla, nirlagomes@hotmail.com
 	Prof. John, jhsfelix@gmail.com 
 	Alexandre, cunhacos@gmail.com 
-	Agnaldo, agnaldo.jnr1995@gmail.com
