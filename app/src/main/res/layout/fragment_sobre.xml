@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:text="@string/cont_info"
-                android:autoLink="web"
+                android:autoLink="email"
                 android:textColorLink="@color/textColorGray"
                 style="@style/TextStyle.Paragrafo.Texto" />
 
@@ -134,15 +134,19 @@
                 android:textColorLink="@color/textColorGray"
                 style="@style/TextStyle.Paragrafo.Texto" />
 
-            <!--
             <TextView
-                android:id="@+id/text_sobre_versao_app"
-                style="@android:style/Widget.DeviceDefault.Light.TextView.SpinnerItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autoLink="none"
-                android:padding="10dp" />
-                -->
+                android:text="@string/vers_titulo"
+                style="@style/TextStyle.Titulo.Texto" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="@string/vers_info"
+                android:textColorLink="@color/textColorGray"
+                style="@style/TextStyle.Paragrafo.Texto" />
 
         </LinearLayout>
 

@@ -10,11 +10,11 @@
     <!-- Margens personalizadas do Aplicativo. -->
     <dimen name="app_bar_height">0dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="card_margin">10dp</dimen>
+    <dimen name="card_margin">15dp</dimen>
     <dimen name="card_radius">5dp</dimen>
     <dimen name="card_menu_radius">25dp</dimen>
     <dimen name="card_menu_margin">5dp</dimen>
-    <dimen name="card_menu_wh">110dp</dimen>
+    <dimen name="card_menu_wh">120dp</dimen>
     <dimen name="card_elevation">6dp</dimen>
     <dimen name="card_menu_elevation">5dp</dimen>
     <dimen name="card_menu_padding">5dp</dimen>

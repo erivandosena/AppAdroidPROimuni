@@ -23,13 +23,17 @@ import br.com.erivando.proimuni.mvp.MvpPresenter;
 @PerActivity
 public interface CriancaMvpPresenter<V extends CriancaMvpView> extends MvpPresenter<V> {
 
-    void onCadasrarClick(Long id, String nome, String nascimento, String responsavel, String sexo, Bitmap foto);
+    void onCadastrarClick(Long id, String nome, String nascimento, String sexo, Bitmap foto);
 
     boolean onNovoAtualizaCrianca(Crianca crianca);
 
     List<Crianca> onCriancaCadastrada();
 
     Crianca onCriancaCadastrada(Long id);
+
+    void onRemoveCrianca(Long id);
+
+    boolean onCadastraCartaoCrianca(Long idCrianca);
 
     void selecionarImagem(@ApplicationContext final Context context);
 

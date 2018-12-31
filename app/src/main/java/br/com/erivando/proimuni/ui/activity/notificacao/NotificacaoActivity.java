@@ -145,7 +145,7 @@ public class NotificacaoActivity extends BaseActivity implements NotificacaoMvpV
         collapsingToolbar.setTitle(getResources().getString(R.string.text_configuracoes_titulo));
         */
 
-        textViewTituloToobar.setText(getResources().getString(R.string.text_configuracoes_titulo));
+        textViewTituloToobar.setText(getResources().getString(R.string.menu_config));
 
         getActivityComponent().inject(this);
         presenter.onAttach(this);

@@ -2,6 +2,7 @@ package br.com.erivando.proimuni.ui.activity.cartao;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +27,8 @@ import br.com.erivando.proimuni.ui.adapter.CartaoRVA;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 
 /**
  * Projeto:     VacinasKIDS
@@ -44,14 +49,18 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
     //@BindView(R.id.collapsing_toolbar_cartao_lista)
     //CollapsingToolbarLayout collapsingToolbar;
 
-    @BindView(R.id.fab_cartao_add)
-    FloatingActionButton fabFloatingActionButton;
+
+   //@BindView(R.id.fab_cartao_add)
+   // FloatingActionButton fabFloatingActionButton;
 
     @BindView(R.id.cartao_recyclerView)
     RecyclerView cartao_recycler_view;
 
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
+
+    @BindView(R.id.layout_toobar)
+    LinearLayout linearLayoutToobar;
 
     private List<Cartao> listaCartoes;
 
@@ -96,6 +105,8 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
         CartaoRVA adapter = new CartaoRVA(listaCartoes, CartaoListaActvity.this, intent);
         cartao_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         cartao_recycler_view.setAdapter(adapter);
+
+        resizeCustomizedToobar(linearLayoutToobar);
     }
 
     @OnClick(R.id.btn_nav_voltar)
@@ -103,12 +114,14 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
         onBackPressed();
     }
 
+    /*
     @OnClick(R.id.fab_cartao_add)
     public void onClick(View view) {
-        if (view == fabFloatingActionButton) {
-            openCartaoActivity();
-        }
+        //if (view == fabFloatingActionButton) {
+        //    openCartaoActivity();
+        //}
     }
+    */
 
     @Override
     public void onDestroy() {

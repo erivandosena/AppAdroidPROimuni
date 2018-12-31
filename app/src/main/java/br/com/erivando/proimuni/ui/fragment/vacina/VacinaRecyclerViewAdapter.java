@@ -33,9 +33,6 @@ public class VacinaRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> 
     private List<Vacina> mVacinaValues;
     Context context;
 
-    //@BindView(R.id.card_view_vacina)
-    // CardView cardViewColorVacina;
-
     public VacinaRecyclerViewAdapter(Context context, List<Vacina> items) {
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mBackground = mTypedValue.resourceId;

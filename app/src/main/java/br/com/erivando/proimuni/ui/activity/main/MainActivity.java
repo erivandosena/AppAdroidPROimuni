@@ -21,7 +21,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,23 +86,23 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @BindView(R.id.navigation_view)
     NavigationView navigationView;
 
-    @BindView(R.id.text_versao_app)
-    TextView versaoAppTextView;
+    //@BindView(R.id.text_versao_app)
+    //TextView versaoAppTextView;
 
     @BindView(R.id.btn_cartao)
-    Button cartaoImageButton;
+    ImageButton cartaoImageButton;
 
     //@BindView(R.id.btn_crianca)
     //ImageButton criancaImageButton;
 
     @BindView(R.id.btn_vacina)
-    Button vacinaImageButton;
+    ImageButton vacinaImageButton;
 
     @BindView(R.id.btn_calendario)
-    Button calendarioImageButton;
+    ImageButton calendarioImageButton;
 
     @BindView(R.id.btn_posto)
-    Button postoImageButton;
+    ImageButton postoImageButton;
 
     @BindView(R.id.btn_drawer)
     ImageButton buttonBarDrawerToggle;
@@ -149,7 +148,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         buttonBarDrawerToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!drawer.isDrawerOpen(GravityCompat.START))
+                if (!drawer.isDrawerOpen(GravityCompat.START))
                     drawer.openDrawer(Gravity.START);
                 else
                     drawer.closeDrawer(Gravity.END);
@@ -159,9 +158,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         buttonBarDrawerToggleClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!drawer.isDrawerOpen(Gravity.END))
+                if (!drawer.isDrawerOpen(Gravity.END))
                     drawer.closeDrawer(Gravity.START);
-                 else
+                else
                     drawer.closeDrawer(Gravity.END);
             }
         });
@@ -196,7 +195,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     protected void setUp() {
 
-       // setSupportActionBar(toolbar);
+        // setSupportActionBar(toolbar);
 
         /*
         drawerToggle = new ActionBarDrawerToggle(
@@ -225,8 +224,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         presenter.onNavMenuCreated();
         setupCardContainerView();
 
-       // Intent msgIntent = new Intent(MainActivity.this, Servico.class);
-       // startService(msgIntent);
+        // Intent msgIntent = new Intent(MainActivity.this, Servico.class);
+        // startService(msgIntent);
 
     }
 
@@ -322,20 +321,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                             case R.id.nav_item_crianca:
                                 openCriancaListaActivity("edita");
                                 return true;
-                            /*
-                            case R.id.nav_item_cartao:
-                                openEditaCartaoActivity("edita");
-                                return true;
-                            case R.id.nav_item_vacina:
-                                openVacinaActivity();
-                                return true;
-                            case R.id.nav_item_calendario:
-                                openCalendarioVacinal();
-                                return true;
-                            case R.id.nav_item_posto:
-                                openMapaPostosVacinacao();
-                                return true;
-                            */
                             case R.id.nav_item_backup:
                                 executaBackup();
                                 return true;
@@ -352,7 +337,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                                 presenter.onDrawerRateUsClick();
                                 return true;
                             case R.id.nav_item_curiosidade:
-                                Toast.makeText(AppAplicacao.contextApp, "Ainda não implementado! :(", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AppAplicacao.contextApp, getResources().getString(R.string.menu_curiosidade)+"\n\nAinda não implementado! :(\n", Toast.LENGTH_SHORT).show();
                                 return true;
                             case R.id.nav_item_sobre:
                                 presenter.onDrawerOptionAboutClick();
@@ -387,7 +372,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         Intent shareIntent = ShareCompat.IntentBuilder.from(this)
                 .setType("text/html")
                 .setSubject(getResources().getString(R.string.app_name))
-                .setChooserTitle(getResources().getString(R.string.app_name))
+                .setChooserTitle(getResources().getString(R.string.menu_compartilhar) +" "+ getResources().getString(R.string.app_name))
                 .setText("Olá!\n" + getResources().getString(R.string.app_name) + " " + getResources().getString(R.string.app_mensagem_indicacao) + "\n" + getResources().getString(R.string.app_link_download) + "\n\n♥ " + getResources().getString(R.string.app_slogan))
                 .createChooserIntent()
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -506,8 +491,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void updateAppVersion() {
-        String version = getString(R.string.versao_app) + " " + BuildConfig.VERSION_NAME;
-        versaoAppTextView.setText(version);
+        //String version = getString(R.string.versao_app) + " " + BuildConfig.VERSION_NAME;
+       // versaoAppTextView.setText(version);
     }
 
     @Override
@@ -571,7 +556,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     private void executaBackup() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
         alertDialog.setIcon(R.drawable.ic_launcher_round);
-        alertDialog.setTitle(getResources().getString(R.string.app_name) + " | Copiar");
+        alertDialog.setTitle(getResources().getString(R.string.menu_backup_copia));
         alertDialog.setCancelable(false);
         alertDialog.setMessage("Esta cópia de seguranca substituirá a cópia anterior.\n\nConfirme Sim para continuar ou Não para cancelar.");
         alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
@@ -590,7 +575,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     private void executaRestauracao() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
         alertDialog.setIcon(R.drawable.ic_launcher_round);
-        alertDialog.setTitle(getResources().getString(R.string.app_name) + " | Restaurar");
+        alertDialog.setTitle(getResources().getString(R.string.menu_backup_restaura));
         alertDialog.setCancelable(false);
         alertDialog.setMessage("Esta restauração substituirá seus dados atuais do aplicativo.\n\nConfirme Sim para continuar ou Não para cancelar.");
         alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
@@ -604,10 +589,13 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 try {
-                                    finish();
-                                    System.exit(1);
+                                    presenter.onDrawerOptionLogoutClick();
                                 } catch (Throwable throwable) {
                                     throwable.printStackTrace();
+                                }
+                                finally {
+                                    finish();
+                                    System.exit(1);
                                 }
                             }
                         })

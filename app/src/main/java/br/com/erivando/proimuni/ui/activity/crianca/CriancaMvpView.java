@@ -19,4 +19,7 @@ public interface CriancaMvpView extends MvpView {
     void openCriancaActivity();
 
     void openCriancaListaActivity(String acao);
+
+    void openCartaoListaActivity(String acao);
+
 }

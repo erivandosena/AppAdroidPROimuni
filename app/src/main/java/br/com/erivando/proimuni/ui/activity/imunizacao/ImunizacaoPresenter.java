@@ -3,6 +3,8 @@ package br.com.erivando.proimuni.ui.activity.imunizacao;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.erivando.proimuni.database.IDataManager;
@@ -90,7 +92,6 @@ public class ImunizacaoPresenter<V extends ImunizacaoMvpView> extends BasePresen
                         public void onClick(DialogInterface dialog, int which) {
                             try {
                                 getMvpView().openCartaoDetalheActivity(idCartao);
-
                             } catch (Throwable throwable) {
                                 throwable.printStackTrace();
                             }
@@ -110,6 +111,16 @@ public class ImunizacaoPresenter<V extends ImunizacaoMvpView> extends BasePresen
     @Override
     public boolean onNovoAtualizaImunizacao(Imunizacao imunizacao) {
         return getIDataManager().novoAtualizaImunizacao(imunizacao);
+    }
+
+    @Override
+    public boolean onRemoveImunizacao(Long id) {
+        return getIDataManager().eliminaImunizacao(id);
+    }
+
+    @Override
+    public List<Imunizacao> onImunizacoesCartaoCrianca(String[] campo, Long[] id) {
+        return getIDataManager().obtemImunizacoes(campo, id);
     }
 
     @Override

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -26,6 +27,8 @@ import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoDetalheActivity;
+import br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity;
+import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaMvpView;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
@@ -33,6 +36,8 @@ import br.com.erivando.proimuni.util.HeaderView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 
 /**
  * Projeto:     VacinasKIDS
@@ -44,22 +49,28 @@ import butterknife.OnClick;
 
 public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpView {
 
-    @BindView(R.id.text_nome_agente)
-    public TextView mTextAgente;
-    @BindView(R.id.text_nome_unidade)
-    public TextView mTextUnidade;
-    @BindView(R.id.text_lote_vacina)
-    public TextView mTextLote;
-    @BindView(R.id.text_data_imunizacao)
-    public TextView mTextData;
-    @BindView(R.id.btn_registra_imunizacao)
-    public Button mRegistrar;
-    //@BindView(R.id.text_imunizacao_vacina_descricao)
-    //public TextView mTexVacinaDescricao;
     @Inject
     ImunizacaoMvpPresenter<ImunizacaoMvpView> presenter;
     @Inject
     VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
+
+    @BindView(R.id.text_nome_agente)
+    public TextView mTextAgente;
+
+    @BindView(R.id.text_nome_unidade)
+    public TextView mTextUnidade;
+
+    @BindView(R.id.text_lote_vacina)
+    public TextView mTextLote;
+
+    @BindView(R.id.text_data_imunizacao)
+    public TextView mTextData;
+
+    @BindView(R.id.btn_registra_imunizacao)
+    public Button mRegistrar;
+
+    //@BindView(R.id.text_imunizacao_vacina_descricao)
+    //public TextView mTexVacinaDescricao;
 
    // @BindView(R.id.toolbar)
    // Toolbar toolbar;
@@ -74,6 +85,9 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
 
    // @BindView(R.id.float_header_view)
     //HeaderView floatHeaderView;
+
+    @BindView(R.id.layout_toobar)
+    LinearLayout linearLayoutToobar;
 
     Intent intent;
 
@@ -148,11 +162,16 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
             idIdade = intent.getLongExtra("idade", 0L);
             idCartao = intent.getLongExtra("cartao", 0L);
 
+            Vacina vacina = vacinaPresenter.onVacinaCadastrada(idVacina);
+            //floatHeaderView.bindTo(null, vacina.getVaciNome());
+            //mTexVacinaDescricao.setText(vacina.getVaciDescricao());
+            textViewTituloToobar.setText(vacina.getVaciNome());
+
             if (presenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{idVacina, idDose, idCartao}) != null) {
                 new AlertDialog.Builder(this)
                         .setIcon(R.drawable.ic_launcher_round)
-                        .setTitle(AppAplicacao.contextApp.getResources().getString(R.string.app_name))
-                        .setMessage("\nImunização já foi registrada!")
+                        .setTitle(textViewTituloToobar.getText().toString())
+                        .setMessage("\nImunização já registrada!\n")
                         .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -167,11 +186,9 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
                         .show();
             }
 
-            Vacina vacina = vacinaPresenter.onVacinaCadastrada(idVacina);
-            //floatHeaderView.bindTo(null, vacina.getVaciNome());
-            //mTexVacinaDescricao.setText(vacina.getVaciDescricao());
-            textViewTituloToobar.setText(vacina.getVaciNome());
         }
+
+        resizeCustomizedToobar(linearLayoutToobar);
     }
 
     @OnClick(R.id.btn_nav_voltar)
@@ -200,6 +217,14 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
     public void openCartaoDetalheActivity(Long idLong) {
         Intent intent = CartaoDetalheActivity.getStartIntent(this);
         intent.putExtra("cartao", idLong);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void openCartaoListaActivity(String acao) {
+        Intent intent = CartaoListaActvity.getStartIntent(ImunizacaoActivity.this);
+        intent.putExtra("cartaoLista", acao);
         startActivity(intent);
         finish();
     }

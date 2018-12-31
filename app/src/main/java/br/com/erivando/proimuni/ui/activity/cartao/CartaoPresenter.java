@@ -28,7 +28,7 @@ public class CartaoPresenter<V extends CartaoMvpView> extends BasePresenter<V> i
     }
 
     @Override
-    public void onCadasrarClick(Long id, Long idCrianca) {
+    public void onCadastrarClick(Long id, Long idCrianca) {
         getMvpView().showLoading();
         Crianca crianca = getIDataManager().obtemCrianca(idCrianca);
         if (crianca == null) {

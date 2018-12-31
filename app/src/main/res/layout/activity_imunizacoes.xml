@@ -35,37 +35,56 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|bottom"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginBottom="10dp"
             android:orientation="vertical"
-            android:paddingBottom="20dp">
+            android:padding="10dp">
 
-            <TextView
-                style="@style/TextStyle.TextView.Label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_crianca" />
-
-            <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/crianca"
-                style="@style/TextStyle.Spinner.DropDown"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:spinnerMode="dropdown" />
+                android:orientation="horizontal"
+                android:layout_marginBottom="3dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/round_border_listview">
 
-            <Button
-                android:id="@+id/btn_cadadastar_cartao"
+                <TextView
+                    style="@style/TextStyle.Titulo.Texto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:text="@string/text_vacina" />
+
+                <TextView
+                    style="@style/TextStyle.Titulo.Texto"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/text_dose" />
+
+                <TextView
+                    style="@style/TextStyle.Titulo.Texto"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="@string/text_data_imunizacao"
+                    android:textAlignment="textStart" />
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/lista_imunizacoes"
                 android:layout_width="match_parent"
-                style="@style/Button.Padrao"
-                android:text="@string/btn_salvar" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_border_listview"
+                android:scrollbars="none" />
 
         </LinearLayout>
 

@@ -1,5 +1,7 @@
 package br.com.erivando.proimuni.ui.activity.imunizacao;
 
+import java.util.List;
+
 import br.com.erivando.proimuni.database.model.Imunizacao;
 import br.com.erivando.proimuni.di.PerActivity;
 import br.com.erivando.proimuni.mvp.MvpPresenter;
@@ -17,6 +19,10 @@ public interface ImunizacaoMvpPresenter<V extends ImunizacaoMvpView> extends Mvp
     void onCadasrarClick(Long id, String imunData, String imunAgente, String imunPosto, String imunLote, Long idVacina, Long idDose, Long idIdade, Long idCartao);
 
     boolean onNovoAtualizaImunizacao(Imunizacao imunizacao);
+
+    boolean onRemoveImunizacao(Long id);
+
+    List<Imunizacao> onImunizacoesCartaoCrianca(String[] campo, Long[] id);
 
     Imunizacao onImunizacaoCadastrada(String[] strings, Long[] longs);
 

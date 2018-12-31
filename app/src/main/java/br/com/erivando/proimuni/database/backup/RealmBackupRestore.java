@@ -2,6 +2,7 @@ package br.com.erivando.proimuni.database.backup;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -13,7 +14,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
+import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.RealmDataBase;
+import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import io.realm.Realm;
 import io.realm.internal.IOException;
 
@@ -28,74 +31,104 @@ import io.realm.internal.IOException;
 public class RealmBackupRestore {
 
     private final static String TAG = RealmBackupRestore.class.getName();
+    Context context = AppAplicacao.contextApp;
     // Permissões de armazenamento
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+
     };
-    private File EXPORT_REALM_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-    private String EXPORT_REALM_FILE_NAME = "vacinaskids.realm";
-    private String IMPORT_REALM_FILE_NAME = "default.realm"; // Eventualmente, substitua isso se estiver usando um nome de banco de dados personalizado
-    private Activity activity;
+    private File EXPORT_REALM_EXTERNAL_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+    private File EXPORT_REALM_INTERNAL_PATH = new File(context.getFilesDir() + File.separator + Environment.DIRECTORY_DOWNLOADS);
+    private String EXPORT_REALM_FILE_NAME = context.getResources().getString(R.string.app_name) + ".realm";
+    private String IMPORT_REALM_FILE_NAME = "default.realm"; // Substituir se estiver usando um nome de banco de dados personalizado
+    //private Activity activity;
     private Realm realm;
 
-    public RealmBackupRestore(Activity activity) {
-        this.realm = new RealmDataBase(activity.getApplicationContext()).getRealmInstance();
-        this.activity = activity;
+    public RealmBackupRestore(Context context) {
+        this.realm = new RealmDataBase(context.getApplicationContext()).getRealmInstance();
+        this.context = context;
+    }
+
+    public boolean isExternalStorage() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
     }
 
     public void backup() {
         //Primeiro, verifique se temos permissões de armazenamento
-        if (checkStoragePermissions(activity) == 0) {
-            File exportRealmFile;
+        if (checkStoragePermissions() == 0) {
+            File exportRealmFile = null;
             try {
-                Log.d(TAG, "Realm DB Path = " + this.dbPath());
-
+                //Log.d(TAG, "Realm DB Path = " + this.dbPath());
                 try {
-                    EXPORT_REALM_PATH.mkdirs();
-
                     //criar um arquivo de menu_backup_copia
-                    exportRealmFile = new File(EXPORT_REALM_PATH, EXPORT_REALM_FILE_NAME);
+                    if (isExternalStorage()) {
+                        EXPORT_REALM_EXTERNAL_PATH.mkdirs();
+                        exportRealmFile = new File(EXPORT_REALM_EXTERNAL_PATH, EXPORT_REALM_FILE_NAME);
+                        //Log.e("EXTERNAL_PATH ", String.valueOf(EXPORT_REALM_EXTERNAL_PATH));
+                    } else {
+                        EXPORT_REALM_INTERNAL_PATH.mkdirs();
+                        exportRealmFile = new File(EXPORT_REALM_INTERNAL_PATH, EXPORT_REALM_FILE_NAME);
+                        //Log.e("INTERNAL_PATH ", String.valueOf(EXPORT_REALM_INTERNAL_PATH));
+                    }
 
-                    //se o arquivo de menu_backup_copia já existir, exclua-o
-                    exportRealmFile.delete();
+                   // Log.e("exportRealmFile: ", String.valueOf(exportRealmFile.getAbsoluteFile()));
+
+                    //se o arquivo já existir, exclua-o
+                    if (exportRealmFile.exists())
+                        exportRealmFile.delete();
 
                     // copiar o Realm atual para o arquivo de menu_backup_copia
                     realm.writeCopyTo(exportRealmFile);
+                    Toast.makeText(context, "Cópia dos dados concluída!\nDisponível em Downloads", Toast.LENGTH_LONG).show();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                String msg = "Arquivo exportado para o local: " + EXPORT_REALM_PATH + "/" + EXPORT_REALM_FILE_NAME;
-                Toast.makeText(activity.getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-                Log.d(TAG, msg);
+                //String msg = "Arquivo exportado para o local: " + EXPORT_REALM_PATH + "/" + EXPORT_REALM_FILE_NAME;
+                //Log.d(TAG, msg);
             } finally {
                 realm.close();
             }
         } else {
-            Toast.makeText(activity.getApplicationContext(), "Necessário conceder permissões.", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Necessário conceder permissões.", Toast.LENGTH_LONG).show();
         }
     }
 
     public void restore() {
-        if (checkStoragePermissions(activity) == 0) {
+        if (checkStoragePermissions() == 0) {
+
+            String restoreFilePath = null;
+
             //Restaura
-            String restoreFilePath = EXPORT_REALM_PATH + "/" + EXPORT_REALM_FILE_NAME;
+            if (isExternalStorage()) {
+                restoreFilePath = EXPORT_REALM_EXTERNAL_PATH + File.separator + EXPORT_REALM_FILE_NAME;
+                //Log.e("EXTERNAL_PATH ", String.valueOf(EXPORT_REALM_EXTERNAL_PATH));
+            } else {
+                restoreFilePath = EXPORT_REALM_INTERNAL_PATH + File.separator + EXPORT_REALM_FILE_NAME;
+                //Log.e("INTERNAL_PATH ", String.valueOf(EXPORT_REALM_INTERNAL_PATH));
+            }
 
-            Log.d(TAG, "oldFilePath = " + restoreFilePath);
+            //Log.e(TAG, "oldFilePath = " + restoreFilePath);
 
-            copyBundledRealmFile(restoreFilePath, IMPORT_REALM_FILE_NAME);
-            Toast.makeText(activity.getApplicationContext(), "Finalizando restauração...", Toast.LENGTH_LONG).show();
-            Log.d(TAG, "A restauração de dados foi concluída!");
+            if (new File(restoreFilePath).exists()) {
+                copyBundledRealmFile(restoreFilePath, IMPORT_REALM_FILE_NAME);
+                Toast.makeText(context, "Finalizando restauração...", Toast.LENGTH_LONG).show();
+            }
+
         } else {
-            Toast.makeText(activity.getApplicationContext(), "Necessário conceder permissões.", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Necessário conceder permissões.", Toast.LENGTH_LONG).show();
         }
     }
 
     private String copyBundledRealmFile(String oldFilePath, String outFileName) {
         try {
-            File file = new File(activity.getApplicationContext().getFilesDir(), outFileName);
+            File file = new File(context.getFilesDir(), outFileName);
 
             FileOutputStream outputStream = new FileOutputStream(file);
 
@@ -118,12 +151,12 @@ public class RealmBackupRestore {
         return null;
     }
 
-    private int checkStoragePermissions(Activity activity) {
+    private int checkStoragePermissions() {
         // Verifique se temos permissão de gravação
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permission = ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+            ActivityCompat.requestPermissions((Activity) context, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
         }
         return permission;
     }

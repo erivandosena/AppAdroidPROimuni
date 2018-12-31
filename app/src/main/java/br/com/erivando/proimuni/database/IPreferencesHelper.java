@@ -22,6 +22,10 @@ public interface IPreferencesHelper {
 
     void setCurrentUserName(String userName);
 
+    String getCurrentUserLogin();
+
+    void setCurrentUserLogin(String userLogin);
+
     String getCurrentUserEmail();
 
     void setCurrentUserEmail(String email);

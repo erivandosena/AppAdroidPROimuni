@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +14,10 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
@@ -24,11 +25,12 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardview_cartao"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/card_margin"
-        card_view:cardBackgroundColor="@color/colorGreen"
+        android:backgroundTint="@color/colorGreen"
         card_view:cardCornerRadius="@dimen/card_menu_radius"
         card_view:cardElevation="@dimen/card_menu_elevation"
         card_view:cardMaxElevation="@dimen/card_menu_elevation"
@@ -48,22 +50,22 @@
                 android:layout_height="60dp"
                 android:background="@color/colorTransparent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_launcher_round"/>
+                app:srcCompat="@drawable/ic_launcher_round" />
 
             <TextView
                 android:id="@+id/text_titulo_cartao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="8dp"
                 android:layout_toEndOf="@id/image_cartao"
+                android:layout_toRightOf="@id/image_cartao"
                 android:paddingStart="5dp"
                 android:paddingLeft="5dp"
-                android:layout_toRightOf="@id/image_cartao"
-                android:textColor="@color/colorWhite"
-                android:layout_alignParentRight="true"
                 android:text="@null"
-                android:theme="@style/TextStyle.TituloMedio.Lista"/>
+                android:textColor="@color/colorWhite"
+                android:theme="@style/TextStyle.TituloMedio.Lista" />
 
             <TextView
                 android:id="@+id/text_sub_titulo_cartao"
@@ -71,16 +73,17 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_titulo_cartao"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/image_cartao"
-                android:paddingStart="5dp"
                 android:layout_alignParentRight="true"
+                android:layout_toEndOf="@id/image_cartao"
                 android:layout_toRightOf="@id/image_cartao"
-                android:textColor="@color/colorWhite"
+                android:paddingStart="5dp"
                 android:paddingLeft="5dp"
                 android:text="@null"
-                android:theme="@style/TextStyle.SubTitulo.Lista"/>
+                android:textColor="@color/colorWhite"
+                android:theme="@style/TextStyle.SubTitulo.Lista" />
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 
 </LinearLayout>
+

@@ -6,7 +6,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,7 +17,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
+import android.support.v4.app.TaskStackBuilder;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -136,7 +135,6 @@ public class Servico extends Service {
         return START_STICKY;
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -172,7 +170,7 @@ public class Servico extends Service {
         doses = new ArrayList<Dose>();
         idades = new ArrayList<Idade>();
 
-        if (usuario != null && !criancas.isEmpty() && !cartoes.isEmpty()) {
+        if (!criancas.isEmpty() || !cartoes.isEmpty()) {
             for (Idade idade : listaIdade) {
                 for (Calendario calendarioItem : calendarios) {
                     if (calendarioItem.getIdade().getId() == idade.getId()) {
@@ -191,9 +189,9 @@ public class Servico extends Service {
 
             // notificação inicial geral
             if (imunizacoes.isEmpty()) {
-                String nomeUsuario = usuario != null ? usuario.getUsuaNome() : "Olá";
+                String nomeUsuario = usuario != null ? "Olá "+usuario.getUsuaNome() : "Olá";
                 repeatedNotificationInicial = showLocalNotification(context, CartaoDetalheActivity.class,
-                        "Olá " + nomeUsuario + ", é importante que você cadastre sua(s) criança(s) para usufruir dos benefícios do "+getResources().getString(R.string.app_name)+". Vamos lá! Inicie o preenchimento do cartão vacinal!",
+                        nomeUsuario + ", é importante que você cadastre sua(s) criança(s) para usufruir dos benefícios do "+getResources().getString(R.string.app_name)+". Vamos lá! Inicie o preenchimento do cartão vacinal!",
                         "Cadastre um Cartão Vacinal",
                         "Lembrete",
                         "Preencha no cartão as vacinas realizadas.",
@@ -305,7 +303,7 @@ public class Servico extends Service {
                         }
                     }
                 } else {
-                    Log.e("IMUNIZADO..........> ", calendario.getVacina().getVaciNome() + " (" + calendario.getDose().getDoseDescricao() + ")");
+                    //Log.e("IMUNIZADO..........> ", calendario.getVacina().getVaciNome() + " (" + calendario.getDose().getDoseDescricao() + ")");
                 }
                 listaVacina.clear();
            // } else {
@@ -315,7 +313,6 @@ public class Servico extends Service {
 
     private List<Imunizacao> verificaImunizacoes(Vacina vacina, Dose dose, Cartao cartao) {
         List<Imunizacao> imunizacoes = iDataManager.obtemImunizacoes(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{vacina.getId(), dose.getId(), cartao.getId()});
-        Log.e("RESULTADO: ", String.valueOf(imunizacoes));
         return imunizacoes;
     }
 
@@ -386,7 +383,7 @@ public class Servico extends Service {
         listaMsgAgrupada.add(textBig);
         Collections.sort(listaMsgAgrupada, Collections.reverseOrder());
 
-        Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_cartao);
+        Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_dose);
         List<String> textoLongo = new ArrayList<String>();
 
         NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
@@ -418,7 +415,7 @@ public class Servico extends Service {
         notificationCompactBuild.setContentTitle(context.getString(R.string.app_name));
         notificationCompactBuild.setContentText(contentText);
         notificationCompactBuild.setTicker(contentText);
-        notificationCompactBuild.setSmallIcon(R.drawable.ic_vacina);
+        notificationCompactBuild.setSmallIcon(R.drawable.ic_notificacao);
         notificationCompactBuild.setLargeIcon(largeIcon);
         notificationCompactBuild.setAutoCancel(true);
         notificationCompactBuild.setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 500, 800});

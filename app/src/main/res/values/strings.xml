@@ -14,7 +14,6 @@
     <string name="app_link_download">https://goo.gl/aXpXcF</string>
     <string name="legenda_action_snackbar">Substitua por sua própria ação</string>
     <string name="button_action_snackbar">Ação</string>
-    <string name="versao_app">Versão</string>
 
     <!-- Menus Drawer -->
     <string name="open_drawer">Abre gaveta</string>
@@ -31,9 +30,8 @@
     <string name="menu_backup_copia">Salvar dados</string>
     <string name="menu_backup_restaura">Recuperar dados</string>
     <string name="menu_config">Configurações</string>
-    <string name="menu_compartilhar">Compartilhar App</string>
-    <string name="menu_avaliacao">Avaliar App</string>
-    <string name="menu_sobre">Sobre o App</string>
+    <string name="menu_compartilhar">Compartilhar</string>
+    <string name="menu_avaliacao">Avaliar</string>
     <string name="menu_logout">Sair</string>
 
     <!-- Menus Toolbar. -->
@@ -62,11 +60,12 @@
     <string name="text_usuario_login">Usuário</string>
     <string name="hint_usuario_login">Informe um nome</string>
     <string name="text_usuario_email">E-mail</string>
-    <string name="hint_usuario_email">Informe o E-mail</string>
+    <string name="hint_usuario_email">Informe o e-mail</string>
     <string name="hint_cad_usuario_senha">Informe a senha</string>
     <string name="text_usuario_repete_senha">Repete senha</string>
     <string name="hint_text_usuario_repete_senha">Confirme a senha</string>
     <string name="btn_salvar">Salvar</string>
+    <string name="btn_remover">Remover</string>
     <string name="btn_voltar">Voltar</string>
     <string name="text_valida_cadastro">Não foi possível salvar!</string>
     <string name="text_cadastro_sucesso">Salvo com sucesso!</string>
@@ -101,13 +100,14 @@
     <string name="api_retry_error"> Por favor, tente novamente!</string>
     <string name="api_default_error">Algo errado aconteceu!</string>
     <string name="connection_error">Conexão com a Internet perdida!</string>
+    <string name="texto_erro_excluir">Não foi possível remover!</string>
 
     <!--App perfil. -->
     <string name="perfil_nome" />
     <string name="perfil_email" />
 
     <!-- Sobre. -->
-    <string name="text_sobre_titulo">Sobre o Aplicativo</string>
+    <string name="text_sobre_titulo">Sobre</string>
     <string name="proj_titulo">Projeto</string>
     <string name="proj_info">O PROIMUNI é produto da dissertação de mestrado do Programa de Pós-graduação em Enfermagem da Universidade Federal do Ceará. \nO objetivo do app é o gerenciamento de vacinas infantis oferecidas na rede pública e privada. \nO app permite gerenciar mais de um cartão, incluir fotos de perfil, registrar as doses das vacinas, receber notificações com lembretes das datas e doses,  ter acesso a informações detalhadas de cada vacina, exportar a carteira de vacinação para PDF e compartilhar seus registros. \nO PROIMUNI disponibiza a função de geolocalizacao para pesquisa de unidades de saúde que ofereçam o serviço de vacinação. \nMatenha seu calendário vacinal em dia. Comece a usufruir do PROIMUNI!</string>
     <string name="tecn_titulo">Tecnologia</string>
@@ -115,15 +115,9 @@
     <string name="cont_titulo">Contato</string>
     <string name="cont_info">proimuni@gmail.com</string>
     <string name="auto_titulo">Desenvolvedor</string>
-    <string name="auto_info">Erivando Sena | erivandoramos@bol.com.br</string>
-    <!--
-    <string name="repo_titulo">Repositório</string>
-    <string name="repo_info">https://bitbucket.org/erivandoramos/vacinaskids/src/</string>
-    -->
-    <!--
-    <string name="envo_titulo">Participantes</string>
-    <string name="envo_info">thaispaula73@gmail.com \ncunhacos@gmail.com \nnirlagomesg@gmail.com \njhsfelix@gmail.com</string>
-    -->
+    <string name="auto_info">Erivando Sena \nerivandoramos@bol.com.br</string>
+    <string name="vers_titulo">Versão</string>
+    <string name="vers_info">1.0.0</string>
 
     <!--  facebook Login. -->
     <string name="facebook_app_id">1858097654229517</string>
@@ -168,9 +162,15 @@
     <string name="texto_aviso_crianca_nao_cadastrada">É necessário cadastrar uma crianca!</string>
     <string name="texto_aviso_cartao_nao_cadastrado">É necessário cadastrar um cartão!</string>
     <string name="texto_aviso_crianca_cartao_cadastrada">Criança já possui cartão!</string>
-    <string name="text_lista_crianca_titulo">Selecione a Criança</string>
-    <string name="text_lista_cartao_titulo">Selecione o Cartão</string>
+    <string name="text_lista_crianca_titulo">Selecione a criança</string>
+    <string name="text_lista_cartao_titulo">Selecione o cartão</string>
     <string name="text_lista_calendario_titulo">Calendário Vacinal</string>
+    <string name="texto_aviso_remove_crianca">\nCriança removida!\n</string>
+
+    <!-- Cadastro Cartão -->
+    <string name="texto_aviso_cadastra_cartao">\nGerando o cartão da criança....\n</string>
+    <string name="texto_aviso_atualiza_cartao">\nAtualizando dados no cartão....\n</string>
+    <string name="texto_aviso_removendo_cartao">\nRemovendo cartão da crianca...\n</string>
 
     <!-- Tabs -->
     <string name="title_tab1">Rede Pública</string>
@@ -189,15 +189,20 @@
     <string name="text_data_imunizacao">Data</string>
     <string name="hint_data_imunizacao">Informe data da imunização</string>
     <string name="text_imunizacao_titulo">Imunização</string>
+    <string name="text_imunizacoes_titulo">Imunizações</string>
     <string name="btn_imunizar">Imunizar</string>
+    <string name="texto_aviso_removendo_imunizacao">\nRemovendo imunizações do cartão...\n</string>
+    <string name="texto_aviso_remove_imunizacao">\nRemovendo imunização...\n</string>
+    <string name="text_dose">Dose</string>
+    <string name="text_titulo_remove_imunizacao">Remover imunização</string>
 
     <!-- MapaActivity -->
     <string name="error_location_provider">Erro de localização</string>
-    <string name="text_mapa_titulo">Localizar postos de saúde</string>
+    <string name="text_mapa_titulo">Postos</string>
     <string name="text_pesuisa_mapa">Faça uma pesquisa</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">"Mapa "</string>
-    <string name="hint_localizar_postos">Bairro</string>
+    <string name="hint_localizar_postos">Informe o bairro</string>
     <string name="erro_text_pesquisa_posto">Informe um bairro</string>
     <string name="title_vacinaskids_dynamic_feature">Módulo Vacinas Kids</string>
     <string name="title_dynamic_feature2">Module Title</string>
@@ -206,7 +211,6 @@
 
     <string name="btn_ativa_notificacao">Ativa Notificações</string>
     <string name="btn_desativa_notificacao">Desativa Notificações</string>
-    <string name="text_configuracoes_titulo">Configurações do Aplicativo</string>
 
     <!-- PDF -->
     <string name="gera_pdf">"Montando seu Cartão Vacinal em PDF, aguarde...</string>

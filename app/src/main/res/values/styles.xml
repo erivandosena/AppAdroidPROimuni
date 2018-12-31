@@ -23,7 +23,7 @@
         <item name="android:typeface">normal</item>
         <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_seta_voltar</item>
-        <!-- <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>  -->
+         <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>  -->
         <item name="android:windowDisablePreview">true</item>
 
     </style>
@@ -126,7 +126,8 @@
         <item name="android:padding">5dp</item>
         <item name="android:cursorVisible">true</item>
         <item name="android:layout_marginBottom">10dp</item>
-        <item name="android:background">@drawable/round_border_text_input</item>
+        <item name="android:drawablePadding">20dp</item>
+        <item name="android:background">@drawable/round_border_spinner_dropdown</item>
         <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
     </style>
 
@@ -134,15 +135,34 @@
         <item name="android:layout_height">36dp</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
-        <item name="android:paddingLeft">20dp</item>
-        <item name="android:paddingRight">10dp</item>
+        <item name="android:layout_marginLeft">7dp</item>
+        <item name="android:layout_marginRight">7dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
         <item name="android:background">@drawable/botao_padrao</item>
         <item name="android:foreground">?selectableItemBackground</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:drawableTint" tools:targetApi="m">@color/colorWhite</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
+    </style>
+
+    <style name="Button.Menu" parent="Widget.AppCompat.Button">
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:background">@color/colorTransparent</item>
+        <item name="android:contentDescription">@null</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:tint">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="TextStyle.Menu" parent="TextStyle">
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/colorTransparent</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
     </style>
 

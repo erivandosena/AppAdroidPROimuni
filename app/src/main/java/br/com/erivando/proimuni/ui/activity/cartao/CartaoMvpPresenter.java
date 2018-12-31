@@ -18,7 +18,7 @@ import br.com.erivando.proimuni.mvp.MvpPresenter;
 @PerActivity
 public interface CartaoMvpPresenter<V extends CartaoMvpView> extends MvpPresenter<V> {
 
-    void onCadasrarClick(Long id, Long idCrianca);
+    void onCadastrarClick(Long id, Long idCrianca);
 
     boolean onNovoAtualizaCartao(Cartao cartao);
 

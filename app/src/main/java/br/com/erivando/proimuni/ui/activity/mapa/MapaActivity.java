@@ -66,6 +66,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
+
 /**
  * Projeto:     VacinasKIDS
  * Autor:       Erivando Sena
@@ -107,6 +109,9 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
 
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
+
+    @BindView(R.id.layout_toobar)
+    LinearLayout linearLayoutToobar;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, MapaActivity.class);
@@ -213,11 +218,13 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
             googlePlacesReadTask.execute(toPass);
             //Log.i("LINK ", toPass[1].toString());
         }
+
+        setUp();
     }
 
     @Override
     protected void setUp() {
-
+        resizeCustomizedToobar(linearLayoutToobar);
     }
 
     @Override

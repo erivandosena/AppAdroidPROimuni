@@ -1,8 +1,12 @@
 package br.com.erivando.proimuni.util;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
+import android.os.Build;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -25,6 +29,43 @@ public final class NetworkUtils {
         // This utility class is not publicly instantiable
     }
 
+    public static boolean isWifiConnected(@NonNull Context context) {
+        return isConnected(context, ConnectivityManager.TYPE_WIFI);
+    }
+
+    public static boolean isMobileConnected(@NonNull Context context) {
+        return isConnected(context, ConnectivityManager.TYPE_MOBILE);
+    }
+
+    public static boolean isConnected(@NonNull Context context) {
+        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
+    }
+
+    private static boolean isConnected(@NonNull Context context, int type) {
+        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            NetworkInfo networkInfo = connMgr.getNetworkInfo(type);
+            return networkInfo != null && networkInfo.isConnected();
+        } else {
+            return isConnected(connMgr, type);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private static boolean isConnected(@NonNull ConnectivityManager connMgr, int type) {
+        Network[] networks = connMgr.getAllNetworks();
+        NetworkInfo networkInfo;
+        for (Network mNetwork : networks) {
+            networkInfo = connMgr.getNetworkInfo(mNetwork);
+            if (networkInfo != null && networkInfo.getType() == type && networkInfo.isConnected()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean isNetworkConnected(Context context) {
         /*
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -34,7 +75,6 @@ public final class NetworkUtils {
             Toast.makeText(context, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
         return isConnected;
         */
-
 
         /*
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -46,31 +86,39 @@ public final class NetworkUtils {
         }
         return true;
         */
-
-
+        boolean status = false;
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
         if (connectivity != null) {
             NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null)
-                for (int i = 0; i < info.length; i++)
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                        try {
-                            HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com.br").openConnection());
-                            urlc.setRequestProperty("User-Agent", "Test");
-                            urlc.setRequestProperty("Connection", "close");
-                            urlc.setConnectTimeout(500); //choose your own timeframe
-                            urlc.setReadTimeout(500); //choose your own timeframe
-                            urlc.connect();
-                            return (urlc.getResponseCode() == 200);
-                        } catch (IOException e) {
-                            Toast.makeText(context, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
-                            return false;  //connectivity exists, but no internet.
+            if (info != null) {
+                /*
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                    for (int i = 0; i < info.length; i++)
+                        if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                            try {
+                                HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com.br").openConnection());
+                                urlc.setRequestProperty("User-Agent", "Test");
+                                urlc.setRequestProperty("Connection", "close");
+                                urlc.setConnectTimeout(350);
+                                urlc.setReadTimeout(350);
+                                urlc.connect();
+                                status = (urlc.getResponseCode() == 200);
+                            } catch (Exception e) {
+                                Toast.makeText(context, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
+                                return false;
+                            }
                         }
-                    }
-
+                } else {
+                */
+                    NetworkInfo networkInfoMobile = connectivity.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+                    NetworkInfo networkInfoWifi = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                    status = (info != null && networkInfoMobile.isConnected()) || (info != null && networkInfoWifi.isConnected());
+                }
         }
-        Toast.makeText(context, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
-        return false;
+        if (!status)
+            Toast.makeText(context, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
+        return status;
     }
 
 }

@@ -23,7 +23,9 @@ import javax.inject.Inject;
 import br.com.erivando.proimuni.BuildConfig;
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.IDataManager;
+import br.com.erivando.proimuni.database.model.Cartao;
 import br.com.erivando.proimuni.database.model.Crianca;
+import br.com.erivando.proimuni.database.model.Imunizacao;
 import br.com.erivando.proimuni.database.model.Usuario;
 import br.com.erivando.proimuni.mvp.base.BasePresenter;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
@@ -58,7 +60,7 @@ public class CriancaPresenter<V extends CriancaMvpView> extends BasePresenter<V>
     }
 
     @Override
-    public void onCadasrarClick(Long id, String nome, String nascimento, String responsavel, String sexo, Bitmap foto) {
+    public void onCadastrarClick(Long id, String nome, String nascimento, String sexo, Bitmap foto) {
         if ((nome == null) || (nome.isEmpty()) || !nome.matches("^[a-zA-Za-zà-ú]+ [a-zA-ZA-ZÀ-Ú]+.*")) {
             getMvpView().onError(R.string.erro_text_nome_completo);
             return;
@@ -76,7 +78,8 @@ public class CriancaPresenter<V extends CriancaMvpView> extends BasePresenter<V>
 
         getMvpView().showLoading();
         nome = getCapitalizeNome(nome.trim());
-        Usuario usuario = getIDataManager().obtemUsuario(getIDataManager().obtemUsuario().getId());
+       // Usuario usuario = getIDataManager().obtemUsuario(getIDataManager().obtemUsuario().getId());
+        Usuario usuario = getIDataManager().obtemUsuario();
 
         Crianca crianca = new Crianca();
         crianca.setId((id == 0L) ? (long) getIDataManager().getCriancaID().incrementAndGet() : id);
@@ -88,7 +91,8 @@ public class CriancaPresenter<V extends CriancaMvpView> extends BasePresenter<V>
 
         try {
             if (onNovoAtualizaCrianca(crianca)) {
-                getMvpView().showMessage(R.string.text_cadastro_sucesso);
+                if(onCadastraCartaoCrianca(crianca.getId()))
+                    getMvpView().showMessage(R.string.text_cadastro_sucesso);
             } else {
                 getMvpView().showMessage(R.string.text_valida_cadastro);
                 return;
@@ -96,7 +100,13 @@ public class CriancaPresenter<V extends CriancaMvpView> extends BasePresenter<V>
             if (!isViewAttached()) {
                 return;
             }
-            getMvpView().openCriancaListaActivity("edita");
+
+            if(id == 0L)
+                getMvpView().openCartaoListaActivity("cartao");
+            else {
+                getMvpView().openCriancaListaActivity("edita");
+            }
+
         } catch (Exception ex) {
             getMvpView().onError(ex.getMessage());
             getMvpView().onError(R.string.erro_text_cadastro);
@@ -118,6 +128,51 @@ public class CriancaPresenter<V extends CriancaMvpView> extends BasePresenter<V>
     @Override
     public Crianca onCriancaCadastrada(Long id) {
         return getIDataManager().obtemCrianca(id);
+    }
+
+    @Override
+    public void onRemoveCrianca(Long id) {
+        Cartao cartao = getIDataManager().obtemCartaoPorCrianca(id);
+        Long idCartao = cartao.getId();
+        Imunizacao imunizacao = getIDataManager().obtemImunizacaoPorCartao(idCartao);
+        if (getIDataManager().eliminaCrianca(id)) {
+            if(imunizacao != null && imunizacao.getId() != null)
+                if (getIDataManager().eliminaImunizacaoPorCartao(idCartao))
+                    Toast.makeText(AppAplicacao.contextApp, AppAplicacao.contextApp.getString(R.string.texto_aviso_removendo_imunizacao), Toast.LENGTH_LONG).show();
+            if(idCartao != null)
+                if (getIDataManager().eliminaCartao(idCartao))
+                    Toast.makeText(AppAplicacao.contextApp, AppAplicacao.contextApp.getString(R.string.texto_aviso_removendo_cartao), Toast.LENGTH_LONG).show();
+            Toast.makeText(AppAplicacao.contextApp, AppAplicacao.contextApp.getString(R.string.texto_aviso_remove_crianca), Toast.LENGTH_LONG).show();
+            getMvpView().openCriancaListaActivity("edita");
+        } else {
+            getMvpView().onError(R.string.texto_erro_excluir);
+        }
+    }
+
+    @Override
+    public boolean onCadastraCartaoCrianca(Long idCrianca) {
+        getMvpView().showLoading();
+        try {
+            Crianca crianca = getIDataManager().obtemCrianca(idCrianca);
+            Cartao cartao = getIDataManager().obtemCartaoPorCrianca(idCrianca);
+            Long id;
+            if (cartao == null) {
+                Toast.makeText(AppAplicacao.contextApp, AppAplicacao.contextApp.getString(R.string.texto_aviso_cadastra_cartao), Toast.LENGTH_LONG).show();
+                cartao = new Cartao();
+                id = 0L;
+            } else {
+                Toast.makeText(AppAplicacao.contextApp, AppAplicacao.contextApp.getString(R.string.texto_aviso_atualiza_cartao), Toast.LENGTH_LONG).show();
+                id = cartao.getId();
+            }
+            //Cartao cartao = new Cartao();
+            cartao.setId((id == 0L) ? (long) getIDataManager().getCartaoID().incrementAndGet() : id);
+            cartao.setCrianca(crianca);
+
+            return getIDataManager().novoAtualizaCartao(cartao);
+
+        } finally {
+            getMvpView().hideLoading();
+        }
     }
 
     @Override

@@ -24,7 +24,7 @@ public interface CadastroUsuarioMvpPresenter<V extends CadastroUsuarioMvpView> e
 
     String getTokenUsuario();
 
-    void onCadasrarClick(Long id, String nome, String login, String email, String senha, String repeteSenha, Bitmap foto);
+    void onCadastrarClick(Long id, String nome, String login, String email, String senha, String repeteSenha, Bitmap foto);
 
     boolean onNovoAtualizaUsuario(Usuario usuario);
 

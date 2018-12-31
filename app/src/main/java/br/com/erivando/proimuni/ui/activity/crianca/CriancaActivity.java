@@ -5,17 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -31,6 +29,8 @@ import br.com.erivando.proimuni.database.model.Crianca;
 import br.com.erivando.proimuni.database.model.Usuario;
 import br.com.erivando.proimuni.imagem.RoundedImageButton;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
+import br.com.erivando.proimuni.ui.activity.cartao.CartaoActivity;
+import br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioMvpPresenter;
@@ -44,6 +44,7 @@ import static br.com.erivando.proimuni.util.Uteis.PERMISSOES;
 import static br.com.erivando.proimuni.util.Uteis.TODAS_PERMISSOES;
 import static br.com.erivando.proimuni.util.Uteis.base64ParaBitmap;
 import static br.com.erivando.proimuni.util.Uteis.hasPermissoes;
+import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 
 /**
  * Projeto:     VacinasKIDS
@@ -76,14 +77,22 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     @BindView(R.id.nascimento)
     EditText nascimentoEditText;
 
+    /*
     @BindView(R.id.responsavel)
     Spinner comboResponsavel;
+    */
 
     @BindView(R.id.sexo)
     Spinner comboSexo;
 
     @BindView(R.id.img_crianca_foto)
     RoundedImageButton fotoImageButton;
+
+    @BindView(R.id.btn_remover_crianca)
+    Button buttonRemoveCrianca;
+
+    @BindView(R.id.layout_toobar)
+    LinearLayout linearLayoutToobar;
 
     private Intent intent;
     private ArrayAdapter<String> adapterResponsavel;
@@ -183,8 +192,16 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
         if (imagemBitmapFoto == null && crianca!= null)
             if (crianca.getCriaFoto() != null)
                 imagemBitmapFoto = base64ParaBitmap(crianca.getCriaFoto());
-        presenter.onCadasrarClick(id, nomeEditText.getText().toString(), nascimentoEditText.getText().toString(), comboResponsavel.getSelectedItem().toString(), comboSexo.getSelectedItem().toString(), imagemBitmapFoto);
+        presenter.onCadastrarClick(id, nomeEditText.getText().toString(), nascimentoEditText.getText().toString(), comboSexo.getSelectedItem().toString(), imagemBitmapFoto);
     }
+
+    @OnClick(R.id.btn_remover_crianca)
+    public void onRemoverClick(View v) {
+        if (crianca!= null)
+            presenter.onRemoveCrianca(id);
+    }
+
+
 
     @Override
     public void onDestroy() {
@@ -200,12 +217,19 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
             if (crianca != null) {
                 nomeEditText.setText(crianca.getCriaNome());
                 nascimentoEditText.setText(Uteis.getParseDateString(crianca.getCriaNascimento()));
-                comboResponsavel.setSelection(adapterResponsavel.getPosition(crianca.getUsuario().getUsuaNome()));
+                //comboResponsavel.setSelection(adapterResponsavel.getPosition(crianca.getUsuario().getUsuaNome()));
                 comboSexo.setSelection(adapterSexo.getPosition(crianca.getCriaSexo()));
                 if (crianca.getCriaFoto() != null)
                     fotoImageButton.setImageBitmap(base64ParaBitmap(crianca.getCriaFoto()));
+                buttonRemoveCrianca.setVisibility(View.VISIBLE);
+            } else {
+                buttonRemoveCrianca.setVisibility(View.GONE);
             }
+        } else {
+
         }
+
+        resizeCustomizedToobar(linearLayoutToobar);
     }
 
     @Override
@@ -240,22 +264,34 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
         finish();
     }
 
+    @Override
+    public void openCartaoListaActivity(String acao) {
+        Intent intent = CartaoListaActvity.getStartIntent(CriancaActivity.this);
+        intent.putExtra("cartaoLista", acao);
+        startActivity(intent);
+        finish();
+    }
+
+
     private void getCrianca() {
+        /*
         Usuario usuario = presenterUsuario.onUsuarioCadastrado();
         if (usuario != null) {
             String[] responsavel = new String[]{usuario.getUsuaNome()};
             adapterResponsavel = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, responsavel);
             adapterResponsavel.setDropDownViewResource(android.R.layout.simple_spinner_item);
-            comboResponsavel.setAdapter(adapterResponsavel);
+            //comboResponsavel.setAdapter(adapterResponsavel);
 
-            String[] sexo = new String[]{"Menino", "Menina"};
-            adapterSexo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sexo);
-            adapterSexo.setDropDownViewResource(android.R.layout.simple_spinner_item);
-            comboSexo.setAdapter(adapterSexo);
         } else {
-            Toast.makeText(this, this.getString(R.string.texto_aviso_usuario_nao_cadastrado), Toast.LENGTH_LONG).show();
-            openUsuarioActivity();
+         //   Toast.makeText(this, this.getString(R.string.texto_aviso_usuario_nao_cadastrado), Toast.LENGTH_LONG).show();
+         //   openUsuarioActivity();
         }
+        */
+
+        String[] sexo = new String[]{"Menino", "Menina"};
+        adapterSexo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sexo);
+        adapterSexo.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        comboSexo.setAdapter(adapterSexo);
     }
 
     public void openUsuarioActivity() {

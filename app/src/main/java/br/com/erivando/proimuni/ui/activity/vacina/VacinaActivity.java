@@ -1,17 +1,17 @@
 package br.com.erivando.proimuni.ui.activity.vacina;
 
-import android.app.Activity;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,6 +27,8 @@ import br.com.erivando.proimuni.ui.fragment.vacina.VacinaPublicaFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 
 /**
  * Projeto:     VacinasKIDS
@@ -49,6 +51,9 @@ public class VacinaActivity extends BaseActivity implements VacinaMvpView {
 
     @BindView(R.id.tabs)
     TabLayout tabLayout;
+
+    @BindView(R.id.layout_toobar)
+    LinearLayout linearLayoutToobar;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, VacinaActivity.class);
@@ -78,10 +83,9 @@ public class VacinaActivity extends BaseActivity implements VacinaMvpView {
         collapsingToolbar.setTitle(getResources().getString(R.string.text_vacinas_titulo));
         */
 
+        textViewTituloToobar.setText(getResources().getString(R.string.text_vacinas_titulo));
         getActivityComponent().inject(this);
 
-
-        textViewTituloToobar.setText(getResources().getString(R.string.text_vacinas_titulo));
 
         presenter.onAttach(this);
 
@@ -90,6 +94,7 @@ public class VacinaActivity extends BaseActivity implements VacinaMvpView {
         setUp();
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void initViews() {
         if (viewPager != null) {
             setupViewPager(viewPager);
@@ -104,6 +109,7 @@ public class VacinaActivity extends BaseActivity implements VacinaMvpView {
 
     @Override
     protected void setUp() {
+        resizeCustomizedToobar(linearLayoutToobar);
     }
 
     @Override

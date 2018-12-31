@@ -75,6 +75,8 @@ public interface IDataManager extends IPreferencesHelper {
 
     boolean eliminaCartao(Long id);
 
+    boolean eliminaCartaoPorCrianca(Long id);
+
     Cartao obtemCartao(Long id);
 
     Cartao obtemCartao();
@@ -187,7 +189,11 @@ public interface IDataManager extends IPreferencesHelper {
 
     boolean eliminaImunizacao(Long id);
 
+    boolean eliminaImunizacaoPorCartao(Long id);
+
     Imunizacao obtemImunizacao(Long id);
+
+    Imunizacao obtemImunizacaoPorCartao(Long id);
 
     Imunizacao obtemImunizacao();
 

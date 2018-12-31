@@ -106,6 +106,11 @@ public class DataManager implements IDataManager {
     }
 
     @Override
+    public boolean eliminaCartaoPorCrianca(Long id) {
+        return realmDataBase.remove(Cartao.class, "crianca.id", id);
+    }
+
+    @Override
     public Cartao obtemCartao(Long id) {
         return realmDataBase.getObject(Cartao.class, "id", id);
     }
@@ -378,8 +383,18 @@ public class DataManager implements IDataManager {
     }
 
     @Override
+    public boolean eliminaImunizacaoPorCartao(Long id) {
+        return realmDataBase.remove(Imunizacao.class, "cartao.id", id);
+    }
+
+    @Override
     public Imunizacao obtemImunizacao(Long id) {
         return realmDataBase.getObject(Imunizacao.class, "id", id);
+    }
+
+    @Override
+    public Imunizacao obtemImunizacaoPorCartao(Long id) {
+        return realmDataBase.getObject(Imunizacao.class, "cartao.id", id);
     }
 
     @Override
@@ -510,6 +525,16 @@ public class DataManager implements IDataManager {
     @Override
     public void setCurrentUserName(String userName) {
         preferencesHelper.setCurrentUserName(userName);
+    }
+
+    @Override
+    public String getCurrentUserLogin() {
+        return preferencesHelper.getCurrentUserLogin();
+    }
+
+    @Override
+    public void setCurrentUserLogin(String userLogin) {
+        preferencesHelper.setCurrentUserLogin(userLogin);
     }
 
     @Override

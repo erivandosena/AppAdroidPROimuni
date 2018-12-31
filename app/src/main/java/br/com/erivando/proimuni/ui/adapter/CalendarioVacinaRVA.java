@@ -2,6 +2,7 @@ package br.com.erivando.proimuni.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import br.com.erivando.proimuni.database.model.Idade;
 import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaDetalheActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.realm.RealmList;
 
 /**
@@ -31,10 +34,13 @@ public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRV
     private RealmList<Dose> doseList;
     private RealmList<Idade> idadeList;
 
+    Context context;
+
     public CalendarioVacinaRVA(RealmList<Vacina> vacinaList, RealmList<Dose> doseList, RealmList<Idade> idadeList, Context mContext) {
         this.vacinaList = vacinaList;
         this.doseList = doseList;
         this.idadeList = idadeList;
+        this.context = mContext;
     }
 
     @Override
@@ -74,6 +80,7 @@ public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRV
             }
         });
 
+        holder.cardViewColorCalendarioVacina.setCardBackgroundColor(context.getResources().getColor((R.color.colorBlue)));
     }
 
     @Override
@@ -88,8 +95,12 @@ public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRV
         protected TextView textTituloDose;
         protected TextView textTituloRede;
 
+        @BindView(R.id.cardview_calendario_vacina)
+        protected CardView cardViewColorCalendarioVacina;
+
         public SingleItemRowHolder(View view) {
             super(view);
+            ButterKnife.bind(this, view);
             this.imageItem = view.findViewById(R.id.image_item);
             this.textTituloVacina = view.findViewById(R.id.texto_titulo_vacina);
             this.textTituloDose = view.findViewById(R.id.texto_titulo_dose);

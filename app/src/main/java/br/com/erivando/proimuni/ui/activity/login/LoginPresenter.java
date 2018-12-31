@@ -147,7 +147,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                         tokenUsuario,
                         usuario.getId(),
                         DataManager.LoggedInMode.LOGGED_IN_MODE_LOCAL,
-                        usuario.getUsuaNome(),
+                        usuario.getUsuaNome() == null ? usuario.getUsuaLogin() : usuario.getUsuaNome(),
                         usuario.getUsuaEmail(),
                         (usuario.getUsuaFoto() != null) ? "file://" + getPathFromUri(AppAplicacao.contextApp, bitmapParaUri(AppAplicacao.contextApp, base64ParaBitmap(usuario.getUsuaFoto()))) : null
                 );

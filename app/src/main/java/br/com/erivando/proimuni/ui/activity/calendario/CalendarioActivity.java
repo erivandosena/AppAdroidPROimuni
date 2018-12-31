@@ -2,12 +2,15 @@ package br.com.erivando.proimuni.ui.activity.calendario;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,6 +33,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.RealmList;
+
+import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 
 /**
  * Projeto:     VacinasKIDS
@@ -59,6 +64,8 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
 
+    @BindView(R.id.layout_toobar)
+    LinearLayout linearLayoutToobar;
 
     List<Idade> idades;
     List<Calendario> calendarios;
@@ -111,6 +118,8 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
         CalendarioRVA adapter = new CalendarioRVA(calendarioCompleto, this);
         my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         my_recycler_view.setAdapter(adapter);
+
+        resizeCustomizedToobar(linearLayoutToobar);
     }
 
     public void createDummyData() {

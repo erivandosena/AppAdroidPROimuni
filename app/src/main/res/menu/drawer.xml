@@ -96,7 +96,7 @@
             android:id="@+id/nav_item_sobre"
             android:checked="true"
             android:icon="@drawable/ic_sobre"
-            android:title="@string/menu_sobre" />
+            android:title="@string/text_sobre_titulo" />
 
         <item
             android:id="@+id/nav_item_logout"

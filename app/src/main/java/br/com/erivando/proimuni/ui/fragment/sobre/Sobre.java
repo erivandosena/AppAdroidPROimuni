@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -18,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-;
+;import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 
 /**
  * Projeto:     VacinasKIDS
@@ -38,6 +39,9 @@ public class Sobre extends BaseActivity implements SobreMvpView {
 
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
+
+    @BindView(R.id.layout_toobar)
+    LinearLayout linearLayoutToobar;
 
     //@BindView(R.id.toolbar_sobre)
     //Toolbar toolbar;
@@ -72,10 +76,13 @@ public class Sobre extends BaseActivity implements SobreMvpView {
         });
         collapsingToolbar.setTitle(getResources().getString(R.string.text_sobre_titulo));
         */
+
+        setUp();
     }
 
     @Override
     protected void setUp() {
+        resizeCustomizedToobar(linearLayoutToobar);
     }
 
     @OnClick(R.id.btn_nav_voltar)

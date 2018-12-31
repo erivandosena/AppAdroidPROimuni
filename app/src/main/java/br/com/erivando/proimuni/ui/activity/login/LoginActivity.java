@@ -209,6 +209,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
             public void afterTextChanged(Editable s) {
 
             }
+
         });
 
         //habilitaTelaCheia(this);

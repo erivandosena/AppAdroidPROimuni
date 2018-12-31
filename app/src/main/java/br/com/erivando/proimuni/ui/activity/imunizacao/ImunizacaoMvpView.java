@@ -13,4 +13,6 @@ public interface ImunizacaoMvpView extends MvpView {
 
     void openCartaoDetalheActivity(Long idLong);
 
+    void openCartaoListaActivity(String acao);
+
 }

@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,11 +35,11 @@ import br.com.erivando.proimuni.database.model.Dose;
 import br.com.erivando.proimuni.database.model.Idade;
 import br.com.erivando.proimuni.database.model.Imunizacao;
 import br.com.erivando.proimuni.database.model.Vacina;
-import br.com.erivando.proimuni.imagem.RoundedImageButton;
 import br.com.erivando.proimuni.imagem.RoundedImageView;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.calendario.CalendarioMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.calendario.CalendarioMvpView;
+import br.com.erivando.proimuni.ui.activity.crianca.CriancaActivity;
 import br.com.erivando.proimuni.ui.activity.idade.IdadeMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.idade.IdadeMvpView;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoMvpPresenter;
@@ -49,6 +50,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.RealmList;
+
+import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 
 /**
  * Projeto:     VacinasKIDS
@@ -96,6 +99,9 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
     @BindView(R.id.card_view_cartao)
     public CardView cardViewCartaoCrianca;
 
+    @BindView(R.id.layout_toobar)
+    LinearLayout linearLayoutToobar;
+
     private Cartao cartao;
     private Intent intent;
 
@@ -127,12 +133,15 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         collapsingToolbar.setTitle(getResources().getString(R.string.menu_item1));
         */
 
-        textViewTituloToobar.setText(getResources().getString(R.string.menu_cartao));
+
 
         getActivityComponent().inject(this);
 
-
         presenter.onAttach(this);
+
+        textViewTituloToobar.setText(getResources().getString(R.string.menu_cartao));
+
+
 
         intent = getIntent();
 
@@ -152,6 +161,16 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         onBackPressed();
     }
 
+    @OnClick(R.id.card_view_cartao)
+    public void onClickCartao(View v) {
+        if (cartao != null) {
+            Intent intent = CriancaActivity.getStartIntent(this);
+            intent.putExtra("crianca", cartao.getCrianca().getId());
+            startActivity(intent);
+            finish();
+        }
+    }
+
     @Override
     protected void setUp() {
         if (intent != null) {
@@ -164,7 +183,7 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
                 if (cartao.getCrianca().getCriaFoto() != null)
                     roundedImageViewCrianca.setImageBitmap(Uteis.base64ParaBitmap(cartao.getCrianca().getCriaFoto()));
                 mTextCrianca.setText(cartao.getCrianca().getCriaNome());
-                mTextIdade.setText("IDADE: " + Uteis.obtemIdadeCompleta(cartao.getCrianca().getCriaNascimento()));
+                mTextIdade.setText(Uteis.obtemIdadeCompleta(cartao.getCrianca().getCriaNascimento()));
             }
         }
 
@@ -176,7 +195,7 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         List<Idade> listaIdades = new ArrayList<Idade>();
         List<Imunizacao> listaImunizacoes = new ArrayList<Imunizacao>();
         for (Idade idade : idadeList) {
-            RealmList<Vacina> vacinaItem = new RealmList<Vacina>();
+            //RealmList<Vacina> vacinaItem = new RealmList<Vacina>();
             for (Calendario calendarioItem : calendarioList) {
                 if (calendarioItem.getIdade().getId() == idade.getId()) {
                     listaVacinas.add(calendarioItem.getVacina());
@@ -201,6 +220,8 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         cardViewCartaoCrianca.setRadius(20f);
         cardViewCartaoCrianca.setCardElevation(2f);
         cardViewCartaoCrianca.setUseCompatPadding(true);
+
+        resizeCustomizedToobar(linearLayoutToobar);
     }
 
     @Override

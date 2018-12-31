@@ -1,10 +1,11 @@
 package br.com.erivando.proimuni.ui.activity.splash;
 
-import android.app.ActivityManager;
+import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.os.SystemClock;
@@ -14,7 +15,6 @@ import javax.inject.Inject;
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.broadcast.Notificacao;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
-import br.com.erivando.proimuni.service.Servico;
 import br.com.erivando.proimuni.ui.activity.login.LoginActivity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import butterknife.ButterKnife;
@@ -35,12 +35,6 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
     @Inject
     SplashMvpPresenter<SplashMvpView> mPresenter;
 
-    AlarmManager alarmManager;
-    PendingIntent pendingIntent;
-
-    private Servico mServico;
-    private Intent intent;
-
     private Context context;
 
     public static Intent getStartIntent(Context context) {
@@ -48,6 +42,7 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
         return intent;
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,12 +60,12 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
         Intent alarm = new Intent(this.context, Notificacao.class);
         boolean alarmRunning = (PendingIntent.getBroadcast(this.context, 0, alarm, PendingIntent.FLAG_NO_CREATE) != null);
+        long intervalo = (50000 * 1440) / 2L; //(60000 * 1440)/2L, pendingIntent); //1800000 milliseconds, or every 30 minutes.
         if (alarmRunning == false) {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(this.context, 0, alarm, 0);
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), (50000 * 1440) / 2L, pendingIntent);//(60000 * 1440)/2L, pendingIntent); //1800000 milliseconds, or every 30 minutes.
+            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), intervalo, pendingIntent);
         }
-
 
     }
 
@@ -110,7 +105,7 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
     @Override
     protected void setUp() {
-        if (android.os.Build.VERSION.SDK_INT > 15) {
+        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
@@ -123,14 +118,5 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
         return SplashActivity.this;
     }
 
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
-    }
 
 }

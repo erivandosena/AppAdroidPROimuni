@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,13 +18,18 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.erivando.proimuni.R;
+import br.com.erivando.proimuni.database.model.Cartao;
 import br.com.erivando.proimuni.database.model.Crianca;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
+import br.com.erivando.proimuni.ui.activity.cartao.CartaoMvpPresenter;
+import br.com.erivando.proimuni.ui.activity.cartao.CartaoMvpView;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.adapter.CriancaRVA;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 
 /**
  * Projeto:     VacinasKIDS
@@ -37,6 +43,9 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
 
     @Inject
     CriancaMvpPresenter<CriancaMvpView> presenterCrianca;
+
+    @Inject
+    CartaoMvpPresenter<CartaoMvpView> presenterCartao;
 
    // @BindView(R.id.toolbar_crianca_lista)
     //Toolbar toolbar;
@@ -52,6 +61,9 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
 
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
+
+    @BindView(R.id.layout_toobar)
+    LinearLayout linearLayoutToobar;
 
     private List<Crianca> listaCriancas;
 
@@ -108,9 +120,11 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
     @Override
     protected void setUp() {
         crianca_recycler_view.setHasFixedSize(true);
-        CriancaRVA adapter = new CriancaRVA(listaCriancas, CriancaListaActvity.this, intent);
+        CriancaRVA adapter = new CriancaRVA(listaCriancas, getCartao(), CriancaListaActvity.this, intent);
         crianca_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         crianca_recycler_view.setAdapter(adapter);
+
+        resizeCustomizedToobar(linearLayoutToobar);
     }
 
     @Override
@@ -135,6 +149,10 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
         }
     }
 
+    private List<Cartao> getCartao() {
+        return presenterCartao.onCartaoCadastrados();
+    }
+
     public void openCriancaActivity() {
         startActivity(CriancaActivity.getStartIntent(this));
         finish();
@@ -142,6 +160,11 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
 
     @Override
     public void openCriancaListaActivity(String acao) {
+    }
+
+    @Override
+    public void openCartaoListaActivity(String acao) {
+
     }
 
     public void openMainActivity() {

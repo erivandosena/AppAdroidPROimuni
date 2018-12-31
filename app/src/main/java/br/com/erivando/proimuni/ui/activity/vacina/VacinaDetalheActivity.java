@@ -19,6 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
+
 /**
  * Projeto:     VacinasKIDS
  * Autor:       Erivando Sena
@@ -53,6 +55,9 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
 
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
+
+    @BindView(R.id.layout_toobar)
+    LinearLayout linearLayoutToobar;
 
     private String vacinaNome;
     private String vacinaRede;
@@ -137,6 +142,8 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
         mTexVacinaDescricao.setText(vacinaDesc);
         mTexVacinaAdministracao.setText(vacinaAdmin);
         loadBackdrop();
+
+        resizeCustomizedToobar(linearLayoutToobar);
     }
 
     @OnClick(R.id.btn_nav_voltar)

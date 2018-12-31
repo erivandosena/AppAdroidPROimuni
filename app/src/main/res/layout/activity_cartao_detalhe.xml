@@ -18,7 +18,7 @@
 
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -33,15 +33,82 @@
 
         <include layout="@layout/content_toobar" />
 
+
         <android.support.v7.widget.CardView
             android:id="@+id/card_view_cartao"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/colorPurple"
+            card_view:cardCornerRadius="@dimen/card_menu_radius"
+            card_view:cardElevation="@dimen/card_menu_elevation"
+            card_view:cardMaxElevation="@dimen/card_menu_elevation"
+            card_view:contentPadding="@dimen/card_menu_padding">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp">
+
+                <br.com.erivando.proimuni.imagem.RoundedImageView
+                    android:id="@+id/image_crianca_cartao"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@color/colorTransparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_add_crianca_white" />
+
+                <TextView
+                    android:id="@+id/text_titulo_crianca_cartao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_toEndOf="@id/image_crianca_cartao"
+                    android:layout_toRightOf="@id/image_crianca_cartao"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text="@null"
+                    android:textColor="@color/colorWhite"
+                    android:theme="@style/TextStyle.TituloMedio.Lista" />
+
+                <TextView
+                    android:id="@+id/text_sub_titulo_crianca_cartao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_titulo_crianca_cartao"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_toEndOf="@id/image_crianca_cartao"
+                    android:layout_toRightOf="@id/image_crianca_cartao"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text="@null"
+                    android:textColor="@color/colorWhite"
+                    android:theme="@style/TextStyle.SubTitulo.Lista" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!--
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view_cartao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
+            android:clickable="true"
             android:orientation="vertical"
             card_view:cardBackgroundColor="@color/colorGrayLight"
             card_view:cardCornerRadius="20dp"
@@ -60,17 +127,18 @@
                     android:id="@+id/image_crianca_cartao"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/ic_crianca_white"
                     android:tint="@color/colorTransparent"
-                    android:scaleType="fitCenter" />
+                    android:background="@color/colorTransparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_add_crianca_white" />
 
                 <TextView
                     android:id="@+id/text_titulo_crianca_cartao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginRight="65dp"
                     android:text="@null"
                     android:textColor="@color/colorWhite"
@@ -82,15 +150,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/image_crianca_cartao"
                     android:layout_marginRight="65dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="1dp"
                     android:text="@null"
                     android:textColor="@color/colorWhite"
                     android:theme="@style/TextStyle.SubTitulo.Lista" />
 
             </RelativeLayout>
-
-
         </android.support.v7.widget.CardView>
+        -->
 
     </android.support.design.widget.AppBarLayout>
 

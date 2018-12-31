@@ -21,6 +21,7 @@ import br.com.erivando.proimuni.database.model.Dose;
 import br.com.erivando.proimuni.database.model.Idade;
 import br.com.erivando.proimuni.database.model.Imunizacao;
 import br.com.erivando.proimuni.database.model.Vacina;
+import br.com.erivando.proimuni.ui.activity.cartao.CartaoDetalheActivity;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoActivity;
 
 /**
@@ -57,7 +58,6 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
         this.imunizacaoList = imunizacaoList;
         this.cartao = cartao;
         this.mContext = mContext;
-
     }
 
     @Override
@@ -488,6 +488,8 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     intent.putExtra("idade", idIdade);
                     intent.putExtra("cartao", idCartao);
                     mContext.startActivity(intent);
+                    ((CartaoDetalheActivity)mContext).finish();
+
                 }
             });
 

@@ -17,9 +17,11 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
     <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,34 +33,24 @@
         <android.support.v7.widget.CardView
             android:layout_width="@dimen/card_menu_wh"
             android:layout_height="@dimen/card_menu_wh"
-            android:layout_gravity="center"
             android:layout_margin="@dimen/card_menu_margin"
             card_view:cardCornerRadius="@dimen/card_menu_radius"
             card_view:cardElevation="@dimen/card_menu_elevation"
-            card_view:cardMaxElevation="@dimen/card_menu_elevation"
-            card_view:contentPadding="@dimen/card_menu_padding">
+            card_view:cardMaxElevation="@dimen/card_menu_elevation">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_cartao"
+                style="@style/Button.Menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="@color/colorTransparent"
-                android:contentDescription="@null"
-                android:paddingTop="25dp"
-                android:drawableTop="@drawable/ic_cartao"
-                android:tint="@color/colorPrimaryDark" />
+                app:srcCompat="@drawable/ic_cartao" />
 
             <TextView
+                style="@style/TextStyle.Menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_margin="5dp"
-                android:paddingBottom="10dp"
-                android:gravity="center"
                 android:text="@string/menu_cartao"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textAlignment="center" />
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -68,30 +60,21 @@
             android:layout_margin="5dp"
             card_view:cardCornerRadius="@dimen/card_menu_radius"
             card_view:cardElevation="@dimen/card_menu_elevation"
-            card_view:cardMaxElevation="@dimen/card_menu_elevation"
-            card_view:contentPadding="@dimen/card_menu_padding">
+            card_view:cardMaxElevation="@dimen/card_menu_elevation">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_vacina"
+                style="@style/Button.Menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="@color/colorTransparent"
-                android:contentDescription="@null"
-                android:paddingTop="15dp"
-                android:drawableTop="@drawable/ic_vacina"
-                android:tint="@color/colorPrimaryDark" />
+                app:srcCompat="@drawable/ic_vacina" />
 
             <TextView
+                style="@style/TextStyle.Menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_margin="5dp"
-                android:paddingBottom="10dp"
-                android:gravity="center"
                 android:text="@string/menu_vacina"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textAlignment="center" />
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -101,30 +84,21 @@
             android:layout_margin="5dp"
             card_view:cardCornerRadius="@dimen/card_menu_radius"
             card_view:cardElevation="@dimen/card_menu_elevation"
-            card_view:cardMaxElevation="@dimen/card_menu_elevation"
-            card_view:contentPadding="@dimen/card_menu_padding">
+            card_view:cardMaxElevation="@dimen/card_menu_elevation">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_calendario"
+                style="@style/Button.Menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="@color/colorTransparent"
-                android:contentDescription="@null"
-                android:paddingTop="15dp"
-                android:drawableTop="@drawable/ic_calendario"
-                android:tint="@color/colorPrimaryDark" />
+                app:srcCompat="@drawable/ic_calendario" />
 
             <TextView
+                style="@style/TextStyle.Menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_margin="5dp"
-                android:paddingBottom="10dp"
-                android:gravity="center"
                 android:text="@string/menu_calendario"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textAlignment="center" />
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -134,30 +108,21 @@
             android:layout_margin="@dimen/card_menu_margin"
             card_view:cardCornerRadius="@dimen/card_menu_radius"
             card_view:cardElevation="@dimen/card_menu_elevation"
-            card_view:cardMaxElevation="@dimen/card_menu_elevation"
-            card_view:contentPadding="@dimen/card_menu_padding">
+            card_view:cardMaxElevation="@dimen/card_menu_elevation">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_posto"
+                style="@style/Button.Menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="@color/colorTransparent"
-                android:contentDescription="@null"
-                android:paddingTop="15dp"
-                android:drawableTop="@drawable/ic_posto"
-                android:tint="@color/colorPrimaryDark" />
+                app:srcCompat="@drawable/ic_posto" />
 
             <TextView
+                style="@style/TextStyle.Menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_margin="5dp"
-                android:paddingBottom="10dp"
-                android:gravity="center"
                 android:text="@string/menu_posto"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textAlignment="center" />
         </android.support.v7.widget.CardView>
 
         <!--
@@ -233,4 +198,5 @@
         -->
 
     </GridLayout>
+
 </LinearLayout>

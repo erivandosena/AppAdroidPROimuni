@@ -3,10 +3,9 @@ package br.com.erivando.proimuni.ui.activity.cartao;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +26,8 @@ import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 
 /**
  * Projeto:     VacinasKIDS
@@ -55,6 +56,9 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView {
 
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
+
+    @BindView(R.id.layout_toobar)
+    LinearLayout linearLayoutToobar;
 
     private Intent intent;
     private Cartao cartao;
@@ -109,12 +113,12 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView {
         Long idCrianca = criancas.get(comboCartao.getSelectedItemPosition()).getId();
         cartao = presenter.onCartaoCadastradoPorCrianca(idCrianca);
         if (cartao == null) {
-            presenter.onCadasrarClick(id, idCrianca);
+            presenter.onCadastrarClick(id, idCrianca);
         } else {
             if (cartao.getCrianca().getId() == idCrianca)
                 Toast.makeText(this, this.getString(R.string.texto_aviso_crianca_cartao_cadastrada), Toast.LENGTH_LONG).show();
             else
-                presenter.onCadasrarClick(cartao.getId(), idCrianca);
+                presenter.onCadastrarClick(cartao.getId(), idCrianca);
         }
     }
 
@@ -131,6 +135,8 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView {
                 comboCartao.setSelection(listaCrianca.indexOf(cartao.getCrianca().getCriaNome()));
             }
         }
+
+        resizeCustomizedToobar(linearLayoutToobar);
     }
 
     @Override

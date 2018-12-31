@@ -8,6 +8,7 @@ import br.com.erivando.proimuni.ui.activity.cartao.CartaoDetalheActivity;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaActivity;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaListaActvity;
+import br.com.erivando.proimuni.ui.activity.crianca.CriancaListaImunizacao;
 import br.com.erivando.proimuni.ui.activity.dose.DoseActivity;
 import br.com.erivando.proimuni.ui.activity.idade.IdadeActivity;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoActivity;
@@ -75,4 +76,6 @@ public interface ActivityComponent {
     void inject(MapaActivity activityInject);
 
     void inject(NotificacaoActivity activityInject);
+
+    void inject(CriancaListaImunizacao activityInject);
 }

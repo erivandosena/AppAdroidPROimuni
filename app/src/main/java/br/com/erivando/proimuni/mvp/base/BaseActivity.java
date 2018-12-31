@@ -26,11 +26,14 @@ import br.com.erivando.proimuni.di.component.DaggerActivityComponent;
 import br.com.erivando.proimuni.di.module.ActivityModule;
 import br.com.erivando.proimuni.mvp.MvpView;
 import br.com.erivando.proimuni.ui.activity.login.LoginActivity;
+import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import br.com.erivando.proimuni.util.CommonUtils;
 import br.com.erivando.proimuni.util.NetworkUtils;
 import butterknife.Unbinder;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+import static br.com.erivando.proimuni.util.Uteis.habilitaTelaCheia;
 
 /**
  * Projeto:     VacinasKIDS
@@ -41,6 +44,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 
 public abstract class BaseActivity extends AppCompatActivity implements MvpView, BaseFragment.Callback {
+
+    public static final int PERMISSION_REQUEST_CODE = 1;
 
     private ProgressDialog progressDialog;
 
@@ -74,6 +79,10 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((AppAplicacao) getApplication()).getComponent())
                 .build();
+
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 || Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            habilitaTelaCheia(this);
+        }
     }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean state){
@@ -165,6 +174,23 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 
     @Override
     public boolean isNetworkConnected() {
+        /*
+        boolean status = false;
+        if (status == NetworkUtils.isWifiConnected(getApplicationContext())) {
+            if (status == NetworkUtils.isWifiConnected(getApplicationContext())) {
+                if (status == NetworkUtils.isMobileConnected(getApplicationContext())) {
+                    Toast.makeText(AppAplicacao.contextApp, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+        return status;
+        */
         return NetworkUtils.isNetworkConnected(getApplicationContext());
     }
 
@@ -213,6 +239,19 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         } else {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Permissão concedida, agora você pode usar a unidade local.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "Permissão negada, você não pode usar a unidade local.", Toast.LENGTH_LONG).show();
+                }
+                break;
         }
     }
 }

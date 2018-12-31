@@ -10,6 +10,7 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -28,6 +29,7 @@ import static br.com.erivando.proimuni.util.Uteis.PERMISSOES;
 import static br.com.erivando.proimuni.util.Uteis.TODAS_PERMISSOES;
 import static br.com.erivando.proimuni.util.Uteis.base64ParaBitmap;
 import static br.com.erivando.proimuni.util.Uteis.hasPermissoes;
+import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 
 /**
  * Projeto:     VacinasKIDS
@@ -72,12 +74,16 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     @BindView(R.id.img_usuario_foto)
     RoundedImageButton fotoImageButton;
 
+    @BindView(R.id.text_titulo_toobar)
+    TextView textViewTituloToobar;
+
+    @BindView(R.id.layout_toobar)
+    LinearLayout linearLayoutToobar;
+
     private Usuario usuario;
     private Long id;
     private Bitmap imagemBitmapFoto;
 
-    @BindView(R.id.text_titulo_toobar)
-    TextView textViewTituloToobar;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, CadastroUsuarioActivity.class);
@@ -151,7 +157,7 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
         if (imagemBitmapFoto == null && usuario != null)
             if (usuario.getUsuaFoto() != null)
                 imagemBitmapFoto = base64ParaBitmap(usuario.getUsuaFoto());
-        presenter.onCadasrarClick(id, nomeEditText.getText().toString(), loginEditText.getText().toString(), emailEditText.getText().toString(), senhaEditText.getText().toString(), repSenhaEditText.getText().toString(), imagemBitmapFoto);
+        presenter.onCadastrarClick(id, String.valueOf(nomeEditText.getText()), loginEditText.getText().toString(), emailEditText.getText().toString(), senhaEditText.getText().toString(), repSenhaEditText.getText().toString(), imagemBitmapFoto);
     }
 
     @Override
@@ -248,13 +254,16 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
         usuario = presenter.onUsuarioCadastrado();
         if (usuario != null) {
             id = usuario.getId();
-            nomeEditText.setText(usuario.getUsuaNome());
+            if(usuario.getUsuaNome() != null)
+                nomeEditText.setText(usuario.getUsuaNome());
             loginEditText.setText(usuario.getUsuaLogin());
             emailEditText.setText(usuario.getUsuaEmail());
             senhaEditText.setText(usuario.getUsuaSenha());
             if (usuario.getUsuaFoto() != null)
                 fotoImageButton.setImageBitmap(base64ParaBitmap(usuario.getUsuaFoto()));
         }
+
+        resizeCustomizedToobar(linearLayoutToobar);
     }
 
     @Override

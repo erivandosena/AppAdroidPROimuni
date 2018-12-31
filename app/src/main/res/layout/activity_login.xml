@@ -60,9 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="50dp"
-            android:layout_marginBottom="10dp"
             android:foregroundGravity="top"
             android:orientation="vertical">
 
@@ -86,7 +85,7 @@
                     android:hint="@string/hint_usuario_nome"
                     android:inputType="text"
                     android:paddingLeft="10dp"
-                    android:maxLength="30" />
+                    android:maxLength="15" />
 
                 <TextView
                     style="@style/TextStyle.TextView.Label"
@@ -151,7 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <Button
@@ -174,7 +173,7 @@
                     android:id="@+id/btn_cadastro_usuario"
                     style="@style/Button.Padrao"
                     android:layout_width="match_parent"
-                    android:drawableLeft="@drawable/ic_add_usuario"
+                    android:drawableLeft="@drawable/ic_add_usuario_white"
                     android:text="@string/btn_login_fazer_cadastro" />
             </LinearLayout>
 

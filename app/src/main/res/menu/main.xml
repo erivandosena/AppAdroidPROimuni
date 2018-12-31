@@ -50,19 +50,19 @@ android:showAsAction
 
     <item
         android:id="@+id/nav_item_crianca"
-        android:icon="@drawable/ic_criancas_cadastro"
+        android:icon="@drawable/ic_crianca"
         android:title="@string/menu_crianca"
         app:showAsAction="ifRoom|withText" />
 
     <item
         android:id="@+id/nav_item_cartao"
-        android:icon="@drawable/ic_gerenciar"
+        android:icon="@drawable/ic_cartao"
         android:title="@string/menu_cartao"
         app:showAsAction="ifRoom|withText" />
 
     <item
         android:id="@+id/nav_item_posto"
-        android:icon="@drawable/ic_mapa"
+        android:icon="@drawable/ic_posto"
         android:title="@string/menu_posto"
         app:showAsAction="never|withText" />
 

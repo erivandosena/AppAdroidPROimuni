@@ -23,9 +23,11 @@ import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.util.Base64;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -90,13 +92,8 @@ public class Uteis {
 
 
     public static void statusBarTransparente(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window = ((Activity) context).getWindow();
-
-           //window.requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);//or add in style.xml
-
-
-            window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT || Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+            ((Activity) context).getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
     }
 
@@ -227,8 +224,8 @@ public class Uteis {
     public static void exibeAvaliacaoDialog(final Context context) {
         Resources res = context.getResources();
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                .setIcon(R.drawable.ic_star)
-                .setTitle(R.string.app_name)
+                .setIcon(R.drawable.ic_launcher_round)
+                .setTitle(res.getString(R.string.menu_avaliacao))
                 .setMessage(R.string.mensagen_avaliacao_app)
                 .setCancelable(false)
                 .setPositiveButton(Html.fromHtml(res.getString(R.string.botao_ok_avaliacao_app)), new DialogInterface.OnClickListener() {
@@ -460,5 +457,13 @@ public class Uteis {
 
     public static int getTabsHeight(Context context) {
         return (int) context.getResources().getDimension(R.dimen.tabsHeight);
+    }
+
+    public static void resizeCustomizedToobar(LinearLayout linearLayoutToobar) {
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 || Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            ViewGroup.LayoutParams params = linearLayoutToobar.getLayoutParams();
+            params.height = 65;
+            linearLayoutToobar.setLayoutParams(params);
+        }
     }
 }
