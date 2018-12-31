@@ -81,7 +81,8 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
     @Override
     public void openMainActivity() {
-        showLoading();
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.O_MR1)
+            showLoading();
         Intent intent = MainActivity.getStartIntent(SplashActivity.this);
         startActivity(intent);
         finish();

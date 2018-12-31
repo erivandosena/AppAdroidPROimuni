@@ -17,14 +17,10 @@ import br.com.erivando.proimuni.service.Servico;
 public class Notificacao extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        //context.startService(new Intent(context, Servico.class));
         Intent background = new Intent(context, Servico.class);
-        context.startService(background);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            //context.startForegroundService(intent);
             context.startForegroundService(background);
         } else {
-            //context.startService(intent);
             context.startService(background);
         }
     }

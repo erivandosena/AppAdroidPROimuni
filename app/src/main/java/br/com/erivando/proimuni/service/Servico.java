@@ -43,6 +43,7 @@ import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.di.component.DaggerServiceComponent;
 import br.com.erivando.proimuni.di.component.ServiceComponent;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoDetalheActivity;
+import br.com.erivando.proimuni.ui.activity.crianca.CriancaActivity;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
 
 /**
@@ -69,7 +70,7 @@ public class Servico extends Service {
     private List<Dose> doses;
     private List<Idade> idades, listaIdade;
     private List<Imunizacao> imunizacoes;
-    private List<Imunizacao> naoImunizados;
+   //private List<Imunizacao> naoImunizados;
     private List<Calendario> calendarios;
     private List<Cartao> cartoes;
     private List<String> statusCartaoVacinal;
@@ -82,8 +83,8 @@ public class Servico extends Service {
 
     private Calendario calendarioItem;
 
-    private Timer timer;
-    private TimerTask timerTask;
+    //private Timer timer;
+    //private TimerTask timerTask;
 
     private List<CharSequence> listaMsgAgrupada;
 
@@ -95,7 +96,7 @@ public class Servico extends Service {
 
     private Thread backgroundThread;
 
-    private String generoCrianca;
+    //private String generoCrianca;
 
     private NotificationManager notificationManager;
 
@@ -170,7 +171,7 @@ public class Servico extends Service {
         doses = new ArrayList<Dose>();
         idades = new ArrayList<Idade>();
 
-        if (!criancas.isEmpty() || !cartoes.isEmpty()) {
+        if (iDataManager.getCurrentUserLoggedInMode() != IDataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
             for (Idade idade : listaIdade) {
                 for (Calendario calendarioItem : calendarios) {
                     if (calendarioItem.getIdade().getId() == idade.getId()) {
@@ -189,8 +190,8 @@ public class Servico extends Service {
 
             // notificação inicial geral
             if (imunizacoes.isEmpty()) {
-                String nomeUsuario = usuario != null ? "Olá "+usuario.getUsuaNome() : "Olá";
-                repeatedNotificationInicial = showLocalNotification(context, CartaoDetalheActivity.class,
+                String nomeUsuario = (usuario != null && usuario.getUsuaNome() != null) ? "Olá "+usuario.getUsuaNome() : "Olá "+ iDataManager.getCurrentUserName();
+                repeatedNotificationInicial = showLocalNotification(context, CriancaActivity.class,
                         nomeUsuario + ", é importante que você cadastre sua(s) criança(s) para usufruir dos benefícios do "+getResources().getString(R.string.app_name)+". Vamos lá! Inicie o preenchimento do cartão vacinal!",
                         "Cadastre um Cartão Vacinal",
                         "Lembrete",
@@ -347,9 +348,9 @@ public class Servico extends Service {
         return notificationManager;
     }
 
-    private boolean verificaCartao(Imunizacao imunizacao) {
-        return (imunizacao.getCartao().getCrianca().getId().equals(cartao.getCrianca().getId()));
-    }
+    //private boolean verificaCartao(Imunizacao imunizacao) {
+    //    return (imunizacao.getCartao().getCrianca().getId().equals(cartao.getCrianca().getId()));
+    //}
 
     private String aplicaStatusVacina(Long semanasIdadeCrianca, Long baseQuantSemanas, Cartao cartao, String idadeVacinacao) {
        // String statusVencendo = "Existe vacina para " +idadeVacinacao.toUpperCase() + " no prazo de vacinação";
