@@ -174,7 +174,7 @@ public class Servico extends Service {
         if (iDataManager.getCurrentUserLoggedInMode() != IDataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
             for (Idade idade : listaIdade) {
                 for (Calendario calendarioItem : calendarios) {
-                    if (calendarioItem.getIdade().getId() == idade.getId()) {
+                    if (calendarioItem.getIdade().getId() == idade.getId() && "Pública".equalsIgnoreCase(calendarioItem.getVacina().getVaciRede())) {
                         vacinas.add(calendarioItem.getVacina());
                         doses.add(calendarioItem.getDose());
                         idades.add(calendarioItem.getIdade());
@@ -206,7 +206,7 @@ public class Servico extends Service {
             for (Idade idade : listaIdade) {
                 for (Calendario calendarioItem : calendarios) {
                     this.calendarioItem = calendarioItem;
-                    if (calendarioItem.getIdade().getId() == idade.getId()) {
+                    if (calendarioItem.getIdade().getId() == idade.getId() && "Pública".equalsIgnoreCase(calendarioItem.getVacina().getVaciRede())) {
                         String mesesIdadeCalendario = idade.getIdadDescricao().toLowerCase();
                         for (Cartao cartao : cartoes) {
                             for (Crianca crianca : criancas) {

@@ -178,6 +178,8 @@ public interface IDataManager extends IPreferencesHelper {
 
     List<Calendario> obtemCalendarios(String[] valores);
 
+    List<Calendario> obtemCalendariosPorVacina(String[] valores);
+
     List<Calendario> obtemCalendarios();
 
     List<Calendario> obtemCalendariosOrderBy(String orderBy);

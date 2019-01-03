@@ -8,12 +8,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -45,6 +49,7 @@ import br.com.erivando.proimuni.ui.activity.idade.IdadeMvpView;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoMvpView;
 import br.com.erivando.proimuni.ui.adapter.VacinaRVA;
+import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import br.com.erivando.proimuni.util.Uteis;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,6 +106,17 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
     @BindView(R.id.layout_toobar)
     LinearLayout linearLayoutToobar;
 
+
+    @BindView(R.id.text_pesquisa_vacina)
+    TextInputEditText textInputPesquisa;
+
+    @BindView(R.id.btn_pesquisa_vacina)
+    ImageButton imageButtonPesquisa;
+
+    private List<Calendario> calendarioList;
+
+    private VacinaRVA adapter;
+
     private Cartao cartao;
     private Intent intent;
 
@@ -140,18 +156,69 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
 
         textViewTituloToobar.setText(getResources().getString(R.string.menu_cartao));
 
-
-
         intent = getIntent();
 
         setUp();
+
+        textInputPesquisa.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length() == 0)
+                    montaCartao();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        textInputPesquisa.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+
+                }
+            }
+        });
+    }
+
+    @OnClick(R.id.btn_pesquisa_vacina)
+    public void onClickPesquisa(View view) {
+        if (view == imageButtonPesquisa) {
+            hideKeyboard();
+            showLoading();
+            if(textInputPesquisa.getText().length() > 0) {
+                calendarioList = calendarioPresenter.onCalendariosPorNomeVacina(new String[]{"vacina.vaciNome", textInputPesquisa.getText().toString().trim()});
+                if (calendarioList.isEmpty()) {
+                    calendarioList = calendarioPresenter.onCalendariosPorVacina(new String[]{"vacina.vaciNome", textInputPesquisa.getText().toString().trim()});
+                    if (calendarioList.isEmpty()) {
+                        textInputPesquisa.setText("");
+                        Toast.makeText(CartaoDetalheActivity.this, R.string.aviso_vacina_nao_encontrada, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+            montaCartao();
+            //adapter.notifyDataSetChanged();
+            hideLoading();
+        }
     }
 
     @OnClick(R.id.fab_cartao_print)
     public void onClick(View view) {
         //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
         if (view == fabFloatingActionButton) {
-            criaPDF(CartaoDetalheActivity.this);
+            Toast.makeText(AppAplicacao.contextApp, getResources().getString(R.string.text_cartao_titulo)+" PDF\n\nAinda não implementado! :(\n", Toast.LENGTH_SHORT).show();
+
+
+            //criaPDF(CartaoDetalheActivity.this);
+
+
         }
     }
 
@@ -186,8 +253,9 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
             }
         }
 
+        /*
         List<Idade> idadeList = idadePresenter.onIdadesCadastradas();
-        List<Calendario> calendarioList = calendarioPresenter.onCalendariosCadastrados();
+        calendarioList = calendarioPresenter.onCalendariosCadastrados();
 
         List<Vacina> listaVacinas = new ArrayList<Vacina>();
         List<Dose> listaDoses = new ArrayList<Dose>();
@@ -211,7 +279,52 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
 
         RecyclerView my_recycler_view = findViewById(R.id.cartao_lista_vacina_recyclerView);
         my_recycler_view.setHasFixedSize(true);
-        VacinaRVA adapter = new VacinaRVA(listaVacinas, listaDoses, listaIdades, listaImunizacoes, cartao, this);
+        adapter = new VacinaRVA(listaVacinas, listaDoses, listaIdades, listaImunizacoes, cartao, this);
+        my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        my_recycler_view.setAdapter(adapter);
+        */
+
+        montaCartao();
+
+        /*
+        cardViewCartaoCrianca.setCardBackgroundColor(getResources().getColor((R.color.colorPurpleLight)));
+        cardViewCartaoCrianca.setRadius(20f);
+        cardViewCartaoCrianca.setCardElevation(2f);
+        cardViewCartaoCrianca.setUseCompatPadding(true);
+
+        resizeCustomizedToobar(linearLayoutToobar);
+        */
+    }
+
+    private void montaCartao() {
+        List<Idade> idadeList = idadePresenter.onIdadesCadastradas();
+
+        if(textInputPesquisa.getText().length() == 0)
+            calendarioList = calendarioPresenter.onCalendariosCadastrados();
+
+        List<Vacina> listaVacinas = new ArrayList<Vacina>();
+        List<Dose> listaDoses = new ArrayList<Dose>();
+        List<Idade> listaIdades = new ArrayList<Idade>();
+        List<Imunizacao> listaImunizacoes = new ArrayList<Imunizacao>();
+        for (Idade idade : idadeList) {
+            //RealmList<Vacina> vacinaItem = new RealmList<Vacina>();
+            for (Calendario calendarioItem : calendarioList) {
+                if (calendarioItem.getIdade().getId() == idade.getId()) {
+                    listaVacinas.add(calendarioItem.getVacina());
+                    listaDoses.add(calendarioItem.getDose());
+                    listaIdades.add(calendarioItem.getIdade());
+                    Imunizacao imunizacao = imunizacaoPresenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{calendarioItem.getVacina().getId(), calendarioItem.getDose().getId(), idCartao});
+
+                    if (imunizacao != null) {
+                        listaImunizacoes.add(imunizacao);
+                    }
+                }
+            }
+        }
+
+        RecyclerView my_recycler_view = findViewById(R.id.cartao_lista_vacina_recyclerView);
+        my_recycler_view.setHasFixedSize(true);
+        adapter = new VacinaRVA(listaVacinas, listaDoses, listaIdades, listaImunizacoes, cartao, this);
         my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         my_recycler_view.setAdapter(adapter);
 

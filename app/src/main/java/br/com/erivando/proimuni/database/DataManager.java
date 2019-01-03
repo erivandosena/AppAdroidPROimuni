@@ -357,6 +357,11 @@ public class DataManager implements IDataManager {
     }
 
     @Override
+    public List<Calendario> obtemCalendariosPorVacina(String[] valores) {
+        return realmDataBase.findLike(valores[0], valores[1], Calendario.class);
+    }
+
+    @Override
     public List<Calendario> obtemCalendarios() {
         return realmDataBase.findAll(Calendario.class);
     }

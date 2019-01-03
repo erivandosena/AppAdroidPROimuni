@@ -24,10 +24,12 @@ import br.com.erivando.proimuni.database.model.Dose;
 import br.com.erivando.proimuni.database.model.Idade;
 import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.di.ApplicationContext;
+import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  * Projeto:     VacinasKIDS
@@ -193,7 +195,14 @@ public class RealmDataBase implements IRealm {
     @Override
     public <T extends RealmObject> List<T> findAll(String campo, String valor, Class<T> clazz) {
         Realm realm = getRealmInstance();
-        return realm.where(clazz).equalTo(campo, valor).findAll();
+        return realm.where(clazz).equalTo(campo, valor, Case.INSENSITIVE).findAll();
+    }
+
+    @Override
+    public <T extends RealmObject> List<T> findLike(String campo, String valor, Class<T> clazz) {
+        Realm realm = getRealmInstance();
+        return realm.where(clazz).contains(campo, valor, Case.INSENSITIVE).findAll();
+        //return realm.where(clazz).like(campo, valor, Case.INSENSITIVE).findAllSortedAsync(clazz, Sort.ASCENDING);
     }
 
     @Override

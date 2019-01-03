@@ -31,6 +31,16 @@ public class CalendarioPresenter<V extends CalendarioMvpView> extends BasePresen
     }
 
     @Override
+    public List<Calendario> onCalendariosPorVacina(String[] valores) {
+        return getIDataManager().obtemCalendariosPorVacina(valores);
+    }
+
+    @Override
+    public List<Calendario> onCalendariosPorNomeVacina(String[] valores) {
+        return getIDataManager().obtemCalendarios(valores);
+    }
+
+    @Override
     public Calendario onCalendarioCadastrado() {
         return getIDataManager().obtemCalendario();
     }

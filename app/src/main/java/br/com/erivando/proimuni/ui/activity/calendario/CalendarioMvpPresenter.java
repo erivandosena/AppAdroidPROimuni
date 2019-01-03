@@ -19,6 +19,10 @@ public interface CalendarioMvpPresenter<V extends CalendarioMvpView> extends Mvp
 
     List<Calendario> onCalendariosCadastrados();
 
+    List<Calendario> onCalendariosPorVacina(String[] valores);
+
+    List<Calendario> onCalendariosPorNomeVacina(String[] valores);
+
     Calendario onCalendarioCadastrado();
 
 }

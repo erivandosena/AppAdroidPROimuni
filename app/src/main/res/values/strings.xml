@@ -160,6 +160,7 @@
     <string name="text_valida_crianca">Informe uma criança</string>
     <string name="text_crianca">Criança</string>
     <string name="text_vacina">Vacina</string>
+    <string name="hint_text_vacina">Nome da vacina</string>
     <string name="texto_aviso_usuario_nao_cadastrado">É necessário cadastrar o usuário!</string>
     <string name="texto_aviso_crianca_nao_cadastrada">É necessário cadastrar uma crianca!</string>
     <string name="texto_aviso_cartao_nao_cadastrado">É necessário cadastrar um cartão!</string>
@@ -169,10 +170,11 @@
     <string name="text_lista_calendario_titulo">Calendário Vacinal</string>
     <string name="texto_aviso_remove_crianca">\nCriança removida!\n</string>
 
-    <!-- Cadastro Cartão -->
+    <!-- Cartão -->
     <string name="texto_aviso_cadastra_cartao">\nGerando o cartão da criança....\n</string>
     <string name="texto_aviso_atualiza_cartao">\nAtualizando dados no cartão....\n</string>
     <string name="texto_aviso_removendo_cartao">\nRemovendo cartão da crianca...\n</string>
+    <string name="aviso_vacina_nao_encontrada">Vacina não localizada!</string>
 
     <!-- Tabs -->
     <string name="title_tab1">Rede Pública</string>

@@ -135,7 +135,7 @@ dependencies {
     /* Fast Android Networking with RxJava2 */
     implementation 'com.amitshekhar.android:rx2-android-networking:1.0.2'
     /* Realm */
-    implementation 'io.realm:android-adapters:2.1.1'
+    implementation 'io.realm:android-adapters:3.1.0'
     /* RxJava 2 */
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     /* Fast Android Networking */
