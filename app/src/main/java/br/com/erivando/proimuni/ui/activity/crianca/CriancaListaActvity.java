@@ -3,11 +3,9 @@ package br.com.erivando.proimuni.ui.activity.crianca;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -145,7 +143,7 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
             listaCriancas = criancas;
         } else {
             Toast.makeText(this, this.getString(R.string.texto_aviso_crianca_nao_cadastrada), Toast.LENGTH_LONG).show();
-            //openCriancaActivity();
+            openCriancaActivity();
         }
     }
 

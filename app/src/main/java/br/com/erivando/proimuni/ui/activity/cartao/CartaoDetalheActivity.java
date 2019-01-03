@@ -49,7 +49,6 @@ import br.com.erivando.proimuni.util.Uteis;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.realm.RealmList;
 
 import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 

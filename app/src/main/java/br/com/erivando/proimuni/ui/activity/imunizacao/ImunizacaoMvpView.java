@@ -15,4 +15,5 @@ public interface ImunizacaoMvpView extends MvpView {
 
     void openCartaoListaActivity(String acao);
 
+    void getNomeDose(String nomeDose);
 }

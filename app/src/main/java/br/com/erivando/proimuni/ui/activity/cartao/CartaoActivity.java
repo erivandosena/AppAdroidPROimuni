@@ -164,11 +164,11 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView {
             comboCartao.setAdapter(adapterCartao);
         } else {
             Toast.makeText(this, this.getString(R.string.texto_aviso_crianca_nao_cadastrada), Toast.LENGTH_LONG).show();
-            openCriancaActivity();
+            openCriancaListaActivity();
         }
     }
 
-    public void openCriancaActivity() {
+    public void openCriancaListaActivity() {
         startActivity(CriancaListaActvity.getStartIntent(this));
         finish();
     }

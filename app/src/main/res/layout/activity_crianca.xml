@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_nome_crianca"
                 android:inputType="textAutoComplete"
-                android:maxLength="30" />
+                android:maxLength="40" />
 
             <TextView
                 style="@style/TextStyle.TextView.Label"
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_text_nascimento"
                 android:inputType="date"
-                android:maxLength="30" />
+                android:maxLength="10" />
             <!--
             <TextView
                 style="@style/TextStyle.TextView.Label"

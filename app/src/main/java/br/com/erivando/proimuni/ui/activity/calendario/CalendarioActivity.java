@@ -2,14 +2,10 @@ package br.com.erivando.proimuni.ui.activity.calendario;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,7 +22,6 @@ import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.idade.IdadeMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.idade.IdadeMvpView;
-import br.com.erivando.proimuni.ui.activity.login.LoginActivity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.adapter.CalendarioRVA;
 import butterknife.BindView;

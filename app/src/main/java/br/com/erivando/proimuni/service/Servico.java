@@ -25,8 +25,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.inject.Inject;
 
@@ -45,6 +43,8 @@ import br.com.erivando.proimuni.di.component.ServiceComponent;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoDetalheActivity;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaActivity;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
+
+import static br.com.erivando.proimuni.util.Uteis.getCapitalizeNome;
 
 /**
  * Projeto:     VacinasKIDS
@@ -190,7 +190,7 @@ public class Servico extends Service {
 
             // notificação inicial geral
             if (imunizacoes.isEmpty()) {
-                String nomeUsuario = (usuario != null && usuario.getUsuaNome() != null) ? "Olá "+usuario.getUsuaNome() : "Olá "+ iDataManager.getCurrentUserName();
+                String nomeUsuario = (usuario != null && usuario.getUsuaNome() != null) ? "Olá "+usuario.getUsuaNome() : "Olá "+ getCapitalizeNome(iDataManager.getCurrentUserName());
                 repeatedNotificationInicial = showLocalNotification(context, CriancaActivity.class,
                         nomeUsuario + ", é importante que você cadastre sua(s) criança(s) para usufruir dos benefícios do "+getResources().getString(R.string.app_name)+". Vamos lá! Inicie o preenchimento do cartão vacinal!",
                         "Cadastre um Cartão Vacinal",

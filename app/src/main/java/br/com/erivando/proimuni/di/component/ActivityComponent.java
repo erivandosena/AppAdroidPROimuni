@@ -78,4 +78,5 @@ public interface ActivityComponent {
     void inject(NotificacaoActivity activityInject);
 
     void inject(CriancaListaImunizacao activityInject);
+
 }

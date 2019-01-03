@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.IDataManager;
 import br.com.erivando.proimuni.database.model.Cartao;
 import br.com.erivando.proimuni.database.model.Dose;
@@ -16,7 +17,6 @@ import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.mvp.base.BasePresenter;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import br.com.erivando.proimuni.util.rx.SchedulerProvider;
-import br.com.erivando.proimuni.R;
 import io.reactivex.disposables.CompositeDisposable;
 
 import static br.com.erivando.proimuni.util.Uteis.getCapitalizeNome;
@@ -127,5 +127,12 @@ public class ImunizacaoPresenter<V extends ImunizacaoMvpView> extends BasePresen
     public Imunizacao onImunizacaoCadastrada(String[] strings, Long[] longs) {
         return getIDataManager().obtemImunizacao(strings, longs);
     }
+
+    @Override
+    public void onNomeDosePorId(Long id) {
+        Dose dose = getIDataManager().obtemDose(id);
+        getMvpView().getNomeDose(dose.getDoseDescricao());
+    }
+
 
 }

@@ -2,12 +2,10 @@ package br.com.erivando.proimuni.ui.fragment.vacina;
 
 import android.support.v7.widget.CardView;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import br.com.erivando.proimuni.mvp.base.BaseViewHolder;
 import br.com.erivando.proimuni.R;
+import br.com.erivando.proimuni.mvp.base.BaseViewHolder;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

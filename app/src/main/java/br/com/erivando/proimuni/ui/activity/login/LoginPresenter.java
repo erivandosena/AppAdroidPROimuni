@@ -43,7 +43,6 @@ import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecovera
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.Base64;
 import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
@@ -53,6 +52,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -62,10 +62,14 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.inject.Inject;
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
+import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -85,6 +89,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import static android.app.Activity.RESULT_OK;
 import static br.com.erivando.proimuni.util.Uteis.base64ParaBitmap;
 import static br.com.erivando.proimuni.util.Uteis.bitmapParaUri;
+import static br.com.erivando.proimuni.util.Uteis.getCapitalizeNome;
 import static br.com.erivando.proimuni.util.Uteis.getPathFromUri;
 import static br.com.erivando.proimuni.util.Uteis.hasPermissoes;
 
@@ -184,7 +189,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                 getMvpView().onError(R.string.text_valida_usuario);
                 return null;
             }
-        }finally {
+        } finally {
             getMvpView().hideLoading();
         }
     }
@@ -268,7 +273,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
                     @Override
                     public void onCancel() {
-                       // getMvpView().hideLoading();
+                        // getMvpView().hideLoading();
                         Toast.makeText(AppAplicacao.contextApp, R.string.facebook_cancel_login, Toast.LENGTH_SHORT).show();
                     }
 
@@ -402,7 +407,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             Toast.makeText(AppAplicacao.contextApp, R.string.google_cancel_login, Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } finally {
-           // getMvpView().hideLoading();
+            // getMvpView().hideLoading();
         }
     }
 
@@ -422,6 +427,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
     @Override
     public void enviaSenhaPorEmail(View view, String login) {
+        //BACKUP_FILE = null;
         try {
             if (login == null || login.isEmpty() || login.length() < 4 || login.length() > 20 || login.matches("^[a-zA-Z]+ [a-zA-Z]+.*")) {
                 getMvpView().onError(R.string.text_valida_login);
@@ -436,7 +442,19 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         } catch (Exception e) {
             //Log.e("enviaSenhaPorEmail: ", e.getMessage());
             e.printStackTrace();
-            return;
+            //return;
+        }
+    }
+
+    @Override
+    public void enviaBackupPorEmail(View view) {
+        try {
+            //usuario = getIDataManager().obtemUsuario();
+            getResultsFromApi(view);
+            Log.e("enviaBackupPorEmail", String.valueOf(view));
+        } catch (Exception e) {
+            e.printStackTrace();
+            //return;
         }
     }
 
@@ -518,6 +536,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
     @Override
     public void getResultsFromApi(View view) {
+        Log.e("getResultsFromApi", String.valueOf(view));
         if (!isGooglePlayServicesAvailable()) {
             acquireGooglePlayServices();
         } else if (googleAccountCredential.getSelectedAccountName() == null) {
@@ -525,6 +544,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         } else if (!internetDetector.checkMobileInternetConn()) {
             showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.aviso_sem_internet));
         } else {
+            Log.e("CredentialRequestTask", String.valueOf(this));
             new CredentialRequestTask(this, googleAccountCredential).execute();
         }
     }
@@ -568,17 +588,74 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             String user = "me";
             String to = usuario.getUsuaEmail();
             String from = googleAccountCredential.getSelectedAccountName();
-            String subject = AppAplicacao.contextApp.getResources().getString(R.string.texto_email_assunto);
-            String body = AppAplicacao.contextApp.getResources().getString(R.string.texto_email_senha) + " " + usuario.getUsuaNome() + "\n\n" + AppAplicacao.contextApp.getResources().getString(R.string.texto_envio_senha) + " " + usuario.getUsuaSenha() + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + AppAplicacao.contextApp.getResources().getString(R.string.app_name) + "\n" + AppAplicacao.contextApp.getResources().getString(R.string.app_slogan);
+            String subject = AppAplicacao.contextApp.getResources().getString(R.string.texto_email_assunto) + " " + getMvpView().getContextActivity().getString(R.string.app_name);
+            String body = AppAplicacao.contextApp.getResources().getString(R.string.texto_email_senha) + " " + usuario.getUsuaNome() + "\n\n" + AppAplicacao.contextApp.getResources().getString(R.string.texto_envio_senha) + " " + usuario.getUsuaSenha() + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + AppAplicacao.contextApp.getResources().getString(R.string.app_name) + "\n\n";
             MimeMessage mimeMessage;
             String response = "";
             try {
-                mimeMessage = createEmail(to, from, subject, body);
+                mimeMessage = createEmail(to, from, subject, body, null);
                 response = sendMessage(service, user, mimeMessage);
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
             return response;
+        }
+
+        private String getDataFromApi(String attach, String usuario, String email) throws java.io.IOException {
+            // Obtendo valores para, email, assunto, mensagem e anexo
+            String user = "me";
+            String from = googleAccountCredential.getSelectedAccountName();
+            String subject = getMvpView().getContextActivity().getResources().getString(R.string.texto_email_anexo_backup) + " " + getMvpView().getContextActivity().getString(R.string.app_name);
+            String body = getMvpView().getContextActivity().getResources().getString(R.string.texto_email_senha) + " " + getCapitalizeNome(usuario) + "\n\n" + getMvpView().getContextActivity().getResources().getString(R.string.texto_envio_anexo) + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + getMvpView().getContextActivity().getResources().getString(R.string.app_name) + "\n\n";
+            File anexo = new File(attach);
+            MimeMessage mimeMessage;
+            String response = "";
+            try {
+                mimeMessage = createEmail(email, from, subject, body, anexo);
+                response = sendMessage(service, user, mimeMessage);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+
+        // Método para criar e-mails Params
+        private MimeMessage createEmail(String to, String from, String subject, String bodyText, File anexo) throws MessagingException {
+            Properties props = new Properties();
+            Session session = Session.getDefaultInstance(props, null);
+
+            MimeMessage email = new MimeMessage(session);
+            InternetAddress tAddress = new InternetAddress(to);
+            InternetAddress fAddress = new InternetAddress(from);
+
+            email.setFrom(fAddress);
+            email.addRecipient(javax.mail.Message.RecipientType.TO, tAddress);
+            email.setSubject(subject);
+
+            // Crie o objeto Multipart e adicione objetos MimeBodyPart a este objeto
+            Multipart multipart = new MimeMultipart();
+
+            BodyPart textBody = new MimeBodyPart();
+            textBody.setText(bodyText);
+            multipart.addBodyPart(textBody);
+
+            if (anexo != null) {
+                DataSource ds = new FileDataSource(anexo) {
+                    public String getContentType() {
+                        return "application/octet-stream";
+                    }
+                };
+                BodyPart mbp = new MimeBodyPart();
+                mbp.setDataHandler(new DataHandler(ds));
+                mbp.setFileName(anexo.getName());
+                mbp.setDisposition(Part.ATTACHMENT);
+                multipart.addBodyPart(mbp);
+            }
+
+            //Definir o objeto multipart para o objeto de mensagem
+            email.setContent(multipart);
+
+            return email;
         }
 
         // Método para envio do e-mail
@@ -588,6 +665,25 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             message = service.users().messages().send(userId, message).execute();
             return message.getId();
         }
+
+        private Message createMessageWithEmail(MimeMessage email) throws MessagingException, IOException {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            email.writeTo(bytes);
+            String encodedEmail = com.google.api.client.util.Base64.encodeBase64URLSafeString(bytes.toByteArray());
+            Message message = new Message();
+            message.setRaw(encodedEmail);
+            return message;
+        }
+
+        /*
+        // Método para envio do e-mail
+        private String sendMessage(Gmail service, String userId, MimeMessage email) throws MessagingException, IOException {
+            Message message = createMessageWithEmail(email);
+            // Método oficial do GMail para enviar e-mail com OAuth 2.0
+            message = service.users().messages().send(userId, message).execute();
+            return message.getId();
+        }
+
 
         // Método para criar e-mails Params
         private MimeMessage createEmail(String to, String from, String subject, String bodyText) throws MessagingException {
@@ -623,6 +719,26 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             message.setRaw(encodedEmail);
             return message;
         }
+        */
+
+        /*
+        @Override
+        protected String doInBackground(Void... voids) {
+            Log.e("doInBackground", String.valueOf(BACKUP_FILE));
+            try {
+                if (BACKUP_FILE == null) {
+                    return getDataFromApi();
+                } else {
+                    return getDataFromApi();
+                }
+
+            } catch (Exception e) {
+                lastError = e;
+                cancel(true);
+                return null;
+            }
+        }
+        */
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -634,6 +750,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                 return null;
             }
         }
+
 
         @Override
         protected void onPreExecute() {

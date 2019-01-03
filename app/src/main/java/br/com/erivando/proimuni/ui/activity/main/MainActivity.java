@@ -8,8 +8,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.NetworkOnMainThreadException;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
@@ -28,13 +30,14 @@ import android.widget.Toast;
 import com.facebook.login.LoginManager;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Calendar;
 
 import javax.inject.Inject;
 
-import br.com.erivando.proimuni.BuildConfig;
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.backup.RealmBackupRestore;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
@@ -56,7 +59,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static br.com.erivando.proimuni.database.backup.RealmBackupRestore.BACKUP_FILE;
 import static br.com.erivando.proimuni.util.Uteis.exibeAvaliacaoDialog;
+import static br.com.erivando.proimuni.util.Uteis.getCapitalizeNome;
 
 /**
  * Projeto:     VacinasKIDs
@@ -76,6 +81,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Inject
     ImunizacaoMvpPresenter<ImunizacaoMvpView> imunizacaoPresenter;
+
+    //@PreferenceInfo
+    //String prefFileName;
+
+    //private PreferencesHelper preferencesHelper;
 
     //@BindView(R.id.toolbar)
     //Toolbar toolbar;
@@ -119,9 +129,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     private RoundedImageView perfilImageView;
 
-    private RealmBackupRestore backupRestore;
-
     private ImageButton buttonBarDrawerToggleClose;
+
+    private RealmBackupRestore backupRestore;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -141,13 +151,15 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
         presenter.onAttach(this);
 
+        //preferencesHelper = (PreferencesHelper) this.getSharedPreferences(prefFileName, Context.MODE_PRIVATE);
+
         backupRestore = new RealmBackupRestore(this);
 
         setUp();
 
         buttonBarDrawerToggle.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 if (!drawer.isDrawerOpen(GravityCompat.START))
                     drawer.openDrawer(Gravity.START);
                 else
@@ -157,13 +169,15 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
         buttonBarDrawerToggleClose.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 if (!drawer.isDrawerOpen(Gravity.END))
                     drawer.closeDrawer(Gravity.START);
                 else
                     drawer.closeDrawer(Gravity.END);
+
             }
         });
+
         hideLoading();
     }
 
@@ -268,13 +282,17 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             ((Animatable) drawable).start();
         }
         switch (item.getItemId()) {
-            case R.id.nav_item_usuario:
-                return true;
-            case R.id.nav_item_crianca:
-                return true;
             case R.id.nav_item_cartao:
+                onCartaoVacinal();
                 return true;
-            case R.id.nav_item_posto:
+            case R.id.nav_item_vacina:
+                onVacina();
+                return true;
+            case R.id.nav_item_calendario:
+                onCalendarioVacinal();
+                return true;
+            case R.id.nav_item_postos:
+                onMapa();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -308,7 +326,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         nomeTextView = headerLayout.findViewById(R.id.text_nome_perfil);
         emailTextView = headerLayout.findViewById(R.id.text_email_perfil);
         buttonBarDrawerToggleClose = headerLayout.findViewById(R.id.btn_drawer_close);
-
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -468,7 +485,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void updateUserName(String currentUserName) {
         nomeTextView.setText(currentUserName);
-        textViewMenu.setText(currentUserName);
+        textViewMenu.setText(getCapitalizeNome(currentUserName));
     }
 
     @Override
@@ -484,6 +501,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             Bitmap bitmap = BitmapFactory.decodeStream(in);
             perfilImageView.setImageBitmap(bitmap);
             roundedImageMenu.setImageBitmap(bitmap);
+        } catch (NetworkOnMainThreadException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -554,14 +573,53 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     private void executaBackup() {
+        backupRestore = new RealmBackupRestore(AppAplicacao.contextApp);
+
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
         alertDialog.setIcon(R.drawable.ic_launcher_round);
         alertDialog.setTitle(getResources().getString(R.string.menu_backup_copia));
         alertDialog.setCancelable(false);
-        alertDialog.setMessage("Esta cópia de seguranca substituirá a cópia anterior.\n\nConfirme Sim para continuar ou Não para cancelar.");
+        alertDialog.setMessage("Esta cópia de seguranca substituirá localmente a cópia anterior.\n\nConfirme Sim para continuar ou Não para cancelar.");
         alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+
                 backupRestore.backup();
+
+                if(BACKUP_FILE != null && emailTextView.getText() != null) {
+
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContextActivity());
+                    alertDialog.setIcon(R.drawable.ic_launcher_round);
+                    alertDialog.setTitle(getContextActivity().getResources().getString(R.string.titulo_backup_copia_email));
+                    alertDialog.setCancelable(false);
+                    alertDialog.setMessage("Para maior segurança, uma cópia dos dados pode ser enviada para outros dispositivos através de Bluetooth ou E-mail.(Recomendado)\n\nConfirme Sim para continuar ou Não para cancelar.");
+                    alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            File filelocation = new File(BACKUP_FILE);
+                            Uri path = Uri.fromFile(filelocation);
+                            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                            emailIntent.setType("text/plain");
+                            String to[] = {emailTextView.getText().toString()};
+                            emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+                            emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse( "file://"+path));
+                            emailIntent.putExtra(Intent.EXTRA_SUBJECT, getContextActivity().getResources().getString(R.string.texto_email_anexo_backup) + " " + getContextActivity().getString(R.string.app_name));
+                            //emailIntent.putExtra(Intent.EXTRA_TEXT, getContextActivity().getResources().getString(R.string.texto_email_senha) + " " + getCapitalizeNome(nomeTextView.getText().toString()) + "\n\n" + getContextActivity().getResources().getString(R.string.texto_envio_anexo) + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + getContextActivity().getResources().getString(R.string.app_name) + "\n" + getContextActivity().getResources().getString(R.string.app_slogan)+"\n\n");
+                            emailIntent.putExtra(Intent.EXTRA_TEXT, getContextActivity().getResources().getString(R.string.texto_envio_anexo) +" "+ getCapitalizeNome(nomeTextView.getText().toString()) + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + getContextActivity().getResources().getString(R.string.app_name) + "\n\n");
+                            startActivity(Intent.createChooser(emailIntent , getContextActivity().getResources().getString(R.string.titulo_backup_copia_email)));
+
+                            //loginPresenter.enviaBackupPorEmail(view);
+                        }
+                    });
+
+                    alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    alertDialog.show();
+
+
+                }
             }
         });
         alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
@@ -573,6 +631,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     private void executaRestauracao() {
+        backupRestore = new RealmBackupRestore(AppAplicacao.contextApp);
+
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
         alertDialog.setIcon(R.drawable.ic_launcher_round);
         alertDialog.setTitle(getResources().getString(R.string.menu_backup_restaura));
@@ -580,12 +640,13 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         alertDialog.setMessage("Esta restauração substituirá seus dados atuais do aplicativo.\n\nConfirme Sim para continuar ou Não para cancelar.");
         alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                //presenter.onExecutaBackupRestore().restore();
                 backupRestore.restore();
                 new AlertDialog.Builder(MainActivity.this)
                         .setIcon(R.drawable.ic_launcher_round)
                         .setTitle(getResources().getString(R.string.app_name))
-                        .setMessage("O aplicativo será fechado para concluir o procedimento de restauração dos dados.")
-                        .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
+                        .setMessage("É necessário sair do aplicativo para concluir o procedimento de restauração dos dados.")
+                        .setPositiveButton("Sair", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 try {

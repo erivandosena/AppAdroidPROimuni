@@ -1,7 +1,6 @@
 package br.com.erivando.proimuni.util.geolocalizacao;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
 

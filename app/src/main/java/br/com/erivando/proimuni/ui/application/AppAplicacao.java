@@ -11,7 +11,6 @@ import com.facebook.appevents.AppEventsLogger;
 import javax.inject.Inject;
 
 import br.com.erivando.proimuni.BuildConfig;
-import br.com.erivando.proimuni.database.IDataManager;
 import br.com.erivando.proimuni.di.component.ApplicationComponent;
 import br.com.erivando.proimuni.di.component.DaggerApplicationComponent;
 import br.com.erivando.proimuni.di.module.ApplicationModule;
@@ -29,8 +28,8 @@ public class AppAplicacao extends MultiDexApplication {
 
     public static Context contextApp;
 
-    @Inject
-    IDataManager iDataManager;
+    //@Inject
+    //IDataManager iDataManager;
 
     @Inject
     CalligraphyConfig calligraphyConfig;

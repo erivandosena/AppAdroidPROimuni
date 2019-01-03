@@ -26,7 +26,6 @@ import br.com.erivando.proimuni.di.component.DaggerActivityComponent;
 import br.com.erivando.proimuni.di.module.ActivityModule;
 import br.com.erivando.proimuni.mvp.MvpView;
 import br.com.erivando.proimuni.ui.activity.login.LoginActivity;
-import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import br.com.erivando.proimuni.util.CommonUtils;
 import br.com.erivando.proimuni.util.NetworkUtils;

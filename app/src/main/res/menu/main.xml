@@ -43,25 +43,25 @@ android:showAsAction
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/nav_item_usuario"
-        android:icon="@drawable/ic_usuario"
-        android:title="@string/menu_usuario"
-        app:showAsAction="ifRoom|withText" />
-
-    <item
-        android:id="@+id/nav_item_crianca"
-        android:icon="@drawable/ic_crianca"
-        android:title="@string/menu_crianca"
-        app:showAsAction="ifRoom|withText" />
-
-    <item
         android:id="@+id/nav_item_cartao"
         android:icon="@drawable/ic_cartao"
         android:title="@string/menu_cartao"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="never|withText" />
 
     <item
-        android:id="@+id/nav_item_posto"
+        android:id="@+id/nav_item_vacina"
+        android:icon="@drawable/ic_vacina"
+        android:title="@string/menu_vacina"
+        app:showAsAction="never|withText" />
+
+    <item
+        android:id="@+id/nav_item_calendario"
+        android:icon="@drawable/ic_calendario"
+        android:title="@string/menu_calendario"
+        app:showAsAction="never|withText" />
+
+    <item
+        android:id="@+id/nav_item_postos"
         android:icon="@drawable/ic_posto"
         android:title="@string/menu_posto"
         app:showAsAction="never|withText" />

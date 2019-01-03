@@ -183,4 +183,5 @@ public class ActivityModule {
     NotificacaoMvpPresenter<NotificacaoMvpView> provideNotificacaoPresenter(NotificacaoPresenter<NotificacaoMvpView> presenter) {
         return presenter;
     }
+
 }

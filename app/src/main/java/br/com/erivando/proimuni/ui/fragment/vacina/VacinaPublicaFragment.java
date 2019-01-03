@@ -3,7 +3,6 @@ package br.com.erivando.proimuni.ui.fragment.vacina;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -72,6 +71,6 @@ public class VacinaPublicaFragment extends BaseFragment implements VacinaMvpView
 
     @Override
     public Context getContextActivity() {
-        return getContext();
+        return getContextActivity();
     }
 }

@@ -1,7 +1,5 @@
 package br.com.erivando.proimuni.util.geolocalizacao;
 
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

@@ -9,12 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.model.Dose;
 import br.com.erivando.proimuni.database.model.Idade;
 import br.com.erivando.proimuni.database.model.Vacina;
-import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaDetalheActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -110,7 +109,7 @@ public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRV
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   // Toast.makeText(v.getContext(), textTituloVacina.getText(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(v.getContextActivity(), textTituloVacina.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
             */

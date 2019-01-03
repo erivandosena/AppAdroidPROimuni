@@ -9,10 +9,6 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import br.com.erivando.proimuni.R;
 
 /**

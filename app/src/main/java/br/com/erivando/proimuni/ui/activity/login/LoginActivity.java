@@ -10,8 +10,6 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,8 +29,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static br.com.erivando.proimuni.ui.activity.login.LoginPresenter.RC_SIGN_IN;
-import static br.com.erivando.proimuni.util.Uteis.habilitaTelaCheia;
-import static br.com.erivando.proimuni.util.Uteis.statusBarTransparente;
 
 /**
  * Projeto:     VacinasKIDS

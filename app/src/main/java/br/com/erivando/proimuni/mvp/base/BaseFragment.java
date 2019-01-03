@@ -14,10 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import br.com.erivando.proimuni.di.component.ActivityComponent;
-import br.com.erivando.proimuni.di.component.DaggerActivityComponent;
-import br.com.erivando.proimuni.di.module.ActivityModule;
 import br.com.erivando.proimuni.mvp.MvpView;
-import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import br.com.erivando.proimuni.util.CommonUtils;
 import butterknife.Unbinder;
 

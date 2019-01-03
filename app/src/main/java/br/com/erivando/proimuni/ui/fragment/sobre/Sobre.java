@@ -3,15 +3,12 @@ package br.com.erivando.proimuni.ui.fragment.sobre;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import javax.inject.Inject;
 
-import br.com.erivando.proimuni.BuildConfig;
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
@@ -19,7 +16,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-;import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
+import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
+
+;
 
 /**
  * Projeto:     VacinasKIDS

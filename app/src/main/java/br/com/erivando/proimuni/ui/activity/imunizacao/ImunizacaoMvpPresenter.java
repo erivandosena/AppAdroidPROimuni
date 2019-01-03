@@ -26,4 +26,5 @@ public interface ImunizacaoMvpPresenter<V extends ImunizacaoMvpView> extends Mvp
 
     Imunizacao onImunizacaoCadastrada(String[] strings, Long[] longs);
 
+    void onNomeDosePorId(Long id);
 }

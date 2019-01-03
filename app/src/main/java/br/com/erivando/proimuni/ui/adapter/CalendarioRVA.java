@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -63,7 +62,7 @@ public class CalendarioRVA extends RecyclerView.Adapter<CalendarioRVA.ItemRowHol
         itemRowHolder.btnInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), sectionName, Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContextActivity(), sectionName, Toast.LENGTH_SHORT).show();
             }
         });
         */

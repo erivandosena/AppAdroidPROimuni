@@ -91,4 +91,5 @@ public class Firebase extends BaseActivity implements LoginMvpView {
     public Activity getContextActivity() {
         return null;
     }
+
 }

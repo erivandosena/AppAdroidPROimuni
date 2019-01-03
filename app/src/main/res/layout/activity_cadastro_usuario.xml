@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_nome_completo"
                 android:inputType="textAutoComplete"
-                android:maxLength="30" />
+                android:maxLength="40" />
 
             <TextView
                 style="@style/TextStyle.TextView.Label"
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_usuario_email"
                 android:inputType="textEmailAddress"
-                android:maxLength="40" />
+                android:maxLength="50" />
 
             <TextView
                 style="@style/TextStyle.TextView.Label"

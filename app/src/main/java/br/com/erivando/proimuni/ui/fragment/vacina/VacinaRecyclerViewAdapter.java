@@ -3,21 +3,17 @@ package br.com.erivando.proimuni.ui.fragment.vacina;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.request.RequestOptions;
-
 import java.util.List;
 
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaDetalheActivity;
-import butterknife.BindView;
 
 /**
  * Projeto:     VacinasKIDS

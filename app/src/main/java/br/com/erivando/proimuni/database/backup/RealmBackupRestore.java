@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.File;
@@ -30,20 +29,15 @@ import io.realm.internal.IOException;
 
 public class RealmBackupRestore {
 
-    private final static String TAG = RealmBackupRestore.class.getName();
-    Context context = AppAplicacao.contextApp;
+    public static String BACKUP_FILE;
     // Permissões de armazenamento
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-
-    };
+    private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+    Context context = AppAplicacao.contextApp;
     private File EXPORT_REALM_EXTERNAL_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
     private File EXPORT_REALM_INTERNAL_PATH = new File(context.getFilesDir() + File.separator + Environment.DIRECTORY_DOWNLOADS);
     private String EXPORT_REALM_FILE_NAME = context.getResources().getString(R.string.app_name) + ".realm";
     private String IMPORT_REALM_FILE_NAME = "default.realm"; // Substituir se estiver usando um nome de banco de dados personalizado
-    //private Activity activity;
     private Realm realm;
 
     public RealmBackupRestore(Context context) {
@@ -63,38 +57,43 @@ public class RealmBackupRestore {
         //Primeiro, verifique se temos permissões de armazenamento
         if (checkStoragePermissions() == 0) {
             File exportRealmFile = null;
+
+            //Log.d(TAG, "Realm DB Path = " + this.dbPath());
             try {
-                //Log.d(TAG, "Realm DB Path = " + this.dbPath());
-                try {
-                    //criar um arquivo de menu_backup_copia
-                    if (isExternalStorage()) {
-                        EXPORT_REALM_EXTERNAL_PATH.mkdirs();
-                        exportRealmFile = new File(EXPORT_REALM_EXTERNAL_PATH, EXPORT_REALM_FILE_NAME);
-                        //Log.e("EXTERNAL_PATH ", String.valueOf(EXPORT_REALM_EXTERNAL_PATH));
-                    } else {
-                        EXPORT_REALM_INTERNAL_PATH.mkdirs();
-                        exportRealmFile = new File(EXPORT_REALM_INTERNAL_PATH, EXPORT_REALM_FILE_NAME);
-                        //Log.e("INTERNAL_PATH ", String.valueOf(EXPORT_REALM_INTERNAL_PATH));
-                    }
-
-                   // Log.e("exportRealmFile: ", String.valueOf(exportRealmFile.getAbsoluteFile()));
-
-                    //se o arquivo já existir, exclua-o
-                    if (exportRealmFile.exists())
-                        exportRealmFile.delete();
-
-                    // copiar o Realm atual para o arquivo de menu_backup_copia
-                    realm.writeCopyTo(exportRealmFile);
-                    Toast.makeText(context, "Cópia dos dados concluída!\nDisponível em Downloads", Toast.LENGTH_LONG).show();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
+                //criar um arquivo de menu_backup_copia
+                if (isExternalStorage()) {
+                    EXPORT_REALM_EXTERNAL_PATH.mkdirs();
+                    exportRealmFile = new File(EXPORT_REALM_EXTERNAL_PATH, EXPORT_REALM_FILE_NAME);
+                    //Log.e("EXTERNAL_PATH ", String.valueOf(EXPORT_REALM_EXTERNAL_PATH));
+                } else {
+                    EXPORT_REALM_INTERNAL_PATH.mkdirs();
+                    exportRealmFile = new File(EXPORT_REALM_INTERNAL_PATH, EXPORT_REALM_FILE_NAME);
+                    //Log.e("INTERNAL_PATH ", String.valueOf(EXPORT_REALM_INTERNAL_PATH));
                 }
-                //String msg = "Arquivo exportado para o local: " + EXPORT_REALM_PATH + "/" + EXPORT_REALM_FILE_NAME;
-                //Log.d(TAG, msg);
-            } finally {
-                realm.close();
+
+                //se o arquivo já existir, exclua-o
+                if (exportRealmFile.exists())
+                    exportRealmFile.delete();
+
+                // copiar o Realm atual para o arquivo de menu_backup_copia
+                realm.beginTransaction();
+                realm.writeCopyTo(exportRealmFile);
+                realm.commitTransaction();
+
+                BACKUP_FILE = exportRealmFile.getAbsolutePath();
+                Toast.makeText(context, "\nCópia dos dados concluída!\nDisponível localmente em Downloads.\n", Toast.LENGTH_LONG).show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                realm.cancelTransaction();
+                e.printStackTrace();
             }
+
+            if (!realm.isClosed())
+                realm.close();
+            //String msg = "Arquivo exportado para o local: " + EXPORT_REALM_PATH + "/" + EXPORT_REALM_FILE_NAME;
+            //Log.d(TAG, msg);
         } else {
             Toast.makeText(context, "Necessário conceder permissões.", Toast.LENGTH_LONG).show();
         }

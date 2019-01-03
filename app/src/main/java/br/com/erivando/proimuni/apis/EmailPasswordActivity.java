@@ -77,7 +77,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
             return;
         }
 
-       // showProgressDialog();
+        // showProgressDialog();
 
         // [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -98,7 +98,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
                         }
 
                         // [START_EXCLUDE]
-                       // hideProgressDialog();
+                        // hideProgressDialog();
                         // [END_EXCLUDE]
                     }
                 });
@@ -111,7 +111,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
             return;
         }
 
-      //  showProgressDialog();
+        //  showProgressDialog();
 
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
@@ -133,9 +133,9 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
 
                         // [START_EXCLUDE]
                         if (!task.isSuccessful()) {
-                         //   mStatusTextView.setText(R.string.auth_failed);
+                            //   mStatusTextView.setText(R.string.auth_failed);
                         }
-                     //   hideProgressDialog();
+                        //   hideProgressDialog();
                         // [END_EXCLUDE]
                     }
                 });
@@ -149,7 +149,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
 
     private void sendEmailVerification() {
         // Disable button
-       // findViewById(R.id.verifyEmailButton).setEnabled(false);
+        // findViewById(R.id.verifyEmailButton).setEnabled(false);
 
         // Send verification email
         // [START send_email_verification]
@@ -160,7 +160,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
                     public void onComplete(@NonNull Task<Void> task) {
                         // [START_EXCLUDE]
                         // Re-enable button
-                     //   findViewById(R.id.verifyEmailButton).setEnabled(true);
+                        //   findViewById(R.id.verifyEmailButton).setEnabled(true);
 
                         if (task.isSuccessful()) {
                             Toast.makeText(EmailPasswordActivity.this,
@@ -201,7 +201,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
     }
 
     private void updateUI(FirebaseUser user) {
-      //  hideProgressDialog();
+        //  hideProgressDialog();
         /*
         if (user != null) {
             mStatusTextView.setText(getString(R.string.emailpassword_status_fmt, user.getEmail(), user.isEmailVerified()));
@@ -246,6 +246,6 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public Context getContextActivity() {
-        return null;
+        return this;
     }
 }

@@ -17,8 +17,6 @@ import io.reactivex.disposables.CompositeDisposable;
 
 public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> implements MainMvpPresenter<V> {
 
-    private static final String TAG = "MainPresenter";
-
     @Inject
     public MainPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(iDataManager, schedulerProvider, compositeDisposable);

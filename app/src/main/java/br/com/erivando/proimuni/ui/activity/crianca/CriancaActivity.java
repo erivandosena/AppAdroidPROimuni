@@ -20,16 +20,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
 
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.model.Crianca;
-import br.com.erivando.proimuni.database.model.Usuario;
 import br.com.erivando.proimuni.imagem.RoundedImageButton;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
-import br.com.erivando.proimuni.ui.activity.cartao.CartaoActivity;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioActivity;
@@ -100,6 +99,8 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     private Crianca crianca;
     private Long id;
     private Bitmap imagemBitmapFoto;
+
+    private List<Crianca> listaCriancas;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, CriancaActivity.class);
@@ -201,8 +202,6 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
             presenter.onRemoveCrianca(id);
     }
 
-
-
     @Override
     public void onDestroy() {
         presenter.onDetach();
@@ -235,7 +234,11 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        openCriancaListaActivity("edita");
+        if (!listaCriancas.isEmpty())
+            openCriancaListaActivity("edita");
+        else {
+            openMainActivity();
+        }
     }
 
     @Override
@@ -251,8 +254,7 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
 
     @Override
     public void openCriancaActivity() {
-        startActivity(CriancaListaActvity.getStartIntent(this));
-        finish();
+
     }
 
     @Override
@@ -274,6 +276,8 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
 
 
     private void getCrianca() {
+
+        listaCriancas = presenter.onCriancaCadastrada();
         /*
         Usuario usuario = presenterUsuario.onUsuarioCadastrado();
         if (usuario != null) {

@@ -5,10 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -28,11 +25,8 @@ import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoDetalheActivity;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity;
-import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaMvpView;
-import br.com.erivando.proimuni.ui.application.AppAplicacao;
-import br.com.erivando.proimuni.util.HeaderView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -53,6 +47,9 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
     ImunizacaoMvpPresenter<ImunizacaoMvpView> presenter;
     @Inject
     VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
+
+    @BindView(R.id.text_nome_dose)
+    public TextView mTextDose;
 
     @BindView(R.id.text_nome_agente)
     public TextView mTextAgente;
@@ -163,9 +160,8 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
             idCartao = intent.getLongExtra("cartao", 0L);
 
             Vacina vacina = vacinaPresenter.onVacinaCadastrada(idVacina);
-            //floatHeaderView.bindTo(null, vacina.getVaciNome());
-            //mTexVacinaDescricao.setText(vacina.getVaciDescricao());
             textViewTituloToobar.setText(vacina.getVaciNome());
+            presenter.onNomeDosePorId(idDose);
 
             if (presenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{idVacina, idDose, idCartao}) != null) {
                 new AlertDialog.Builder(this)
@@ -227,6 +223,11 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
         intent.putExtra("cartaoLista", acao);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void getNomeDose(String nomeDose) {
+        mTextDose.setText(nomeDose);
     }
 
     @Override
