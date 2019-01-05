@@ -1,19 +1,15 @@
 package br.com.erivando.proimuni.ui.activity.splash;
 
 import android.annotation.TargetApi;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.os.SystemClock;
 
 import javax.inject.Inject;
 
 import br.com.erivando.proimuni.R;
-import br.com.erivando.proimuni.broadcast.Notificacao;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.login.LoginActivity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
@@ -57,7 +53,7 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
         this.context = getContextActivity();
 
-
+/*
         Intent alarm = new Intent(this.context, Notificacao.class);
         boolean alarmRunning = (PendingIntent.getBroadcast(this.context, 0, alarm, PendingIntent.FLAG_NO_CREATE) != null);
         long intervalo = (50000 * 1440) / 2L; //(60000 * 1440)/2L, pendingIntent); //1800000 milliseconds, or every 30 minutes.
@@ -66,6 +62,8 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), intervalo, pendingIntent);
         }
+
+      */
 
     }
 
@@ -86,11 +84,6 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
         Intent intent = MainActivity.getStartIntent(SplashActivity.this);
         startActivity(intent);
         finish();
-    }
-
-    @Override
-    public void startServico() {
-        // setAlarm();
     }
 
     @Override

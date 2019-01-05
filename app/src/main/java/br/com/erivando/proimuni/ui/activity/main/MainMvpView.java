@@ -11,7 +11,6 @@ import br.com.erivando.proimuni.mvp.MvpView;
  */
 
 public interface MainMvpView extends MvpView {
-    void showAboutFragment();
 
     void openLoginActivity();
 
@@ -43,13 +42,13 @@ public interface MainMvpView extends MvpView {
 
     void setupNavMenu();
 
-    void setupCardContainerView();
-
     void onFacebookSignOut();
 
     void onGooleSignOut();
 
     void onCompartilhaApp();
+
+    void onInicializacoes();
 
     //RealmBackupRestore onBackupRestore(Context context, String usuarioNome, String usuarioEmail);
 }

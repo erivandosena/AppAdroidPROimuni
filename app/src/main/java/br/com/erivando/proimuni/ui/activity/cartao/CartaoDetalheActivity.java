@@ -168,13 +168,14 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length() == 0)
-                    montaCartao();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if(s.length() == 0) {
+                    hideKeyboard();
+                    montaCartao();
+                }
             }
         });
 

@@ -1,5 +1,7 @@
 package br.com.erivando.proimuni.ui.activity.main;
 
+import android.content.Context;
+
 import br.com.erivando.proimuni.di.PerActivity;
 import br.com.erivando.proimuni.mvp.MvpPresenter;
 
@@ -20,11 +22,10 @@ public interface MainMvpPresenter<V extends MainMvpView> extends MvpPresenter<V>
 
     void onDrawerRateUsClick();
 
-    //void onDrawerMyFeedClick();
-
-    //void onViewInitialized();
-
-    //void onCardExhausted();
-
     void onNavMenuCreated();
+
+    void iniciaServicoNotificacao(Context context);
+
+    void finalizaServicoNotificacao(Context context);
+
 }

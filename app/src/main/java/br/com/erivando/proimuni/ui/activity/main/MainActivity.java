@@ -11,6 +11,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.NetworkOnMainThreadException;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -85,10 +87,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     //@PreferenceInfo
     //String prefFileName;
 
-    //private PreferencesHelper preferencesHelper;
-
-    //@BindView(R.id.toolbar)
-    //Toolbar toolbar;
+    //@BindView(R.id.text_versao_app)
+    //TextView versaoAppTextView;
 
     @BindView(R.id.drawer_view)
     DrawerLayout drawer;
@@ -96,14 +96,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @BindView(R.id.navigation_view)
     NavigationView navigationView;
 
-    //@BindView(R.id.text_versao_app)
-    //TextView versaoAppTextView;
-
     @BindView(R.id.btn_cartao)
     ImageButton cartaoImageButton;
-
-    //@BindView(R.id.btn_crianca)
-    //ImageButton criancaImageButton;
 
     @BindView(R.id.btn_vacina)
     ImageButton vacinaImageButton;
@@ -133,6 +127,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     private RealmBackupRestore backupRestore;
 
+    private Handler handler;
+
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         return intent;
@@ -146,38 +142,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_main);
         getActivityComponent().inject(this);
-
         setUnBinder(ButterKnife.bind(this));
-
         presenter.onAttach(this);
-
-        //preferencesHelper = (PreferencesHelper) this.getSharedPreferences(prefFileName, Context.MODE_PRIVATE);
-
-        backupRestore = new RealmBackupRestore(this);
-
+        setupNavMenu();
+        presenter.onNavMenuCreated();
         setUp();
-
-        buttonBarDrawerToggle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!drawer.isDrawerOpen(GravityCompat.START))
-                    drawer.openDrawer(Gravity.START);
-                else
-                    drawer.closeDrawer(Gravity.END);
-            }
-        });
-
-        buttonBarDrawerToggleClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!drawer.isDrawerOpen(Gravity.END))
-                    drawer.closeDrawer(Gravity.START);
-                else
-                    drawer.closeDrawer(Gravity.END);
-
-            }
-        });
-
         hideLoading();
     }
 
@@ -185,11 +154,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     public void onCartaoVacinal() {
         openCartaoListaActivity("cartao");
     }
-
-    //@OnClick(R.id.btn_crianca)
-    //public void onCrianca() {
-    //    openCriancaListaActivity("edita");
-    //}
 
     @OnClick(R.id.btn_vacina)
     public void onVacina() {
@@ -208,55 +172,12 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     protected void setUp() {
-
-        // setSupportActionBar(toolbar);
-
-        /*
-        drawerToggle = new ActionBarDrawerToggle(
-                this,
-                drawer,
-                //toolbar,
-                R.string.open_drawer,
-                R.string.close_drawer) {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                hideKeyboard();
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
-        };
-
-        drawer.addDrawerListener(drawerToggle);
-        drawerToggle.syncState();
-        */
-
-        setupNavMenu();
-        presenter.onNavMenuCreated();
-        setupCardContainerView();
-
-        // Intent msgIntent = new Intent(MainActivity.this, Servico.class);
-        // startService(msgIntent);
-
+        onInicializacoes();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        /*
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag("Fragment");
-        if (fragment == null) {
-            super.onBackPressed();
-        } else {
-              onFragmentDetached(Sobre.TAG);
-              //onFragmentDetached(MapaActivity.TAG);
-        }
-        */
-
     }
 
     @Override
@@ -320,58 +241,76 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void setupNavMenu() {
-
         View headerLayout = navigationView.getHeaderView(0);
+
         perfilImageView = headerLayout.findViewById(R.id.img_imagem_perfil);
         nomeTextView = headerLayout.findViewById(R.id.text_nome_perfil);
         emailTextView = headerLayout.findViewById(R.id.text_email_perfil);
+
         buttonBarDrawerToggleClose = headerLayout.findViewById(R.id.btn_drawer_close);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        drawer.closeDrawer(GravityCompat.START);
-                        switch (item.getItemId()) {
-                            case R.id.nav_item_usuario:
-                                openCadastroUsuarioActivity();
-                                return true;
-                            case R.id.nav_item_crianca:
-                                openCriancaListaActivity("edita");
-                                return true;
-                            case R.id.nav_item_backup:
-                                executaBackup();
-                                return true;
-                            case R.id.nav_item_restauracao:
-                                executaRestauracao();
-                                return true;
+        buttonBarDrawerToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!drawer.isDrawerOpen(GravityCompat.START))
+                    drawer.openDrawer(Gravity.START);
+                else
+                    drawer.closeDrawer(Gravity.END);
+            }
+        });
+
+        buttonBarDrawerToggleClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!drawer.isDrawerOpen(Gravity.END))
+                    drawer.closeDrawer(Gravity.START);
+                else
+                    drawer.closeDrawer(Gravity.END);
+
+            }
+        });
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                drawer.closeDrawer(GravityCompat.START);
+                switch (item.getItemId()) {
+                    case R.id.nav_item_usuario:
+                        openCadastroUsuarioActivity();
+                        return true;
+                    case R.id.nav_item_crianca:
+                        openCriancaListaActivity("edita");
+                        return true;
+                    case R.id.nav_item_backup:
+                        executaBackup();
+                        return true;
+                    case R.id.nav_item_restauracao:
+                        executaRestauracao();
+                        return true;
+                                /*
                             case R.id.nav_item_configuracao:
                                 openConfiguracoesActivity();
                                 return true;
-                            case R.id.nav_item_compartilhar:
-                                onCompartilhaApp();
-                                return true;
-                            case R.id.nav_item_avaliacao:
-                                presenter.onDrawerRateUsClick();
-                                return true;
-                            case R.id.nav_item_curiosidade:
-                                Toast.makeText(AppAplicacao.contextApp, getResources().getString(R.string.menu_curiosidade)+"\n\nAinda não implementado! :(\n", Toast.LENGTH_SHORT).show();
-                                return true;
-                            case R.id.nav_item_sobre:
-                                presenter.onDrawerOptionAboutClick();
-                                return true;
-                            case R.id.nav_item_logout:
-                                presenter.onDrawerOptionLogoutClick();
-                                return true;
-                            default:
-                                return false;
-                        }
-                    }
-                });
-    }
-
-    @Override
-    public void setupCardContainerView() {
-
+                                */
+                    case R.id.nav_item_compartilhar:
+                        onCompartilhaApp();
+                        return true;
+                    case R.id.nav_item_avaliacao:
+                        presenter.onDrawerRateUsClick();
+                        return true;
+                    case R.id.nav_item_curiosidade:
+                        Toast.makeText(AppAplicacao.contextApp, getResources().getString(R.string.menu_curiosidade) + "\n\nAinda não implementado! :(\n", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.nav_item_sobre:
+                        presenter.onDrawerOptionAboutClick();
+                        return true;
+                    case R.id.nav_item_logout:
+                        presenter.onDrawerOptionLogoutClick();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
 
     @Override
@@ -389,8 +328,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         Intent shareIntent = ShareCompat.IntentBuilder.from(this)
                 .setType("text/html")
                 .setSubject(getResources().getString(R.string.app_name))
-                .setChooserTitle(getResources().getString(R.string.menu_compartilhar) +" "+ getResources().getString(R.string.app_name))
-                .setText("Olá!\n" + getResources().getString(R.string.app_name) + " " + getResources().getString(R.string.app_mensagem_indicacao) + "\n" + getResources().getString(R.string.app_link_download) + "\n\n♥ " + getResources().getString(R.string.app_slogan))
+                .setChooserTitle(getResources().getString(R.string.menu_compartilhar) + " " + getResources().getString(R.string.app_name))
+                .setText("Olá!\n" + getResources().getString(R.string.app_name) + " " + getResources().getString(R.string.app_mensagem_indicacao) + "\n" + getResources().getString(R.string.app_link_download) + "\n") //\n♥ " + getResources().getString(R.string.app_slogan))
                 .createChooserIntent()
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         if (shareIntent.resolveActivity(getPackageManager()) != null) {
@@ -399,10 +338,14 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     @Override
-    public void showAboutFragment() {
-        lockDrawer();
-        startActivity(Sobre.getStartIntent(this));
-        finish();
+    public void onInicializacoes() {
+        handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                presenter.iniciaServicoNotificacao(MainActivity.this);
+            }
+        });
     }
 
     public void showMapaActivity() {
@@ -417,7 +360,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void openLoginActivity() {
         startActivity(LoginActivity.getStartIntent(this));
-
         finish();
     }
 
@@ -447,14 +389,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         finish();
     }
 
-    // @Override
-    public void openEditaCartaoActivity(String acao) {
-        Intent intent = CartaoListaActvity.getStartIntent(MainActivity.this);
-        intent.putExtra("cartaoLista", acao);
-        startActivity(intent);
-        finish();
-    }
-
     public void openConfiguracoesActivity() {
         Intent intent = NotificacaoActivity.getStartIntent(MainActivity.this);
         startActivity(intent);
@@ -473,12 +407,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     public void openMapaPostosVacinacao() {
-        /*
-        Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?q=Posto%20de%20saúde");
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
-        startActivity(mapIntent);
-        */
         showMapaActivity();
     }
 
@@ -511,7 +439,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void updateAppVersion() {
         //String version = getString(R.string.versao_app) + " " + BuildConfig.VERSION_NAME;
-       // versaoAppTextView.setText(version);
+        // versaoAppTextView.setText(version);
     }
 
     @Override
@@ -538,43 +466,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
     }
 
-    @Override
-    public void onFragmentAttached() {
-    }
-
-    @Override
-    public void onFragmentDetached(String tag) {
-        /*
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragmentSobre = fragmentManager.findFragmentByTag(tag);
-        if (fragmentSobre != null) {
-            fragmentManager
-                    .beginTransaction()
-                    .disallowAddToBackStack()
-                    .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
-                    .remove(fragmentSobre)
-                    .commitNow();
-            unlockDrawer();
-        }
-
-        fragmentManager = getSupportFragmentManager();
-        Fragment fragmentMapa = fragmentManager.findFragmentByTag(tag);
-        if (fragmentMapa != null) {
-            fragmentManager
-                    .beginTransaction()
-                    .disallowAddToBackStack()
-                    .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
-                    .remove(fragmentMapa)
-                    .commitNow();
-            unlockDrawer();
-        }
-
-*/
-    }
-
     private void executaBackup() {
-        backupRestore = new RealmBackupRestore(AppAplicacao.contextApp);
-
+        backupRestore = new RealmBackupRestore(MainActivity.this);
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
         alertDialog.setIcon(R.drawable.ic_launcher_round);
         alertDialog.setTitle(getResources().getString(R.string.menu_backup_copia));
@@ -585,7 +478,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
                 backupRestore.backup();
 
-                if(BACKUP_FILE != null && emailTextView.getText() != null) {
+                if (BACKUP_FILE != null && emailTextView.getText() != null) {
 
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContextActivity());
                     alertDialog.setIcon(R.drawable.ic_launcher_round);
@@ -601,11 +494,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                             emailIntent.setType("text/plain");
                             String to[] = {emailTextView.getText().toString()};
                             emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
-                            emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse( "file://"+path));
+                            emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + path));
                             emailIntent.putExtra(Intent.EXTRA_SUBJECT, getContextActivity().getResources().getString(R.string.texto_email_anexo_backup) + " " + getContextActivity().getString(R.string.app_name));
                             //emailIntent.putExtra(Intent.EXTRA_TEXT, getContextActivity().getResources().getString(R.string.texto_email_senha) + " " + getCapitalizeNome(nomeTextView.getText().toString()) + "\n\n" + getContextActivity().getResources().getString(R.string.texto_envio_anexo) + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + getContextActivity().getResources().getString(R.string.app_name) + "\n" + getContextActivity().getResources().getString(R.string.app_slogan)+"\n\n");
-                            emailIntent.putExtra(Intent.EXTRA_TEXT, getContextActivity().getResources().getString(R.string.texto_envio_anexo) +" "+ getCapitalizeNome(nomeTextView.getText().toString()) + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + getContextActivity().getResources().getString(R.string.app_name) + "\n\n");
-                            startActivity(Intent.createChooser(emailIntent , getContextActivity().getResources().getString(R.string.titulo_backup_copia_email)));
+                            emailIntent.putExtra(Intent.EXTRA_TEXT, getContextActivity().getResources().getString(R.string.texto_envio_anexo) + " " + getCapitalizeNome(nomeTextView.getText().toString()) + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + getContextActivity().getResources().getString(R.string.app_name) + "\n\n");
+                            startActivity(Intent.createChooser(emailIntent, getContextActivity().getResources().getString(R.string.titulo_backup_copia_email)));
 
                             //loginPresenter.enviaBackupPorEmail(view);
                         }
@@ -631,8 +524,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     private void executaRestauracao() {
-        backupRestore = new RealmBackupRestore(AppAplicacao.contextApp);
-
+        backupRestore = new RealmBackupRestore(MainActivity.this);
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
         alertDialog.setIcon(R.drawable.ic_launcher_round);
         alertDialog.setTitle(getResources().getString(R.string.menu_backup_restaura));
@@ -640,8 +532,14 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         alertDialog.setMessage("Esta restauração substituirá seus dados atuais do aplicativo.\n\nConfirme Sim para continuar ou Não para cancelar.");
         alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                //presenter.onExecutaBackupRestore().restore();
+
+                showLoading();
+
+                presenter.finalizaServicoNotificacao(MainActivity.this);
+
                 backupRestore.restore();
+
+                hideLoading();
                 new AlertDialog.Builder(MainActivity.this)
                         .setIcon(R.drawable.ic_launcher_round)
                         .setTitle(getResources().getString(R.string.app_name))
@@ -653,8 +551,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                                     presenter.onDrawerOptionLogoutClick();
                                 } catch (Throwable throwable) {
                                     throwable.printStackTrace();
-                                }
-                                finally {
+                                } finally {
                                     finish();
                                     System.exit(1);
                                 }

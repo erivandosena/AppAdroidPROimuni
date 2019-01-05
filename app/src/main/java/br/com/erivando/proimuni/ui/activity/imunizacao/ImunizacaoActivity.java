@@ -6,21 +6,26 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
 
 import br.com.erivando.proimuni.R;
+import br.com.erivando.proimuni.database.model.Imunizacao;
 import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoDetalheActivity;
@@ -31,6 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static br.com.erivando.proimuni.util.Uteis.getMesesDatas;
 import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 
 /**
@@ -163,28 +169,68 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
             textViewTituloToobar.setText(vacina.getVaciNome());
             presenter.onNomeDosePorId(idDose);
 
-            if (presenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{idVacina, idDose, idCartao}) != null) {
-                new AlertDialog.Builder(this)
-                        .setIcon(R.drawable.ic_launcher_round)
-                        .setTitle(textViewTituloToobar.getText().toString())
-                        .setMessage("\nImunização já registrada!\n")
-                        .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    openCartaoDetalheActivity(idCartao);
-                                } catch (Throwable throwable) {
-                                    throwable.printStackTrace();
-                                }
-                            }
-                        })
-                        .setCancelable(false)
-                        .show();
+            Imunizacao imunizacao = presenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{idVacina, idDose, idCartao});
+
+            if (imunizacao != null) {
+
+                List<Imunizacao> imunizacoesRealizadas = presenter.onImunizacoesCartaoCrianca(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{idVacina, idDose, idCartao});
+                Log.e("imunizacoesRealizadas", String.valueOf(imunizacoesRealizadas.size()));
+
+                if(("Menina".equalsIgnoreCase(imunizacao.getCartao().getCrianca().getCriaSexo()) | "Menino".equalsIgnoreCase(imunizacao.getCartao().getCrianca().getCriaSexo())) && "HPV".equalsIgnoreCase(vacina.getVaciNome()) && imunizacoesRealizadas.size() < 2) {
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt","br"));
+                    Calendar data = Calendar.getInstance();
+                    Date dataAtual = data.getTime();
+                    int periodo = getMesesDatas(imunizacao.getImunData(), dataAtual);
+
+                    if(periodo < 6) {
+
+                        new AlertDialog.Builder(this)
+                                .setIcon(R.drawable.ic_launcher_round)
+                                .setTitle(textViewTituloToobar.getText().toString())
+                                .setMessage("\nImunização ainda não necessária!\n\nÉ preciso um prazo mínimo de 6 meses da 1ª dose realizada em "+sdf.format(imunizacao.getImunData())+" há "+ (periodo == 1 ? periodo+" mês." : periodo+" meses."))
+                                .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        try {
+                                            openCartaoDetalheActivity(idCartao);
+                                        } catch (Throwable throwable) {
+                                            throwable.printStackTrace();
+                                        }
+                                    }
+                                })
+                                .setCancelable(false)
+                                .show();
+
+                    }
+
+                } else {
+                    avisoPadrao();
+                }
             }
 
         }
 
         resizeCustomizedToobar(linearLayoutToobar);
+    }
+
+    private void avisoPadrao() {
+        new AlertDialog.Builder(this)
+                .setIcon(R.drawable.ic_launcher_round)
+                .setTitle(textViewTituloToobar.getText().toString())
+                .setMessage("\nImunização já registrada!\n")
+                .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            openCartaoDetalheActivity(idCartao);
+                        } catch (Throwable throwable) {
+                            throwable.printStackTrace();
+                        }
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
 
     @OnClick(R.id.btn_nav_voltar)

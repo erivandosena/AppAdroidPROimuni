@@ -52,8 +52,8 @@
     "id": 8,
     "vaciNome": "Pneumocócica 23V",
     "vaciRede": "Pública",
-    "vaciDescricao": "Previne infecções invasivas (meningite, pneumonia, bacteremia e otite) causadas por 23 tipos de pneumococos (para a população indígena).",
-    "vaciAdministracao": "É administrada por via intramuscular. Em crianças menores de 2 anos, a injeção é realizada na coxa (vasto lateral); e em crianças maiores de 2 anos a injeção é realizada no braço (deltoide)."
+    "vaciDescricao": "Previne infecções invasivas (meningite, pneumonia, bacteremia e otite) causadas por 23 tipos de pneumococos.",
+    "vaciAdministracao": "É administrada por via intramuscular. Em crianças menores de 2 anos, a injeção é realizada na coxa (vasto lateral); e em crianças maiores de 2 anos a injeção é realizada no braço (deltoide).\n\nPara crianças indígenas."
   },
   {
     "id": 9,
@@ -137,6 +137,6 @@
     "vaciNome": "HPV",
     "vaciRede": "Pública",
     "vaciDescricao": "Previne o câncer do colo do útero, vulvar, vaginal e anal, lesões pré-cancerosas ou displásicas, verrugas genitais e infecções causadas pelo papilomavírus humano (HPV) dos tipos 6, 11, 16 e 18.",
-    "vaciAdministracao": "É administrada por via intramuscular, preferencialmente na parte superior do braço (deltoide),  ou na região anterolateral superior da coxa."
+    "vaciAdministracao": "É administrada por via intramuscular, preferencialmente na parte superior do braço (deltoide), ou na região anterolateral superior da coxa.\n\nPara meninas com idade entre 9 a 14 anos são duas doses com intervalo mínimo de 6 meses entre cada dose.\n\nPara meninos com idade de 11 a 14 anos também são duas doses com intervalo mínimo de 6 meses entre cada dose."
   }
 ]

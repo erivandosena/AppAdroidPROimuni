@@ -30,32 +30,6 @@
             android:icon="@drawable/ic_crianca"
             android:title="@string/menu_crianca" />
 
-        <!--
-        <item
-            android:id="@+id/nav_item_cartao"
-            android:checked="true"
-            android:icon="@android:drawable/ic_menu_help"
-            android:title="@string/menu_cartao" />
-
-        <item
-            android:id="@+id/nav_item_vacina"
-            android:checked="true"
-            android:icon="@android:drawable/ic_menu_help"
-            android:title="@string/menu_vacina" />
-
-        <item
-            android:id="@+id/nav_item_calendario"
-            android:checked="true"
-            android:icon="@android:drawable/ic_menu_help"
-            android:title="@string/menu_calendario" />
-
-        <item
-            android:id="@+id/nav_item_posto"
-            android:checked="true"
-            android:icon="@android:drawable/ic_menu_help"
-            android:title="@string/menu_posto" />
-            -->
-
         <item
             android:id="@+id/nav_item_curiosidade"
             android:checked="true"
@@ -74,11 +48,13 @@
             android:icon="@drawable/ic_cloud_restore"
             android:title="@string/menu_backup_restaura" />
 
+        <!--
         <item
             android:id="@+id/nav_item_configuracao"
             android:checked="true"
             android:icon="@drawable/ic_configuracao"
             android:title="@string/menu_config" />
+        -->
 
         <item
             android:id="@+id/nav_item_compartilhar"

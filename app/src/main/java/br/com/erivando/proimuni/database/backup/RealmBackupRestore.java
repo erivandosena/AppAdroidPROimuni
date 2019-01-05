@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.RealmDataBase;
+import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import io.realm.Realm;
 import io.realm.internal.IOException;
@@ -41,7 +42,7 @@ public class RealmBackupRestore {
     private Realm realm;
 
     public RealmBackupRestore(Context context) {
-        this.realm = new RealmDataBase(context.getApplicationContext()).getRealmInstance();
+        this.realm = new RealmDataBase(AppAplicacao.contextApp).getRealmInstance();
         this.context = context;
     }
 
@@ -155,7 +156,7 @@ public class RealmBackupRestore {
         int permission = ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) context, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+            ActivityCompat.requestPermissions((Activity)context, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
         }
         return permission;
     }

@@ -30,9 +30,6 @@ public class SplashPresenter<V extends SplashMvpView> extends BasePresenter<V> i
     @Override
     public void onAttach(V mvpView) {
         super.onAttach(mvpView);
-
-        getMvpView().startServico();
-
         Handler handler = new Handler();
         handler.postDelayed(this, 1500);
         importaDadosJson();

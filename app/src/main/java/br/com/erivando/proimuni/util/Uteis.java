@@ -466,4 +466,18 @@ public class Uteis {
         }
     }
 
+    public static int getMesesDatas(Date dataInicio, Date dataFinal) {
+        int count = 0;
+        if (dataInicio != null && dataFinal != null && dataInicio.before(dataFinal)) {
+            Calendar clStart = Calendar.getInstance();
+            clStart.setTime(dataInicio);
+            Calendar clEnd = Calendar.getInstance();
+            clEnd.setTime(dataFinal);
+            while (clStart.get(Calendar.MONTH) != clEnd.get(Calendar.MONTH) || clStart.get(Calendar.YEAR) != clEnd.get(Calendar.YEAR)) {
+                clStart.add(Calendar.MONTH, 1);
+                count++;
+            }
+        }
+        return count;
+    }
 }
