@@ -6,14 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -173,8 +171,7 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
 
             if (imunizacao != null) {
 
-                List<Imunizacao> imunizacoesRealizadas = presenter.onImunizacoesCartaoCrianca(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{idVacina, idDose, idCartao});
-                Log.e("imunizacoesRealizadas", String.valueOf(imunizacoesRealizadas.size()));
+                List<Imunizacao> imunizacoesRealizadas = presenter.onImunizacoesCadastradas(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{idVacina, idDose, idCartao});
 
                 if(("Menina".equalsIgnoreCase(imunizacao.getCartao().getCrianca().getCriaSexo()) | "Menino".equalsIgnoreCase(imunizacao.getCartao().getCrianca().getCriaSexo())) && "HPV".equalsIgnoreCase(vacina.getVaciNome()) && imunizacoesRealizadas.size() < 2) {
 

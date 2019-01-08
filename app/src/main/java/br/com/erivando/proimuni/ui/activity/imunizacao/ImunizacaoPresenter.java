@@ -119,7 +119,7 @@ public class ImunizacaoPresenter<V extends ImunizacaoMvpView> extends BasePresen
     }
 
     @Override
-    public List<Imunizacao> onImunizacoesCartaoCrianca(String[] campo, Long[] id) {
+    public List<Imunizacao> onImunizacoesCadastradas(String[] campo, Long[] id) {
         return getIDataManager().obtemImunizacoes(campo, id);
     }
 

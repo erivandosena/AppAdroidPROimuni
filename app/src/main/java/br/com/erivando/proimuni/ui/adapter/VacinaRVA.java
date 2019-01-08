@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import br.com.erivando.proimuni.R;
@@ -43,20 +46,30 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
     private Cartao cartao;
 
     private Context mContext;
-    private ProgressDialog progressDialog;
 
     protected CardView cardView;
 
+    private boolean redeVacinas;
 
-    private int limiteRemove;
+    private List<Integer> itensRemove;
 
-    public VacinaRVA(List<Vacina> vacinaList, List<Dose> doseList, List<Idade> idadeList, List<Imunizacao> imunizacaoList, Cartao cartao, Context mContext) {
+    private int countItemHolder;
+
+    private boolean startRemove;
+
+    private List<Imunizacao> imunizacoesHPV;
+
+
+    public VacinaRVA(List<Vacina> vacinaList, List<Dose> doseList, List<Idade> idadeList, List<Imunizacao> imunizacaoList, Cartao cartao, boolean redeVacinas, List<Imunizacao> imunizacoesHPV, Context mContext) {
         this.vacinaList = vacinaList;
         this.doseList = doseList;
         this.idadeList = idadeList;
         this.imunizacaoList = imunizacaoList;
         this.cartao = cartao;
         this.mContext = mContext;
+        this.redeVacinas = redeVacinas;
+        this.imunizacoesHPV = imunizacoesHPV;
+        this.itensRemove = new ArrayList<Integer>();
     }
 
     @Override
@@ -69,9 +82,55 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
 
     @Override
     public void onBindViewHolder(VacinaRVA.SingleItemRowHolder holder, final int i) {
+        countItemHolder += 1;
+
         vacina = vacinaList.get(i);
         dose = doseList.get(i);
         idade = idadeList.get(i);
+
+        Long mesesIdadeCrianca = (Calendar.getInstance().getTime().getTime() - cartao.getCrianca().getCriaNascimento().getTime()) / (1000L * 60 * 60 * 24 * 365 / 12);
+        String mesesIdadeCalendario = idade.getIdadDescricao().toLowerCase().trim();
+
+        verificaCartaoVacinal(mesesIdadeCrianca, mesesIdadeCalendario);
+
+        if ("Privada".equalsIgnoreCase(vacina.getVaciRede())) {
+            if (!redeVacinas) {
+                if (!itensRemove.contains(i))
+                    itensRemove.add(i);
+            }
+        }
+        if ("Pneumocócica 23V".equalsIgnoreCase(vacina.getVaciNome())) {
+            if (!cartao.getCrianca().isCriaEtnia()) {
+                if (!itensRemove.contains(i))
+                    itensRemove.add(i);
+            }
+        }
+        if ("HPV".equalsIgnoreCase(vacina.getVaciNome())) {
+            if ("Menino".equalsIgnoreCase(cartao.getCrianca().getCriaSexo())) {
+                if ("9 a 14 anos".equals(mesesIdadeCalendario)) {
+                    //removeItem(i);
+                    if (!itensRemove.contains(i))
+                        itensRemove.add(i);
+                }
+            }
+            if ("Menina".equalsIgnoreCase(cartao.getCrianca().getCriaSexo())) {
+                if ("11 a 14 anos".equals(mesesIdadeCalendario)) {
+                    if (!itensRemove.contains(i))
+                        itensRemove.add(i);
+                }
+            }
+
+
+        }
+
+        Collections.sort(itensRemove);
+        Collections.reverse(itensRemove);
+
+        startRemove = (getItemCount() == countItemHolder);
+        if (startRemove) {
+            for (Integer posicao : itensRemove)
+                removeItem(posicao);
+        }
 
         String vacinar;
         if ("ao nascer".equals(idade.getIdadDescricao().toLowerCase()))
@@ -80,37 +139,12 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
             vacinar = "Vacinar com";
         if ("9 a 14 anos".equals(idade.getIdadDescricao().toLowerCase()) || "11 a 14 anos".equals(idade.getIdadDescricao().toLowerCase()))
             vacinar = "Vacinar entre";
+
         String rede;
         if ("Pública".equals(vacina.getVaciRede()))
             rede = "Disponível na rede";
         else
             rede = "Opcional na rede";
-
-        Long mesesIdadeCrianca = (Calendar.getInstance().getTime().getTime() - cartao.getCrianca().getCriaNascimento().getTime()) / (1000L * 60 * 60 * 24 * 365 / 12);
-        String mesesIdadeCalendario = idade.getIdadDescricao().toLowerCase().trim();
-
-        verificaCartaoVacinal(mesesIdadeCrianca, mesesIdadeCalendario, holder);
-
-        if ("menino".equals(cartao.getCrianca().getCriaSexo().toLowerCase())) {
-            if ("9 a 14 anos".equals(mesesIdadeCalendario)) {
-                new Handler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        deleteItem(i);
-                    }
-                });
-            }
-        }
-        if ("menina".equals(cartao.getCrianca().getCriaSexo().toLowerCase())) {
-            if ("11 a 14 anos".equals(mesesIdadeCalendario)) {
-                new Handler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        deleteItem(i);
-                    }
-                });
-            }
-        }
 
         holder.textVacina.setText(vacina.getVaciNome());
         holder.textDose.setText(dose.getDoseDescricao());
@@ -123,22 +157,36 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
         holder.idCartao = cartao.getId();
     }
 
-    private void verificaCartaoVacinal(Long mesesIdadeCrianca, String mesesIdadeCalendario, VacinaRVA.SingleItemRowHolder holder) {
+    private void removeItem(final int position) {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                vacinaList.remove(position);
+                doseList.remove(position);
+                idadeList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeRemoved(position, getItemCount());
+                Log.e("REMOVIDO ", String.valueOf(position));
+            }
+        });
+    }
+
+    private void verificaCartaoVacinal(Long mesesIdadeCrianca, String mesesIdadeCalendario) {
         switch (mesesIdadeCalendario) {
             case "ao nascer":
                 if (!imunizacaoList.isEmpty()) {
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 1L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 1L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 1L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 1L, null);
                 }
                 break;
             case "2 meses":
@@ -146,15 +194,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 2L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 2L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 2L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 2L, null);
                 }
                 break;
             case "3 meses":
@@ -162,15 +210,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 3L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 3L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 3L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 3L, null);
                 }
                 break;
             case "4 meses":
@@ -178,15 +226,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 4L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 4L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 4L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 4L, null);
                 }
                 break;
             case "5 meses":
@@ -194,15 +242,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 5L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 5L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 5L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 5L, null);
                 }
                 break;
             case "6 meses":
@@ -210,15 +258,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 6L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 6L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 6L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 6L, null);
                 }
                 break;
             case "7 meses":
@@ -227,15 +275,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 7L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 7L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 7L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 7L, null);
                 }
                 break;
             case "9 meses":
@@ -243,15 +291,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 9L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 9L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 9L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 9L, null);
                 }
                 break;
             case "12 meses":
@@ -259,15 +307,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 12L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 12L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 12L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 12L, null);
                 }
                 break;
             case "15 meses":
@@ -275,15 +323,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 15L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 15L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 15L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 15L, null);
                 }
                 break;
             case "18 meses":
@@ -291,15 +339,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 18L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 18L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 18L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 18L, null);
                 }
                 break;
             case "4 anos":
@@ -307,15 +355,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 48L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 48L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 48L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 48L, null);
                 }
                 break;
             case "5 anos":
@@ -323,15 +371,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 60L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 60L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 60L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 60L, null);
                 }
                 break;
             case "11 anos":
@@ -339,15 +387,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, null);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 132L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 132L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 132L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 132L, null);
                 }
                 break;
             case "9 a 14 anos":
@@ -355,15 +403,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, imunizacao);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 108L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 108L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 108L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 108L, null);
                 }
                 break;
             case "11 a 14 anos":
@@ -371,15 +419,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     for (Imunizacao imunizacao : imunizacaoList) {
                         if (verificaCartao(imunizacao)) {
                             if (verificaImunizacao(imunizacao)) {
-                                aplicaStatusVacina(null, null, holder);
+                                aplicaStatusVacina(null, null, imunizacao);
                                 break;
                             } else {
-                                aplicaStatusVacina(mesesIdadeCrianca, 132L, holder);
+                                aplicaStatusVacina(mesesIdadeCrianca, 132L, null);
                             }
                         }
                     }
                 } else {
-                    aplicaStatusVacina(mesesIdadeCrianca, 132L, holder);
+                    aplicaStatusVacina(mesesIdadeCrianca, 132L, null);
                 }
                 break;
             default:
@@ -387,52 +435,47 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
         }
     }
 
-    private void aplicaStatusVacina(Long mesesIdadeCrianca, Long semanas, VacinaRVA.SingleItemRowHolder holder) {
-        /*
-        int vacinaAvencer = R.drawable.ic_vacina;
-        int vacinaEmDias = R.drawable.ic_vacina_imunizada;
-        int vacinaVencendo = R.drawable.ic_vacina_aviso;
-        int vacinaVencida = R.drawable.ic_vacina_vencida;
-        */
+    private void aplicaStatusVacina(Long mesesIdadeCrianca, Long semanas, Imunizacao imunizacao) {
 
         int vacinaCinzaAvencer = mContext.getResources().getColor((R.color.colorGray));
         int vacinaVerdeEmdia = mContext.getResources().getColor((R.color.colorGreen));
         int vacinaAmareloVencendo = mContext.getResources().getColor((R.color.colorYellow));
         int vacinaVermelhoVencido = mContext.getResources().getColor((R.color.colorPink));
 
-        //holder.imageVacina.setImageResource(vacinaAvencer);
         cardView.setCardBackgroundColor(vacinaCinzaAvencer);
-        if(mesesIdadeCrianca == null && semanas == null) {
+        if (mesesIdadeCrianca == null && semanas == null) {
             if (!imunizacaoList.isEmpty()) {
-                //holder.imageVacina.setImageResource(vacinaEmDias);
                 cardView.setCardBackgroundColor(vacinaVerdeEmdia);
+
+                if(imunizacao != null) {
+                    if ("9 a 14 anos".equalsIgnoreCase(imunizacao.getIdade().getIdadDescricao())) {
+                        if (!imunizacoesHPV.isEmpty() && isImunizacoes() < 2) {
+                            cardView.setCardBackgroundColor(vacinaVermelhoVencido);
+                        }
+                    }
+                    if ("11 a 14 anos".equalsIgnoreCase(imunizacao.getIdade().getIdadDescricao())) {
+                        if (!imunizacoesHPV.isEmpty() && isImunizacoes() < 2) {
+                            cardView.setCardBackgroundColor(vacinaVermelhoVencido);
+                        }
+                    }
+                }
             }
         } else {
             if (mesesIdadeCrianca == semanas) {
-                //holder.imageVacina.setImageResource(vacinaVencendo);
                 cardView.setCardBackgroundColor(vacinaAmareloVencendo);
             }
             if (mesesIdadeCrianca > semanas) {
-                //holder.imageVacina.setImageResource(vacinaVencida);
                 cardView.setCardBackgroundColor(vacinaVermelhoVencido);
-            }
-            if ("9 a 14 anos".equals(mesesIdadeCrianca)) {
-                if (mesesIdadeCrianca > semanas && mesesIdadeCrianca <= semanas + 60L) {
-                    //holder.imageVacina.setImageResource(vacinaVencida);
-                    cardView.setCardBackgroundColor(vacinaVermelhoVencido);
-                }
-            }
-            if ("11 a 14 anos".equals(mesesIdadeCrianca)) {
-                if (mesesIdadeCrianca > semanas && mesesIdadeCrianca <= semanas + 36L) {
-                   // holder.imageVacina.setImageResource(vacinaVencida);
-                    cardView.setCardBackgroundColor(vacinaVermelhoVencido);
-                }
             }
         }
 
         cardView.setRadius(20f);
         cardView.setCardElevation(2f);
         cardView.setUseCompatPadding(true);
+    }
+
+    private int isImunizacoes() {
+        return imunizacoesHPV.size();
     }
 
     private boolean verificaCartao(Imunizacao imunizacao) {
@@ -443,22 +486,12 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
         return (imunizacao.getVacina().getId().equals(vacina.getId()) && imunizacao.getDose().getId().equals(dose.getId()));
     }
 
-    public void deleteItem(int position) {
-        limiteRemove +=1;
-        if(limiteRemove == 1) {
-            vacinaList.remove(position);
-            notifyItemRemoved(position);
-        }
-    }
-
     @Override
     public int getItemCount() {
         return (null != vacinaList ? vacinaList.size() : 0);
     }
 
     public class SingleItemRowHolder extends RecyclerView.ViewHolder {
-        //protected CardView cardView;
-        //protected ImageView imageVacina;
         protected TextView textVacina;
         protected TextView textDose;
         protected TextView textIdade;
@@ -471,8 +504,6 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
 
         public SingleItemRowHolder(View view) {
             super(view);
-            //this.cardView = view.findViewById(R.id.card_view_cartao_vacina);
-            //this.imageVacina = view.findViewById(R.id.imagem_vacina);
             this.textVacina = view.findViewById(R.id.text_vacina);
             this.textDose = view.findViewById(R.id.text_dose);
             this.textIdade = view.findViewById(R.id.text_idade);
@@ -487,7 +518,7 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                     intent.putExtra("idade", idIdade);
                     intent.putExtra("cartao", idCartao);
                     mContext.startActivity(intent);
-                    ((CartaoDetalheActivity)mContext).finish();
+                    ((CartaoDetalheActivity) mContext).finish();
 
                 }
             });

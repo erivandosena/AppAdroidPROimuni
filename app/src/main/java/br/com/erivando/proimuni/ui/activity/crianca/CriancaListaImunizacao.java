@@ -82,7 +82,7 @@ public class CriancaListaImunizacao extends BaseActivity implements CriancaMvpVi
             idCartao = intent.getLongExtra("cartao", 0L);
             cartao = cartaoPresenter.onCartaoCadastrado(idCartao);
             if(cartao != null) {
-                listaImunizacoes = presenter.onImunizacoesCartaoCrianca(new String[]{"cartao.id"}, new Long[]{idCartao});
+                listaImunizacoes = presenter.onImunizacoesCadastradas(new String[]{"cartao.id"}, new Long[]{idCartao});
                 if(!listaImunizacoes.isEmpty()) {
                     final CriancaImunizacoesAdapter adapterImunizacao = new CriancaImunizacoesAdapter(this, listaImunizacoes);
                     listViewImunizacoes.setAdapter(adapterImunizacao);

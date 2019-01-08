@@ -45,6 +45,9 @@ import br.com.erivando.proimuni.database.backup.RealmBackupRestore;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.calendario.CalendarioActivity;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity;
+import br.com.erivando.proimuni.ui.activity.configuracao.ConfiguracaoActivity;
+import br.com.erivando.proimuni.ui.activity.configuracao.ConfiguracaoMvpPresenter;
+import br.com.erivando.proimuni.ui.activity.configuracao.ConfiguracaoMvpView;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaListaActvity;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoMvpView;
@@ -52,11 +55,9 @@ import br.com.erivando.proimuni.ui.activity.login.LoginActivity;
 import br.com.erivando.proimuni.ui.activity.login.LoginMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.login.LoginMvpView;
 import br.com.erivando.proimuni.ui.activity.mapa.MapaActivity;
-import br.com.erivando.proimuni.ui.activity.notificacao.NotificacaoActivity;
 import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaActivity;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
-import br.com.erivando.proimuni.ui.fragment.sobre.Sobre;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -83,6 +84,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Inject
     ImunizacaoMvpPresenter<ImunizacaoMvpView> imunizacaoPresenter;
+
+    @Inject
+    ConfiguracaoMvpPresenter<ConfiguracaoMvpView> configuracaoPresenter;
 
     //@PreferenceInfo
     //String prefFileName;
@@ -286,11 +290,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                     case R.id.nav_item_restauracao:
                         executaRestauracao();
                         return true;
-                                /*
-                            case R.id.nav_item_configuracao:
-                                openConfiguracoesActivity();
-                                return true;
-                                */
+                    case R.id.nav_item_configuracao:
+                        openConfiguracoesActivity();
+                        return true;
                     case R.id.nav_item_compartilhar:
                         onCompartilhaApp();
                         return true;
@@ -343,7 +345,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                presenter.iniciaServicoNotificacao(MainActivity.this);
+                if(!presenter.onConfigNotificacoes())
+                    configuracaoPresenter.iniciaServicoNotificacao(MainActivity.this);
             }
         });
     }
@@ -390,7 +393,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     public void openConfiguracoesActivity() {
-        Intent intent = NotificacaoActivity.getStartIntent(MainActivity.this);
+        Intent intent = ConfiguracaoActivity.getStartIntent(MainActivity.this);
         startActivity(intent);
         finish();
     }
@@ -535,7 +538,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
                 showLoading();
 
-                presenter.finalizaServicoNotificacao(MainActivity.this);
+                configuracaoPresenter.finalizaServicoNotificacao(MainActivity.this);
 
                 backupRestore.restore();
 

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -92,6 +93,11 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
 
     @BindView(R.id.layout_toobar)
     LinearLayout linearLayoutToobar;
+
+    @BindView(R.id.btn_toggle_vacina_indigenas)
+    ToggleButton toggleButtonIndigena;
+
+    private boolean toggleStatus;
 
     private Intent intent;
     private ArrayAdapter<String> adapterResponsavel;
@@ -188,12 +194,23 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
         }
     }
 
+    @OnClick(R.id.btn_toggle_vacina_indigenas)
+    public void onIndigenasClick(View view) {
+        boolean onClick = ((ToggleButton) view).isChecked();
+        if(onClick){
+            toggleStatus=true;
+        }
+        else {
+            toggleStatus=false;
+        }
+    }
+
     @OnClick(R.id.btn_cadadastar_crianca)
     public void onCadasrarClick(View v) {
         if (imagemBitmapFoto == null && crianca!= null)
             if (crianca.getCriaFoto() != null)
                 imagemBitmapFoto = base64ParaBitmap(crianca.getCriaFoto());
-        presenter.onCadastrarClick(id, nomeEditText.getText().toString(), nascimentoEditText.getText().toString(), comboSexo.getSelectedItem().toString(), imagemBitmapFoto);
+        presenter.onCadastrarClick(id, nomeEditText.getText().toString(), nascimentoEditText.getText().toString(), comboSexo.getSelectedItem().toString(), imagemBitmapFoto, toggleStatus);
     }
 
     @OnClick(R.id.btn_remover_crianca)
@@ -221,6 +238,7 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
                 if (crianca.getCriaFoto() != null)
                     fotoImageButton.setImageBitmap(base64ParaBitmap(crianca.getCriaFoto()));
                 buttonRemoveCrianca.setVisibility(View.VISIBLE);
+                toggleButtonIndigena.setChecked(crianca.isCriaEtnia());
             } else {
                 buttonRemoveCrianca.setVisibility(View.GONE);
             }

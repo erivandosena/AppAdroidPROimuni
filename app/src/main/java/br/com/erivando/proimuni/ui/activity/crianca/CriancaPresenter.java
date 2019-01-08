@@ -60,7 +60,7 @@ public class CriancaPresenter<V extends CriancaMvpView> extends BasePresenter<V>
     }
 
     @Override
-    public void onCadastrarClick(Long id, String nome, String nascimento, String sexo, Bitmap foto) {
+    public void onCadastrarClick(Long id, String nome, String nascimento, String sexo, Bitmap foto, boolean etnia) {
         if ((nome == null) || (nome.isEmpty()) || !nome.matches("^[a-zA-Za-zà-ú]+ [a-zA-ZA-ZÀ-Ú]+.*")) {
             getMvpView().onError(R.string.erro_text_nome_completo);
             return;
@@ -88,6 +88,7 @@ public class CriancaPresenter<V extends CriancaMvpView> extends BasePresenter<V>
         crianca.setCriaSexo(sexo);
         crianca.setUsuario(usuario);
         crianca.setCriaFoto((foto != null) ? bitmapParaBase64(foto) : null);
+        crianca.setCriaEtnia(etnia);
 
         try {
             if (onNovoAtualizaCrianca(crianca)) {

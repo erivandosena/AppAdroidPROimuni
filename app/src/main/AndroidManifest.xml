@@ -143,7 +143,7 @@
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name="br.com.erivando.proimuni.ui.activity.notificacao.NotificacaoActivity"
+            android:name="br.com.erivando.proimuni.ui.activity.configuracao.ConfiguracaoActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"

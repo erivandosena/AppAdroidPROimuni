@@ -572,4 +572,24 @@ public class DataManager implements IDataManager {
         preferencesHelper.setAccessToken(accessToken);
     }
 
+    @Override
+    public boolean isNotificacoes() {
+        return preferencesHelper.isNotificacoes();
+    }
+
+    @Override
+    public void setNotificacoes(boolean valor) {
+        preferencesHelper.setNotificacoes(valor);
+    }
+
+    @Override
+    public boolean isRedeVacinas() {
+        return preferencesHelper.isRedeVacinas();
+    }
+
+    @Override
+    public void setRedeVacinas(boolean valor) {
+        preferencesHelper.setRedeVacinas(valor);
+    }
+
 }

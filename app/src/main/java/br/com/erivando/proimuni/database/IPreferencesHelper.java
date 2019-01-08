@@ -38,4 +38,12 @@ public interface IPreferencesHelper {
 
     void setAccessToken(String accessToken);
 
+    boolean isNotificacoes();
+
+    void setNotificacoes(boolean valor);
+
+    boolean isRedeVacinas();
+
+    void setRedeVacinas(boolean valor);
+
 }

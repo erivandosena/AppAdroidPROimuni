@@ -28,6 +28,8 @@ public class PreferencesHelper implements IPreferencesHelper {
     private static final String PREF_KEY_CURRENT_USER_EMAIL = "PREF_KEY_CURRENT_USER_EMAIL";
     private static final String PREF_KEY_CURRENT_USER_PROFILE_PIC_URL = "PREF_KEY_CURRENT_USER_PROFILE_PIC_URL";
     private static final String PREF_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN";
+    private static final String PREF_KEY_NOTIFICACOES = "PREF_KEY_NOTIFICACOES";
+    private static final String PREF_KEY_REDE_VACINAS = "PREF_KEY_REDE_VACINAS";
 
     private final SharedPreferences sharedPreferences;
 
@@ -107,5 +109,26 @@ public class PreferencesHelper implements IPreferencesHelper {
     public void setAccessToken(String accessToken) {
         sharedPreferences.edit().putString(PREF_KEY_ACCESS_TOKEN, accessToken).apply();
     }
+
+    @Override
+    public boolean isNotificacoes() {
+        return sharedPreferences.getBoolean(PREF_KEY_NOTIFICACOES, false);
+    }
+
+    @Override
+    public void setNotificacoes(boolean valor) {
+        sharedPreferences.edit().putBoolean(PREF_KEY_NOTIFICACOES, valor).apply();
+    }
+
+    @Override
+    public boolean isRedeVacinas() {
+        return sharedPreferences.getBoolean(PREF_KEY_REDE_VACINAS, false);
+    }
+
+    @Override
+    public void setRedeVacinas(boolean valor) {
+        sharedPreferences.edit().putBoolean(PREF_KEY_REDE_VACINAS, valor).apply();
+    }
+
 
 }

@@ -22,7 +22,7 @@ public interface ImunizacaoMvpPresenter<V extends ImunizacaoMvpView> extends Mvp
 
     boolean onRemoveImunizacao(Long id);
 
-    List<Imunizacao> onImunizacoesCartaoCrianca(String[] campo, Long[] id);
+    List<Imunizacao> onImunizacoesCadastradas(String[] campo, Long[] id);
 
     Imunizacao onImunizacaoCadastrada(String[] strings, Long[] longs);
 

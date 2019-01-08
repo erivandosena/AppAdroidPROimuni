@@ -24,8 +24,6 @@ public interface MainMvpPresenter<V extends MainMvpView> extends MvpPresenter<V>
 
     void onNavMenuCreated();
 
-    void iniciaServicoNotificacao(Context context);
-
-    void finalizaServicoNotificacao(Context context);
+    boolean onConfigNotificacoes();
 
 }

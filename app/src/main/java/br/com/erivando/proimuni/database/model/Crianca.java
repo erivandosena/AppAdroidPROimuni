@@ -41,17 +41,20 @@ public class Crianca extends RealmObject implements Parcelable {
     private Date criaNascimento;
     private String criaSexo;
     private String criaFoto;
+    private boolean criaEtnia;
 
     public Crianca() {
+        //this.setCriaEtnia(false);
     }
 
-    public Crianca(Long id, Usuario usuario, String criaNome, Date criaNascimento, String criaSexo, String criaFoto) {
+    public Crianca(Long id, Usuario usuario, String criaNome, Date criaNascimento, String criaSexo, String criaFoto, boolean criaEtnia) {
         this.id = id;
         this.usuario = usuario;
         this.criaNome = criaNome;
         this.criaNascimento = criaNascimento;
         this.criaSexo = criaSexo;
         this.criaFoto = criaFoto;
+        this.criaEtnia = criaEtnia;
     }
 
     protected Crianca(Parcel in) {
@@ -63,6 +66,7 @@ public class Crianca extends RealmObject implements Parcelable {
         criaNascimento = data == -1 ? null : new Date(data);
         criaSexo = in.readString();
         criaFoto = in.readString();
+        criaEtnia = in.readInt() == 1 ? true : false ;
     }
 
     public Long getId() {
@@ -113,6 +117,14 @@ public class Crianca extends RealmObject implements Parcelable {
         this.criaFoto = criaFoto;
     }
 
+    public boolean isCriaEtnia() {
+        return criaEtnia;
+    }
+
+    public void setCriaEtnia(boolean criaEtnia) {
+        this.criaEtnia = criaEtnia;
+    }
+
     @Override
     public String toString() {
         return getCriaNome();
@@ -148,5 +160,6 @@ public class Crianca extends RealmObject implements Parcelable {
         dest.writeLong(criaNascimento.getTime());
         dest.writeString(criaSexo);
         dest.writeString(criaFoto);
+        dest.writeInt(criaEtnia == true ? 1 : 0);
     }
 }

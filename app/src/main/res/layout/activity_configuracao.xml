@@ -47,29 +47,44 @@
             android:orientation="vertical"
             android:paddingBottom="20dp">
 
-                    <Button
-                        android:id="@+id/btn_on_notificacao"
-                        android:layout_width="match_parent"
-                        android:layout_height="36dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@drawable/botao_padrao"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
-                        android:text="@string/btn_ativa_notificacao"
-                        android:textColor="@color/colorWhite"/>
+            <TextView
+                style="@style/TextStyle.TextView.Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Desativar Notificações" />
+            <ToggleButton
+                android:id="@+id/btn_toggle_notificacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="Sim"
+                android:textOff="Não"
+                android:button="@drawable/round_border_toggle_button"
+                android:background="@color/colorTransparent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="-4dp"
+                android:textAlignment="textEnd"
+                android:gravity="end|center_vertical"
+                style="@style/TextStyle.TextInputEdit.Texto"
+                />
 
-                    <Button
-                        android:id="@+id/btn_off_notificacao"
-                        android:layout_width="match_parent"
-                        android:layout_height="36dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@drawable/botao_padrao"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
-                        android:text="@string/btn_desativa_notificacao"
-                        android:textColor="@color/colorWhite" />
+            <TextView
+                style="@style/TextStyle.TextView.Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notificar Vacinas da Rede Privada" />
+            <ToggleButton
+                android:id="@+id/btn_toggle_vacinas_opcionais"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="Sim"
+                android:textOff="Não"
+                android:button="@drawable/round_border_toggle_button"
+                android:background="@color/colorTransparent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="-4dp"
+                android:textAlignment="textEnd"
+                android:gravity="end|center_vertical"
+                style="@style/TextStyle.TextInputEdit.Texto"/>
 
         </LinearLayout>
 

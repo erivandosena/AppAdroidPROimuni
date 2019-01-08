@@ -118,6 +118,25 @@
                 android:layout_height="wrap_content"
                 android:spinnerMode="dropdown" />
 
+            <TextView
+                style="@style/TextStyle.TextView.Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Criança indígena" />
+            <ToggleButton
+                android:id="@+id/btn_toggle_vacina_indigenas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="Sim"
+                android:textOff="Não"
+                android:button="@drawable/round_border_toggle_button"
+                android:background="@color/colorTransparent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="-4dp"
+                android:textAlignment="textEnd"
+                android:gravity="end|center_vertical"
+                style="@style/TextStyle.TextInputEdit.Texto" />
+
             <Button
                 android:id="@+id/btn_cadadastar_crianca"
                 android:layout_width="match_parent"

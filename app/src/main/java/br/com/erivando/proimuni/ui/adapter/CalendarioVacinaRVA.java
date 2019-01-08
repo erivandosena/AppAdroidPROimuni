@@ -61,9 +61,16 @@ public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRV
         else
             rede = "Opcional na rede";
 
+        String genero = new String();
+        if("9 a 14 anos".equalsIgnoreCase(singleItemIdade.getIdadDescricao()))
+            genero = "(Meninas)";
+
+        if("11 a 14 anos".equalsIgnoreCase(singleItemIdade.getIdadDescricao()))
+            genero = "(Meninos)";
+
         holder.textTituloVacina.setText(singleItemVacina.getVaciNome());
         holder.textTituloDose.setText(singleItemDose.getDoseDescricao());
-        holder.textTituloRede.setText(rede + " " + singleItemVacina.getVaciRede());
+        holder.textTituloRede.setText(rede + " " + singleItemVacina.getVaciRede() + ("Pneumocócica 23V".equalsIgnoreCase(singleItemVacina.getVaciNome()) ? "\n(Crianças indígenas)" : "") + ("HPV".equalsIgnoreCase(singleItemVacina.getVaciNome()) ? "\n"+genero : ""));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

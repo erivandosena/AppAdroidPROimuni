@@ -1,4 +1,4 @@
-package br.com.erivando.proimuni.ui.activity.notificacao;
+package br.com.erivando.proimuni.ui.activity.configuracao;
 
 import br.com.erivando.proimuni.mvp.MvpView;
 
@@ -10,6 +10,6 @@ import br.com.erivando.proimuni.mvp.MvpView;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public interface NotificacaoMvpView extends MvpView {
+public interface ConfiguracaoMvpView extends MvpView {
 
 }

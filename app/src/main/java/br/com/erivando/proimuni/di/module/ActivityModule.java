@@ -12,6 +12,7 @@ import br.com.erivando.proimuni.ui.activity.calendario.CalendarioPresenter;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoMvpView;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoPresenter;
+import br.com.erivando.proimuni.ui.activity.configuracao.ConfiguracaoMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaMvpView;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaPresenter;
@@ -33,9 +34,8 @@ import br.com.erivando.proimuni.ui.activity.main.MainPresenter;
 import br.com.erivando.proimuni.ui.activity.mapa.MapaMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.mapa.MapaMvpView;
 import br.com.erivando.proimuni.ui.activity.mapa.MapaPresenter;
-import br.com.erivando.proimuni.ui.activity.notificacao.NotificacaoMvpPresenter;
-import br.com.erivando.proimuni.ui.activity.notificacao.NotificacaoMvpView;
-import br.com.erivando.proimuni.ui.activity.notificacao.NotificacaoPresenter;
+import br.com.erivando.proimuni.ui.activity.configuracao.ConfiguracaoMvpView;
+import br.com.erivando.proimuni.ui.activity.configuracao.ConfiguracaoPresenter;
 import br.com.erivando.proimuni.ui.activity.splash.SplashMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.splash.SplashMvpView;
 import br.com.erivando.proimuni.ui.activity.splash.SplashPresenter;
@@ -180,7 +180,7 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    NotificacaoMvpPresenter<NotificacaoMvpView> provideNotificacaoPresenter(NotificacaoPresenter<NotificacaoMvpView> presenter) {
+    ConfiguracaoMvpPresenter<ConfiguracaoMvpView> provideNotificacaoPresenter(ConfiguracaoPresenter<ConfiguracaoMvpView> presenter) {
         return presenter;
     }
 
