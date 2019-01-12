@@ -93,18 +93,6 @@
             android:scaleType="fitCenter"
             card_view:srcCompat="@drawable/ic_plus" />
 
-        <!--
-        <Button
-            android:id="@+id/btn_info"
-            android:layout_width="100dp"
-            android:layout_height="25dp"
-            android:layout_gravity="right"
-            android:background="@drawable/botao_padrao"
-            android:backgroundTint="@color/colorGrayLight"
-            android:text="@string/text_btn_info"
-            android:textColor="@color/colorGray" tools:targetApi="lollipop"/>
-            -->
-
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

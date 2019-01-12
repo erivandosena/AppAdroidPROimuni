@@ -18,10 +18,10 @@ import br.com.erivando.proimuni.imagem.RoundedImageView;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoActivity;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoDetalheActivity;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity;
-import br.com.erivando.proimuni.util.Uteis;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static br.com.erivando.proimuni.util.Uteis.base64ParaBitmap;
 import static br.com.erivando.proimuni.util.Uteis.obtemIdadePorDiaOuMesOuAno;
 
 /**
@@ -59,11 +59,10 @@ public class CartaoRVA extends RecyclerView.Adapter<CartaoRVA.SingleItemRowHolde
         cartao = cartaoList.get(position);
 
         if (cartao.getCrianca() != null && cartao.getCrianca().getCriaFoto() != null)
-            holder.imageView.setImageBitmap(Uteis.base64ParaBitmap(cartao.getCrianca().getCriaFoto()));
+            holder.imageView.setImageBitmap(base64ParaBitmap(cartao.getCrianca().getCriaFoto()));
         else
             holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_launcher_round));
 
-        //holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_gerenciar));
         holder.tvTitle.setText(cartao.getCrianca().getCriaNome());
         holder.tvSubtitle.setText(obtemIdadePorDiaOuMesOuAno(cartao.getCrianca().getCriaNascimento()));
         holder.idCartao = cartao.getId();

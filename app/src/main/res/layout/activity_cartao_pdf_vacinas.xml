@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+~ Copyright [2018] [Erivando Sena]
+~
+~ Licenciado sob a Licença Apache, Versão 2.0 (a "Licença");
+~ você não pode usar este arquivo, exceto em conformidade com a Licença.
+~ Você pode obter uma cópia da Licença em
+~
+~ http://www.apache.org/licenses/LICENSE-2.0
+~
+~ A menos que exigido pela lei aplicável ou acordado por escrito, o software
+~ distribuído sob a Licença é distribuído em uma base "COMO ESTÁ",
+~ SEM GARANTIAS OU CONDIÇÕES DE QUALQUER TIPO, expressas ou implícitas.
+~ Veja a Licença para o idioma específico que governa as permissões e
+~ limitações sob a licença.
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/layout_vacinas"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="250px"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:foreground="@drawable/round_border_cardview_solid_ligth"
+        card_view:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/text_pdf_vacina"
+                style="@style/TextStyle.TextView.Texto.Vacinas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@null" />
+
+            <TextView
+                android:id="@+id/text_pdf_dose"
+                style="@style/TextStyle.TextView.Texto.Doses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@null" />
+
+            <LinearLayout
+                android:id="@+id/layout_imunizacao_comum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_pdf_imunizacao_data"
+                    style="@style/TextStyle.TextView.Texto.Imunizacoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Data:" />
+
+                <TextView
+                    android:id="@+id/text_pdf_imunizacao_lote"
+                    style="@style/TextStyle.TextView.Texto.Imunizacoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lote:" />
+
+                <TextView
+                    android:id="@+id/text_pdf_imunizacao_aplicador"
+                    style="@style/TextStyle.TextView.Texto.Imunizacoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Func.:" />
+
+                <TextView
+                    android:id="@+id/text_pdf_imunizacao_unidade"
+                    style="@style/TextStyle.TextView.Texto.Imunizacoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Unid.:" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_imunizacao_hpv1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/text_pdf_imunizacao_data_hpv1"
+                    style="@style/TextStyle.TextView.Texto.Imunizacoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Data:" />
+
+                <TextView
+                    android:id="@+id/text_pdf_imunizacao_lote_hpv1"
+                    style="@style/TextStyle.TextView.Texto.Imunizacoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lote:" />
+
+                <TextView
+                    android:id="@+id/text_pdf_imunizacao_aplicador_hpv1"
+                    style="@style/TextStyle.TextView.Texto.Imunizacoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Func.:" />
+
+                <TextView
+                    android:id="@+id/text_pdf_imunizacao_unidade_hpv1"
+                    style="@style/TextStyle.TextView.Texto.Imunizacoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Unid.:" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_imunizacao_hpv2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/text_pdf_dose_hpv2"
+                    style="@style/TextStyle.TextView.Texto.Doses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@null" />
+
+                <TextView
+                    android:id="@+id/text_pdf_imunizacao_data_hpv2"
+                    style="@style/TextStyle.TextView.Texto.Imunizacoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Data:" />
+
+                <TextView
+                    android:id="@+id/text_pdf_imunizacao_lote_hpv2"
+                    style="@style/TextStyle.TextView.Texto.Imunizacoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lote:" />
+
+                <TextView
+                    android:id="@+id/text_pdf_imunizacao_aplicador_hpv2"
+                    style="@style/TextStyle.TextView.Texto.Imunizacoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Func.:" />
+
+                <TextView
+                    android:id="@+id/text_pdf_imunizacao_unidade_hpv2"
+                    style="@style/TextStyle.TextView.Texto.Imunizacoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Unid.:" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -58,14 +58,6 @@ public class CalendarioRVA extends RecyclerView.Adapter<CalendarioRVA.ItemRowHol
         itemRowHolder.rvLista.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         itemRowHolder.rvLista.setAdapter(itemListDataAdapter);
         itemRowHolder.rvLista.setNestedScrollingEnabled(false);
-        /*
-        itemRowHolder.btnInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContextActivity(), sectionName, Toast.LENGTH_SHORT).show();
-            }
-        });
-        */
     }
 
     @Override
@@ -76,13 +68,11 @@ public class CalendarioRVA extends RecyclerView.Adapter<CalendarioRVA.ItemRowHol
     public class ItemRowHolder extends RecyclerView.ViewHolder {
         protected TextView textTituloIdade;
         protected RecyclerView rvLista;
-        protected Button btnInfo;
 
         public ItemRowHolder(View view) {
             super(view);
             this.textTituloIdade = view.findViewById(R.id.text_calendario_tit_vacina);
             this.rvLista = view.findViewById(R.id.recycler_view_lista);
-            //this.btnInfo = view.findViewById(R.id.btn_info);
         }
     }
 

@@ -1,4 +1,4 @@
-package br.com.erivando.proimuni.ui.fragment.vacina;
+package br.com.erivando.proimuni.ui.activity.vacina.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,17 +17,19 @@ import br.com.erivando.proimuni.di.component.ActivityComponent;
 import br.com.erivando.proimuni.mvp.base.BaseFragment;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaMvpView;
+import br.com.erivando.proimuni.ui.adapter.VacinaFragmentRVA;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
  * Projeto:     VacinasKIDS
  * Autor:       Erivando Sena
- * Data/Hora:   18 de Outubro de 2018 as 03:20
+ * Data/Hora:   16 de Outubro de 2018 as 13:14
  * Local:       Fortaleza/CE
  * E-mail:      erivandoramos@bol.com.br
  */
-public class VacinaPrivadaFragment extends BaseFragment implements VacinaMvpView {
+
+public class VacinaPublicaFragment extends BaseFragment implements VacinaMvpView {
 
     @Inject
     VacinaMvpPresenter<VacinaMvpView> presenter;
@@ -55,7 +57,7 @@ public class VacinaPrivadaFragment extends BaseFragment implements VacinaMvpView
     private void setupRecyclerView(RecyclerView recyclerView) {
         mLayoutManager = new GridLayoutManager(recyclerView.getContext(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(new VacinaRecyclerViewAdapter(getActivity(), presenter.onVacinasPorRede(new String[]{"vaciRede", "Privada"})));
+        recyclerView.setAdapter(new VacinaFragmentRVA(getActivity(), presenter.onVacinasPorRede(new String[]{"vaciRede", "Pública"})));
     }
 
     @Override
@@ -66,7 +68,6 @@ public class VacinaPrivadaFragment extends BaseFragment implements VacinaMvpView
 
     @Override
     protected void setUp(View view) {
-
     }
 
     @Override

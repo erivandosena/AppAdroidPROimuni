@@ -39,7 +39,6 @@ public class SplashPresenter<V extends SplashMvpView> extends BasePresenter<V> i
         if (getIDataManager().getCurrentUserLoggedInMode() == IDataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
             getMvpView().openLoginActivity();
         } else {
-            Log.e("isNetworkConnected()", String.valueOf(getMvpView().isNetworkConnected()));
             if (getMvpView().isNetworkConnected()) {
                 getMvpView().openMainActivity();
             } else {

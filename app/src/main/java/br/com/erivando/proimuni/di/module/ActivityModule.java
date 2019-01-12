@@ -16,6 +16,9 @@ import br.com.erivando.proimuni.ui.activity.configuracao.ConfiguracaoMvpPresente
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaMvpView;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaPresenter;
+import br.com.erivando.proimuni.ui.activity.curiosidade.CuriosidadeMvpPresenter;
+import br.com.erivando.proimuni.ui.activity.curiosidade.CuriosidadeMvpView;
+import br.com.erivando.proimuni.ui.activity.curiosidade.CuriosidadePresenter;
 import br.com.erivando.proimuni.ui.activity.dose.DoseMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.dose.DoseMvpView;
 import br.com.erivando.proimuni.ui.activity.dose.DosePresenter;
@@ -45,9 +48,9 @@ import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioPresenter;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaMvpView;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaPresenter;
-import br.com.erivando.proimuni.ui.fragment.sobre.SobreMvpPresenter;
-import br.com.erivando.proimuni.ui.fragment.sobre.SobreMvpView;
-import br.com.erivando.proimuni.ui.fragment.sobre.SobrePresenter;
+import br.com.erivando.proimuni.ui.activity.sobre.SobreMvpPresenter;
+import br.com.erivando.proimuni.ui.activity.sobre.SobreMvpView;
+import br.com.erivando.proimuni.ui.activity.sobre.SobrePresenter;
 import br.com.erivando.proimuni.util.rx.AppSchedulerProvider;
 import br.com.erivando.proimuni.util.rx.SchedulerProvider;
 import dagger.Module;
@@ -180,8 +183,13 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    ConfiguracaoMvpPresenter<ConfiguracaoMvpView> provideNotificacaoPresenter(ConfiguracaoPresenter<ConfiguracaoMvpView> presenter) {
+    ConfiguracaoMvpPresenter<ConfiguracaoMvpView> provideConfiguracaoPresenter(ConfiguracaoPresenter<ConfiguracaoMvpView> presenter) {
         return presenter;
     }
 
+    @Provides
+    @PerActivity
+    CuriosidadeMvpPresenter<CuriosidadeMvpView> provideCuriosidadePresenter(CuriosidadePresenter<CuriosidadeMvpView> presenter) {
+        return presenter;
+    }
 }

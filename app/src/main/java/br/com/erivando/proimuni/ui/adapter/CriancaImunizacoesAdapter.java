@@ -69,13 +69,6 @@ public class CriancaImunizacoesAdapter extends BaseAdapter {
 
         TextView textData = layout.findViewById(R.id.text_imunizacao_data);
         textData.setText(getParseDateString(imunizacao.getImunData()));
-        /*
-        if (position % 2 == 1) {
-            layout.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrayLight));
-        } else {
-            layout.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrayFineLight));
-        }
-        */
 
         return layout;
     }

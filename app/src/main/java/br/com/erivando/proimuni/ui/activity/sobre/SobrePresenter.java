@@ -1,4 +1,4 @@
-package br.com.erivando.proimuni.ui.fragment.sobre;
+package br.com.erivando.proimuni.ui.activity.sobre;
 
 import javax.inject.Inject;
 

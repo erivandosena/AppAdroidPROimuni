@@ -299,9 +299,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                     case R.id.nav_item_avaliacao:
                         presenter.onDrawerRateUsClick();
                         return true;
+                        /*
                     case R.id.nav_item_curiosidade:
                         Toast.makeText(AppAplicacao.contextApp, getResources().getString(R.string.menu_curiosidade) + "\n\nAinda não implementado! :(\n", Toast.LENGTH_SHORT).show();
                         return true;
+                        */
                     case R.id.nav_item_sobre:
                         presenter.onDrawerOptionAboutClick();
                         return true;

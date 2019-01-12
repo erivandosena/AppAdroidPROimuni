@@ -67,7 +67,7 @@ public class ApplicationModule {
     @Singleton
     CalligraphyConfig provideCalligraphyDefaultConfig() {
         return new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/source-sans-pro/SourceSansPro-Regular.ttf")
+                .setDefaultFontPath("fonts/montserrat/Montserrat-Regular.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build();
     }

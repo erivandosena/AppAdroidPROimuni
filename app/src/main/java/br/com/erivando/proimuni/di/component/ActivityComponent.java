@@ -9,6 +9,7 @@ import br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaActivity;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaListaActvity;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaListaImunizacao;
+import br.com.erivando.proimuni.ui.activity.curiosidade.CuriosidadeActivity;
 import br.com.erivando.proimuni.ui.activity.dose.DoseActivity;
 import br.com.erivando.proimuni.ui.activity.idade.IdadeActivity;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoActivity;
@@ -20,9 +21,9 @@ import br.com.erivando.proimuni.ui.activity.splash.SplashActivity;
 import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaActivity;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaDetalheActivity;
-import br.com.erivando.proimuni.ui.fragment.sobre.Sobre;
-import br.com.erivando.proimuni.ui.fragment.vacina.VacinaPrivadaFragment;
-import br.com.erivando.proimuni.ui.fragment.vacina.VacinaPublicaFragment;
+import br.com.erivando.proimuni.ui.activity.sobre.Sobre;
+import br.com.erivando.proimuni.ui.activity.vacina.fragment.VacinaPrivadaFragment;
+import br.com.erivando.proimuni.ui.activity.vacina.fragment.VacinaPublicaFragment;
 import dagger.Component;
 
 /**
@@ -79,4 +80,5 @@ public interface ActivityComponent {
 
     void inject(CriancaListaImunizacao activityInject);
 
+    void inject(CuriosidadeActivity activityInject);
 }

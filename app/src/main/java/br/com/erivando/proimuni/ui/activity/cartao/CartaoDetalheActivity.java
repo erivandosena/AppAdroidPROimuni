@@ -15,10 +15,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +26,7 @@ import com.hendrix.pdfmyxml.viewRenderer.AbstractViewRenderer;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -50,13 +49,20 @@ import br.com.erivando.proimuni.ui.activity.idade.IdadeMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.idade.IdadeMvpView;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoMvpView;
+import br.com.erivando.proimuni.ui.activity.vacina.VacinaMvpPresenter;
+import br.com.erivando.proimuni.ui.activity.vacina.VacinaMvpView;
+import br.com.erivando.proimuni.ui.adapter.CartaoPdfIdadeRVA;
+import br.com.erivando.proimuni.ui.adapter.CartaoPdfRVA;
 import br.com.erivando.proimuni.ui.adapter.VacinaRVA;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import br.com.erivando.proimuni.util.Uteis;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.RealmList;
 
+import static br.com.erivando.proimuni.util.Uteis.obtemIdadeCompleta;
+import static br.com.erivando.proimuni.util.Uteis.obtemIdadePorDiaOuMesOuAno;
 import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 
 /**
@@ -76,6 +82,9 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
 
     @Inject
     IdadeMvpPresenter<IdadeMvpView> idadePresenter;
+
+    @Inject
+    VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
 
     @Inject
     CalendarioMvpPresenter<CalendarioMvpView> calendarioPresenter;
@@ -110,7 +119,6 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
     @BindView(R.id.layout_toobar)
     LinearLayout linearLayoutToobar;
 
-
     @BindView(R.id.text_pesquisa_vacina)
     TextInputEditText textInputPesquisa;
 
@@ -118,12 +126,9 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
     ImageButton imageButtonPesquisa;
 
     private List<Calendario> calendarioList;
-
     private VacinaRVA adapter;
-
     private Cartao cartao;
     private Intent intent;
-
     private Long idCartao;
 
     public static Intent getStartIntent(Context context) {
@@ -137,21 +142,6 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         setContentView(R.layout.activity_cartao_detalhe);
 
         setUnBinder(ButterKnife.bind(this));
-        /*
-        final Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //executar o que quiser no clique da seta esquerda
-                onBackPressed();
-            }
-        });
-        CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(getResources().getString(R.string.menu_item1));
-        */
-
 
         getActivityComponent().inject(this);
 
@@ -199,21 +189,7 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
                 }
             }
             montaCartao();
-            //adapter.notifyDataSetChanged();
             hideLoading();
-        }
-    }
-
-    @OnClick(R.id.fab_cartao_print)
-    public void onClick(View view) {
-        //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-        if (view == fabFloatingActionButton) {
-            Toast.makeText(AppAplicacao.contextApp, getResources().getString(R.string.text_cartao_titulo) + " PDF\n\nAinda não implementado! :(\n", Toast.LENGTH_SHORT).show();
-
-
-            //criaPDF(CartaoDetalheActivity.this);
-
-
         }
     }
 
@@ -232,6 +208,14 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         }
     }
 
+    @OnClick(R.id.fab_cartao_print)
+    public void onClick(View view) {
+        if (view == fabFloatingActionButton) {
+            //Toast.makeText(AppAplicacao.contextApp, getResources().getString(R.string.text_cartao_titulo) + " PDF\n\nAinda não implementado! :(\n", Toast.LENGTH_SHORT).show();
+            criaPDF(CartaoDetalheActivity.this);
+        }
+    }
+
     @Override
     protected void setUp() {
         if (intent != null) {
@@ -244,51 +228,11 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
                 if (cartao.getCrianca().getCriaFoto() != null)
                     roundedImageViewCrianca.setImageBitmap(Uteis.base64ParaBitmap(cartao.getCrianca().getCriaFoto()));
                 mTextCrianca.setText(cartao.getCrianca().getCriaNome());
-                mTextIdade.setText(Uteis.obtemIdadeCompleta(cartao.getCrianca().getCriaNascimento()));
+                mTextIdade.setText(obtemIdadeCompleta(cartao.getCrianca().getCriaNascimento()));
             }
         }
-
-        /*
-        List<Idade> idadeList = idadePresenter.onIdadesCadastradas();
-        calendarioList = calendarioPresenter.onCalendariosCadastrados();
-
-        List<Vacina> listaVacinas = new ArrayList<Vacina>();
-        List<Dose> listaDoses = new ArrayList<Dose>();
-        List<Idade> listaIdades = new ArrayList<Idade>();
-        List<Imunizacao> listaImunizacoes = new ArrayList<Imunizacao>();
-        for (Idade idade : idadeList) {
-            //RealmList<Vacina> vacinaItem = new RealmList<Vacina>();
-            for (Calendario calendarioItem : calendarioList) {
-                if (calendarioItem.getIdade().getId() == idade.getId()) {
-                    listaVacinas.add(calendarioItem.getVacina());
-                    listaDoses.add(calendarioItem.getDose());
-                    listaIdades.add(calendarioItem.getIdade());
-                    Imunizacao imunizacao = imunizacaoPresenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{calendarioItem.getVacina().getId(), calendarioItem.getDose().getId(), idCartao});
-
-                    if (imunizacao != null) {
-                        listaImunizacoes.add(imunizacao);
-                    }
-                }
-            }
-        }
-
-        RecyclerView my_recycler_view = findViewById(R.id.cartao_lista_vacina_recyclerView);
-        my_recycler_view.setHasFixedSize(true);
-        adapter = new VacinaRVA(listaVacinas, listaDoses, listaIdades, listaImunizacoes, cartao, this);
-        my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        my_recycler_view.setAdapter(adapter);
-        */
 
         montaCartao();
-
-        /*
-        cardViewCartaoCrianca.setCardBackgroundColor(getResources().getColor((R.color.colorPurpleLight)));
-        cardViewCartaoCrianca.setRadius(20f);
-        cardViewCartaoCrianca.setCardElevation(2f);
-        cardViewCartaoCrianca.setUseCompatPadding(true);
-
-        resizeCustomizedToobar(linearLayoutToobar);
-        */
     }
 
     private void montaCartao() {
@@ -303,7 +247,6 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         List<Imunizacao> listaImunizacoes = new ArrayList<Imunizacao>();
         List<Imunizacao> listaImunizacoesHPV = new ArrayList<Imunizacao>();
         for (Idade idade : idadeList) {
-            //RealmList<Vacina> vacinaItem = new RealmList<Vacina>();
             for (Calendario calendarioItem : calendarioList) {
                 if (calendarioItem.getIdade().getId() == idade.getId()) {
                     listaVacinas.add(calendarioItem.getVacina());
@@ -358,56 +301,139 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
         finish();
     }
 
-    private void criaPDF(Context context) {
+    private void criaPDF(final Context context) {
+        AbstractViewRenderer pagina = new AbstractViewRenderer(context, R.layout.activity_cartao_vacinas) {
 
-        final String texto = "        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu mi dapibus, sodales ante vel, ultrices velit. Proin ac libero vitae mi bibendum fringilla quis id massa. Vivamus pharetra orci vitae tincidunt molestie. Morbi aliquam nulla diam, nec dapibus ligula suscipit in. Praesent eu tortor ut risus venenatis faucibus ut id felis. Nulla purus ipsum, varius id aliquet eu, ultricies at urna. Sed tempor ligula condimentum tempor auctor. Integer consequat cursus lobortis.\n" +
-                "        Proin diam urna, mollis at luctus quis, suscipit sed mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at laoreet ex. Aliquam elementum, nibh nec elementum pretium, urna risus pretium odio, in bibendum mi lorem ut tellus. Nullam volutpat volutpat dolor, nec pulvinar nunc pulvinar at. Proin elementum bibendum dapibus. Sed molestie laoreet nisi sit amet cursus. Sed in lobortis neque. Integer purus arcu, elementum sit amet blandit in, pharetra a nunc. Praesent placerat pellentesque ligula a accumsan. Phasellus sagittis lacus at tellus suscipit, sit amet consequat velit commodo. Vivamus pharetra nulla nec purus efficitur, vitae commodo lacus blandit. Aliquam risus libero, facilisis nec massa a, hendrerit volutpat leo. Duis in eros eros. Ut lacus felis, placerat ut malesuada ut, efficitur vitae leo. Integer sit amet neque nunc.\n" +
-                "        Ut tincidunt diam id ornare maximus. Praesent libero dui, auctor a tortor quis, lobortis tincidunt est. Maecenas vel facilisis tellus. Phasellus finibus nisl sit amet cursus semper. Fusce convallis ullamcorper lorem, a egestas purus. Duis semper ante in arcu euismod pharetra. Quisque vitae consequat massa. Proin pellentesque nisl in elit accumsan, eget fringilla ligula maximus. Duis nec ipsum id nisi vehicula cursus. Quisque a semper ante. Pellentesque mattis neque tortor, sit amet accumsan nisi euismod eu. Duis accumsan lorem a auctor molestie. Quisque viverra dapibus est id sollicitudin. Suspendisse eu ex vitae ante sagittis gravida tempus ut justo. Integer tincidunt, ex sit amet condimentum mattis, ligula arcu venenatis ex, id consectetur augue lectus sit amet elit. Cras luctus purus quis magna efficitur pharetra.\n" +
-                "        Maecenas pulvinar rutrum nulla at venenatis. Nam eu felis vitae nisi vestibulum dignissim. Vivamus tempor lorem nisi, in ullamcorper nisl mollis eu. Fusce a placerat arcu. Donec dictum ultrices elit, a condimentum quam imperdiet eu. Phasellus eu nulla neque. Integer laoreet, justo vitae vehicula varius, nibh metus ullamcorper lectus, nec fringilla urna ante vitae massa. Integer a nibh nec dui sodales semper. Nunc ipsum dolor, condimentum nec felis a, bibendum posuere velit. Curabitur nec dignissim ipsum.\n" +
-                "        Cras sed diam id dui scelerisque luctus. Nullam facilisis porta massa. Suspendisse porta blandit erat sit amet lobortis. Pellentesque vel ultricies eros. Ut lectus nibh, viverra quis nulla in, malesuada congue ipsum. Mauris pretium ante et magna placerat efficitur tempor sed felis. Vestibulum efficitur mattis vestibulum. Vestibulum ullamcorper laoreet nisl sit amet imperdiet. Morbi eu ex quis quam sodales convallis. Nunc pharetra at mauris et vestibulum. Donec consequat nec nibh eget elementum. Fusce consequat hendrerit diam. Mauris bibendum, mauris vel auctor condimentum, ex odio ornare urna, at ultrices odio ante eget orci. Vivamus non quam aliquet nunc elementum facilisis. Curabitur vitae viverra erat.";
+            private RecyclerView mRecyclerViewIdades;
+            private RecyclerView mRecyclerViewCalendario;
+            private CartaoPdfIdadeRVA mCartaoPdfIdadesAdapter;
+            private List<Idade> todasIdades;
+            private List<Idade> idades;
+            private CartaoPdfRVA mCartaoPdfAdapter;
+            private List<Calendario> calendarios;
+            private List<Calendario> vacinas;
+            private List<Imunizacao> imunizacoesHPV;
+            private TextView nomeCrianca;
+            private TextView idadeCrianca;
+            private TextView etniaCrianca;
+            private TextView redeVacinas;
+            private TextView textCopyright;
 
+            private void criaDadosCalendario() {
+                idades = new ArrayList<Idade>();
+                vacinas = new ArrayList<Calendario>();
+                imunizacoesHPV = new ArrayList<Imunizacao>();
+                todasIdades = idadePresenter.onIdadesCadastradas();
+                calendarios = calendarioPresenter.onCalendariosCadastrados();
 
-        //Implementar o View renderer
-        AbstractViewRenderer page = new AbstractViewRenderer(context, R.layout.activity_cartao_vacinas) {
-            //private String _text;
+                for (Idade idade : todasIdades) {
+                    idades.add(idade);
+                    if ("Menina".equalsIgnoreCase(cartao.getCrianca().getCriaSexo()))
+                        if ("11 a 14 Anos".equalsIgnoreCase(idade.getIdadDescricao())) {
+                            idades.remove(idade);
+                        }
+                    if ("Menino".equalsIgnoreCase(cartao.getCrianca().getCriaSexo()))
+                        if ("9 a 14 Anos".equalsIgnoreCase(idade.getIdadDescricao())) {
+                            idades.remove(idade);
+                        }
+                }
 
-            //public void setText(String text) {
-            //    _text = text;
-            //}
+                for (Idade idade : idades) {
+                    Calendario calendario = new Calendario();
+
+                    RealmList<Vacina> itemVacina = new RealmList<Vacina>();
+                    RealmList<Dose> itemDose = new RealmList<Dose>();
+                    RealmList<Idade> itemIdade = new RealmList<Idade>();
+                    RealmList<Imunizacao> itemImunizacao = new RealmList<Imunizacao>();
+
+                    for (Calendario itemCalendario : calendarios) {
+                        if (itemCalendario.getIdade().getId() == idade.getId()) {
+                            itemVacina.add(itemCalendario.getVacina());
+                            itemDose.add(itemCalendario.getDose());
+                            itemIdade.add(itemCalendario.getIdade());
+
+                            if("Pneumocócica 23V".equalsIgnoreCase(itemCalendario.getVacina().getVaciNome()))
+                                if(!cartao.getCrianca().isCriaEtnia()) {
+                                    itemVacina.remove(itemCalendario.getVacina());
+                                    itemDose.remove(itemCalendario.getDose());
+                                    itemIdade.remove(itemCalendario.getIdade());
+                                }
+                            Imunizacao imunizacao = imunizacaoPresenter.onImunizacaoCadastrada(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{itemCalendario.getVacina().getId(), itemCalendario.getDose().getId(), idCartao});
+                            if(imunizacao != null) {
+                                itemImunizacao.add(imunizacao);
+                                if ("HPV".equalsIgnoreCase(imunizacao.getVacina().getVaciNome()) && imunizacoesHPV.isEmpty())
+                                    imunizacoesHPV = imunizacaoPresenter.onImunizacoesCadastradas(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{itemCalendario.getVacina().getId(), itemCalendario.getDose().getId(), idCartao});
+                            }
+                        }
+                    }
+                    calendario.setVacinasInSection(itemVacina);
+                    calendario.setDosesInSection(itemDose);
+                    calendario.setIdadesInSection(itemIdade);
+                    calendario.setImunizacoesInSection(itemImunizacao);
+                    vacinas.add(calendario);
+                }
+            }
 
             @Override
             protected void initView(View view) {
-                //TextView tv_hello = (TextView)view.findViewById(R.id.tv_hello);
-                // tv_hello.setText(texto);
-                ImageView imagem = (ImageView) view.findViewById(R.id.imagem);
-                imagem.setImageResource(R.drawable.ic_layout_cartao_pdf);
+                //ImageView imagem = (ImageView) view.findViewById(R.id.imagem);
+                //imagem.setImageResource(R.drawable.ic_layout_cartao_pdf);
+
+                criaDadosCalendario();
+
+
+                nomeCrianca = (TextView) view.findViewById(R.id.text_pdf_nome_crianca);
+                idadeCrianca = (TextView) view.findViewById(R.id.text_pdf_idade_crianca);
+                etniaCrianca = (TextView) view.findViewById(R.id.text_pdf_etnia_crianca);
+                redeVacinas = (TextView) view.findViewById(R.id.text_pdf_rede_vacinas);
+                textCopyright = (TextView) view.findViewById(R.id.text_pdf_copyright);
+
+                mRecyclerViewIdades = (RecyclerView) view.findViewById(R.id.recycler_view_pdf_idades);
+                mRecyclerViewCalendario = (RecyclerView) view.findViewById(R.id.recycler_view_pdf_vacinas);
+
+                nomeCrianca.setText("Nome: "+cartao.getCrianca().getCriaNome().toUpperCase());
+                idadeCrianca.setText("Idade: "+obtemIdadePorDiaOuMesOuAno(cartao.getCrianca().getCriaNascimento()).toUpperCase());
+                if (cartao.getCrianca().isCriaEtnia())
+                    etniaCrianca.setText("Criança: Indígena");
+                else
+                    etniaCrianca.setVisibility(View.GONE);
+                redeVacinas.setText("Vacinas da Rede: "+ (configuracaoPresenter.onRedeVacinas() ? "PÚBLICA/PRIVADA" : "PÚBLICA"));
+                textCopyright.setText("© " + Calendar.getInstance().get(Calendar.YEAR) + " " + context.getResources().getString(R.string.app_name));
+
+                mRecyclerViewIdades.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+                mCartaoPdfIdadesAdapter = new CartaoPdfIdadeRVA(idades);
+                mRecyclerViewIdades.setAdapter(mCartaoPdfIdadesAdapter);
+                mRecyclerViewIdades.setHasFixedSize(true);
+
+                mRecyclerViewCalendario.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+                mCartaoPdfAdapter = new CartaoPdfRVA(vacinas, imunizacoesHPV, configuracaoPresenter.onRedeVacinas(), context);
+                mRecyclerViewCalendario.setAdapter(mCartaoPdfAdapter);
+                mRecyclerViewCalendario.setHasFixedSize(true);
+
+                EXPORT_PDF_FILE_NAME = "CartaoVacinal-"+cartao.getCrianca().getCriaNome().replace(" ", "");
             }
 
         };
 
-        // pode reutilizar o bitmap se for preciso
-        page.setReuseBitmap(true);
-        // Construção documento PDF
-        PdfDocument doc = new PdfDocument(context);
+        //pagina.setReuseBitmap(true);
+        PdfDocument documento = new PdfDocument(context);
         // adicione quantas páginas forem necessárias
-        doc.addPage(page);
-        doc.setRenderWidth(8268);
-        doc.setRenderHeight(11693);
-        doc.setOrientation(PdfDocument.A4_MODE.LANDSCAPE);
-        doc.setProgressTitle(R.string.app_name);
-        doc.setProgressMessage(R.string.gera_pdf);
-        doc.setFileName(EXPORT_PDF_FILE_NAME);
-        doc.setSaveDirectory(EXPORT_PDF_PATH);//context.getExternalFilesDir(null));
-        doc.setInflateOnMainThread(false);
-        doc.setListener(new PdfDocument.Callback() {
+        documento.addPage(pagina);
+        documento.setRenderWidth(8268);
+        documento.setRenderHeight(11693);
+        documento.setOrientation(PdfDocument.A4_MODE.LANDSCAPE);
+        documento.setProgressTitle(R.string.app_name);
+        documento.setProgressMessage(R.string.gera_pdf);
+        documento.setFileName(EXPORT_PDF_FILE_NAME);
+        documento.setSaveDirectory(EXPORT_PDF_PATH); //context.getExternalFilesDir(null));
+        documento.setInflateOnMainThread(false);
+        documento.setListener(new PdfDocument.Callback() {
             @Override
             public void onComplete(File file) {
-                Log.e(PdfDocument.TAG_PDF_MY_XML, "Completo");
-
                 new AlertDialog.Builder(CartaoDetalheActivity.this)
                         .setIcon(R.drawable.ic_launcher_round)
-                        .setTitle(getResources().getString(R.string.app_name))
-                        .setMessage("Cartão Vacinal exportado em foramto PDF com sucesso!")
+                        .setTitle(getResources().getString(R.string.text_cartao_titulo))
+                        .setMessage("Cartão em formato PDF gerado com sucesso!")
                         .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -420,42 +446,16 @@ public class CartaoDetalheActivity extends BaseActivity implements CartaoMvpView
 
             @Override
             public void onError(Exception e) {
-                Log.e(PdfDocument.TAG_PDF_MY_XML, "Erro");
                 e.printStackTrace();
             }
         });
 
-        Toast.makeText(context, "Salvando PDF em: " + EXPORT_PDF_PATH + "/" + EXPORT_PDF_FILE_NAME + ".pdf", Toast.LENGTH_LONG).show();
-
-        doc.createPdf(context);
-
-
-        // OU
-
-        /*
-        new PdfDocument.Builder(context).addPage(page).orientation(PdfDocument.A4_MODE.LANDSCAPE)
-                .progressMessage(R.string.app_name).progressTitle(R.string.gera_pdf)
-                .renderWidth(8031).renderHeight(11614)
-                .saveDirectory(EXPORT_PDF_PATH).filename(EXPORT_PDF_FILE_NAME+2)
-                .listener(new PdfDocument.Callback() {
-                    @Override
-                    public void onComplete(File file) {
-                        Log.i(PdfDocument.TAG_PDF_MY_XML, "Completo");
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        Log.i(PdfDocument.TAG_PDF_MY_XML, "Erro");
-                    }
-                }).create().createPdf(this);
-       */
-
+        Toast.makeText(context, "Salvando PDF em:\n" + EXPORT_PDF_PATH + "/" + EXPORT_PDF_FILE_NAME + ".pdf", Toast.LENGTH_LONG).show();
+        documento.createPdf(context);
     }
 
     public void exibePDF(String local) {
-
         File arquivo = new File(local + ".pdf");
-        //Toast.makeText(getApplicationContext(), file.toString() , Toast.LENGTH_LONG).show();
         if (arquivo.exists()) {
             Intent target = new Intent(Intent.ACTION_VIEW);
             target.setDataAndType(Uri.fromFile(arquivo), "application/pdf");

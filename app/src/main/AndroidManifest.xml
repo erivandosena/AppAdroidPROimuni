@@ -24,7 +24,7 @@
         android:roundIcon="@drawable/ic_launcher_round"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:hardwareAccelerated="true"
+        android:hardwareAccelerated="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Proimuni">
         <activity
@@ -130,7 +130,7 @@
             android:theme="@style/AppTheme.Proimuni"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="br.com.erivando.proimuni.ui.fragment.sobre.Sobre"
+            android:name=".ui.activity.sobre.Sobre"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Proimuni"

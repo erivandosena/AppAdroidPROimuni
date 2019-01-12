@@ -111,16 +111,6 @@ public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRV
             this.textTituloVacina = view.findViewById(R.id.texto_titulo_vacina);
             this.textTituloDose = view.findViewById(R.id.texto_titulo_dose);
             this.textTituloRede = view.findViewById(R.id.texto_titulo_rede);
-
-            /*
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                   // Toast.makeText(v.getContextActivity(), textTituloVacina.getText(), Toast.LENGTH_SHORT).show();
-                }
-            });
-            */
-
         }
 
     }

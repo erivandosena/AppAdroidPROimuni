@@ -166,7 +166,7 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                 idadeList.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeRemoved(position, getItemCount());
-                Log.e("REMOVIDO ", String.valueOf(position));
+                //Log.e("REMOVIDO ", String.valueOf(position));
             }
         });
     }

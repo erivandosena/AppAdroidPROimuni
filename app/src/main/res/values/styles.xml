@@ -38,6 +38,16 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="TextStyle.Heading" parent="TextStyle">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextStyle.Heading">
+        <item name="android:textColor">@color/textColorWhite</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
+    </style>
 
     <style name="Toolbar" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:layout_width">match_parent</item>
@@ -79,6 +89,19 @@
     <style name="TextStyle.SubTitulo.Lista" parent="TextStyle">
         <item name="android:textSize">12sp</item>
         <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
+    </style>
+
+    <style name="TextStyle.Title" parent="TextStyle">
+        <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
+    </style>
+
+    <style name="TextAppearance.Text.Light" parent="android:TextAppearance">
+        <item name="fontPath">fonts/montserrat/Montserrat-Light.ttf</item>
+    </style>
+
+    <style name="TextStyle.Title.Sub" parent="TextStyle.Title">
+        <item name="android:textAppearance">@style/TextAppearance.Text.Light</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="TextStyle.Titulo.Texto" parent="TextStyle">
@@ -155,6 +178,12 @@
         <item name="android:tint">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="Button.ImageButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:padding">5dp</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:background">@null</item>
+    </style>
+
     <style name="TextStyle.Menu" parent="TextStyle">
         <item name="android:layout_gravity">bottom</item>
         <item name="android:gravity">center</item>
@@ -166,73 +195,65 @@
         <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
     </style>
 
-    <style name="TextStyle.EditText" parent="TextStyle">
-        <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
-    </style>
 
-    <style name="TextStyle.Heading" parent="TextStyle">
-        <item name="android:textSize">21sp</item>
-        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
-    </style>
 
-    <style name="Toolbar.TitleText" parent="TextStyle.Heading">
-        <item name="android:textColor">@color/textColorWhite</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
-    </style>
 
-    <style name="Button" parent="Widget.AppCompat.Button">
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:paddingLeft">8dp</item>
-        <item name="android:paddingRight">8dp</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:background">@drawable/button_bg</item>
-        <item name="android:foreground">?selectableItemBackground</item>
-    </style>
 
-    <style name="Button.Primary" parent="Button">
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:background">@drawable/button_primary_bg</item>
-    </style>
-
-    <style name="Button.Primary.Quiz.Empty" parent="Button.Primary">
-        <item name="android:textColor">@color/colorWhite</item>
+    <style name="TextStyle.TextView.Titulo.Cartao" parent="TextStyle">
+        <item name="android:layout_marginTop">-5dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">0dp</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:background">@drawable/button_primary_bg</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">46sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
     </style>
 
-    <style name="Button.ImageButton" parent="Widget.AppCompat.ImageButton">
-        <item name="android:padding">5dp</item>
-        <item name="android:scaleType">centerInside</item>
-        <item name="android:background">@null</item>
+    <style name="TextStyle.TextView.Texto.Idades" parent="TextStyle">
+        <item name="android:padding">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">28px</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
     </style>
 
-    <style name="TextStyle.Title" parent="TextStyle">
+    <style name="TextStyle.TextView.Texto.Vacinas" parent="TextStyle">
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">31px</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
+    </style>
+
+    <style name="TextStyle.TextView.Texto.Doses" parent="TextStyle">
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:textSize">28px</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
+    </style>
+
+    <style name="TextStyle.TextView.Texto.Imunizacoes" parent="TextStyle">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">23px</item>
         <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
     </style>
 
-    <style name="TextAppearance.Text.Light" parent="android:TextAppearance">
-        <item name="fontPath">fonts/montserrat/Montserrat-Light.ttf</item>
-    </style>
-
-    <style name="TextStyle.Title.Sub" parent="TextStyle.Title">
-        <item name="android:textAppearance">@style/TextAppearance.Text.Light</item>
-        <item name="android:textSize">12sp</item>
-    </style>
-
-    <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/colorGray</item>
-    </style>
-
-    <style name="TextStyle.EditText.Normal" parent="TextStyle.EditText">
-        <item name="fontPath">fonts/montserrat/Montserrat-Regular.ttf</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:background">@drawable/background_edit</item>
+    <style name="TextStyle.Titulo.Pdf" parent="TextStyle">
+        <item name="android:textSize">36px</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:maxLength">35</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
+    </style>
+
+    <style name="TextStyle.TextView.Label.Pdf" parent="TextStyle">
+        <item name="android:textSize">21px</item>
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_marginBottom">-2dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
     </style>
 
     <!-- Animacoes de telas -->

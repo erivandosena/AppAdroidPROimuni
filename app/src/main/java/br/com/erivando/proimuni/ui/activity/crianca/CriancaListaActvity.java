@@ -117,10 +117,10 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
 
     @Override
     protected void setUp() {
-        crianca_recycler_view.setHasFixedSize(true);
         CriancaRVA adapter = new CriancaRVA(listaCriancas, getCartao(), CriancaListaActvity.this, intent);
         crianca_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         crianca_recycler_view.setAdapter(adapter);
+        crianca_recycler_view.setHasFixedSize(true);
 
         resizeCustomizedToobar(linearLayoutToobar);
     }

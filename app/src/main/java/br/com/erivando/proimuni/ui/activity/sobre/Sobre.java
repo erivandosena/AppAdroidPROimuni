@@ -1,4 +1,4 @@
-package br.com.erivando.proimuni.ui.fragment.sobre;
+package br.com.erivando.proimuni.ui.activity.sobre;
 
 import android.content.Context;
 import android.content.Intent;

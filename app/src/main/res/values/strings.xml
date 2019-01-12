@@ -219,7 +219,10 @@
     <string name="titulo_backup_copia_email">Enviar para E-mail/Bluetooth</string>
 
     <!-- PDF -->
-    <string name="gera_pdf">"Montando seu Cartão Vacinal em PDF, aguarde...</string>
+    <string name="gera_pdf">"Montando o Cartão de Vacina em PDF, aguarde...</string>
     <string name="text_btn_info">Saber mais</string>
+    <string name="text_titulo_cartao">Cartão de Vacinas</string>
+    <string name="text_crianca_nome">Crianca:</string>
+    <string name="text_crianca_idade">Idade:</string>
 
 </resources>

@@ -47,15 +47,6 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
     @Inject
     IdadeMvpPresenter<IdadeMvpView> idadePresenter;
 
-   // @BindView(R.id.toolbar)
-   // Toolbar toolbar;
-
-   // @BindView(R.id.collapsing_toolbar_calendario)
-   // CollapsingToolbarLayout collapsingToolbar;
-
-    // @BindView(R.id.collapsing_toolbar_calendario)
-    // CollapsingToolbarLayout collapsingToolbar;
-
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
 
@@ -76,16 +67,6 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario);
         setUnBinder(ButterKnife.bind(this));
-        //setSupportActionBar(toolbar);
-      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // getSupportActionBar().setTitle(getResources().getString(R.string.text_lista_calendario_titulo));
-      //  toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-       //     @Override
-       //     public void onClick(View v) {
-        //        onBackPressed();
-       //     }
-       // });
-       // collapsingToolbar.setTitle(getResources().getString(R.string.text_lista_calendario_titulo));
 
         textViewTituloToobar.setText(getResources().getString(R.string.text_lista_calendario_titulo));
         getActivityComponent().inject(this);
@@ -106,35 +87,39 @@ public class CalendarioActivity extends BaseActivity implements CalendarioMvpVie
         idades = idadePresenter.onIdadesCadastradas();
         calendarioCompleto = new ArrayList<Calendario>();
 
-        createDummyData();
+        criaDadosCalendario();
 
-        RecyclerView my_recycler_view = findViewById(R.id.calendario_recyclerView);
-        my_recycler_view.setHasFixedSize(true);
+        RecyclerView recyclerViewCalendario = findViewById(R.id.calendario_recyclerView);
         CalendarioRVA adapter = new CalendarioRVA(calendarioCompleto, this);
-        my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        my_recycler_view.setAdapter(adapter);
+        recyclerViewCalendario.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerViewCalendario.setAdapter(adapter);
+        recyclerViewCalendario.setHasFixedSize(true);
 
         resizeCustomizedToobar(linearLayoutToobar);
     }
 
-    public void createDummyData() {
+    public void criaDadosCalendario() {
         for (Idade idade : idades) {
-            Calendario dm = new Calendario();
-            dm.setTituloIdade(idade.getIdadDescricao());
+
+            Calendario calendario = new Calendario();
+            calendario.setTituloIdade(idade.getIdadDescricao());
+
             RealmList<Vacina> itemVacina = new RealmList<Vacina>();
             RealmList<Dose> itemDose = new RealmList<Dose>();
             RealmList<Idade> itemIdade = new RealmList<Idade>();
-            for (Calendario calendario : calendarios) {
-                if (calendario.getIdade().getId() == idade.getId()) {
-                    itemVacina.add(calendario.getVacina());
-                    itemDose.add(calendario.getDose());
-                    itemIdade.add(calendario.getIdade());
+
+            for (Calendario itemCalendario : calendarios) {
+                if (itemCalendario.getIdade().getId() == idade.getId()) {
+                    itemVacina.add(itemCalendario.getVacina());
+                    itemDose.add(itemCalendario.getDose());
+                    itemIdade.add(itemCalendario.getIdade());
                 }
             }
-            dm.setVacinasInSection(itemVacina);
-            dm.setDosesInSection(itemDose);
-            dm.setIdadesInSection(itemIdade);
-            calendarioCompleto.add(dm);
+            calendario.setVacinasInSection(itemVacina);
+            calendario.setDosesInSection(itemDose);
+            calendario.setIdadesInSection(itemIdade);
+
+            calendarioCompleto.add(calendario);
         }
     }
 

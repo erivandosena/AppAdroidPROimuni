@@ -105,10 +105,10 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
 
     @Override
     protected void setUp() {
-        cartao_recycler_view.setHasFixedSize(true);
         CartaoRVA adapter = new CartaoRVA(listaCartoes, CartaoListaActvity.this, intent);
         cartao_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         cartao_recycler_view.setAdapter(adapter);
+        cartao_recycler_view.setHasFixedSize(true);
 
         resizeCustomizedToobar(linearLayoutToobar);
     }

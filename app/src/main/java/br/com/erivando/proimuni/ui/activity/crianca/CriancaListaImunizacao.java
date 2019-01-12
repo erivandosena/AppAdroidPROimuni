@@ -100,9 +100,6 @@ public class CriancaListaImunizacao extends BaseActivity implements CriancaMvpVi
                                     if (presenter.onRemoveImunizacao(listaImunizacoes.get(position).getId())) {
                                         adapterImunizacao.notifyDataSetChanged();
                                         listViewImunizacoes.refreshDrawableState();
-                                       // Intent intent = CriancaListaImunizacao.getStartIntent(CriancaListaImunizacao.this);
-                                       // intent.putExtra("criancaLista", "edita");
-                                       // startActivity(intent);
                                     }
                                 }
                             });

@@ -16,40 +16,179 @@
 ~ limitações sob a licença.
 -->
 
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="1322.835dp"
-    android:layout_height="1870.866dp"
+    android:layout_width="1870.866dp"
+    android:layout_height="1322.835dp"
     android:background="@color/colorWhite">
 
-    <!--
-    <LinearLayout
-        android:layout_width="944.883dp"
-        android:layout_height="1555.906dp"
-        android:layout_marginLeft="188.976dp"
-        android:layout_marginTop="157.480dp"
-        android:layout_marginRight="188.976dp"
-        android:layout_marginBottom="157.480dp">
-        -->
 
-        <!--
-        <TextView
-            android:id="@+id/tv_hello"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:justificationMode="inter_word"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent" />
 
-            -->
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/colorTransparent"
+        android:foreground="@drawable/round_border_cardview_solid">
 
-        <ImageView
-            android:id="@+id/imagem"
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/ic_layout_cartao_pdf"
-            android:contentDescription="@null" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:background="@drawable/round_border_layout_gradient">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:id="@+id/image_pdf_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="54dp"
+                    android:background="@color/colorTransparent"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/ic_launcher_round" />
+
+                <TextView
+                    style="@style/TextStyle.TextView.Titulo.Cartao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/image_pdf_logo"
+                    android:layout_toRightOf="@+id/image_pdf_logo"
+                    android:text="@string/text_titulo_cartao" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/colorTransparent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/text_pdf_nome_crianca"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="0dp"
+                        android:paddingLeft="0dp"
+                        android:paddingEnd="50dp"
+                        android:paddingRight="50dp"
+                        android:text="@null"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_pdf_idade_crianca"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/text_pdf_nome_crianca"
+                        android:layout_toRightOf="@+id/text_pdf_nome_crianca"
+                        android:paddingStart="0dp"
+                        android:paddingLeft="0dp"
+                        android:paddingEnd="50dp"
+                        android:paddingRight="50dp"
+                        android:text="@null"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_pdf_etnia_crianca"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/text_pdf_idade_crianca"
+                        android:layout_toRightOf="@+id/text_pdf_idade_crianca"
+                        android:paddingStart="0dp"
+                        android:paddingLeft="0dp"
+                        android:paddingEnd="50dp"
+                        android:paddingRight="50dp"
+                        android:text="@null"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_pdf_rede_vacinas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/text_pdf_etnia_crianca"
+                        android:layout_toRightOf="@+id/text_pdf_etnia_crianca"
+                        android:paddingStart="0dp"
+                        android:paddingLeft="0dp"
+                        android:paddingEnd="50dp"
+                        android:paddingRight="50dp"
+                        android:text="@null"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_pdf_idades"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_pdf_vacinas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_pdf_copyright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="30dp"
+            android:paddingBottom="5dp"
+            android:text="@null"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+    </android.support.v7.widget.CardView>
 
 
 </RelativeLayout>
