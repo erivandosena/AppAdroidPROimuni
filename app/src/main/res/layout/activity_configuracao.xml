@@ -51,13 +51,13 @@
                 style="@style/TextStyle.TextView.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Desativar Notificações" />
+                android:text="@string/config_desativar_notifica" />
             <ToggleButton
                 android:id="@+id/btn_toggle_notificacao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOn="Sim"
-                android:textOff="Não"
+                android:textOn="@string/config_sim"
+                android:textOff="@string/config_nao"
                 android:button="@drawable/round_border_toggle_button"
                 android:background="@color/colorTransparent"
                 android:layout_marginBottom="10dp"
@@ -71,13 +71,13 @@
                 style="@style/TextStyle.TextView.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notificar Vacinas da Rede Privada" />
+                android:text="@string/config_notificar_vacinas_rede_privada" />
             <ToggleButton
                 android:id="@+id/btn_toggle_vacinas_opcionais"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOn="Sim"
-                android:textOff="Não"
+                android:textOn="@string/config_sim"
+                android:textOff="@string/config_nao"
                 android:button="@drawable/round_border_toggle_button"
                 android:background="@color/colorTransparent"
                 android:layout_marginBottom="10dp"

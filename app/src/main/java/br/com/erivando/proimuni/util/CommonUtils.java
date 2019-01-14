@@ -31,7 +31,7 @@ public final class CommonUtils {
     private static final String TAG = "CommonUtils";
 
     private CommonUtils() {
-        // This utility class is not publicly instantiable
+        // Esta classe de utilitário não é publicamente instanciável.
     }
 
     public static ProgressDialog showLoadingDialog(Context context) {

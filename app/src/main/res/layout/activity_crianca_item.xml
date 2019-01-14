@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
   ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -93,7 +95,8 @@
                 android:clickable="true"
                 android:scaleType="fitCenter"
                 android:tint="@color/colorWhite"
-                card_view:srcCompat="@drawable/ic_cartao" />
+                card_view:srcCompat="@drawable/ic_cartao"
+                android:focusable="true" />
 
             <ImageButton
                 android:id="@+id/btn_imunizacoes"
@@ -113,7 +116,8 @@
                 android:clickable="true"
                 android:scaleType="fitCenter"
                 android:tint="@color/colorWhite"
-                card_view:srcCompat="@drawable/ic_vacina" />
+                card_view:srcCompat="@drawable/ic_vacina"
+                android:focusable="true" />
 
             <ImageView
                 android:layout_width="wrap_content"

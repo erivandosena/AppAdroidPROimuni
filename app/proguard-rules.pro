@@ -19,8 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#-keepattributes *Annotation*
+#-keepclassmembers class br.com.erivando.proimuni.** { *; }
 -keepattributes AnnotationDefault
--keepattributes *Annotation*
--keep @**annotation** class* {*;}
 -keepattributes Exceptions, InnerClasses, MethodParameters, Signature, EnclosingMethod, RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
--keepattributes Signature
+-ignorewarnings

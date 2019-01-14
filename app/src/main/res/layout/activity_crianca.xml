@@ -91,20 +91,7 @@
                 android:hint="@string/hint_text_nascimento"
                 android:inputType="date"
                 android:maxLength="10" />
-            <!--
-            <TextView
-                style="@style/TextStyle.TextView.Label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_nome_responsavel" />
 
-            <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/responsavel"
-                style="@style/TextStyle.Spinner.DropDown"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dropdown" />
-            -->
             <TextView
                 style="@style/TextStyle.TextView.Label"
                 android:layout_width="wrap_content"
@@ -122,13 +109,13 @@
                 style="@style/TextStyle.TextView.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Criança indígena" />
+                android:text="@string/text_crianca_etnia" />
             <ToggleButton
                 android:id="@+id/btn_toggle_vacina_indigenas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOn="Sim"
-                android:textOff="Não"
+                android:textOn="@string/config_sim"
+                android:textOff="@string/config_nao"
                 android:button="@drawable/round_border_toggle_button"
                 android:background="@color/colorTransparent"
                 android:layout_marginBottom="5dp"

@@ -44,7 +44,6 @@ public class Crianca extends RealmObject implements Parcelable {
     private boolean criaEtnia;
 
     public Crianca() {
-        //this.setCriaEtnia(false);
     }
 
     public Crianca(Long id, Usuario usuario, String criaNome, Date criaNascimento, String criaSexo, String criaFoto, boolean criaEtnia) {

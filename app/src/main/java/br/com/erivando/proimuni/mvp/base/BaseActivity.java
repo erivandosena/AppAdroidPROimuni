@@ -173,23 +173,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 
     @Override
     public boolean isNetworkConnected() {
-        /*
-        boolean status = false;
-        if (status == NetworkUtils.isWifiConnected(getApplicationContext())) {
-            if (status == NetworkUtils.isWifiConnected(getApplicationContext())) {
-                if (status == NetworkUtils.isMobileConnected(getApplicationContext())) {
-                    Toast.makeText(AppAplicacao.contextApp, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
-                } else {
-                    return true;
-                }
-            } else {
-                return true;
-            }
-        } else {
-            return true;
-        }
-        return status;
-        */
         return NetworkUtils.isNetworkConnected(getApplicationContext());
     }
 

@@ -1,12 +1,10 @@
 package br.com.erivando.proimuni.ui.adapter;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,7 +106,6 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
         if ("HPV".equalsIgnoreCase(vacina.getVaciNome())) {
             if ("Menino".equalsIgnoreCase(cartao.getCrianca().getCriaSexo())) {
                 if ("9 a 14 anos".equals(mesesIdadeCalendario)) {
-                    //removeItem(i);
                     if (!itensRemove.contains(i))
                         itensRemove.add(i);
                 }
@@ -161,12 +158,15 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                vacinaList.remove(position);
-                doseList.remove(position);
-                idadeList.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeRemoved(position, getItemCount());
-                //Log.e("REMOVIDO ", String.valueOf(position));
+                try {
+                    vacinaList.remove(position);
+                    doseList.remove(position);
+                    idadeList.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeRemoved(position, getItemCount());
+                } catch (IndexOutOfBoundsException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -443,6 +443,7 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
         int vacinaVermelhoVencido = mContext.getResources().getColor((R.color.colorPink));
 
         cardView.setCardBackgroundColor(vacinaCinzaAvencer);
+
         if (mesesIdadeCrianca == null && semanas == null) {
             if (!imunizacaoList.isEmpty()) {
                 cardView.setCardBackgroundColor(vacinaVerdeEmdia);
@@ -461,6 +462,14 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
                 }
             }
         } else {
+
+            if(semanas == 1L) {
+                if (mesesIdadeCrianca < 1L) {
+                    cardView.setCardBackgroundColor(vacinaAmareloVencendo);
+                } else if (mesesIdadeCrianca >= 1L) {
+                    cardView.setCardBackgroundColor(vacinaVermelhoVencido);
+                }
+            }
             if (mesesIdadeCrianca == semanas) {
                 cardView.setCardBackgroundColor(vacinaAmareloVencendo);
             }

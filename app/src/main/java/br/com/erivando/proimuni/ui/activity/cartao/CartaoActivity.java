@@ -45,12 +45,6 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView {
     @Inject
     CriancaMvpPresenter<CriancaMvpView> presenterCrianca;
 
- //   @BindView(R.id.toolbar_cartao)
-   // Toolbar toolbar;
-
-   // @BindView(R.id.collapsing_toolbar_cartao)
-  //  CollapsingToolbarLayout collapsingToolbar;
-
     @BindView(R.id.crianca)
     Spinner comboCartao;
 
@@ -76,18 +70,6 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartao);
         setUnBinder(ButterKnife.bind(this));
-        /*
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        collapsingToolbar.setTitle(getResources().getString(R.string.text_cartao_titulo));
-        */
-
         textViewTituloToobar.setText(getResources().getString(R.string.text_cartao_titulo));
         getActivityComponent().inject(this);
         presenter.onAttach(this);

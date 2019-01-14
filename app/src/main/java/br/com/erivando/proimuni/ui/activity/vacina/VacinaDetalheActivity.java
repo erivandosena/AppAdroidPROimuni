@@ -76,37 +76,15 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vacina_detalhe);
-
         getActivityComponent().inject(this);
-
         setUnBinder(ButterKnife.bind(this));
-
         vacinaPresenter.onAttach(this);
-
         intent = getIntent();
-
         vacinaNome = intent.getStringExtra(EXTRA_NOME);
         vacinaRede = intent.getStringExtra(EXTRA_REDE);
         vacinaDesc = intent.getStringExtra(EXTRA_DESC);
         vacinaAdmin = intent.getStringExtra(EXTRA_ADMIN);
         activityOrigem = intent.getStringExtra("Activity");
-
-        /*
-        final Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // perform whatever you want on back arrow click
-                onBackPressed();
-            }
-        });
-
-        CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(vacinaNome);
-        */
-
         setUp();
     }
 
@@ -177,8 +155,6 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
     }
 
     private void loadBackdrop() {
-        //final ImageView imageView = findViewById(R.id.backdrop);
-        //Glide.with(this).load(R.drawable.ic_vacina).apply(RequestOptions.centerCropTransform()).into(imageView);
     }
 
     @Override

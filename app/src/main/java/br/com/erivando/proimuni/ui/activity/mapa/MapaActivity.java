@@ -92,12 +92,6 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
     private boolean statusChangedMapa;
     private Drawable iconeDrawable;
 
-    //@BindView(R.id.toolbar_mapa)
-    //Toolbar toolbar;
-
-    //@BindView(R.id.collapsing_toolbar_mapa)
-    //CollapsingToolbarLayout collapsingToolbar;
-
     @BindView(R.id.btn_pesquisa_posto)
     ImageButton buttonPesquisa;
 
@@ -120,23 +114,9 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_mapa);
         setUnBinder(ButterKnife.bind(this));
-        /*
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        collapsingToolbar.setTitle(getResources().getString(R.string.text_mapa_titulo));
-        */
         textViewTituloToobar.setText(getResources().getString(R.string.text_mapa_titulo));
-
         getActivityComponent().inject(this);
-
         iconeDrawable = getResources().getDrawable(R.drawable.ic_local_app);
-
         buttonPesquisa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,7 +193,6 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
             toPass[0] = mGoogleMap;
             toPass[1] = googlePlacesUrl.toString();
             googlePlacesReadTask.execute(toPass);
-            //Log.i("LINK ", toPass[1].toString());
         }
 
         setUp();

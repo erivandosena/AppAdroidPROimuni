@@ -141,30 +141,25 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             getMvpView().onError(R.string.text_valida_senha);
             return;
         }
-        //getMvpView().showLoading();
 
-        try {
-            if (getIDataManager().validaLoginUsuario(login, senha)) {
-                usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login, "usuaSenha", senha});
-                String tokenUsuario = UUID.randomUUID().toString().replace("-", "");
-                getIDataManager().setAccessToken(tokenUsuario);
-                getIDataManager().updateUserInfo(
-                        tokenUsuario,
-                        usuario.getId(),
-                        DataManager.LoggedInMode.LOGGED_IN_MODE_LOCAL,
-                        usuario.getUsuaNome() == null ? usuario.getUsuaLogin() : usuario.getUsuaNome(),
-                        usuario.getUsuaEmail(),
-                        (usuario.getUsuaFoto() != null) ? "file://" + getPathFromUri(AppAplicacao.contextApp, bitmapParaUri(AppAplicacao.contextApp, base64ParaBitmap(usuario.getUsuaFoto()))) : null
-                );
-                if (!isViewAttached()) {
-                    return;
-                }
-                getMvpView().openMainActivity();
-            } else {
-                getMvpView().onError(R.string.text_valida_usuario);
+        if (getIDataManager().validaLoginUsuario(login, senha)) {
+            usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login, "usuaSenha", senha});
+            String tokenUsuario = UUID.randomUUID().toString().replace("-", "");
+            getIDataManager().setAccessToken(tokenUsuario);
+            getIDataManager().updateUserInfo(
+                    tokenUsuario,
+                    usuario.getId(),
+                    DataManager.LoggedInMode.LOGGED_IN_MODE_LOCAL,
+                    usuario.getUsuaNome() == null ? usuario.getUsuaLogin() : usuario.getUsuaNome(),
+                    usuario.getUsuaEmail(),
+                    (usuario.getUsuaFoto() != null) ? "file://" + getPathFromUri(AppAplicacao.contextApp, bitmapParaUri(AppAplicacao.contextApp, base64ParaBitmap(usuario.getUsuaFoto()))) : null
+            );
+            if (!isViewAttached()) {
+                return;
             }
-        } finally {
-            //getMvpView().hideLoading();
+            getMvpView().openMainActivity();
+        } else {
+            getMvpView().onError(R.string.text_valida_usuario);
         }
 
     }
@@ -208,85 +203,74 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
         isLoggedIn = accessToken != null && !accessToken.isExpired();
 
-        try {
-            //getMvpView().showLoading();
-            if (isLoggedIn) {
-                getMvpView().openMainActivity();
-            } else {
-                LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        // Se o token de acesso já estiver disponível, atribua-o.
-                        accessToken = loginResult.getAccessToken();
-                        accessToken.getPermissions();
+        if (isLoggedIn) {
+            getMvpView().openMainActivity();
+        } else {
+            LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    // Se o token de acesso já estiver disponível, atribua-o.
+                    accessToken = loginResult.getAccessToken();
+                    accessToken.getPermissions();
 
-                        GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
-                                if (graphResponse.getError() == null) {
-                                    final Bundle bundleData = getParametrosFacebook(jsonObject);
-                                    GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
-                                        @Override
-                                        public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
-                                            try {
-                                                if (graphResponse.getError() == null && bundleData != null) {
+                    GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                        @Override
+                        public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                            if (graphResponse.getError() == null) {
+                                final Bundle bundleData = getParametrosFacebook(jsonObject);
+                                GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+                                    @Override
+                                    public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                                        try {
+                                            if (graphResponse.getError() == null && bundleData != null) {
 
-                                                    String id = bundleData.getString("id");
-                                                    String nome = bundleData.getString("name");
-                                                    String email = bundleData.getString("email");
-                                                    String primeiroNome = bundleData.getString("first_name");
-                                                    String segundoNome = bundleData.getString("last_name");
+                                                String id = bundleData.getString("id");
+                                                String nome = bundleData.getString("name");
+                                                String email = bundleData.getString("email");
+                                                String primeiroNome = bundleData.getString("first_name");
+                                                String segundoNome = bundleData.getString("last_name");
 
-                                                    String genero = bundleData.getString("user_gender");
-                                                    String aniversario = bundleData.getString("user_birthday");
-                                                    String fotos = bundleData.getString("user_photos");
-                                                    String localizacao = bundleData.getString("user_location");
-                                                    URL imagemPerfil = new URL("https://graph.facebook.com/" + id + "/picture?type=large");
-                                                    getIDataManager().setAccessToken(accessToken.getToken());
-                                                    getIDataManager().updateUserInfo(
-                                                            accessToken.getToken(),
-                                                            Long.valueOf(id),
-                                                            IDataManager.LoggedInMode.LOGGED_IN_MODE_FACEBOOK,
-                                                            (!nome.equals(primeiroNome + " " + segundoNome) ? nome : primeiroNome + " " + segundoNome),
-                                                            email,
-                                                            (imagemPerfil != null) ? imagemPerfil.toString() : null
-                                                    );
-                                                }
-                                            } catch (MalformedURLException e) {
-                                                e.printStackTrace();
-                                            } finally {
-                                                getMvpView().openMainActivity();
+                                                URL imagemPerfil = new URL("https://graph.facebook.com/" + id + "/picture?type=large");
+                                                getIDataManager().setAccessToken(accessToken.getToken());
+                                                getIDataManager().updateUserInfo(
+                                                        accessToken.getToken(),
+                                                        Long.valueOf(id),
+                                                        IDataManager.LoggedInMode.LOGGED_IN_MODE_FACEBOOK,
+                                                        (!nome.equals(primeiroNome + " " + segundoNome) ? nome : primeiroNome + " " + segundoNome),
+                                                        email,
+                                                        (imagemPerfil != null) ? imagemPerfil.toString() : null
+                                                );
                                             }
+                                        } catch (MalformedURLException e) {
+                                            e.printStackTrace();
+                                        } finally {
+                                            getMvpView().openMainActivity();
                                         }
-                                    }).executeAsync();
-                                }
+                                    }
+                                }).executeAsync();
                             }
-                        });
-                        Bundle parameters = new Bundle();
+                        }
+                    });
+                    Bundle parameters = new Bundle();
                         /* obrigatório solicitar parametros extras ao Facebook
                         parameters.putString("fields", "id, email, name, first_name, last_name, user_gender, user_photos, user_birthday, user_location");
                         */
-                        parameters.putString("fields", "id, email, name, first_name, last_name");
-                        request.setParameters(parameters);
-                        request.executeAsync();
-                    }
+                    parameters.putString("fields", "id, email, name, first_name, last_name");
+                    request.setParameters(parameters);
+                    request.executeAsync();
+                }
 
-                    @Override
-                    public void onCancel() {
-                        // getMvpView().hideLoading();
-                        Toast.makeText(AppAplicacao.contextApp, R.string.facebook_cancel_login, Toast.LENGTH_SHORT).show();
-                    }
+                @Override
+                public void onCancel() {
+                    Toast.makeText(AppAplicacao.contextApp, R.string.facebook_cancel_login, Toast.LENGTH_SHORT).show();
+                }
 
-                    @Override
-                    public void onError(FacebookException exception) {
-                        //getMvpView().hideLoading();
-                        Toast.makeText(AppAplicacao.contextApp, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
-                        exception.printStackTrace();
-                    }
-                });
-            }
-        } finally {
-            //getMvpView().hideLoading();
+                @Override
+                public void onError(FacebookException exception) {
+                    Toast.makeText(AppAplicacao.contextApp, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
+                    exception.printStackTrace();
+                }
+            });
         }
     }
 
@@ -403,7 +387,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             // O código de status ApiException indica o motivo detalhado da falha.
             // Por favor, consulte a referência da classe GoogleSignInStatusCodes para
             // mais informações. e.getStatusCode()
-            //Log.e("Login Google: ", e.getMessage());
             Toast.makeText(AppAplicacao.contextApp, R.string.google_cancel_login, Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } finally {
@@ -427,7 +410,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
     @Override
     public void enviaSenhaPorEmail(View view, String login) {
-        //BACKUP_FILE = null;
         try {
             if (login == null || login.isEmpty() || login.length() < 4 || login.length() > 20 || login.matches("^[a-zA-Z]+ [a-zA-Z]+.*")) {
                 getMvpView().onError(R.string.text_valida_login);
@@ -440,21 +422,17 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             }
             getResultsFromApi(view);
         } catch (Exception e) {
-            //Log.e("enviaSenhaPorEmail: ", e.getMessage());
             e.printStackTrace();
-            //return;
         }
     }
 
     @Override
     public void enviaBackupPorEmail(View view) {
         try {
-            //usuario = getIDataManager().obtemUsuario();
             getResultsFromApi(view);
             Log.e("enviaBackupPorEmail", String.valueOf(view));
         } catch (Exception e) {
             e.printStackTrace();
-            //return;
         }
     }
 
@@ -675,71 +653,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             return message;
         }
 
-        /*
-        // Método para envio do e-mail
-        private String sendMessage(Gmail service, String userId, MimeMessage email) throws MessagingException, IOException {
-            Message message = createMessageWithEmail(email);
-            // Método oficial do GMail para enviar e-mail com OAuth 2.0
-            message = service.users().messages().send(userId, message).execute();
-            return message.getId();
-        }
-
-
-        // Método para criar e-mails Params
-        private MimeMessage createEmail(String to, String from, String subject, String bodyText) throws MessagingException {
-            Properties props = new Properties();
-            Session session = Session.getDefaultInstance(props, null);
-
-            MimeMessage email = new MimeMessage(session);
-            InternetAddress tAddress = new InternetAddress(to);
-            InternetAddress fAddress = new InternetAddress(from);
-
-            email.setFrom(fAddress);
-            email.addRecipient(javax.mail.Message.RecipientType.TO, tAddress);
-            email.setSubject(subject);
-
-            // Crie o objeto Multipart e adicione objetos MimeBodyPart a este objeto
-            Multipart multipart = new MimeMultipart();
-
-            BodyPart textBody = new MimeBodyPart();
-            textBody.setText(bodyText);
-            multipart.addBodyPart(textBody);
-
-            //Definir o objeto multipart para o objeto de mensagem
-            email.setContent(multipart);
-
-            return email;
-        }
-
-        private Message createMessageWithEmail(MimeMessage email) throws MessagingException, IOException {
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            email.writeTo(bytes);
-            String encodedEmail = Base64.encodeBase64URLSafeString(bytes.toByteArray());
-            Message message = new Message();
-            message.setRaw(encodedEmail);
-            return message;
-        }
-        */
-
-        /*
-        @Override
-        protected String doInBackground(Void... voids) {
-            Log.e("doInBackground", String.valueOf(BACKUP_FILE));
-            try {
-                if (BACKUP_FILE == null) {
-                    return getDataFromApi();
-                } else {
-                    return getDataFromApi();
-                }
-
-            } catch (Exception e) {
-                lastError = e;
-                cancel(true);
-                return null;
-            }
-        }
-        */
-
         @Override
         protected String doInBackground(Void... voids) {
             try {
@@ -750,7 +663,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                 return null;
             }
         }
-
 
         @Override
         protected void onPreExecute() {
@@ -780,11 +692,9 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                     getMvpView().getStartActivityForResult(((UserRecoverableAuthIOException) lastError).getIntent(), REQUEST_AUTHORIZATION);
                 } else {
                     showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_google_oauth) + "\n" + lastError);
-                    //Log.e("erro_google_oauth: ", String.valueOf(lastError.getMessage()));
                 }
             } else {
                 showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_request));
-                //Log.e("erro_request: ", lastError.getMessage());
             }
 
         }

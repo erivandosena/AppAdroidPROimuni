@@ -28,9 +28,6 @@ public class AppAplicacao extends MultiDexApplication {
 
     public static Context contextApp;
 
-    //@Inject
-    //IDataManager iDataManager;
-
     @Inject
     CalligraphyConfig calligraphyConfig;
 

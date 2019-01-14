@@ -45,12 +45,6 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
     @Inject
     CartaoMvpPresenter<CartaoMvpView> presenterCartao;
 
-   // @BindView(R.id.toolbar_crianca_lista)
-    //Toolbar toolbar;
-
-    //@BindView(R.id.collapsing_toolbar_crianca_lista)
-   // CollapsingToolbarLayout collapsingToolbar;
-
     @BindView(R.id.fab_crianca_add)
     FloatingActionButton fabFloatingActionButton;
 
@@ -77,34 +71,16 @@ public class CriancaListaActvity extends BaseActivity implements CriancaMvpView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crianca_lista);
         setUnBinder(ButterKnife.bind(this));
-        /*
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        collapsingToolbar.setTitle(getResources().getString(R.string.text_lista_crianca_titulo));
-        */
-
         textViewTituloToobar.setText(getResources().getString(R.string.text_lista_crianca_titulo));
-
         getActivityComponent().inject(this);
-
         presenterCrianca.onAttach(this);
-
         intent = getIntent();
-
         getCrianca();
-
         setUp();
     }
 
     @OnClick(R.id.fab_crianca_add)
     public void onClick(View view) {
-        //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
         if (view == fabFloatingActionButton) {
             openCriancaActivity();
         }

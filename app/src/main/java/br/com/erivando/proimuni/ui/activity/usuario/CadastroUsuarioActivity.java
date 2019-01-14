@@ -44,12 +44,6 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     @Inject
     CadastroUsuarioMvpPresenter<CadastroUsuarioMvpView> presenter;
 
-    // @BindView(R.id.toolbar_usuario)
-    // Toolbar toolbar;
-
-    // @BindView(R.id.collapsing_toolbar_usuario)
-    // CollapsingToolbarLayout collapsingToolbar;
-
     @BindView(R.id.text_cad_nome)
     EditText nomeEditText;
 
@@ -94,30 +88,12 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
-
         setUnBinder(ButterKnife.bind(this));
-        //toolbar.setTitle(getResources().getString(R.string.text_usuario_titulo));
-        // setSupportActionBar(toolbar);
-        //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-        //      @Override
-        //     public void onClick(View v) {
-        //         openLoginOuMainActivity();
-        //    }
-        //  });
-
-        //collapsingToolbar.setTitle(getResources().getString(R.string.text_usuario_titulo));
-
         textViewTituloToobar.setText(getResources().getString(R.string.text_usuario_titulo));
-
         getActivityComponent().inject(this);
-
         presenter.onAttach(this);
-
         usuario = new Usuario();
-
         id = 0L;
-
         setUp();
     }
 
@@ -185,7 +161,6 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
                     textViewSenhaToggle.setText(texto_mostra_toggle);
                     senhaEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     senhaEditText.setSelection(senhaEditText.length());
-                    //senhaEditText.setTextAppearance(CadastroUsuarioActivity.this, R.style.TextStyle_TextInputEdit_Texto);
                 }
             }
         });
@@ -249,8 +224,6 @@ public class CadastroUsuarioActivity extends BaseActivity implements CadastroUsu
             }
         });
 
-        //habilitaTelaCheia(this);
-        //statusBarTransparente(this);
         usuario = presenter.onUsuarioCadastrado();
         if (usuario != null) {
             id = usuario.getId();

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.erivando.proimuni.R;
@@ -33,12 +32,10 @@ public class CartaoPdfRVA extends RecyclerView.Adapter<CartaoPdfRVA.ItemRowHolde
     private List<Imunizacao> imunizacaoHpvList;
     private Context mContext;
     private RecyclerView rvListaIdades;
-    private boolean isRedeVacinas;
 
-    public CartaoPdfRVA(List<Calendario> calendarioList, List<Imunizacao> imunizacaoHpvList, boolean isRedeVacinas, Context mContext) {
+    public CartaoPdfRVA(List<Calendario> calendarioList, List<Imunizacao> imunizacaoHpvList, Context mContext) {
         this.calendarioList = calendarioList;
         this.imunizacaoHpvList = imunizacaoHpvList;
-        this.isRedeVacinas = isRedeVacinas;
         this.mContext = mContext;
     }
 
@@ -53,27 +50,23 @@ public class CartaoPdfRVA extends RecyclerView.Adapter<CartaoPdfRVA.ItemRowHolde
 
     @Override
     public void onBindViewHolder(ItemRowHolder itemRowHolder, int i) {
-        //final String sectionName = calendarioList.get(i).getTituloIdade();
 
         RealmList<Idade> idadeItems = calendarioList.get(i).getIdadesInSection();
         RealmList<Vacina> vacinaItems = calendarioList.get(i).getVacinasInSection();
         RealmList<Dose> doseItems = calendarioList.get(i).getDosesInSection();
         RealmList<Imunizacao> imunizacaoItems = calendarioList.get(i).getImunizacoesInSection();
-        //List<Imunizacao> imunizacaoHpvItems = imunizacaoHpvList;
 
         CartaoPdfIdadeRVA itemListIdadeDataAdapter = new CartaoPdfIdadeRVA(idadeItems);
-        //itemRowHolder.rvListaIdades = this.rvListaIdades;
         rvListaIdades.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         rvListaIdades.setAdapter(itemListIdadeDataAdapter);
         rvListaIdades.setHasFixedSize(true);
-        rvListaIdades.setNestedScrollingEnabled(false);
+        //rvListaIdades.setNestedScrollingEnabled(false);
 
-        //itemRowHolder.textTituloIdade.setText(sectionName);
-        CartaoPdfVacinaRVA itemListaVacinaDataAdapter = new CartaoPdfVacinaRVA(vacinaItems, doseItems, imunizacaoItems, imunizacaoHpvList, isRedeVacinas, mContext);
+        CartaoPdfVacinaRVA itemListaVacinaDataAdapter = new CartaoPdfVacinaRVA(vacinaItems, doseItems, imunizacaoItems, imunizacaoHpvList, mContext);
         itemRowHolder.rvListaVacinas.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         itemRowHolder.rvListaVacinas.setAdapter(itemListaVacinaDataAdapter);
         itemRowHolder.rvListaVacinas.setHasFixedSize(true);
-        itemRowHolder.rvListaVacinas.setNestedScrollingEnabled(false);
+        //itemRowHolder.rvListaVacinas.setNestedScrollingEnabled(false);
 
     }
 
@@ -83,9 +76,6 @@ public class CartaoPdfRVA extends RecyclerView.Adapter<CartaoPdfRVA.ItemRowHolde
     }
 
     public class ItemRowHolder extends RecyclerView.ViewHolder {
-
-        //@BindView(R.id.recycler_view_pdf_idades_lista)
-        //protected RecyclerView rvListaIdades;
 
         @BindView(R.id.recycler_view_pdf_vacinas_lista)
         protected RecyclerView rvListaVacinas;

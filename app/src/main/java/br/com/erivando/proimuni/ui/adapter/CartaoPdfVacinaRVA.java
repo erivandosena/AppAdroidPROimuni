@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import br.com.erivando.proimuni.R;
@@ -37,19 +35,13 @@ public class CartaoPdfVacinaRVA extends RecyclerView.Adapter<CartaoPdfVacinaRVA.
     private RealmList<Dose> doseList;
     private RealmList<Imunizacao> imunizacaoList;
     private List<Imunizacao> imunizacaoHpvList;
-    private List<Integer> itensRemove;
-    private int countItemHolder;
-    private boolean startRemove;
-    private boolean isRedeVacinas;
     Context context;
 
-    public CartaoPdfVacinaRVA(RealmList<Vacina> vacinaList, RealmList<Dose> doseList, RealmList<Imunizacao> imunizacaoList, List<Imunizacao> imunizacaoHpvList, boolean isRedeVacinas, Context mContext) {
+    public CartaoPdfVacinaRVA(RealmList<Vacina> vacinaList, RealmList<Dose> doseList, RealmList<Imunizacao> imunizacaoList, List<Imunizacao> imunizacaoHpvList, Context mContext) {
         this.vacinaList = vacinaList;
         this.doseList = doseList;
         this.imunizacaoList = imunizacaoList;
         this.imunizacaoHpvList = imunizacaoHpvList;
-        this.isRedeVacinas = isRedeVacinas;
-        this.itensRemove = new ArrayList<Integer>();
         this.context = mContext;
     }
 
@@ -61,9 +53,7 @@ public class CartaoPdfVacinaRVA extends RecyclerView.Adapter<CartaoPdfVacinaRVA.
     }
 
     @Override
-    public void onBindViewHolder(final SingleItemRowHolder holder, final int i) {
-        countItemHolder += 1;
-
+    public void onBindViewHolder(SingleItemRowHolder holder, int i) {
         Vacina itemVacina = vacinaList.get(i);
         Dose itemDose = doseList.get(i);
 
@@ -72,71 +62,47 @@ public class CartaoPdfVacinaRVA extends RecyclerView.Adapter<CartaoPdfVacinaRVA.
 
         if (!imunizacaoList.isEmpty()) {
 
-            Imunizacao itemImunizacao = imunizacaoList.get(i);
+            for (Imunizacao itemImunizacao : imunizacaoList) {
+                if (!"HPV".equalsIgnoreCase(itemImunizacao.getVacina().getVaciNome())) {
+                    if (itemVacina.getId() == itemImunizacao.getVacina().getId()) {
+                        holder.textImunizacaoData.setText(formatStringBold("Data:") + " " + getParseDateString(itemImunizacao.getImunData()));
+                        holder.textImunizacaoLote.setText(formatStringBold("Lote:") + " " + itemImunizacao.getImunLote());
+                        holder.textImunizacaoAplic.setText(formatStringBold("Aplic.:") + " " + itemImunizacao.getImunAgente());
+                        holder.textImunizacaoUnid.setText(formatStringBold("Unid.:") + " " + itemImunizacao.getImunPosto());
+                    }
+                } else if (!imunizacaoHpvList.isEmpty()) {
+                    holder.layoutVacinaComum.setVisibility(View.GONE);
+                    holder.layoutVacinaHPV1.setVisibility(View.VISIBLE);
+                    holder.layoutVacinaHPV2.setVisibility(View.VISIBLE);
 
-            if (!"HPV".equalsIgnoreCase(itemImunizacao.getVacina().getVaciNome())) {
-                holder.textImunizacaoData.setText(formatStringBold("Data:")+" " + getParseDateString(itemImunizacao.getImunData()));
-                holder.textImunizacaoLote.setText(formatStringBold("Lote:")+" " + itemImunizacao.getImunLote());
-                holder.textImunizacaoAplic.setText(formatStringBold("Aplic.:")+" " + itemImunizacao.getImunAgente());
-                holder.textImunizacaoUnid.setText(formatStringBold("Unid.:")+" " + itemImunizacao.getImunPosto());
-            } else if (!imunizacaoHpvList.isEmpty()) {
+                    if (!imunizacaoHpvList.isEmpty()) {
+                        Imunizacao imunizacaoHpv1 = imunizacaoHpvList.get(0);
+                        holder.textTituloDose.setText("1ª Dose");
+                        holder.textImunizacaoDataHPV1.setText("Data: " + getParseDateString(imunizacaoHpv1.getImunData()));
+                        holder.textImunizacaoLoteHPV1.setText("Lote: " + imunizacaoHpv1.getImunLote());
+                        holder.textImunizacaoAplicHPV1.setText("Aplic.: " + imunizacaoHpv1.getImunAgente());
+                        holder.textImunizacaoUnidHPV1.setText("Unid.: " + imunizacaoHpv1.getImunPosto());
 
-                //new Handler().post(new Runnable() {
-                //    @Override
-                //    public void run() {
-                holder.layoutVacinaComum.setVisibility(View.GONE);
-                holder.layoutVacinaHPV1.setVisibility(View.VISIBLE);
-                holder.layoutVacinaHPV2.setVisibility(View.VISIBLE);
-                //notifyItemRemoved(position);
-                //notifyItemRangeRemoved(position, getItemCount());
-                //   }
-                //});
+                        if (imunizacaoHpvList.size() > 1) {
+                            Imunizacao imunizacaoHpv2 = imunizacaoHpvList.get(1);
+                            holder.textTituloDoseHPV2.setText("2ª Dose");
+                            holder.textImunizacaoDataHPV2.setText("Data: " + getParseDateString(imunizacaoHpv2.getImunData()));
+                            holder.textImunizacaoLoteHPV2.setText("Lote: " + imunizacaoHpv2.getImunLote());
+                            holder.textImunizacaoAplicHPV2.setText("Aplic.: " + imunizacaoHpv2.getImunAgente());
+                            holder.textImunizacaoUnidHPV2.setText("Unid.: " + imunizacaoHpv2.getImunPosto());
 
-                Imunizacao imunizacaoHpv1 = imunizacaoHpvList.get(0);
-                if (imunizacaoHpv1 != null) {
-                    holder.textTituloDose.setText("1ª Dose");
-                    holder.textImunizacaoDataHPV1.setText("Data: " + getParseDateString(imunizacaoHpv1.getImunData()));
-                    holder.textImunizacaoLoteHPV1.setText("Lote: " + imunizacaoHpv1.getImunLote());
-                    holder.textImunizacaoAplicHPV1.setText("Aplic.: " + imunizacaoHpv1.getImunAgente());
-                    holder.textImunizacaoUnidHPV1.setText("Unid.: " + imunizacaoHpv1.getImunPosto());
-                }
-                if (imunizacaoHpvList.size() > 1) {
-                    Imunizacao imunizacaoHpv2 = imunizacaoHpvList.get(1);
-                    if (imunizacaoHpv2 != null) {
-                        holder.textTituloDoseHPV2.setText("2ª Dose");
-                        holder.textImunizacaoDataHPV2.setText("Data: " + getParseDateString(imunizacaoHpv2.getImunData()));
-                        holder.textImunizacaoLoteHPV2.setText("Lote: " + imunizacaoHpv2.getImunLote());
-                        holder.textImunizacaoAplicHPV2.setText("Aplic.: " + imunizacaoHpv2.getImunAgente());
-                        holder.textImunizacaoUnidHPV2.setText("Unid.: " + imunizacaoHpv2.getImunPosto());
+                        }
                     }
                 }
             }
 
-            if ("Privada".equalsIgnoreCase(itemVacina.getVaciRede())) {
-                if (!isRedeVacinas) {
-                    if (!itensRemove.contains(i))
-                        itensRemove.add(i);
-                }
-            }
-
-            Collections.sort(itensRemove);
-            Collections.reverse(itensRemove);
-
-            startRemove = (getItemCount() == countItemHolder);
-            if (startRemove) {
-                for (Integer posicao : itensRemove)
-                    if(posicao > -1)
-                        holder.layoutVacinas.setVisibility(View.GONE);
-            }
-
         }
-
     }
 
     private String formatStringBold(String text) {
-        String format = "<b>"+text+"</b>";
+        String format = "<b>" + text + "</b>";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return  Html.fromHtml(format, Html.FROM_HTML_MODE_LEGACY).toString();
+            return Html.fromHtml(format, Html.FROM_HTML_MODE_LEGACY).toString();
         } else {
             return Html.fromHtml(format).toString();
         }

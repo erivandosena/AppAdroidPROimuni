@@ -50,7 +50,6 @@ public class PlacesDisplayTask extends AsyncTask<Object, Integer, List<HashMap<S
                 LatLng latLng = new LatLng(lat, lng);
                 markerOptions.position(latLng);
                 markerOptions.title(placeName + " : " + vicinity);
-                // mMap.addMarker(markerOptions);
                 mMap.addMarker(markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_local_posto_saude)));
             }
         }

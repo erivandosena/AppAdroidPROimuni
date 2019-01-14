@@ -44,27 +44,10 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
         super.onCreate(savedInstanceState);
         setUp();
         setContentView(R.layout.activity_splash);
-
         getActivityComponent().inject(this);
-
         setUnBinder(ButterKnife.bind(this));
-
         mPresenter.onAttach(SplashActivity.this);
-
         this.context = getContextActivity();
-
-/*
-        Intent alarm = new Intent(this.context, Notificacao.class);
-        boolean alarmRunning = (PendingIntent.getBroadcast(this.context, 0, alarm, PendingIntent.FLAG_NO_CREATE) != null);
-        long intervalo = (50000 * 1440) / 2L; //(60000 * 1440)/2L, pendingIntent); //1800000 milliseconds, or every 30 minutes.
-        if (alarmRunning == false) {
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this.context, 0, alarm, 0);
-            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), intervalo, pendingIntent);
-        }
-
-      */
-
     }
 
     /**

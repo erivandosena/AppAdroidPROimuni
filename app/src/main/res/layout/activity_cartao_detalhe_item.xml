@@ -39,16 +39,6 @@
         android:paddingRight="10dp"
         android:paddingBottom="5dp">
 
-        <!--
-        <ImageView
-            android:id="@+id/imagem_vacina"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="18dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_vacina" />
-            -->
-
         <TextView
             android:id="@+id/text_vacina"
             android:layout_width="match_parent"

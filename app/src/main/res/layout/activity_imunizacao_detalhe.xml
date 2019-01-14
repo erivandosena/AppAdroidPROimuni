@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:cursorVisible="true"
-                android:focusable="false"
+                android:focusable="true"
                 android:hint="@string/hint_data_imunizacao"
                 android:inputType="date"
                 android:maxLength="10" />

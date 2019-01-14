@@ -56,20 +56,4 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-    <!--
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_cartao_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchorGravity="bottom|right|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_add_cartao"
-        app:elevation="6dp"
-        app:borderWidth="0dp"
-        app:backgroundTint="@color/colorAccent"
-        app:layout_anchor="@+id/appBarLayout"
-        android:tint="@color/colorWhite"
-        android:clickable="true"/>
-        -->
-
 </android.support.design.widget.CoordinatorLayout>

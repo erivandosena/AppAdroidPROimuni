@@ -23,7 +23,7 @@
         <item name="android:typeface">normal</item>
         <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_seta_voltar</item>
-         <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>  -->
+        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>  -->
         <item name="android:windowDisablePreview">true</item>
 
     </style>
@@ -194,10 +194,6 @@
         <item name="android:textSize">13sp</item>
         <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
     </style>
-
-
-
-
 
     <style name="TextStyle.TextView.Titulo.Cartao" parent="TextStyle">
         <item name="android:layout_marginTop">-5dp</item>

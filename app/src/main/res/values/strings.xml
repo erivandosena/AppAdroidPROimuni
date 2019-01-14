@@ -171,9 +171,9 @@
     <string name="texto_aviso_remove_crianca">\nCriança removida!\n</string>
 
     <!-- Cartão -->
-    <string name="texto_aviso_cadastra_cartao">\nGerando o cartão da criança....\n</string>
-    <string name="texto_aviso_atualiza_cartao">\nAtualizando dados no cartão....\n</string>
-    <string name="texto_aviso_removendo_cartao">\nRemovendo cartão da crianca...\n</string>
+    <string name="texto_aviso_cadastra_cartao">\nGerando o cartão da criança…\n</string>
+    <string name="texto_aviso_atualiza_cartao">\nAtualizando dados no cartão…\n</string>
+    <string name="texto_aviso_removendo_cartao">\nRemovendo cartão da crianca…\n</string>
     <string name="aviso_vacina_nao_encontrada">Vacina não localizada!</string>
 
     <!-- Tabs -->
@@ -194,9 +194,9 @@
     <string name="hint_data_imunizacao">Informe data da imunização</string>
     <string name="text_imunizacao_titulo">Imunização</string>
     <string name="text_imunizacoes_titulo">Imunizações</string>
-    <string name="btn_imunizar">Imunizar</string>
-    <string name="texto_aviso_removendo_imunizacao">\nRemovendo imunizações do cartão...\n</string>
-    <string name="texto_aviso_remove_imunizacao">\nRemovendo imunização...\n</string>
+    <string name="btn_imunizar">Cadastrar</string>
+    <string name="texto_aviso_removendo_imunizacao">\nRemovendo imunizações do cartão…\n</string>
+    <string name="texto_aviso_remove_imunizacao">\nRemovendo imunização…\n</string>
     <string name="text_dose">Dose</string>
     <string name="text_titulo_remove_imunizacao">Remover imunização</string>
 
@@ -219,10 +219,20 @@
     <string name="titulo_backup_copia_email">Enviar para E-mail/Bluetooth</string>
 
     <!-- PDF -->
-    <string name="gera_pdf">"Montando o Cartão de Vacina em PDF, aguarde...</string>
+    <string name="gera_pdf">Montando o Cartão de Vacina em PDF, aguarde…</string>
     <string name="text_btn_info">Saber mais</string>
     <string name="text_titulo_cartao">Cartão de Vacinas</string>
     <string name="text_crianca_nome">Crianca:</string>
     <string name="text_crianca_idade">Idade:</string>
+    <string name="text_tit_cartao_pdf">Gerar Cartão PDF</string>
+    <string name="config_desativar_notifica">Desativar Notificações</string>
+    <string name="config_sim">Sim</string>
+    <string name="config_nao">Não</string>
+    <string name="config_notificar_vacinas_rede_privada">Notificar Vacinas da Rede Privada</string>
+    <string name="text_cartao_pdf_data">Data:</string>
+    <string name="text_cartao_pdf_lote">Lote:</string>
+    <string name="text_cartao_pdf_func">Func.:</string>
+    <string name="text_cartao_pdf_unid">Unid.:</string>
+    <string name="text_crianca_etnia">Criança indígena</string>
 
 </resources>

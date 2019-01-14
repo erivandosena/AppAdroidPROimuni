@@ -43,6 +43,7 @@
                 style="@style/Button.Menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@null"
                 app:srcCompat="@drawable/ic_cartao" />
 
             <TextView
@@ -67,6 +68,7 @@
                 style="@style/Button.Menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@null"
                 app:srcCompat="@drawable/ic_vacina" />
 
             <TextView
@@ -91,6 +93,7 @@
                 style="@style/Button.Menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@null"
                 app:srcCompat="@drawable/ic_calendario" />
 
             <TextView
@@ -115,6 +118,7 @@
                 style="@style/Button.Menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@null"
                 app:srcCompat="@drawable/ic_posto" />
 
             <TextView
@@ -124,78 +128,6 @@
                 android:text="@string/menu_posto"
                 android:textAlignment="center" />
         </android.support.v7.widget.CardView>
-
-        <!--
-        <android.support.v7.widget.CardView
-            android:layout_width="@dimen/card_menu_wh"
-            android:layout_height="@dimen/card_menu_wh"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/card_menu_margin"
-            card_view:cardCornerRadius="@dimen/card_menu_radius"
-            card_view:cardElevation="@dimen/card_menu_elevation"
-            card_view:cardMaxElevation="@dimen/card_menu_elevation"
-            card_view:contentPadding="@dimen/card_menu_padding">
-
-            <ImageButton
-                android:id="@+id/btn_cartao_vacinal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="top|center"
-                android:layout_margin="5dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@null"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_idades"
-                android:tint="@color/colorPrimaryDark" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_margin="5dp"
-                android:gravity="center"
-                android:text="@string/menu_item2"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark" />
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="@dimen/card_menu_wh"
-            android:layout_height="@dimen/card_menu_wh"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/card_menu_margin"
-            card_view:cardCornerRadius="@dimen/card_menu_radius"
-            card_view:cardElevation="@dimen/card_menu_elevation"
-            card_view:cardMaxElevation="@dimen/card_menu_elevation"
-            card_view:contentPadding="@dimen/card_menu_padding">
-
-            <ImageButton
-                android:id="@+id/btn_curiosidades"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="top|center"
-                android:layout_margin="5dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@null"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_curiosidades"
-                android:tint="@color/colorPrimaryDark" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_margin="5dp"
-                android:gravity="center"
-                android:text="@string/menu_curiosidade"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark" />
-        </android.support.v7.widget.CardView>
-        -->
 
     </GridLayout>
 

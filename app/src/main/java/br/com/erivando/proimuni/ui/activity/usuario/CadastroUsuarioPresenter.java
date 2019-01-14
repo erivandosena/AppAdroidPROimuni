@@ -58,12 +58,6 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
     @Override
     public void onCadastrarClick(Long id, String nome, String login, String email, String senha, String repeteSenha, Bitmap foto) {
         //validando cadastro do usuário
-        /*
-        if ((nome == null) || (nome.isEmpty()) || !nome.matches("^[a-zA-Za-zà-ú]+ [a-zA-ZA-ZÀ-Ú]+.*")) {
-            getMvpView().onError(R.string.erro_text_nome_completo);
-            return;
-        }
-        */
         if (login == null || login.isEmpty() || login.length() < 4 || login.length() > 20 || login.matches("^[a-zA-Z]+ [a-zA-Z]+.*")) {
             getMvpView().onError(R.string.erro_text_usuario);
             return;
@@ -85,7 +79,6 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
             return;
         }
 
-        //nome = getCapitalizeNome(nome.trim());
         login = login.trim().toLowerCase();
         email = email.trim().toLowerCase();
 
@@ -201,7 +194,6 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
     @Override
     public Bitmap onActivityResult(int requestCode, int resultCode, Intent data, final Context context, final ImageButton imageButton) {
         final int retornoRequestCode = requestCode & 0x0000ffff;
-        //final ImageButton fotoImageButton = null;
         Bitmap imagemBitmapFoto = null;
         try {
             if (resultCode == RESULT_OK) {
@@ -213,7 +205,6 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
                         task.setImageCompressiorListner(new ConverteBase64Task.ImageCompressiorListner() {
                             @Override
                             public void onImageCompressed(Bitmap bitmap) {
-                                //imagemBitmapFoto = bitmap;
                                 imageButton.setImageBitmap(bitmap);
                             }
 

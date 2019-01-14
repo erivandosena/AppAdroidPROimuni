@@ -17,6 +17,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
@@ -38,6 +39,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import br.com.erivando.proimuni.R;
 
@@ -53,6 +55,9 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Uteis {
 
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+
     public static final int REQUEST_IMG_CAMERA = 1;
     public static final int REQUEST_IMG_GALERIA = 2;
     public static final int TODAS_PERMISSOES = 1;
@@ -61,7 +66,7 @@ public class Uteis {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA
     };
-    private static final SimpleDateFormat DATA_FORMAT_PARSER = new SimpleDateFormat("dd/MM/yyyy");
+    private static final SimpleDateFormat DATA_FORMAT_PARSER = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt","br"));
 
     /**
      * @return
@@ -479,5 +484,23 @@ public class Uteis {
             }
         }
         return count;
+    }
+
+    public static boolean isExternalStorage() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static int checkStoragePermissions(Context context) {
+        // Verifique se temos permissão de gravação
+        int permission = ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity)context, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+        }
+        return permission;
     }
 }

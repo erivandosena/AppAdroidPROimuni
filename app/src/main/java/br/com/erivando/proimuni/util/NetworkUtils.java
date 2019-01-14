@@ -22,7 +22,7 @@ import br.com.erivando.proimuni.R;
 public final class NetworkUtils {
 
     private NetworkUtils() {
-        // This utility class is not publicly instantiable
+        // Esta classe de utilitário não é publicamente instanciável.
     }
 
     public static boolean isWifiConnected(@NonNull Context context) {
@@ -63,54 +63,17 @@ public final class NetworkUtils {
     }
 
     public static boolean isNetworkConnected(Context context) {
-        /*
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-        if (!isConnected)
-            Toast.makeText(context, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
-        return isConnected;
-        */
 
-        /*
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
-        } else {
-            Toast.makeText(context, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        return true;
-        */
         boolean status = false;
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         if (connectivity != null) {
             NetworkInfo[] info = connectivity.getAllNetworkInfo();
             if (info != null) {
-                /*
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                    for (int i = 0; i < info.length; i++)
-                        if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                            try {
-                                HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com.br").openConnection());
-                                urlc.setRequestProperty("User-Agent", "Test");
-                                urlc.setRequestProperty("Connection", "close");
-                                urlc.setConnectTimeout(350);
-                                urlc.setReadTimeout(350);
-                                urlc.connect();
-                                status = (urlc.getResponseCode() == 200);
-                            } catch (Exception e) {
-                                Toast.makeText(context, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();
-                                return false;
-                            }
-                        }
-                } else {
-                */
-                    NetworkInfo networkInfoMobile = connectivity.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-                    NetworkInfo networkInfoWifi = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-                    status = (info != null && networkInfoMobile.isConnected()) || (info != null && networkInfoWifi.isConnected());
-                }
+                NetworkInfo networkInfoMobile = connectivity.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+                NetworkInfo networkInfoWifi = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                status = (info != null && networkInfoMobile.isConnected()) || (info != null && networkInfoWifi.isConnected());
+            }
         }
         if (!status)
             Toast.makeText(context, R.string.aviso_sem_internet, Toast.LENGTH_SHORT).show();

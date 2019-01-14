@@ -78,7 +78,6 @@ public class CriancaPresenter<V extends CriancaMvpView> extends BasePresenter<V>
 
         getMvpView().showLoading();
         nome = getCapitalizeNome(nome.trim());
-       // Usuario usuario = getIDataManager().obtemUsuario(getIDataManager().obtemUsuario().getId());
         Usuario usuario = getIDataManager().obtemUsuario();
 
         Crianca crianca = new Crianca();
@@ -165,7 +164,6 @@ public class CriancaPresenter<V extends CriancaMvpView> extends BasePresenter<V>
                 Toast.makeText(AppAplicacao.contextApp, AppAplicacao.contextApp.getString(R.string.texto_aviso_atualiza_cartao), Toast.LENGTH_LONG).show();
                 id = cartao.getId();
             }
-            //Cartao cartao = new Cartao();
             cartao.setId((id == 0L) ? (long) getIDataManager().getCartaoID().incrementAndGet() : id);
             cartao.setCrianca(crianca);
 

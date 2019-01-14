@@ -68,6 +68,7 @@
         app:elevation="6dp"
         app:layout_anchor="@+id/appBarLayout"
         app:layout_anchorGravity="bottom|right|end"
-        app:srcCompat="@drawable/ic_add_usuario" />
+        app:srcCompat="@drawable/ic_add_usuario"
+        android:focusable="true" />
 
 </android.support.design.widget.CoordinatorLayout>

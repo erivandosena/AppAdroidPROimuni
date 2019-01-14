@@ -12,7 +12,6 @@ import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.model.Idade;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.RealmList;
 
 /**
  * Projeto:     PROIMUNI
@@ -46,27 +45,6 @@ public class CartaoPdfIdadeRVA extends RecyclerView.Adapter<CartaoPdfIdadeRVA.It
     public int getItemCount() {
         return mIdades != null ? mIdades.size() : 0;
     }
-
-    /*
-    private void insertItem(Idade obj) {
-        mIdades.add(obj);
-        notifyItemInserted(getItemCount());
-    }
-
-    private void updateItem(int position) {
-        notifyItemChanged(position);
-    }
-
-    private void removerItem(int position) {
-        mIdades.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mIdades.size());
-    }
-
-    public void updateList(Idade obj) {
-        insertItem(obj);
-    }
-    */
 
     public class ItemRowHolder extends RecyclerView.ViewHolder {
 

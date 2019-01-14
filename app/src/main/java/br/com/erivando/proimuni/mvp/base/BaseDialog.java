@@ -131,13 +131,12 @@ public abstract class BaseDialog extends DialogFragment implements MvpViewDialog
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // the content
+
         final RelativeLayout root = new RelativeLayout(getActivity());
         root.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        // creating the fullscreen dialog
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(root);

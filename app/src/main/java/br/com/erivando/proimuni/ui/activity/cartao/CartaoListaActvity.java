@@ -45,16 +45,6 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
     @Inject
     CriancaMvpPresenter<CriancaMvpView> presenterCrianca;
 
-    //@BindView(R.id.toolbar_cartao_lista)
-    //Toolbar toolbar;
-
-    //@BindView(R.id.collapsing_toolbar_cartao_lista)
-    //CollapsingToolbarLayout collapsingToolbar;
-
-
-   //@BindView(R.id.fab_cartao_add)
-   // FloatingActionButton fabFloatingActionButton;
-
     @BindView(R.id.cartao_recyclerView)
     RecyclerView cartao_recycler_view;
 
@@ -65,8 +55,6 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
     LinearLayout linearLayoutToobar;
 
     private List<Cartao> listaCartoes;
-
-    private List<Crianca> listaCriancas;
 
     private Intent intent;
 
@@ -80,20 +68,7 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartao_lista);
         setUnBinder(ButterKnife.bind(this));
-        /*
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        collapsingToolbar.setTitle(getResources().getString(R.string.text_lista_cartao_titulo));
-        */
-
         textViewTituloToobar.setText(getResources().getString(R.string.text_lista_cartao_titulo));
-
         getActivityComponent().inject(this);
         presenter.onAttach(this);
         intent = getIntent();
@@ -117,15 +92,6 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
     public void onClickVoltar(View v) {
         onBackPressed();
     }
-
-    /*
-    @OnClick(R.id.fab_cartao_add)
-    public void onClick(View view) {
-        //if (view == fabFloatingActionButton) {
-        //    openCartaoActivity();
-        //}
-    }
-    */
 
     @Override
     public void onDestroy() {

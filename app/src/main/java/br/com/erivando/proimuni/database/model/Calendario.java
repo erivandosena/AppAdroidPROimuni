@@ -123,6 +123,6 @@ public class Calendario extends RealmObject implements Comparable<Calendario> {
 
     @Override
     public String toString() {
-        return "["+ getVacina().getVaciNome()+", "+getDose().getDoseDescricao()+", "+getIdade().getIdadDescricao().toLowerCase()+"]";
+        return "[" + getVacina().getVaciNome() + ", " + getDose().getDoseDescricao() + ", " + getIdade().getIdadDescricao().toLowerCase() + "]";
     }
 }

@@ -50,6 +50,5 @@ public interface MainMvpView extends MvpView {
 
     void onInicializacoes();
 
-    //RealmBackupRestore onBackupRestore(Context context, String usuarioNome, String usuarioEmail);
 }
 

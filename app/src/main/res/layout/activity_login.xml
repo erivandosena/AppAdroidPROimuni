@@ -133,7 +133,8 @@
                         android:text="@string/btn_login_lembrar_senha"
                         android:textAllCaps="false"
                         android:textColor="@color/textColorGray"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:focusable="true" />
                 </LinearLayout>
 
                 <Button

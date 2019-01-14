@@ -30,11 +30,13 @@
             android:icon="@drawable/ic_crianca"
             android:title="@string/menu_crianca" />
 
+        <!--
         <item
             android:id="@+id/nav_item_curiosidade"
             android:checked="true"
             android:icon="@drawable/ic_curiosidades"
             android:title="@string/menu_curiosidade" />
+        -->
 
         <item
             android:id="@+id/nav_item_backup"

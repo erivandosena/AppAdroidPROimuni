@@ -67,25 +67,8 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
     @BindView(R.id.text_data_imunizacao)
     public TextView mTextData;
 
-    @BindView(R.id.btn_registra_imunizacao)
-    public Button mRegistrar;
-
-    //@BindView(R.id.text_imunizacao_vacina_descricao)
-    //public TextView mTexVacinaDescricao;
-
-   // @BindView(R.id.toolbar)
-   // Toolbar toolbar;
-
-    // @BindView(R.id.toolbar_header_view)
-    // HeaderView toolbarHeaderView;
-    //@BindView(R.id.collapsing_toolbar)
-    //CollapsingToolbarLayout collapsingToolbar;
-
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
-
-   // @BindView(R.id.float_header_view)
-    //HeaderView floatHeaderView;
 
     @BindView(R.id.layout_toobar)
     LinearLayout linearLayoutToobar;
@@ -106,29 +89,10 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imunizacao_detalhe);
-
         setUnBinder(ButterKnife.bind(this));
-        /*
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //executar o que quiser no clique da seta esquerda
-                onBackPressed();
-            }
-        });
-        collapsingToolbar.setTitle(getResources().getString(R.string.text_imunizacao_titulo));
-        //toolbarHeaderView.bindTo("BCG", "Pentavalente");
-        */
-
-
         getActivityComponent().inject(this);
-
         presenter.onAttach(this);
-
         intent = getIntent();
-
         setUp();
 
         mTextData.setOnClickListener(new View.OnClickListener() {
@@ -185,7 +149,7 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
                         new AlertDialog.Builder(this)
                                 .setIcon(R.drawable.ic_launcher_round)
                                 .setTitle(textViewTituloToobar.getText().toString())
-                                .setMessage("\nImunização ainda não necessária!\n\nÉ preciso um prazo mínimo de 6 meses da 1ª dose realizada em "+sdf.format(imunizacao.getImunData())+" há "+ (periodo == 1 ? periodo+" mês." : periodo+" meses."))
+                                .setMessage("\nImunização ainda não necessária!\n\nÉ preciso um prazo mínimo de 6 meses da 1ª dose realizada em "+sdf.format(imunizacao.getImunData())+ " há "+ (periodo == 1 ? periodo+" mês." : periodo+" meses."))
                                 .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

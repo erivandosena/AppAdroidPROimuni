@@ -17,21 +17,24 @@ android {
         applicationId "br.com.erivando.proimuni"
         minSdkVersion 15
         targetSdkVersion 27
-        /* Você especifica o código da versão do seu aplicativo apenas no módulo base. */
+        /* Especifica o código da versão do aplicativo apenas no módulo base. */
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
-        //generatedDensities = []
         /* Devido exceder o limite de 64K nos métodos (ao utilizar Firebase, Google Play, etc.) */
         multiDexEnabled true
         signingConfig signingConfigs.config
     }
     buildTypes {
         debug {
-
+            minifyEnabled true
+            useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            multiDexKeepFile file('multidex-config.txt')
+            multiDexKeepProguard file('multidex-config.pro')
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             multiDexKeepFile file('multidex-config.txt')
             multiDexKeepProguard file('multidex-config.pro')
@@ -76,6 +79,7 @@ android {
     }
     aaptOptions {
         additionalParameters "--no-version-vectors"
+        cruncherEnabled = false
     }
     bundle {
         language {
@@ -151,8 +155,6 @@ dependencies {
     implementation 'com.google.dagger:dagger-android-support:2.15'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.15'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.15'
-    /* Material Components for Android */
-    //implementation 'com.google.android.material:material:1.0.0'
     /* Outras Dependencias Android */
     implementation 'com.android.support:support-media-compat:27.1.1'
     implementation 'com.android.support:support-annotations:27.1.1'

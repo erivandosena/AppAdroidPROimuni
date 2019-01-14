@@ -22,30 +22,25 @@
     android:layout_height="1322.835dp"
     android:background="@color/colorWhite">
 
-
-
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="130dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="100dp"
         android:layout_marginBottom="30dp"
         android:background="@color/colorTransparent"
         android:foreground="@drawable/round_border_cardview_solid">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
+            android:layout_height="match_parent"
+            android:background="@drawable/round_border_layout_gradient"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingTop="5dp"
             android:paddingRight="10dp"
-            android:paddingBottom="5dp"
-            android:background="@drawable/round_border_layout_gradient">
+            android:paddingBottom="30dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -94,8 +89,8 @@
                         android:paddingEnd="50dp"
                         android:paddingRight="50dp"
                         android:text="@null"
-                        android:textSize="18sp"
                         android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -109,8 +104,8 @@
                         android:paddingEnd="50dp"
                         android:paddingRight="50dp"
                         android:text="@null"
-                        android:textSize="18sp"
                         android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -124,8 +119,8 @@
                         android:paddingEnd="50dp"
                         android:paddingRight="50dp"
                         android:text="@null"
-                        android:textSize="18sp"
                         android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -139,8 +134,8 @@
                         android:paddingEnd="50dp"
                         android:paddingRight="50dp"
                         android:text="@null"
-                        android:textSize="18sp"
                         android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                 </RelativeLayout>
@@ -163,13 +158,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view_pdf_vacinas"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:scrollbars="none" />
 
             </LinearLayout>
@@ -177,18 +172,33 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/text_pdf_data"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="0dp"
+            android:gravity="bottom"
+            android:paddingTop="0dp"
+            android:paddingBottom="5dp"
+            android:text="@null"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <TextView
             android:id="@+id/text_pdf_copyright"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom|right"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="30dp"
+            android:gravity="bottom"
+            android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="@null"
             android:textColor="@color/colorBlack"
             android:textSize="18sp" />
 
     </android.support.v7.widget.CardView>
-
 
 </RelativeLayout>

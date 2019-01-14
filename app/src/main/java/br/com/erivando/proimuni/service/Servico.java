@@ -18,7 +18,6 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,8 +41,10 @@ import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.di.component.DaggerServiceComponent;
 import br.com.erivando.proimuni.di.component.ServiceComponent;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoDetalheActivity;
-import br.com.erivando.proimuni.ui.activity.crianca.CriancaActivity;
+import br.com.erivando.proimuni.ui.activity.crianca.CriancaListaActvity;
+import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoActivity;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
+import io.realm.RealmList;
 
 import static br.com.erivando.proimuni.util.Uteis.getCapitalizeNome;
 
@@ -65,13 +66,12 @@ public class Servico extends Service {
     private NotificationCompat.Builder notificationCompactBuild;
     private NotificationCompat.Builder repeatedNotificationInicial;
     private NotificationCompat.Builder repeatedNotificationPadrao;
-
     private List<Crianca> criancas;
     private List<Vacina> vacinas;
+    private List<Idade> idades;
     private List<Dose> doses;
-    private List<Idade> idades, listaIdade;
+    private List<Idade> listaIdade;
     private List<Imunizacao> imunizacoes;
-   //private List<Imunizacao> naoImunizados;
     private List<Calendario> calendarios;
     private List<Cartao> cartoes;
     private List<String> statusCartaoVacinal;
@@ -79,27 +79,16 @@ public class Servico extends Service {
     private Imunizacao imunizacao;
     private Idade idade;
     private Cartao cartao;
-
     private Long semanasIdadeCrianca;
-
     private Calendario calendarioItem;
-
-    //private Timer timer;
-    //private TimerTask timerTask;
-
     private List<CharSequence> listaMsgAgrupada;
-
     private Random randomId;
-
     private Context context;
-
     private boolean isRunning;
-
     private Thread backgroundThread;
-
-    //private String generoCrianca;
-
     private NotificationManager notificationManager;
+    private List<Long> idLimiteLembrete;
+    private List<Idade> idadesRemovidas;
 
     public Servico(Context context) {
         super();
@@ -125,6 +114,8 @@ public class Servico extends Service {
         this.context = AppAplicacao.contextApp;
         this.isRunning = false;
         this.backgroundThread = new Thread(realizaTarefa);
+        this.idLimiteLembrete = new ArrayList<Long>();
+        this.idadesRemovidas = new ArrayList<Idade>();
     }
 
     @Override
@@ -151,7 +142,6 @@ public class Servico extends Service {
 
     private Runnable realizaTarefa = new Runnable() {
         public void run() {
-            // Do something here
             processaNotificacao();
             stopSelf();
         }
@@ -164,21 +154,29 @@ public class Servico extends Service {
         usuario = iDataManager.obtemUsuario();
         criancas = iDataManager.obtemCriancas();
         cartoes = iDataManager.obtemCartoes();
-        listaIdade = iDataManager.obtemIdades();
+        idades = iDataManager.obtemIdades();
         calendarios = iDataManager.isRedeVacinas() ? iDataManager.obtemCalendarios() : iDataManager.obtemCalendarios(new String[]{"vacina.vaciRede", "Pública"});
 
         imunizacoes = new ArrayList<Imunizacao>();
         vacinas = new ArrayList<Vacina>();
         doses = new ArrayList<Dose>();
-        idades = new ArrayList<Idade>();
+        listaIdade = new ArrayList<Idade>();
 
         if (iDataManager.getCurrentUserLoggedInMode() != IDataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
+            for (Idade idade : idades)
+                listaIdade.add(idade);
+
             for (Idade idade : listaIdade) {
+
+                Calendario calendario = new Calendario();
+                RealmList<Vacina> itemVacina = new RealmList<Vacina>();
+
                 for (Calendario calendarioItem : calendarios) {
                     if (calendarioItem.getIdade().getId() == idade.getId()) {
                         vacinas.add(calendarioItem.getVacina());
                         doses.add(calendarioItem.getDose());
-                        idades.add(calendarioItem.getIdade());
+                        itemVacina.add(calendarioItem.getVacina());
+
                         for (Cartao cartao : cartoes) {
                             imunizacao = iDataManager.obtemImunizacao(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{calendarioItem.getVacina().getId(), calendarioItem.getDose().getId(), (cartao != null) ? cartao.getId() : 0L});
                             if (imunizacao != null) {
@@ -187,23 +185,35 @@ public class Servico extends Service {
                         }
                     }
                 }
+
+                calendario.setVacinasInSection(itemVacina);
+
+                if(calendario.getVacinasInSection().size() == 0)
+                    if(!idadesRemovidas.contains(idade))
+                        idadesRemovidas.add(idade);
             }
 
-            // notificação inicial geral
-            if (criancas.isEmpty() || imunizacoes.isEmpty()) {
+            listaIdade.removeAll(idadesRemovidas);
+
+            // notificação inicial geral sem criança
+            if (criancas.isEmpty() || cartoes.isEmpty()) {
                 String nomeUsuario = (usuario != null && usuario.getUsuaNome() != null) ? "Olá "+usuario.getUsuaNome() : "Olá "+ getCapitalizeNome(iDataManager.getCurrentUserName());
-                repeatedNotificationInicial = showLocalNotification(context, CriancaActivity.class,
-                        nomeUsuario + ", é importante que você cadastre sua(s) criança(s) para usufruir dos benefícios do "+getResources().getString(R.string.app_name)+". Vamos lá! Inicie o preenchimento do cartão vacinal!",
-                        "Cadastre um Cartão Vacinal",
+                repeatedNotificationInicial = showLocalNotification(context, CriancaListaActvity.class,
+                        nomeUsuario + ", é importante que você cadastre sua(s) criança(s) para usufruir dos benefícios do "+getResources().getString(R.string.app_name)+". Vamos lá! Inicie o preenchimento do perfil da criança!",
+                        "Cadastrar Criança",
                         "Lembrete",
-                        "Preencha no cartão as vacinas realizadas.",
-                        0L
+                        "Preencha no cartão as imunizações das vacinas realizadas.",
+                        0L, //idCartao
+                        0L, //idVacina
+                        0L, //idDose
+                        0L  //idIdade
                 );
                 // Envia notificação
                 getNotificationManager(context).notify(NOTIFICACAO_ID, Notification.FLAG_SHOW_LIGHTS, repeatedNotificationInicial.build());
             }
-            //else {
+
             statusCartaoVacinal = new ArrayList<String>();
+
             for (Idade idade : listaIdade) {
                 for (Calendario calendarioItem : calendarios) {
                     this.calendarioItem = calendarioItem;
@@ -211,9 +221,14 @@ public class Servico extends Service {
                         String mesesIdadeCalendario = idade.getIdadDescricao().toLowerCase();
                         for (Cartao cartao : cartoes) {
                             for (Crianca crianca : criancas) {
-                                if (cartao.getCrianca().getId().equals(crianca.getId())) {
+                                if (cartao.getCrianca().getId() == crianca.getId()) {
                                     this.cartao = cartao;
                                     this.idade = idade;
+                                    // notificação inicial geral sem imunizações
+                                    if(!idLimiteLembrete.contains(cartao.getId())) {
+                                        idLimiteLembrete.add(cartao.getId());
+                                        notificaLembreteImunizacao(cartao);
+                                    }
                                     semanasIdadeCrianca = (Calendar.getInstance().getTime().getTime() - cartao.getCrianca().getCriaNascimento().getTime()) / (1000L * 60 * 60 * 24 * 365 / 12);
                                     switch (mesesIdadeCalendario) {
                                         case "ao nascer":
@@ -280,6 +295,25 @@ public class Servico extends Service {
         }
     }
 
+    private void notificaLembreteImunizacao(final Cartao cartao) {
+        if (!criancas.isEmpty() && imunizacoes.isEmpty()) {
+            String nomeUsuario = (usuario != null && usuario.getUsuaNome() != null) ? "Olá "+usuario.getUsuaNome() : "Olá "+ getCapitalizeNome(iDataManager.getCurrentUserName());
+            repeatedNotificationInicial = showLocalNotification(context, CartaoDetalheActivity.class,
+                    nomeUsuario + ", é importante que você cadastre as doses das vacinas realizadas para usufruir dos benefícios do "+getResources().getString(R.string.app_name)+". Vamos lá! Inicie o preenchimento das imunizações!",
+                    "Cadastrar Imunização de "+cartao.getCrianca().getCriaNome(),
+                    "Lembrete",
+                    "Selecione as vacinas no cartão, preencha e salve as informações das doses realizadas.",
+                    cartao.getId(),
+                    0L, //idVacina
+                    0L, //idDose
+                    0L  //idIdade
+            );
+            // Envia notificação
+            getNotificationManager(context).notify(NOTIFICACAO_ID, Notification.FLAG_SHOW_LIGHTS, repeatedNotificationInicial.build());
+        }
+
+    }
+
     private void preparaNotificacao(String mesesIdade, Long semanasIdadeCrianca, Long baseQuantSemanas, Cartao cartao) {
         List<String> listaVacina = new ArrayList<String>();
         for (Calendario calendario : calendarios) {
@@ -300,16 +334,6 @@ public class Servico extends Service {
                     List<Imunizacao> dosesImunizadas = iDataManager.obtemImunizacoes(new String[]{"vacina.id", "dose.id", "cartao.id"}, new Long[]{calendario.getVacina().getId(), calendario.getDose().getId(), cartao.getId()});
                     if (crianca.getId().equals(cartao.getId()) && "HPV".equalsIgnoreCase(calendario.getVacina().getVaciNome()) && dosesImunizadas.size() < 2) {
                         defineStatusVacina(mesesIdade, semanasIdadeCrianca, baseQuantSemanas, calendario, listaVacina);
-                        /*
-                        if (semanasIdadeCrianca >= baseQuantSemanas && calendario.getIdade().getIdadDescricao().equalsIgnoreCase(mesesIdade)) {
-                            listaVacina.add(calendario.getIdade().getIdadDescricao());
-                            listaVacina.add(calendario.getVacina().getVaciNome());
-                            listaVacina.add(calendario.getDose().getDoseDescricao());
-
-                            String bigTexto = aplicaStatusVacina(semanasIdadeCrianca, baseQuantSemanas, cartao, listaVacina.get(0));
-                            threadNotificacao(cartao, listaVacina, bigTexto);
-                        }
-                        */
                     }
                 }
             }
@@ -322,17 +346,9 @@ public class Servico extends Service {
             listaVacina.add(calendario.getIdade().getIdadDescricao());
             listaVacina.add(calendario.getVacina().getVaciNome());
             listaVacina.add(calendario.getDose().getDoseDescricao());
-                                        /*
-                                        Log.e("--------------", "---------------------------------");
-                                        Log.e("CARTAO/ID ", cartao.getId().toString());
-                                        Log.e("CARTAO/CRIANCA ", cartao.getCrianca().getCriaNome());
-                                        Log.e("IDADE ", listaVacina.get(0));
-                                        Log.e("VACINA ", listaVacina.get(1));
-                                        Log.e("DOSE ", listaVacina.get(2));
-                                        Log.e("--------------", "---------------------------------");
-                                        */
+
             String bigTexto = aplicaStatusVacina(semanasIdadeCrianca, baseQuantSemanas, cartao, listaVacina.get(0));
-            threadNotificacao(cartao, listaVacina, bigTexto);
+            threadNotificacao(cartao, calendario.getVacina(), calendario.getDose(), calendario.getIdade(), listaVacina, bigTexto);
         }
     }
 
@@ -347,6 +363,14 @@ public class Servico extends Service {
         String statusVencido = "Atenção! "+cartao.getCrianca().getCriaNome()+", possui vacina atrasada de "+idadeVacinacao.toUpperCase() +". Atualize o cartão vacinal!";
 
         String status = null;
+
+        if(baseQuantSemanas == 1L) {
+            if (semanasIdadeCrianca < 1L) {
+                status = statusVencendo;
+            } else if (semanasIdadeCrianca >= 1L){
+                status = statusVencido;
+            }
+        }
         if (semanasIdadeCrianca == baseQuantSemanas) {
             status = statusVencendo;
         }
@@ -368,7 +392,7 @@ public class Servico extends Service {
         return status;
     }
 
-    private void threadNotificacao(Cartao cartao, List<String> listaVacina, String bigTexto) {
+    private void threadNotificacao(Cartao cartao, Vacina vacina, Dose dose, Idade idade, List<String> listaVacina, String bigTexto) {
         try {
             Thread.sleep(20000); //20Seg
             // notificação por etatus da vacina
@@ -376,12 +400,15 @@ public class Servico extends Service {
             String statusVacina = bigTexto.contains("Atenção!") ? "Vacina atrasada" : " Vacina precisa ser realizada";
             String generoCrianca = cartao.getCrianca().getCriaSexo().contains("Menino") ? "vacinado " : "vacinada";
 
-            repeatedNotificationPadrao = showLocalNotification(context, CartaoDetalheActivity.class,
+            repeatedNotificationPadrao = showLocalNotification(context, ImunizacaoActivity.class,
                     bigTexto,
                     statusVacina,
                     "Lembrete",
                     cartao.getCrianca().getCriaNome()+ " precisa ser "+ generoCrianca + " com "+listaVacina.get(2) + " de " + listaVacina.get(1)+".",
-                    cartao.getId()
+                    cartao.getId(),
+                    vacina.getId(),
+                    dose.getId(),
+                    idade.getId()
             );
             // envia notificação
             getNotificationManager(context).notify(NOTIFICACAO_ID, Notification.FLAG_SHOW_LIGHTS, repeatedNotificationPadrao.build());
@@ -400,7 +427,7 @@ public class Servico extends Service {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private NotificationCompat.Builder showLocalNotification(Context context, Class<?> clsDestino, String textBig, String textContentTitle, String summaryTextTitle, String contentText, Long idCartao) {
+    private NotificationCompat.Builder showLocalNotification(Context context, Class<?> clsDestino, String textBig, String textContentTitle, String summaryTextTitle, String contentText, Long idCartao, Long idVacina, Long idDose, Long idIdade) {
 
         listaMsgAgrupada.add(textBig);
         Collections.sort(listaMsgAgrupada, Collections.reverseOrder());
@@ -450,6 +477,11 @@ public class Servico extends Service {
 
         Intent resultIntent = new Intent(context, clsDestino);
         resultIntent.putExtra("cartao", idCartao);
+        if ( idVacina != null && idDose != null && idIdade != null) {
+            resultIntent.putExtra("vacina", idVacina);
+            resultIntent.putExtra("dose", idDose);
+            resultIntent.putExtra("idade", idIdade);
+        }
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(clsDestino);
         stackBuilder.addNextIntent(resultIntent);

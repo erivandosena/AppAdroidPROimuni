@@ -11,11 +11,11 @@
             android:strokeWidth="1" />
         <path
             android:fillColor="#707070"
-            android:pathData="M13.531,10.03V9.07h-2.88v.96h.96v8.16h-.96v.96h3.84v-.96h-.96Z"
+            android:pathData="M13.531,10.03V9.07h-2.88v0.96h0.96v8.16h-0.96v0.96h3.84v-0.96h-0.96Z"
             android:strokeWidth="1" />
         <path
             android:fillColor="#707070"
-            android:pathData="M12.493.471a12,12,0,1,0,12,12A12,12,0,0,0,12.493.471Zm0,23.04a11.04,11.04,0,1,1,11.04,-11.04A11.053,11.053,0,0,1,12.493,23.511Z"
+            android:pathData="M12.493 0.471a12,12,0,1,0,12,12A12,12,0,0,0,12.493 0.471Zm0,23.04a11.04,11.04,0,1,1,11.04,-11.04A11.053,11.053,0,0,1,12.493,23.511Z"
             android:strokeWidth="1" />
     </group>
 </vector>

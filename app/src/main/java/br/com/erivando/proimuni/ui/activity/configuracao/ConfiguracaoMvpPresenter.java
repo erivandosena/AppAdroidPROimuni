@@ -1,9 +1,9 @@
 package br.com.erivando.proimuni.ui.activity.configuracao;
 
-        import android.content.Context;
+import android.content.Context;
 
-        import br.com.erivando.proimuni.di.PerActivity;
-        import br.com.erivando.proimuni.mvp.MvpPresenter;
+import br.com.erivando.proimuni.di.PerActivity;
+import br.com.erivando.proimuni.mvp.MvpPresenter;
 
 /**
  * Projeto:     VacinasKIDS

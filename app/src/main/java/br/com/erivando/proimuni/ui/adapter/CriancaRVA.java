@@ -63,13 +63,6 @@ public class CriancaRVA extends RecyclerView.Adapter<CriancaRVA.SingleItemRowHol
     public void onBindViewHolder(@NonNull CriancaRVA.SingleItemRowHolder holder, int position) {
         crianca = criancaList.get(position);
 
-        /*
-        if (crianca.getCriaFoto() != null)
-            holder.imageView.setImageBitmap(Uteis.base64ParaBitmap(crianca.getCriaFoto()));
-        else
-            holder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_launcher_round));
-        */
-
         holder.tvTitle.setText(crianca.getCriaNome());
         holder.tvSubtitle.setText(obtemIdadeCompleta(crianca.getCriaNascimento()));
         holder.idCrianca =crianca.getId();
@@ -146,7 +139,6 @@ public class CriancaRVA extends RecyclerView.Adapter<CriancaRVA.SingleItemRowHol
                             Intent intent = CriancaListaImunizacao.getStartIntent(mContext);
                             intent.putExtra("cartao", cartao.getId());
                             mContext.startActivity(intent);
-                            //((CriancaListaActvity)mContext).finish();
                         }
                     }
                 }

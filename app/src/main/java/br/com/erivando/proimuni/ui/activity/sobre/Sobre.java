@@ -33,20 +33,11 @@ public class Sobre extends BaseActivity implements SobreMvpView {
     @Inject
     SobreMvpPresenter<SobreMvpView> presenter;
 
-    //@BindView(R.id.text_sobre_versao_app)
-    //TextView versaoAppSobreTextView;
-
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
 
     @BindView(R.id.layout_toobar)
     LinearLayout linearLayoutToobar;
-
-    //@BindView(R.id.toolbar_sobre)
-    //Toolbar toolbar;
-
-    //@BindView(R.id.collapsing_toolbar_sobre)
-    //CollapsingToolbarLayout collapsingToolbar;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, Sobre.class);
@@ -57,25 +48,10 @@ public class Sobre extends BaseActivity implements SobreMvpView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_sobre);
-
         getActivityComponent().inject(this);
         setUnBinder(ButterKnife.bind(this));
         presenter.onAttach(this);
-
         textViewTituloToobar.setText(getResources().getString(R.string.text_sobre_titulo));
-
-        /*
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        collapsingToolbar.setTitle(getResources().getString(R.string.text_sobre_titulo));
-        */
-
         setUp();
     }
 

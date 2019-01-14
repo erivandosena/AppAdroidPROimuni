@@ -1,7 +1,6 @@
 package br.com.erivando.proimuni.ui.activity.splash;
 
 import android.os.Handler;
-import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -39,16 +38,17 @@ public class SplashPresenter<V extends SplashMvpView> extends BasePresenter<V> i
         if (getIDataManager().getCurrentUserLoggedInMode() == IDataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
             getMvpView().openLoginActivity();
         } else {
-            if (getMvpView().isNetworkConnected()) {
-                getMvpView().openMainActivity();
-            } else {
-                if (getIDataManager().getCurrentUserLoggedInMode() == LOGGED_IN_MODE_LOCAL.getType()) {
+            if(getMvpView() != null)
+                if (getMvpView().isNetworkConnected()) {
                     getMvpView().openMainActivity();
                 } else {
-                    getIDataManager().setUserAsLoggedOut();
-                    getMvpView().openLoginActivity();
+                    if (getIDataManager().getCurrentUserLoggedInMode() == LOGGED_IN_MODE_LOCAL.getType()) {
+                        getMvpView().openMainActivity();
+                    } else {
+                        getIDataManager().setUserAsLoggedOut();
+                        getMvpView().openLoginActivity();
+                    }
                 }
-            }
         }
     }
 

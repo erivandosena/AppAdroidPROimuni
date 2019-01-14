@@ -57,17 +57,8 @@
                 android:layout_marginTop="-70dp"
                 android:layout_marginLeft="-65dp"
                 android:backgroundTint="@color/colorBlueFineLight"
-                android:background="@drawable/ic_logo_background"/>
-
-            <!--
-            <LinearLayout
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-76dp"
-                android:layout_marginLeft="-20dp"
                 android:background="@drawable/ic_logo_background"
-                android:backgroundTint="@color/colorBlueFineLight" />
-                -->
+                android:contentDescription="@null" />
 
         </android.support.design.widget.AppBarLayout>
 
@@ -107,16 +98,6 @@
                 app:riv_oval="true"
                 app:riv_tile_mode="clamp" />
 
-                <!--
-                android:id="@+id/imagem_menu"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_launcher_round"
-                android:tint="@android:color/transparent" />
-                -->
-
             <TextView
                 android:id="@+id/text_menu"
                 android:layout_width="wrap_content"
@@ -142,14 +123,5 @@
         app:itemTextColor="@color/colorBlack"
         app:menu="@menu/drawer">
 
-        <!--
-        <TextView
-            android:id="@+id/text_versao_app"
-            style="@style/TextStyle.Title.Sub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:padding="5dp" />
-            -->
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

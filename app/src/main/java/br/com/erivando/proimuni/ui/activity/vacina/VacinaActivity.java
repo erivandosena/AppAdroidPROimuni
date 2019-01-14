@@ -64,33 +64,11 @@ public class VacinaActivity extends BaseActivity implements VacinaMvpView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vacina);
-
         setUnBinder(ButterKnife.bind(this));
-
-        /*
-        final Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(getResources().getString(R.string.text_vacinas_titulo));
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //executar o que quiser no clique da seta esquerda
-                onBackPressed();
-            }
-        });
-        CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(getResources().getString(R.string.text_vacinas_titulo));
-        */
-
         textViewTituloToobar.setText(getResources().getString(R.string.text_vacinas_titulo));
         getActivityComponent().inject(this);
-
-
         presenter.onAttach(this);
-
         initViews();
-
         setUp();
     }
 

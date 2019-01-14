@@ -62,28 +62,28 @@
                     style="@style/TextStyle.TextView.Texto.Imunizacoes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Data:" />
+                    android:text="@string/text_cartao_pdf_data" />
 
                 <TextView
                     android:id="@+id/text_pdf_imunizacao_lote"
                     style="@style/TextStyle.TextView.Texto.Imunizacoes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lote:" />
+                    android:text="@string/text_cartao_pdf_lote" />
 
                 <TextView
                     android:id="@+id/text_pdf_imunizacao_aplicador"
                     style="@style/TextStyle.TextView.Texto.Imunizacoes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Func.:" />
+                    android:text="@string/text_cartao_pdf_func" />
 
                 <TextView
                     android:id="@+id/text_pdf_imunizacao_unidade"
                     style="@style/TextStyle.TextView.Texto.Imunizacoes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Unid.:" />
+                    android:text="@string/text_cartao_pdf_unid" />
             </LinearLayout>
 
             <LinearLayout
@@ -98,28 +98,28 @@
                     style="@style/TextStyle.TextView.Texto.Imunizacoes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Data:" />
+                    android:text="@string/text_cartao_pdf_data" />
 
                 <TextView
                     android:id="@+id/text_pdf_imunizacao_lote_hpv1"
                     style="@style/TextStyle.TextView.Texto.Imunizacoes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lote:" />
+                    android:text="@string/text_cartao_pdf_lote" />
 
                 <TextView
                     android:id="@+id/text_pdf_imunizacao_aplicador_hpv1"
                     style="@style/TextStyle.TextView.Texto.Imunizacoes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Func.:" />
+                    android:text="@string/text_cartao_pdf_func" />
 
                 <TextView
                     android:id="@+id/text_pdf_imunizacao_unidade_hpv1"
                     style="@style/TextStyle.TextView.Texto.Imunizacoes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Unid.:" />
+                    android:text="@string/text_cartao_pdf_unid" />
             </LinearLayout>
 
             <LinearLayout
@@ -142,28 +142,28 @@
                     style="@style/TextStyle.TextView.Texto.Imunizacoes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Data:" />
+                    android:text="@string/text_cartao_pdf_data" />
 
                 <TextView
                     android:id="@+id/text_pdf_imunizacao_lote_hpv2"
                     style="@style/TextStyle.TextView.Texto.Imunizacoes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lote:" />
+                    android:text="@string/text_cartao_pdf_lote" />
 
                 <TextView
                     android:id="@+id/text_pdf_imunizacao_aplicador_hpv2"
                     style="@style/TextStyle.TextView.Texto.Imunizacoes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Func.:" />
+                    android:text="@string/text_cartao_pdf_func" />
 
                 <TextView
                     android:id="@+id/text_pdf_imunizacao_unidade_hpv2"
                     style="@style/TextStyle.TextView.Texto.Imunizacoes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Unid.:" />
+                    android:text="@string/text_cartao_pdf_unid" />
             </LinearLayout>
 
         </LinearLayout>

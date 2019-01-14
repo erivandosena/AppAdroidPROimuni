@@ -27,7 +27,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -57,7 +56,6 @@ import br.com.erivando.proimuni.ui.activity.login.LoginMvpView;
 import br.com.erivando.proimuni.ui.activity.mapa.MapaActivity;
 import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaActivity;
-import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -83,34 +81,13 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     LoginMvpPresenter<LoginMvpView> loginPresenter;
 
     @Inject
-    ImunizacaoMvpPresenter<ImunizacaoMvpView> imunizacaoPresenter;
-
-    @Inject
     ConfiguracaoMvpPresenter<ConfiguracaoMvpView> configuracaoPresenter;
-
-    //@PreferenceInfo
-    //String prefFileName;
-
-    //@BindView(R.id.text_versao_app)
-    //TextView versaoAppTextView;
 
     @BindView(R.id.drawer_view)
     DrawerLayout drawer;
 
     @BindView(R.id.navigation_view)
     NavigationView navigationView;
-
-    @BindView(R.id.btn_cartao)
-    ImageButton cartaoImageButton;
-
-    @BindView(R.id.btn_vacina)
-    ImageButton vacinaImageButton;
-
-    @BindView(R.id.btn_calendario)
-    ImageButton calendarioImageButton;
-
-    @BindView(R.id.btn_posto)
-    ImageButton postoImageButton;
 
     @BindView(R.id.btn_drawer)
     ImageButton buttonBarDrawerToggle;
@@ -443,8 +420,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void updateAppVersion() {
-        //String version = getString(R.string.versao_app) + " " + BuildConfig.VERSION_NAME;
-        // versaoAppTextView.setText(version);
+       // String version = getString(R.string.versao_app) + " " + BuildConfig.VERSION_NAME;
+       // versaoAppTextView.setText(version);
     }
 
     @Override
@@ -504,8 +481,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                             //emailIntent.putExtra(Intent.EXTRA_TEXT, getContextActivity().getResources().getString(R.string.texto_email_senha) + " " + getCapitalizeNome(nomeTextView.getText().toString()) + "\n\n" + getContextActivity().getResources().getString(R.string.texto_envio_anexo) + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + getContextActivity().getResources().getString(R.string.app_name) + "\n" + getContextActivity().getResources().getString(R.string.app_slogan)+"\n\n");
                             emailIntent.putExtra(Intent.EXTRA_TEXT, getContextActivity().getResources().getString(R.string.texto_envio_anexo) + " " + getCapitalizeNome(nomeTextView.getText().toString()) + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + getContextActivity().getResources().getString(R.string.app_name) + "\n\n");
                             startActivity(Intent.createChooser(emailIntent, getContextActivity().getResources().getString(R.string.titulo_backup_copia_email)));
-
-                            //loginPresenter.enviaBackupPorEmail(view);
                         }
                     });
 

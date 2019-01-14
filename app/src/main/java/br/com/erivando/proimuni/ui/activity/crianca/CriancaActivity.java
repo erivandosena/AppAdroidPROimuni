@@ -59,15 +59,6 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     @Inject
     CriancaMvpPresenter<CriancaMvpView> presenter;
 
-    @Inject
-    CadastroUsuarioMvpPresenter<CadastroUsuarioMvpView> presenterUsuario;
-
-   // @BindView(R.id.toolbar_crianca)
-   // Toolbar toolbar;
-
-  //  @BindView(R.id.collapsing_toolbar_crianca)
- //   CollapsingToolbarLayout collapsingToolbar;
-
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
 
@@ -76,11 +67,6 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
 
     @BindView(R.id.nascimento)
     EditText nascimentoEditText;
-
-    /*
-    @BindView(R.id.responsavel)
-    Spinner comboResponsavel;
-    */
 
     @BindView(R.id.sexo)
     Spinner comboSexo;
@@ -100,7 +86,6 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     private boolean toggleStatus;
 
     private Intent intent;
-    private ArrayAdapter<String> adapterResponsavel;
     private ArrayAdapter<String> adapterSexo;
     private Crianca crianca;
     private Long id;
@@ -117,33 +102,14 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crianca);
-
         setUnBinder(ButterKnife.bind(this));
-        /*
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        collapsingToolbar.setTitle(getResources().getString(R.string.text_crianca_titulo));
-        */
         textViewTituloToobar.setText(getResources().getString(R.string.text_crianca_titulo));
-
         getActivityComponent().inject(this);
-
         presenter.onAttach(this);
-
         crianca = new Crianca();
-
         intent = getIntent();
-
         id = 0L;
-
         getCrianca();
-
         setUp();
 
         nascimentoEditText.setOnClickListener(new View.OnClickListener() {
@@ -233,7 +199,6 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
             if (crianca != null) {
                 nomeEditText.setText(crianca.getCriaNome());
                 nascimentoEditText.setText(Uteis.getParseDateString(crianca.getCriaNascimento()));
-                //comboResponsavel.setSelection(adapterResponsavel.getPosition(crianca.getUsuario().getUsuaNome()));
                 comboSexo.setSelection(adapterSexo.getPosition(crianca.getCriaSexo()));
                 if (crianca.getCriaFoto() != null)
                     fotoImageButton.setImageBitmap(base64ParaBitmap(crianca.getCriaFoto()));
@@ -296,20 +261,6 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     private void getCrianca() {
 
         listaCriancas = presenter.onCriancaCadastrada();
-        /*
-        Usuario usuario = presenterUsuario.onUsuarioCadastrado();
-        if (usuario != null) {
-            String[] responsavel = new String[]{usuario.getUsuaNome()};
-            adapterResponsavel = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, responsavel);
-            adapterResponsavel.setDropDownViewResource(android.R.layout.simple_spinner_item);
-            //comboResponsavel.setAdapter(adapterResponsavel);
-
-        } else {
-         //   Toast.makeText(this, this.getString(R.string.texto_aviso_usuario_nao_cadastrado), Toast.LENGTH_LONG).show();
-         //   openUsuarioActivity();
-        }
-        */
-
         String[] sexo = new String[]{"Menino", "Menina"};
         adapterSexo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sexo);
         adapterSexo.setDropDownViewResource(android.R.layout.simple_spinner_item);

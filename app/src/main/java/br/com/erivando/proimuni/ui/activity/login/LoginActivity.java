@@ -74,15 +74,10 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         super.onCreate(savedInstanceState);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_login);
-
         getActivityComponent().inject(this);
-
         setUnBinder(ButterKnife.bind(this));
-
         presenter.onAttach(LoginActivity.this);
-
         setUp();
-
     }
 
     @OnClick(R.id.btn_login_usuario)
@@ -209,8 +204,6 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
         });
 
-        //habilitaTelaCheia(this);
-        //statusBarTransparente(this);
         presenter.onCreateGoogleLogin();
         presenter.onCreateFacebookLogin();
         presenter.onCreateGoogleAccountCredential();

@@ -53,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|center_vertical"
         android:textAlignment="textStart"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="RtlCompat" />
 
 </LinearLayout>
