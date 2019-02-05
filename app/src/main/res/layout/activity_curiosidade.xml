@@ -18,6 +18,7 @@
 
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -41,10 +42,417 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="20dp"
-            android:paddingBottom="20dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
 
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_p1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:foreground="@drawable/round_border_cardview_solid_ligth"
+                app:cardBackgroundColor="@color/colorWhite"
+                card_view:cardCornerRadius="15dp">
 
+                <ImageView
+                    android:id="@+id/image_seta_p1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_seta_spinner" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/titulo_p1"
+                        style="@style/TextStyle.Titulo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="15dp"
+                        android:text="@string/tit_p1" />
+
+                    <TextView
+                        android:id="@+id/desc_p1"
+                        style="@style/TextStyle.Paragrafo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/desc_r_p1"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_p2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:foreground="@drawable/round_border_cardview_solid_ligth"
+                app:cardBackgroundColor="@color/colorWhite"
+                card_view:cardCornerRadius="15dp">
+
+                <ImageView
+                    android:id="@+id/image_seta_p2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_seta_spinner" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/titulo_p2"
+                        style="@style/TextStyle.Titulo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="15dp"
+                        android:text="@string/tit_p2" />
+
+                    <TextView
+                        android:id="@+id/desc_p2"
+                        style="@style/TextStyle.Paragrafo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/desc_r_p2"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_p3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:foreground="@drawable/round_border_cardview_solid_ligth"
+                app:cardBackgroundColor="@color/colorWhite"
+                card_view:cardCornerRadius="15dp">
+
+                <ImageView
+                    android:id="@+id/image_seta_p3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_seta_spinner" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/titulo_p3"
+                        style="@style/TextStyle.Titulo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="15dp"
+                        android:text="@string/tit_p3" />
+
+                    <TextView
+                        android:id="@+id/desc_p3"
+                        style="@style/TextStyle.Paragrafo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/desc_r_p3"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_p4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:foreground="@drawable/round_border_cardview_solid_ligth"
+                app:cardBackgroundColor="@color/colorWhite"
+                card_view:cardCornerRadius="15dp">
+
+                <ImageView
+                    android:id="@+id/image_seta_p4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_seta_spinner" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/titulo_p4"
+                        style="@style/TextStyle.Titulo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="15dp"
+                        android:text="@string/tit_p4" />
+
+                    <TextView
+                        android:id="@+id/desc_p4"
+                        style="@style/TextStyle.Paragrafo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/desc_r_p4"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_p5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:foreground="@drawable/round_border_cardview_solid_ligth"
+                app:cardBackgroundColor="@color/colorWhite"
+                card_view:cardCornerRadius="15dp">
+
+                <ImageView
+                    android:id="@+id/image_seta_p5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_seta_spinner" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/titulo_p5"
+                        style="@style/TextStyle.Titulo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="15dp"
+                        android:text="@string/tit_p5" />
+
+                    <TextView
+                        android:id="@+id/desc_p5"
+                        style="@style/TextStyle.Paragrafo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/desc_r_p5"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_p6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:foreground="@drawable/round_border_cardview_solid_ligth"
+                app:cardBackgroundColor="@color/colorWhite"
+                card_view:cardCornerRadius="15dp">
+
+                <ImageView
+                    android:id="@+id/image_seta_p6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_seta_spinner" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/titulo_p6"
+                        style="@style/TextStyle.Titulo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="15dp"
+                        android:text="@string/tit_p6" />
+
+                    <TextView
+                        android:id="@+id/desc_p6"
+                        style="@style/TextStyle.Paragrafo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/desc_r_p6"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_p7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:foreground="@drawable/round_border_cardview_solid_ligth"
+                app:cardBackgroundColor="@color/colorWhite"
+                card_view:cardCornerRadius="15dp">
+
+                <ImageView
+                    android:id="@+id/image_seta_p7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_seta_spinner" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/titulo_p7"
+                        style="@style/TextStyle.Titulo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="15dp"
+                        android:text="@string/tit_p7" />
+
+                    <TextView
+                        android:id="@+id/desc_p7"
+                        style="@style/TextStyle.Paragrafo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/desc_r_p7"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_p8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:foreground="@drawable/round_border_cardview_solid_ligth"
+                app:cardBackgroundColor="@color/colorWhite"
+                card_view:cardCornerRadius="15dp">
+
+                <ImageView
+                    android:id="@+id/image_seta_p8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_seta_spinner" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/titulo_p8"
+                        style="@style/TextStyle.Titulo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="15dp"
+                        android:text="@string/tit_p8" />
+
+                    <TextView
+                        android:id="@+id/desc_p8"
+                        style="@style/TextStyle.Paragrafo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/desc_r_p8"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_p9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:foreground="@drawable/round_border_cardview_solid_ligth"
+                app:cardBackgroundColor="@color/colorWhite"
+                card_view:cardCornerRadius="15dp">
+
+                <ImageView
+                    android:id="@+id/image_seta_p9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_seta_spinner" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/titulo_p9"
+                        style="@style/TextStyle.Titulo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="15dp"
+                        android:text="@string/tit_p9" />
+
+                    <TextView
+                        android:id="@+id/desc_p9"
+                        style="@style/TextStyle.Paragrafo.Texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/desc_r_p9"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                style="@style/TextStyle.Titulo.Texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/vacina_fonte" />
+
+            <TextView
+                style="@style/TextStyle.Paragrafo.Texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="15dp"
+                android:text="@string/perguntas_respostas_fonte" />
 
         </LinearLayout>
 

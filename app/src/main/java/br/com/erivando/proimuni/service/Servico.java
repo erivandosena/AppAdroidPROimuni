@@ -16,6 +16,7 @@ import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
@@ -107,8 +108,9 @@ public class Servico extends Service {
         super.onCreate();
         ServiceComponent component = DaggerServiceComponent.builder().applicationComponent(((AppAplicacao) getApplication()).getComponent()).build();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForeground(1, new Notification());
+            startForeground(2, new Notification());
         } else {
+           // startForeground(1, new Notification());
         }
         component.inject(this);
         this.context = AppAplicacao.contextApp;
@@ -142,7 +144,8 @@ public class Servico extends Service {
 
     private Runnable realizaTarefa = new Runnable() {
         public void run() {
-            processaNotificacao();
+            if (!iDataManager.isNotificacoes())
+                processaNotificacao();
             stopSelf();
         }
     };
@@ -199,10 +202,10 @@ public class Servico extends Service {
             if (criancas.isEmpty() || cartoes.isEmpty()) {
                 String nomeUsuario = (usuario != null && usuario.getUsuaNome() != null) ? "Olá "+usuario.getUsuaNome() : "Olá "+ getCapitalizeNome(iDataManager.getCurrentUserName());
                 repeatedNotificationInicial = showLocalNotification(context, CriancaListaActvity.class,
-                        nomeUsuario + ", é importante que você cadastre sua(s) criança(s) para usufruir dos benefícios do "+getResources().getString(R.string.app_name)+". Vamos lá! Inicie o preenchimento do perfil da criança!",
+                        nomeUsuario + ", é importante que você cadastre sua(s) criança(s) para usufruir dos benefícios do "+getResources().getString(R.string.app_name)+". Vamos lá! Inicie o preenchimento do perfil da criança",
                         "Cadastrar Criança",
                         "Lembrete",
-                        "Preencha no cartão as imunizações das vacinas realizadas.",
+                        "preencha no cartão as informações das vacinas realizadas.",
                         0L, //idCartao
                         0L, //idVacina
                         0L, //idDose
@@ -264,6 +267,9 @@ public class Servico extends Service {
                                         case "18 meses":
                                             preparaNotificacao(mesesIdadeCalendario, semanasIdadeCrianca, 18L, cartao);
                                             break;
+                                        case "2 anos":
+                                            preparaNotificacao(mesesIdadeCalendario, semanasIdadeCrianca, 24L, cartao);
+                                            break;
                                         case "4 anos":
                                             preparaNotificacao(mesesIdadeCalendario, semanasIdadeCrianca, 48L, cartao);
                                             break;
@@ -299,10 +305,10 @@ public class Servico extends Service {
         if (!criancas.isEmpty() && imunizacoes.isEmpty()) {
             String nomeUsuario = (usuario != null && usuario.getUsuaNome() != null) ? "Olá "+usuario.getUsuaNome() : "Olá "+ getCapitalizeNome(iDataManager.getCurrentUserName());
             repeatedNotificationInicial = showLocalNotification(context, CartaoDetalheActivity.class,
-                    nomeUsuario + ", é importante que você cadastre as doses das vacinas realizadas para usufruir dos benefícios do "+getResources().getString(R.string.app_name)+". Vamos lá! Inicie o preenchimento das imunizações!",
-                    "Cadastrar Imunização de "+cartao.getCrianca().getCriaNome(),
+                    nomeUsuario + ", é importante que você cadastre as doses das vacinas realizadas para usufruir dos benefícios do "+getResources().getString(R.string.app_name)+". Vamos lá! Inicie o cadastro das doses",
+                    "Cadastrar imunização de "+cartao.getCrianca().getCriaNome(),
                     "Lembrete",
-                    "Selecione as vacinas no cartão, preencha e salve as informações das doses realizadas.",
+                    "selecione as vacinas no cartão, preencha e salve as informações das doses realizadas.",
                     cartao.getId(),
                     0L, //idVacina
                     0L, //idDose
@@ -360,7 +366,7 @@ public class Servico extends Service {
     private String aplicaStatusVacina(Long semanasIdadeCrianca, Long baseQuantSemanas, Cartao cartao, String idadeVacinacao) {
 
         String statusVencendo = "Fique de olho na próxima dose de vacina para "+cartao.getCrianca().getCriaNome()+ ": " +idadeVacinacao.toUpperCase();
-        String statusVencido = "Atenção! "+cartao.getCrianca().getCriaNome()+", possui vacina atrasada de "+idadeVacinacao.toUpperCase() +". Atualize o cartão vacinal!";
+        String statusVencido = "Atenção! "+cartao.getCrianca().getCriaNome()+", possui vacina atrasada de "+idadeVacinacao.toUpperCase() +". Atualize o cartão vacinal";
 
         String status = null;
 
@@ -490,6 +496,27 @@ public class Servico extends Service {
         notificationCompactBuild.setContentIntent(pendingIntent);
 
         return notificationCompactBuild;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void startNotificacaoForeground(Context context, Class<?> clsDestino, String textBig, String textContentTitle, String summaryTextTitle, String contentText, Long idCartao, Long idVacina, Long idDose, Long idIdade){
+        //String NOTIFICATION_CHANNEL_ID = "com.example.simpleapp";
+        //String channelName = "My Background Service";
+        NotificationChannel chan = new NotificationChannel(NOTIFICACAO_ID, textContentTitle, NotificationManager.IMPORTANCE_HIGH);
+        chan.setLightColor(Color.BLUE);
+        chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        assert manager != null;
+        manager.createNotificationChannel(chan);
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, chan.getId());
+        Notification notification = notificationBuilder.setOngoing(true)
+                .setSmallIcon(R.drawable.ic_notificacao)
+                .setContentTitle(context.getString(R.string.app_name))
+                .setPriority(NotificationManager.IMPORTANCE_MIN)
+                .setCategory(Notification.CATEGORY_SERVICE)
+                .build();
+        startForeground(2, notification);
     }
 
 }

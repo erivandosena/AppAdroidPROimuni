@@ -86,7 +86,7 @@ public class ImunizacaoPresenter<V extends ImunizacaoMvpView> extends BasePresen
             new AlertDialog.Builder(getMvpView().getContextActivity())
                     .setIcon(R.drawable.ic_launcher_round)
                     .setTitle(AppAplicacao.contextApp.getResources().getString(R.string.app_name))
-                    .setMessage("Parabéns! \nImunização registrada com sucesso!")
+                    .setMessage("Parabéns! \nVacina registrada com sucesso!")
                     .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

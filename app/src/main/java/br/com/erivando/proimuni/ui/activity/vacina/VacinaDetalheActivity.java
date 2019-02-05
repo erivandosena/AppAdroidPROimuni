@@ -34,6 +34,10 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
     public static final String EXTRA_REDE = "vacina_rede";
     public static final String EXTRA_DESC = "vacina_descricao";
     public static final String EXTRA_ADMIN = "vacina_admin";
+    public static final String EXTRA_DOSES = "vacina_doses";
+    public static final String EXTRA_FAIXA = "vacina_faixa";
+    public static final String EXTRA_CONTRAINDICACOES = "vacina_contraindicacoes";
+    public static final String EXTRA_FONTE = "vacina_fonte";
 
     @Inject
     public VacinaMvpPresenter<VacinaMvpView> vacinaPresenter;
@@ -50,6 +54,18 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
     @BindView(R.id.text_vacina_administracao)
     public TextView mTexVacinaAdministracao;
 
+    @BindView(R.id.text_vacina_doses)
+    public TextView mTexVacinaDoses;
+
+    @BindView(R.id.text_vacina_faixa)
+    public TextView mTexVacinaFaixa;
+
+    @BindView(R.id.text_vacina_contraindicacoes)
+    public TextView mTexVacinaContraindicacoes;
+
+    @BindView(R.id.text_vacina_fonte)
+    public TextView mTexVacinaFonte;
+
     @BindView(R.id.fab_vacina_share)
     public FloatingActionButton floatingActionButtonVacinaShare;
 
@@ -63,6 +79,10 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
     private String vacinaRede;
     private String vacinaDesc;
     private String vacinaAdmin;
+    private String vacinaDoses;
+    private String vacinaFaixa;
+    private String vacinaContraindicacoes;
+    private String vacinaFonte;
     private String activityOrigem;
 
     private Intent intent;
@@ -84,6 +104,11 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
         vacinaRede = intent.getStringExtra(EXTRA_REDE);
         vacinaDesc = intent.getStringExtra(EXTRA_DESC);
         vacinaAdmin = intent.getStringExtra(EXTRA_ADMIN);
+        vacinaDoses = intent.getStringExtra(EXTRA_DOSES);
+        vacinaFaixa = intent.getStringExtra(EXTRA_FAIXA);
+        vacinaContraindicacoes = intent.getStringExtra(EXTRA_CONTRAINDICACOES);
+        vacinaFonte = intent.getStringExtra(EXTRA_FONTE);
+
         activityOrigem = intent.getStringExtra("Activity");
         setUp();
     }
@@ -93,11 +118,15 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
         if (view == floatingActionButtonVacinaShare) {
             Intent shareIntent = ShareCompat.IntentBuilder.from(this)
                     .setType("text/html")
-                    .setSubject(getResources().getString(R.string.app_name))
-                    .setChooserTitle(getResources().getString(R.string.app_name))
+                    .setSubject("Sobre vacina "+vacinaNome.toUpperCase())
+                    .setChooserTitle("Compartilhar informação de vacina")
                     .setText(vacinaNome.toUpperCase() + "\n\n" +
-                            vacinaDesc + "\n\n" +
-                            vacinaAdmin + "\n\n" + getResources().getString(R.string.app_name) + "\n" + getResources().getString(R.string.app_link_download) + "\n\n♥ " + getResources().getString(R.string.app_slogan))
+                            vacinaDesc + "\n\nDoses:\n" +
+                            vacinaDoses + "\n\nFaixa etária:\n" +
+                            vacinaFaixa + "\n\nLocal de administração:\n" +
+                            vacinaAdmin + "\n\nContraindicações:\n" +
+                            vacinaContraindicacoes + "\n\nFonte:\n" +
+                            vacinaFonte + "\n\n" + getResources().getString(R.string.app_name) + "\n" + getResources().getString(R.string.app_link_download)+"\n\n")
                     .createChooserIntent()
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             if (shareIntent.resolveActivity(getPackageManager()) != null) {
@@ -119,6 +148,12 @@ public class VacinaDetalheActivity extends BaseActivity implements VacinaMvpView
         mTextViewTitulo.setText(vacinaNome);
         mTexVacinaDescricao.setText(vacinaDesc);
         mTexVacinaAdministracao.setText(vacinaAdmin);
+
+        mTexVacinaDoses.setText(vacinaDoses);
+        mTexVacinaFaixa.setText(vacinaFaixa);
+        mTexVacinaContraindicacoes.setText(vacinaContraindicacoes);
+        mTexVacinaFonte.setText(vacinaFonte);
+
         loadBackdrop();
 
         resizeCustomizedToobar(linearLayoutToobar);

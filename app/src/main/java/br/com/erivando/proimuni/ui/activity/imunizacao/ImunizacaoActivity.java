@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -149,7 +148,7 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
                         new AlertDialog.Builder(this)
                                 .setIcon(R.drawable.ic_launcher_round)
                                 .setTitle(textViewTituloToobar.getText().toString())
-                                .setMessage("\nImunização ainda não necessária!\n\nÉ preciso um prazo mínimo de 6 meses da 1ª dose realizada em "+sdf.format(imunizacao.getImunData())+ " há "+ (periodo == 1 ? periodo+" mês." : periodo+" meses."))
+                                .setMessage("\nCadastro ainda não necessário!\n\nÉ preciso um prazo mínimo de 6 meses da 1ª dose realizada em "+sdf.format(imunizacao.getImunData())+ " há "+ (periodo == 1 ? periodo+" mês." : periodo+" meses."))
                                 .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -179,7 +178,7 @@ public class ImunizacaoActivity extends BaseActivity implements ImunizacaoMvpVie
         new AlertDialog.Builder(this)
                 .setIcon(R.drawable.ic_launcher_round)
                 .setTitle(textViewTituloToobar.getText().toString())
-                .setMessage("\nImunização já registrada!\n")
+                .setMessage("\nVacina já registrada!\n")
                 .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

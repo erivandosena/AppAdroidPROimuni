@@ -157,7 +157,8 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             if (!isViewAttached()) {
                 return;
             }
-            getMvpView().openMainActivity();
+            //getMvpView().openMainActivity();
+            onOpenMainActivity();
         } else {
             getMvpView().onError(R.string.text_valida_usuario);
         }
@@ -204,7 +205,8 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         isLoggedIn = accessToken != null && !accessToken.isExpired();
 
         if (isLoggedIn) {
-            getMvpView().openMainActivity();
+           // getMvpView().openMainActivity();
+            onOpenMainActivity();
         } else {
             LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                 @Override
@@ -244,7 +246,8 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                                         } catch (MalformedURLException e) {
                                             e.printStackTrace();
                                         } finally {
-                                            getMvpView().openMainActivity();
+                                            //getMvpView().openMainActivity();
+                                            onOpenMainActivity();
                                         }
                                     }
                                 }).executeAsync();
@@ -382,7 +385,8 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                     account.getEmail(),
                     (account.getPhotoUrl() != null) ? account.getPhotoUrl().toString() : null
             );
-            getMvpView().openMainActivity();
+            //getMvpView().openMainActivity();
+            onOpenMainActivity();
         } catch (ApiException e) {
             // O código de status ApiException indica o motivo detalhado da falha.
             // Por favor, consulte a referência da classe GoogleSignInStatusCodes para
@@ -514,7 +518,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
     @Override
     public void getResultsFromApi(View view) {
-        Log.e("getResultsFromApi", String.valueOf(view));
         if (!isGooglePlayServicesAvailable()) {
             acquireGooglePlayServices();
         } else if (googleAccountCredential.getSelectedAccountName() == null) {
@@ -522,7 +525,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         } else if (!internetDetector.checkMobileInternetConn()) {
             showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.aviso_sem_internet));
         } else {
-            Log.e("CredentialRequestTask", String.valueOf(this));
             new CredentialRequestTask(this, googleAccountCredential).execute();
         }
     }
@@ -539,6 +541,12 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         alertDialogBuilder.setTitle(R.string.app_name);
         alertDialogBuilder.setNegativeButton(R.string.text_btn_ok, null);
         alertDialogBuilder.setCancelable(false);
+    }
+
+    @Override
+    public void onOpenMainActivity() {
+        //getMvpView().openMainActivity();
+        getMvpView().onOpenIntroducaoActivity();
     }
 
     /**
@@ -567,7 +575,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             String to = usuario.getUsuaEmail();
             String from = googleAccountCredential.getSelectedAccountName();
             String subject = AppAplicacao.contextApp.getResources().getString(R.string.texto_email_assunto) + " " + getMvpView().getContextActivity().getString(R.string.app_name);
-            String body = AppAplicacao.contextApp.getResources().getString(R.string.texto_email_senha) + " " + usuario.getUsuaNome() + "\n\n" + AppAplicacao.contextApp.getResources().getString(R.string.texto_envio_senha) + " " + usuario.getUsuaSenha() + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + AppAplicacao.contextApp.getResources().getString(R.string.app_name) + "\n\n";
+            String body = AppAplicacao.contextApp.getResources().getString(R.string.texto_email_senha) + " " + (usuario.getUsuaNome() != null ? usuario.getUsuaNome() : getCapitalizeNome(usuario.getUsuaLogin())) + "\n\n" + AppAplicacao.contextApp.getResources().getString(R.string.texto_envio_senha) + " " + usuario.getUsuaSenha() + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + AppAplicacao.contextApp.getResources().getString(R.string.app_name) + "\n\n";
             MimeMessage mimeMessage;
             String response = "";
             try {

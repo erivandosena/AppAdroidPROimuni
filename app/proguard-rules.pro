@@ -22,6 +22,8 @@
 
 #-keepattributes *Annotation*
 #-keepclassmembers class br.com.erivando.proimuni.** { *; }
+-keepattributes Signature
+-keepattributes *Annotation*
 -keepattributes AnnotationDefault
 -keepattributes Exceptions, InnerClasses, MethodParameters, Signature, EnclosingMethod, RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
 -ignorewarnings

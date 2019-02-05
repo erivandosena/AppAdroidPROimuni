@@ -15,7 +15,6 @@ import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -75,7 +74,6 @@ import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private static final String GOOGLE_API_KEY = "AIzaSyB32v-g5NTIawHhRoJVqZ8ACWfrFam1Lpc"; // https://developers.google.com/maps/documentation/static-maps/get-api-key
 
     GoogleMap mGoogleMap;
     SupportMapFragment mapFrag;
@@ -86,7 +84,6 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
 
     private int PROXIMITY_RADIUS_1 = 5000;
     private int PROXIMITY_RADIUS_2 = 10000;
-    private LocationManager locationManager;
     private double mLatitudePlaces;
     private double mLongitudePlaces;
     private boolean statusChangedMapa;
@@ -157,6 +154,8 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
     }
 
     private void getPesquisa(String pesquisa) {
+        final String GOOGLE_API_KEY = getResources().getString(R.string.google_maps_key);
+
         if ((pesquisa == null) || (pesquisa.trim().isEmpty())) {
             pesquisa = "Posto de Saúde";
 
@@ -166,6 +165,8 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
             googlePlacesUrl.append("&keyword=" + Uri.encode(pesquisa));
             googlePlacesUrl.append("&fields=photos,formatted_address,name,opening_hours,rating");
             googlePlacesUrl.append("&key=" + GOOGLE_API_KEY);
+            //googlePlacesUrl.append("&hasNextPage=true");
+            //googlePlacesUrl.append("&nextPage()=true");
 
             GooglePlacesReadTask googlePlacesReadTask = new GooglePlacesReadTask();
             Object[] toPass = new Object[2];
@@ -187,11 +188,14 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
             googlePlacesUrl.append("&keyword=" + Uri.encode(pesquisa));
             googlePlacesUrl.append("&fields=photos,formatted_address,name,opening_hours,rating");
             googlePlacesUrl.append("&key=" + GOOGLE_API_KEY);
+            //googlePlacesUrl.append("&hasNextPage=true");
+            //googlePlacesUrl.append("&nextPage()=true");
 
             GooglePlacesReadTask googlePlacesReadTask = new GooglePlacesReadTask();
             Object[] toPass = new Object[2];
             toPass[0] = mGoogleMap;
             toPass[1] = googlePlacesUrl.toString();
+            Log.e("toPass[1]", googlePlacesUrl.toString());
             googlePlacesReadTask.execute(toPass);
         }
 
@@ -276,7 +280,7 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
             markerOptions.title("Você");
             markerOptions.snippet((subLocality != null ? subLocality + "\n" + (locality != null ? locality : "") + " - " + (adminArea != null ? adminArea : "") : "Local atual"));
             BitmapDescriptor markerIcon = getMarkerIconFromDrawable(iconeDrawable);
-            if(markerIcon != null) {
+            if (markerIcon != null) {
                 markerOptions.icon(markerIcon);
             }
             mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
@@ -382,7 +386,7 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
 
     private BitmapDescriptor getMarkerIconFromDrawable(Drawable drawable) {
         Canvas canvas = new Canvas();
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         canvas.setBitmap(bitmap);
         drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
         drawable.draw(canvas);

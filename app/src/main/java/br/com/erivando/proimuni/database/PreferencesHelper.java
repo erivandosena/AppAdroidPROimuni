@@ -30,6 +30,7 @@ public class PreferencesHelper implements IPreferencesHelper {
     private static final String PREF_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN";
     private static final String PREF_KEY_NOTIFICACOES = "PREF_KEY_NOTIFICACOES";
     private static final String PREF_KEY_REDE_VACINAS = "PREF_KEY_REDE_VACINAS";
+    private static final String PREF_KEY_FIRST_LAUNCH = "PREF_KEY_FIRST_LAUNCH";
 
     private final SharedPreferences sharedPreferences;
 
@@ -128,6 +129,16 @@ public class PreferencesHelper implements IPreferencesHelper {
     @Override
     public void setRedeVacinas(boolean valor) {
         sharedPreferences.edit().putBoolean(PREF_KEY_REDE_VACINAS, valor).apply();
+    }
+
+    @Override
+    public void setFirstLaunch(boolean isFirst) {
+        sharedPreferences.edit().putBoolean(PREF_KEY_FIRST_LAUNCH, isFirst).apply();
+    }
+
+    @Override
+    public boolean isFirstLaunch() {
+        return sharedPreferences.getBoolean(PREF_KEY_FIRST_LAUNCH, true);
     }
 
 

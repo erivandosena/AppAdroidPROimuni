@@ -80,10 +80,66 @@
                 style="@style/TextStyle.Titulo.Texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/vacina_doses" />
+
+            <TextView
+                android:id="@+id/text_vacina_doses"
+                style="@style/TextStyle.Paragrafo.Texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="@null" />
+
+            <TextView
+                style="@style/TextStyle.Titulo.Texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/vacina_faixa" />
+
+            <TextView
+                android:id="@+id/text_vacina_faixa"
+                style="@style/TextStyle.Paragrafo.Texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="@null" />
+
+            <TextView
+                style="@style/TextStyle.Titulo.Texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/vacina_administracao" />
 
             <TextView
                 android:id="@+id/text_vacina_administracao"
+                style="@style/TextStyle.Paragrafo.Texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="@null" />
+
+            <TextView
+                style="@style/TextStyle.Titulo.Texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/vacina_contraindicacoes" />
+
+            <TextView
+                android:id="@+id/text_vacina_contraindicacoes"
+                style="@style/TextStyle.Paragrafo.Texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="@null" />
+
+            <TextView
+                style="@style/TextStyle.Titulo.Texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/vacina_fonte" />
+
+            <TextView
+                android:id="@+id/text_vacina_fonte"
                 style="@style/TextStyle.Paragrafo.Texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

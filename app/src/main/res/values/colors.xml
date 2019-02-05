@@ -14,6 +14,7 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#2a2a2a</color>
     <color name="colorRedGoogle">#d34836</color>
+    <color name="colorRedGoogleLight">#FFD26355</color>
     <color name="colorBlueFacebook">#3b5998</color>
     <color name="colorBlue">#3583ff</color>
     <color name="colorBlueFine">#3580e8</color>
@@ -35,4 +36,39 @@
     <color name="textColorBlue">@color/colorPrimary</color>
     <color name="textColorGray">@color/colorGray</color>
     <color name="textColorWhite">@color/colorWhite</color>
+
+    <color name="colorPurpleFineLight">#e8dfff</color>
+    <color name="colorGreenFineLight">#e4f9ea</color>
+    <color name="colorYellowFineLight">#faf4e5</color>
+    <color name="colorPurpleStrong">#954fff</color>
+    <color name="colorGreenStrong">#74f3a7</color>
+    <color name="colorYellowStrong">#f6df7d</color>
+
+    <!-- slides introdução -->
+    <!-- Screens background color-->
+    <color name="bg_screen1">@color/colorPurple</color>
+    <color name="bg_screen2">@color/colorGreen</color>
+    <color name="bg_screen3">@color/colorYellow</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">@color/colorPurpleStrong</color>
+    <color name="dot_dark_screen2">@color/colorGreenStrong</color>
+    <color name="dot_dark_screen3">@color/colorYellowStrong</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">@color/colorPurpleFineLight</color>
+    <color name="dot_light_screen2">@color/colorGreenFineLight</color>
+    <color name="dot_light_screen3">@color/colorYellowFineLight</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+    </array>
 </resources>

@@ -28,4 +28,14 @@
     <dimen name="appbar_layout_height">180dp</dimen>
     <dimen name="appbar_toobar_height">75dp</dimen>
     <dimen name="appbar_text_margin">10dp</dimen>
+
+    <!-- Slide Introdução -->
+    <dimen name="dots_height">30dp</dimen>
+    <dimen name="dots_margin_bottom">20dp</dimen>
+    <dimen name="dots_padding_left">30dp</dimen>
+    <dimen name="dots_padding_right">30dp</dimen>
+    <dimen name="img_width_height">85dp</dimen>
+    <dimen name="slide_title">26sp</dimen>
+    <dimen name="slide_desc">16sp</dimen>
+    <dimen name="desc_padding">40dp</dimen>
 </resources>

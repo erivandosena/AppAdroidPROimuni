@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -25,10 +26,15 @@ import br.com.erivando.proimuni.database.model.Imunizacao;
 import br.com.erivando.proimuni.database.model.Usuario;
 import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
+import br.com.erivando.proimuni.ui.activity.introducao.IntroducaoActivity;
+import br.com.erivando.proimuni.ui.activity.introducao.IntroducaoMvpPresenter;
+import br.com.erivando.proimuni.ui.activity.introducao.IntroducaoMvpView;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
 
 /**
  * Projeto:     VacinasKIDS
@@ -41,6 +47,9 @@ public class ConfiguracaoActivity extends BaseActivity implements ConfiguracaoMv
 
     @Inject
     ConfiguracaoMvpPresenter<ConfiguracaoMvpView> presenter;
+
+    @Inject
+    IntroducaoMvpPresenter<IntroducaoMvpView> introducaoPresenter;
 
     @BindView(R.id.text_titulo_toobar)
     TextView textViewTituloToobar;
@@ -64,6 +73,9 @@ public class ConfiguracaoActivity extends BaseActivity implements ConfiguracaoMv
     private Random randomId;
     private JobScheduler mScheduler;
     private Intent intent;
+
+    @BindView(R.id.layout_toobar)
+    LinearLayout linearLayoutToobar;
 
     @BindView(R.id.btn_toggle_notificacao)
     ToggleButton toggleButtonNotificacoes;
@@ -92,11 +104,20 @@ public class ConfiguracaoActivity extends BaseActivity implements ConfiguracaoMv
     protected void setUp() {
         toggleButtonNotificacoes.setChecked(presenter.onNotificacoes());
         toggleButtonOpcionais.setChecked(presenter.onRedeVacinas());
+        resizeCustomizedToobar(linearLayoutToobar);
     }
 
     @OnClick(R.id.btn_nav_voltar)
     public void onClickVoltar(View v) {
         onBackPressed();
+    }
+
+    @OnClick(R.id.btn_exibe_intro)
+    public void onClickIntroducao(View v) {
+        introducaoPresenter.onSetIntroLaunch(true);
+        Intent intent = IntroducaoActivity.getStartIntent(ConfiguracaoActivity.this);
+        startActivity(intent);
+        finish();
     }
 
     @Override

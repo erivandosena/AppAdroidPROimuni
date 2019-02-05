@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+~ Copyright [2018] [Erivando Sena]
+~
+~ Licenciado sob a Licença Apache, Versão 2.0 (a "Licença");
+~ você não pode usar este arquivo, exceto em conformidade com a Licença.
+~ Você pode obter uma cópia da Licença em
+~
+~ http://www.apache.org/licenses/LICENSE-2.0
+~
+~ A menos que exigido pela lei aplicável ou acordado por escrito, o software
+~ distribuído sob a Licença é distribuído em uma base "COMO ESTÁ",
+~ SEM GARANTIAS OU CONDIÇÕES DE QUALQUER TIPO, expressas ou implícitas.
+~ Veja a Licença para o idioma específico que governa as permissões e
+~ limitações sob a licença.
+-->
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:showIn="@layout/activity_introducao">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/layoutDots"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dots_height"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dots_margin_bottom"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@id/layoutDots"
+            android:alpha=".5"
+            android:background="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:text="@string/tit_intro_next"
+            style="@style/Button.Introducao"/>
+
+        <Button
+            android:id="@+id/btn_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:text="@string/tit_intro_skip"
+            style="@style/Button.Introducao"/>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -116,7 +116,7 @@ public class CriancaListaImunizacao extends BaseActivity implements CriancaMvpVi
                     new AlertDialog.Builder(this)
                             .setIcon(R.drawable.ic_launcher_round)
                             .setTitle(AppAplicacao.contextApp.getResources().getString(R.string.text_imunizacao_titulo))
-                            .setMessage("\nNão foi registrada nenhuma imunização!\n")
+                            .setMessage("\nNão foi registrada nenhuma dose!\n")
                             .setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

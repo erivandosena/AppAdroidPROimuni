@@ -86,6 +86,12 @@
                 android:gravity="end|center_vertical"
                 style="@style/TextStyle.TextInputEdit.Texto"/>
 
+            <Button
+                android:id="@+id/btn_exibe_intro"
+                android:layout_width="match_parent"
+                style="@style/Button.Padrao"
+                android:text="Exibir dicas de utilização" />
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

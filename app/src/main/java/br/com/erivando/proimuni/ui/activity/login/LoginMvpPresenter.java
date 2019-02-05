@@ -64,4 +64,6 @@ public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<
     void getResultsFromApi(View view);
 
     void onCreateGoogleAccountCredential();
+
+    void onOpenMainActivity();
 }

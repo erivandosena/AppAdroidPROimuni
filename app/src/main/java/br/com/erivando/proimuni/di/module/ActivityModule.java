@@ -30,6 +30,9 @@ import br.com.erivando.proimuni.ui.activity.idade.IdadePresenter;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoMvpView;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoPresenter;
+import br.com.erivando.proimuni.ui.activity.introducao.IntroducaoMvpPresenter;
+import br.com.erivando.proimuni.ui.activity.introducao.IntroducaoMvpView;
+import br.com.erivando.proimuni.ui.activity.introducao.IntroducaoPresenter;
 import br.com.erivando.proimuni.ui.activity.login.LoginMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.login.LoginMvpView;
 import br.com.erivando.proimuni.ui.activity.login.LoginPresenter;
@@ -190,6 +193,12 @@ public class ActivityModule {
     @Provides
     @PerActivity
     CuriosidadeMvpPresenter<CuriosidadeMvpView> provideCuriosidadePresenter(CuriosidadePresenter<CuriosidadeMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    IntroducaoMvpPresenter<IntroducaoMvpView> provideIntroducaoPresenter(IntroducaoPresenter<IntroducaoMvpView> presenter) {
         return presenter;
     }
 }

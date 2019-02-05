@@ -82,6 +82,7 @@
             android:text="@null"
             android:textColor="@color/colorWhite" />
 
+        <!--
         <ImageView
             android:id="@+id/img_logo"
             android:layout_width="20dp"
@@ -91,7 +92,8 @@
             android:contentDescription="@null"
             android:padding="2dp"
             android:scaleType="fitCenter"
-            card_view:srcCompat="@drawable/ic_plus" />
+            app:srcCompat="@drawable/ic_plus" />
+            -->
 
     </LinearLayout>
 

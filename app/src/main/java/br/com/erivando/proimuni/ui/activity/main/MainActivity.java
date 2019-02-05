@@ -48,12 +48,12 @@ import br.com.erivando.proimuni.ui.activity.configuracao.ConfiguracaoActivity;
 import br.com.erivando.proimuni.ui.activity.configuracao.ConfiguracaoMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.configuracao.ConfiguracaoMvpView;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaListaActvity;
-import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoMvpPresenter;
-import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoMvpView;
+import br.com.erivando.proimuni.ui.activity.curiosidade.CuriosidadeActivity;
 import br.com.erivando.proimuni.ui.activity.login.LoginActivity;
 import br.com.erivando.proimuni.ui.activity.login.LoginMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.login.LoginMvpView;
 import br.com.erivando.proimuni.ui.activity.mapa.MapaActivity;
+import br.com.erivando.proimuni.ui.activity.sobre.SobreActivity;
 import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaActivity;
 import butterknife.BindView;
@@ -276,13 +276,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                     case R.id.nav_item_avaliacao:
                         presenter.onDrawerRateUsClick();
                         return true;
-                        /*
                     case R.id.nav_item_curiosidade:
-                        Toast.makeText(AppAplicacao.contextApp, getResources().getString(R.string.menu_curiosidade) + "\n\nAinda não implementado! :(\n", Toast.LENGTH_SHORT).show();
+                        openCuriosidadesActivity();
                         return true;
-                        */
                     case R.id.nav_item_sobre:
-                        presenter.onDrawerOptionAboutClick();
+                        openSobreActivity();
                         return true;
                     case R.id.nav_item_logout:
                         presenter.onDrawerOptionLogoutClick();
@@ -308,9 +306,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     public void onCompartilhaApp() {
         Intent shareIntent = ShareCompat.IntentBuilder.from(this)
                 .setType("text/html")
-                .setSubject(getResources().getString(R.string.app_name))
+                .setSubject("Conheça o "+getResources().getString(R.string.app_name))
                 .setChooserTitle(getResources().getString(R.string.menu_compartilhar) + " " + getResources().getString(R.string.app_name))
-                .setText("Olá!\n" + getResources().getString(R.string.app_name) + " " + getResources().getString(R.string.app_mensagem_indicacao) + "\n" + getResources().getString(R.string.app_link_download) + "\n") //\n♥ " + getResources().getString(R.string.app_slogan))
+                .setText("Olá!\n\n" + getResources().getString(R.string.app_name) + " " + getResources().getString(R.string.app_mensagem_indicacao) + " " + getResources().getString(R.string.app_link_download) + "\n\n") //\n♥ " + getResources().getString(R.string.app_slogan))
                 .createChooserIntent()
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         if (shareIntent.resolveActivity(getPackageManager()) != null) {
@@ -338,6 +336,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
             }
         }
     }
+
 
     @Override
     public void openLoginActivity() {
@@ -377,15 +376,29 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         finish();
     }
 
+    public void openCuriosidadesActivity() {
+        Intent intent = CuriosidadeActivity.getStartIntent(MainActivity.this);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     public void openCriancaListaActivity(String acao) {
         Intent intent = CriancaListaActvity.getStartIntent(MainActivity.this);
-        if ("edita".equals(acao))
+        if ("edita".equalsIgnoreCase(acao))
             intent.putExtra("criancaLista", acao);
-        if ("cartao".equals(acao))
+        if ("cartao".equalsIgnoreCase(acao))
             intent.putExtra("criancaLista", acao);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void openSobreActivity() {
+        if (isNetworkConnected()) {
+            startActivity(SobreActivity.getStartIntent(this));
+            finish();
+        }
     }
 
     public void openMapaPostosVacinacao() {

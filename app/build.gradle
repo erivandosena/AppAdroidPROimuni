@@ -8,7 +8,7 @@ android {
         config {
             keyAlias 'proimuni'
             keyPassword 'proimuni'
-            storeFile file('C:\\Users\\Erivando\\Documents\\Google Drive\\PROJETO-ACADEMICO\\Projeto com Thaís\\Certificado App\\Proimuni.jks')
+            storeFile file('D:\\Google Drive\\PROJETO-ACADEMICO\\Projeto com Thaís\\Certificado App\\Proimuni.jks')
             storePassword 'proimuni'
         }
     }
@@ -27,7 +27,7 @@ android {
     }
     buildTypes {
         debug {
-            minifyEnabled true
+            minifyEnabled false
             useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             multiDexKeepFile file('multidex-config.txt')
@@ -107,13 +107,13 @@ android {
 }
 
 dependencies {
+
     /* Android-PdfMyXml */
     implementation 'com.github.HendrixString:Android-PdfMyXml:1.0.8'
     /* smart-scheduler-android */
     implementation 'io.hypertrack:smart-scheduler:0.0.14'
     /* Google Maps */
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
-    implementation 'com.google.android.gms:play-services-places:16.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     /* Glide */
     implementation 'com.github.bumptech.glide:glide:4.6.1'

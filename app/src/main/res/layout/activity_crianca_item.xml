@@ -91,12 +91,12 @@
                 android:layout_alignRight="@+id/text_sub_titulo_crianca"
                 android:layout_marginTop="10dp"
                 android:background="@color/colorTransparent"
-                android:contentDescription="@null"
                 android:clickable="true"
+                android:contentDescription="@null"
+                android:focusable="true"
                 android:scaleType="fitCenter"
                 android:tint="@color/colorWhite"
-                card_view:srcCompat="@drawable/ic_cartao"
-                android:focusable="true" />
+                app:srcCompat="@drawable/ic_cartao" />
 
             <ImageButton
                 android:id="@+id/btn_imunizacoes"
@@ -104,20 +104,20 @@
                 android:layout_height="29dp"
                 android:layout_alignBottom="@+id/btn_cartao_crianca"
                 android:layout_gravity="right"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
                 android:layout_marginLeft="0dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_toStartOf="@+id/btn_cartao_crianca"
                 android:layout_toLeftOf="@+id/btn_cartao_crianca"
-                android:layout_marginTop="10dp"
                 android:background="@color/colorTransparent"
-                android:contentDescription="@null"
                 android:clickable="true"
+                android:contentDescription="@null"
+                android:focusable="true"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
                 android:scaleType="fitCenter"
                 android:tint="@color/colorWhite"
-                card_view:srcCompat="@drawable/ic_vacina"
-                android:focusable="true" />
+                app:srcCompat="@drawable/ic_vacina" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -125,14 +125,14 @@
                 android:layout_alignBottom="@+id/btn_imunizacoes"
                 android:layout_gravity="right"
                 android:layout_marginLeft="0dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_toStartOf="@+id/btn_imunizacoes"
                 android:layout_toLeftOf="@+id/btn_imunizacoes"
-                android:layout_marginTop="10dp"
                 android:background="@color/colorTransparent"
                 android:contentDescription="@null"
                 android:scaleType="fitCenter"
-                card_view:srcCompat="@drawable/ic_plus" />
+                app:srcCompat="@drawable/ic_plus" />
 
         </RelativeLayout>
 

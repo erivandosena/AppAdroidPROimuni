@@ -158,7 +158,7 @@ public class CartaoActivity extends BaseActivity implements CartaoMvpView {
     @Override
     public void openCartaoListaActivity(String acao) {
         Intent intent = CartaoListaActvity.getStartIntent(CartaoActivity.this);
-        if ("edita".equals(acao))
+        if ("edita".equalsIgnoreCase(acao))
             intent.putExtra("cartaoLista", acao);
         startActivity(intent);
         finish();

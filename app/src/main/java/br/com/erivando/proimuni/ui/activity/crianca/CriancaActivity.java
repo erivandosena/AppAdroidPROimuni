@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,8 +34,6 @@ import br.com.erivando.proimuni.mvp.base.BaseActivity;
 import br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioActivity;
-import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioMvpPresenter;
-import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioMvpView;
 import br.com.erivando.proimuni.util.Uteis;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -206,6 +205,7 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
                 toggleButtonIndigena.setChecked(crianca.isCriaEtnia());
             } else {
                 buttonRemoveCrianca.setVisibility(View.GONE);
+                textViewTituloToobar.setText(getResources().getString(R.string.text_crianca_add));
             }
         } else {
 
@@ -217,6 +217,11 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if (intent != null)
+            Log.e("cartaoLista ", String.valueOf(intent.getStringExtra("cartaoLista")));
+            if("edita".equalsIgnoreCase(intent.getStringExtra("cartaoLista")))
+                openCartaoListaActivity("cartao");
+            else
         if (!listaCriancas.isEmpty())
             openCriancaListaActivity("edita");
         else {

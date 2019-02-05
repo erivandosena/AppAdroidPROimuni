@@ -56,4 +56,19 @@
 
     </android.support.v4.widget.NestedScrollView>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_crianca_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:clickable="true"
+        android:tint="@color/colorWhite"
+        app:backgroundTint="@color/colorAccent"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:layout_anchor="@+id/appBarLayout"
+        app:layout_anchorGravity="bottom|right|end"
+        app:srcCompat="@drawable/ic_add_usuario"
+        android:focusable="true" />
+
 </android.support.design.widget.CoordinatorLayout>

@@ -24,6 +24,8 @@ public interface MainMvpView extends MvpView {
 
     void openCriancaListaActivity(String acao);
 
+    void openSobreActivity();
+
     void updateUserName(String currentUserName);
 
     void updateUserEmail(String currentUserEmail);

@@ -51,12 +51,23 @@ public class VacinaFragmentRVA extends RecyclerView.Adapter<VacinaFragmentRVA.It
 
     @Override
     public void onBindViewHolder(@NonNull final ItemViewHolder holder, int position) {
+        holder.mTextViewNome.setText(mVacinaValues.get(position).getVaciNome());
+        holder.mTextViewDescricao.setText(mVacinaValues.get(position).getVaciDescricao());
+        String rede;
+        if ("Pública".equalsIgnoreCase(mVacinaValues.get(position).getVaciRede()))
+            rede = "Disponível na rede pública e privada";
+        else
+            rede = "Opcional na rede privada";
+        holder.mTextViewRede.setText(rede);
+
         holder.mBoundStringNome = mVacinaValues.get(position).getVaciNome();
         holder.mBoundStringRede = mVacinaValues.get(position).getVaciRede();
         holder.mBoundStringDesc = mVacinaValues.get(position).getVaciDescricao();
         holder.mBoundStringAdmin = mVacinaValues.get(position).getVaciAdministracao();
-        holder.mTextViewNome.setText(mVacinaValues.get(position).getVaciNome());
-        holder.mTextViewDescricao.setText(mVacinaValues.get(position).getVaciDescricao());
+        holder.mBoundStringDoses = mVacinaValues.get(position).getVaciDoses();
+        holder.mBoundStringFaixa = mVacinaValues.get(position).getVaciFaixa();
+        holder.mBoundStringContraindicacoes = mVacinaValues.get(position).getVaciContraindicacoes();
+        holder.mBoundStringFonte = mVacinaValues.get(position).getVaciFonte();
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +78,10 @@ public class VacinaFragmentRVA extends RecyclerView.Adapter<VacinaFragmentRVA.It
                 intent.putExtra(VacinaDetalheActivity.EXTRA_REDE, holder.mBoundStringRede);
                 intent.putExtra(VacinaDetalheActivity.EXTRA_DESC, holder.mBoundStringDesc);
                 intent.putExtra(VacinaDetalheActivity.EXTRA_ADMIN, holder.mBoundStringAdmin);
+                intent.putExtra(VacinaDetalheActivity.EXTRA_DOSES, holder.mBoundStringDoses);
+                intent.putExtra(VacinaDetalheActivity.EXTRA_FAIXA, holder.mBoundStringFaixa);
+                intent.putExtra(VacinaDetalheActivity.EXTRA_CONTRAINDICACOES, holder.mBoundStringContraindicacoes);
+                intent.putExtra(VacinaDetalheActivity.EXTRA_FONTE, holder.mBoundStringFonte);
                 context.startActivity(intent);
             }
         });
@@ -90,6 +105,10 @@ public class VacinaFragmentRVA extends RecyclerView.Adapter<VacinaFragmentRVA.It
         public String mBoundStringRede;
         public String mBoundStringDesc;
         public String mBoundStringAdmin;
+        public String mBoundStringDoses;
+        public String mBoundStringFaixa;
+        public String mBoundStringContraindicacoes;
+        public String mBoundStringFonte;
 
         @BindView(R.id.card_view_vacina)
         public CardView cardViewColorVacina;
@@ -99,6 +118,9 @@ public class VacinaFragmentRVA extends RecyclerView.Adapter<VacinaFragmentRVA.It
 
         @BindView(R.id.descricao_vacina)
         public TextView mTextViewDescricao;
+
+        @BindView(R.id.rede_vacina)
+        public TextView mTextViewRede;
 
         public ItemViewHolder(View itemView) {
             super(itemView);

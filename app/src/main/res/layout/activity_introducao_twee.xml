@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+~ Copyright [2018] [Erivando Sena]
+~
+~ Licenciado sob a Licença Apache, Versão 2.0 (a "Licença");
+~ você não pode usar este arquivo, exceto em conformidade com a Licença.
+~ Você pode obter uma cópia da Licença em
+~
+~ http://www.apache.org/licenses/LICENSE-2.0
+~
+~ A menos que exigido pela lei aplicável ou acordado por escrito, o software
+~ distribuído sob a Licença é distribuído em uma base "COMO ESTÁ",
+~ SEM GARANTIAS OU CONDIÇÕES DE QUALQUER TIPO, expressas ou implícitas.
+~ Veja a Licença para o idioma específico que governa as permissões e
+~ limitações sob a licença.
+-->
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_screen3">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/img_width_height"
+            android:layout_height="@dimen/img_width_height"
+            android:layout_marginLeft="-30dp"
+            android:paddingBottom="25dp"
+        android:tint="@color/colorWhite"
+        android:src="@drawable/ic_arquivo_pdf" />
+
+        <ImageView
+            android:layout_width="@dimen/img_width_height"
+            android:layout_height="@dimen/img_width_height"
+            android:paddingBottom="25dp"
+            android:layout_marginTop="-85dp"
+            android:layout_marginLeft="40dp"
+            android:src="@drawable/ic_local_posto_saude" />
+
+
+        <TextView
+            android:id="@+id/text_titulo_intro_slide_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tit_intro_slide_3"
+            style="@style/TextStyle.TextView.Titulo.Introducao" />
+
+        <TextView
+            android:id="@+id/text_descricao_intro_slide_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tit_intro_slide_3_desc"
+            style="@style/TextStyle.TextView.Descricao.Introducao" />
+
+    </LinearLayout>
+
+</RelativeLayout>

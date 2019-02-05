@@ -1,7 +1,6 @@
 package br.com.erivando.proimuni.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.model.Dose;
 import br.com.erivando.proimuni.database.model.Idade;
 import br.com.erivando.proimuni.database.model.Vacina;
-import br.com.erivando.proimuni.ui.activity.vacina.VacinaDetalheActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmList;
@@ -56,10 +54,10 @@ public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRV
         Idade singleItemIdade = idadeList.get(i);
 
         String rede = new String();
-        if ("Pública".equals(singleItemVacina.getVaciRede()))
-            rede = "Disponível na rede";
+        if ("Pública".equalsIgnoreCase(singleItemVacina.getVaciRede()))
+            rede = "Disponível na rede pública e privada";
         else
-            rede = "Opcional na rede";
+            rede = "Opcional na rede privada";
 
         String genero = new String();
         if("9 a 14 anos".equalsIgnoreCase(singleItemIdade.getIdadDescricao()))
@@ -70,11 +68,12 @@ public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRV
 
         holder.textTituloVacina.setText(singleItemVacina.getVaciNome());
         holder.textTituloDose.setText(singleItemDose.getDoseDescricao());
-        holder.textTituloRede.setText(rede + " " + singleItemVacina.getVaciRede() + ("Pneumocócica 23V".equalsIgnoreCase(singleItemVacina.getVaciNome()) ? "\n(Crianças indígenas)" : "") + ("HPV".equalsIgnoreCase(singleItemVacina.getVaciNome()) ? "\n"+genero : ""));
+        holder.textTituloRede.setText(rede + " " + ("Pneumocócica 23V".equalsIgnoreCase(singleItemVacina.getVaciNome()) ? "\n(Crianças indígenas)" : "") + ("HPV".equalsIgnoreCase(singleItemVacina.getVaciNome()) ? "\n"+genero : ""));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 Context context = v.getContext();
                 Intent intent = new Intent(context, VacinaDetalheActivity.class);
                 intent.putExtra(VacinaDetalheActivity.EXTRA_NOME, vacinaList.get(i).getVaciNome());
@@ -83,6 +82,7 @@ public class CalendarioVacinaRVA extends RecyclerView.Adapter<CalendarioVacinaRV
                 intent.putExtra(VacinaDetalheActivity.EXTRA_ADMIN, vacinaList.get(i).getVaciAdministracao());
                 intent.putExtra("Activity", "Calendário");
                 context.startActivity(intent);
+                */
             }
         });
 

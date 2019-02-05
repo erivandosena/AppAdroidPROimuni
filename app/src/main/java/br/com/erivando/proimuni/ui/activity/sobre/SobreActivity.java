@@ -28,7 +28,7 @@ import static br.com.erivando.proimuni.util.Uteis.resizeCustomizedToobar;
  * E-mail:      erivandoramos@bol.com.br
  */
 
-public class Sobre extends BaseActivity implements SobreMvpView {
+public class SobreActivity extends BaseActivity implements SobreMvpView {
 
     @Inject
     SobreMvpPresenter<SobreMvpView> presenter;
@@ -40,7 +40,7 @@ public class Sobre extends BaseActivity implements SobreMvpView {
     LinearLayout linearLayoutToobar;
 
     public static Intent getStartIntent(Context context) {
-        Intent intent = new Intent(context, Sobre.class);
+        Intent intent = new Intent(context, SobreActivity.class);
         return intent;
     }
 

@@ -22,6 +22,7 @@ import javax.inject.Inject;
 
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
+import br.com.erivando.proimuni.ui.activity.introducao.IntroducaoActivity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioActivity;
 import butterknife.BindView;
@@ -126,6 +127,15 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.O_MR1)
             showLoading();
         Intent intent = MainActivity.getStartIntent(LoginActivity.this);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onOpenIntroducaoActivity() {
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.O_MR1)
+            showLoading();
+        Intent intent = IntroducaoActivity.getStartIntent(LoginActivity.this);
         startActivity(intent);
         finish();
     }

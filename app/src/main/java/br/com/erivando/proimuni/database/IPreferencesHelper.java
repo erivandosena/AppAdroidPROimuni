@@ -46,4 +46,8 @@ public interface IPreferencesHelper {
 
     void setRedeVacinas(boolean valor);
 
+    void setFirstLaunch(boolean isFirstTime);
+
+    boolean isFirstLaunch();
+
 }

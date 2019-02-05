@@ -26,12 +26,12 @@
     <string name="menu_vacina">Vacinas</string>
     <string name="menu_calendario">Calendário</string>
     <string name="menu_posto">Postos</string>
-    <string name="menu_curiosidade">Curiosidades</string>
+    <string name="menu_curiosidade">Perguntas frequentes</string>
     <string name="menu_backup_copia">Salvar dados</string>
     <string name="menu_backup_restaura">Recuperar dados</string>
     <string name="menu_config">Configurações</string>
-    <string name="menu_compartilhar">Compartilhar</string>
-    <string name="menu_avaliacao">Avaliar</string>
+    <string name="menu_compartilhar">Compartilhar App</string>
+    <string name="menu_avaliacao">Avaliar App</string>
     <string name="menu_logout">Sair</string>
 
     <!-- Menus Toolbar. -->
@@ -106,13 +106,13 @@
     <string name="perfil_nome" />
     <string name="perfil_email" />
 
-    <!-- Sobre. -->
-    <string name="text_sobre_titulo">Sobre</string>
+    <!-- SobreActivity. -->
+    <string name="text_sobre_titulo">Sobre o App</string>
     <string name="proj_titulo">Projeto</string>
     <string name="proj_info">O PROIMUNI é produto da dissertação de mestrado do Programa de Pós-graduação em Enfermagem da Universidade Federal do Ceará. \nO objetivo do app é o gerenciamento de vacinas infantis oferecidas na rede pública e privada. \nO app permite gerenciar mais de um cartão, incluir fotos de perfil, registrar as doses das vacinas, receber notificações com lembretes das datas e doses,  ter acesso a informações detalhadas de cada vacina, exportar a carteira de vacinação para PDF e compartilhar seus registros. \nO PROIMUNI disponibiza a função de geolocalizacao para pesquisa de unidades de saúde que ofereçam o serviço de vacinação. \nMatenha seu calendário vacinal em dia. Comece a usufruir do PROIMUNI!</string>
     <string name="tecn_titulo">Tecnologia</string>
     <string name="tecn_info">Desenvolvido em plataforma nativa Android, compatível com dispositivos que utilizam versão 4.0.3(API 15) a versão 8.1.0(API 27). Utiliza linguagem de programação Java 8. Implementa arquitetura MVP na codificação das regras de negócio, aplica frameworks Dagger 2 para injeção de dependência e Realm 3 para persistência dos dados.</string>
-    <string name="cont_titulo">Contato</string>
+    <string name="cont_titulo">Contato ou Suporte técnico</string>
     <string name="cont_info">proimuni@gmail.com</string>
     <string name="auto_titulo">Desenvolvedor</string>
     <string name="auto_info">Erivando Sena \nerivandoramos@bol.com.br</string>
@@ -120,8 +120,8 @@
     <string name="vers_info">1.0.0</string>
 
     <!--  facebook Login. -->
-    <string name="facebook_app_id">1858097654229517</string>
-    <string name="facebook_login_protocol_scheme">fb1858097654229517</string>
+    <string name="facebook_app_id">955393904655704</string>
+    <string name="facebook_login_protocol_scheme">fb955393904655704</string>
     <string name="facebook_cancel_login">A operação foi cancelada</string>
     <string name="facebook_error_fabebook_login">Ocorreu um erro ao entrar</string>
     <string name="firebase_logout">Fechar Sessão</string>
@@ -138,7 +138,7 @@
     <string name="envio_senha_email">Verifique sua caixa de entrada.</string>
     <string name="envio_senha">Senha enviada para o e-mail:</string>
     <string name="resultado_google_oauth">Nenhum resultado retornado.</string>
-    <string name="texto_envio_senha">Segue a senha solicitada:</string>
+    <string name="texto_envio_senha">Segue senha solicitada:</string>
     <string name="texto_envio_anexo">Olá! Segue anexo, cópia dos dados do aplicativo enviado por:</string>
     <string name="texto_email_senha">Olá!</string>
     <string name="texto_email_assunto">Senha de usuário</string>
@@ -155,6 +155,7 @@
     <string name="text_sexo">Gênero</string>
     <string name="erro_text_data">Informe uma data válida</string>
     <string name="text_crianca_titulo">Perfil da criança</string>
+    <string name="text_crianca_add">Adicionar criança</string>
     <string name="text_cartao_titulo">Cartão de vacina</string>
     <string name="text_valida_sexo">Informe o sexo</string>
     <string name="text_valida_crianca">Informe uma criança</string>
@@ -181,7 +182,11 @@
     <string name="title_tab2">Rede Privada</string>
     <string name="text_vacinas_titulo">Vacinas</string>
     <string name="vacina_descricao">Descrição</string>
-    <string name="vacina_administracao">Administração</string>
+    <string name="vacina_administracao">Local de administração</string>
+    <string name="vacina_doses">Doses</string>
+    <string name="vacina_faixa">Faixa etária</string>
+    <string name="vacina_contraindicacoes">Contraindicacões</string>
+    <string name="vacina_fonte">Fonte</string>
 
     <!-- Imunização -->
     <string name="text_nome_agente">Nome do Profissional</string>
@@ -192,8 +197,8 @@
     <string name="hint_lote_vacina">Informe número de lote da vacina</string>
     <string name="text_data_imunizacao">Data</string>
     <string name="hint_data_imunizacao">Informe data da imunização</string>
-    <string name="text_imunizacao_titulo">Imunização</string>
-    <string name="text_imunizacoes_titulo">Imunizações</string>
+    <string name="text_imunizacao_titulo">Dose de vacina</string>
+    <string name="text_imunizacoes_titulo">Doses administradas</string>
     <string name="btn_imunizar">Cadastrar</string>
     <string name="texto_aviso_removendo_imunizacao">\nRemovendo imunizações do cartão…\n</string>
     <string name="texto_aviso_remove_imunizacao">\nRemovendo imunização…\n</string>
@@ -234,5 +239,51 @@
     <string name="text_cartao_pdf_func">Func.:</string>
     <string name="text_cartao_pdf_unid">Unid.:</string>
     <string name="text_crianca_etnia">Criança indígena</string>
+
+    <!-- Slide introdução -->
+
+    <string name="tit_intro_next">PRÓXIMO</string>
+    <string name="tit_intro_skip">INGNORAR</string>
+    <string name="tit_intro_start">FINALIZAR</string>
+
+    <string name="tit_intro_slide_1">Bem vindo \nao</string>
+    <string name="tit_intro_slide_1_desc">Agora ficou mais fácil de proteger quem você ama!\nCadastre-se e comece a gerenciar o cartão vacinal de suas crianças.</string>
+
+    <string name="tit_intro_slide_2">Informação \ne Notificação</string>
+    <string name="tit_intro_slide_2_desc">fornece informações sobre as vacinas públicas e privadas e envia notificações das próximas doses e campanhas de vacinação!</string>
+
+    <string name="tit_intro_slide_3">PDF e Geolocalização</string>
+    <string name="tit_intro_slide_3_desc">gera um cartão vacinal digital em PDF e permite compartilhá-lo nas redes sociais e por email.\nUtilize a função de geolocalização e encontre unidades de saúde mais próximas de você!</string>
+
+    <!-- Perguntas / respostas -->
+    <string name="tit_p1">Quais as diferenças das vacinas da rede privada para as da rede pública?</string>
+    <string name="desc_r_p1">Ambas são seguras e protegem as crianças contra as doenças imunopreveníveis. Entretanto, as vacinas da rede privada têm alguns benefícios, como por exemplo, a diminuição das chances de ocorrência dos eventos adversos e a combinação de mais tipos de vacinas em uma única injeção. Além disso, algumas vacinas da rede privada protegem contra outros subtipos da doença, como é o caso da vacina da Meningite ACWY, que protege contra 4 tipos de meningites.</string>
+
+    <string name="tit_p2">Há 6 meses meu/minha filho(a) tomou a vacina BCG porém, a cicatriz vacinal não apareceu. O que devo fazer?</string>
+    <string name="desc_r_p2">Crianças que não apresentam a cicatriz vacinal da BCG, devem ser revacinadas apenas uma vez. A presença da cicatriz vacinal é considerada como dose para efeito de registro, independentemente do tempo transcorrido desde a vacinação até o aparecimento da cicatriz. </string>
+
+    <string name="tit_p3">É necessário dar antitérmico à criança antes da vacinação?</string>
+    <string name="desc_r_p3">Não. Antitérmicos podem interferir na eficácia da vacina, tanto antes como depois da administração da mesma. Entretanto, se a criança apresentar febre após a vacinação, os pais devem  oferecer o antitérmico, de acordo com a prescrição médica. </string>
+
+    <string name="tit_p4">É normal apresentar febre após a administração de uma vacina?</string>
+    <string name="desc_r_p4">Sim. A febre é uma reação bastante comum a algumas vacinas, porém, os pais não precisam se preocupar, pois é uma reação que costuma ser leve e passageira. </string>
+
+    <string name="tit_p5">Meu/minha filho(a) teve febre após a aplicação da vacina, ele(a) pode receber a dose subsequente?</string>
+    <string name="desc_r_p5">Sim! A febre não se constitui como uma contraindicação à vacina, mesmo se esta estiver acima de 38,5 °C.</string>
+
+    <string name="tit_p6">Quais as contraindicações comuns a todas as vacinas?</string>
+    <string name="desc_r_p6">Reação anafilática confirmada após o recebimento de dose anterior e história de hipersensibilidade a qualquer componente dos imunobiológicos. </string>
+
+    <string name="tit_p7">O que é reação anafilática a vacina?</string>
+    <string name="desc_r_p7">É uma reação alérgica ou de hipersensibilidade grave que envolve dois ou mais sítios/sistemas. Em geral, as reações ocorremnas primeiras duas horas após avacinação, sendo mais frequentes nos primeiros 30 minutos.</string>
+
+    <string name="tit_p8">Como saber que meu filho teve uma reação anafilática à vacina?</string>
+    <string name="desc_r_p8">Se a criança apresentar urticária, sibilos, oclusão da glote, edema de lábios, podendo evoluir com hipotensão e choque anafilático são reações indicativas de anafilaxia. Nesses casos,os pais devem levá-la imediatamente ao serviço de saúde mais próximo e as próximas doses estão contraindicadas. Em geral, a reação anafilática ocorre na primeira vez em que a pessoa entra em contato com a vacina em questão.</string>
+
+    <string name="tit_p9">As vacinas podem causar a Síndrome do Espectro Autista? </string>
+    <string name="desc_r_p9">Não. As vacinas não causam autismo. Vários estudos já comprovaram que isso não é verdade. Um deles, publicado na revista JAMA, foi realizado entre 2001 e 2012 com mais de 95 mil crianças mostrou que não há relação entre o autismo e a vacinação. A vacinação promove proteção à saúde das crianças, por isso é importante que os pais e/ou responsáveis estejam informados sobre o assunto e busquem ajuda, sempre que necessário, ao profissional de saúde para sanar suas dúvidas.</string>
+
+    <string name="perguntas_respostas_fonte">Ministério da Saúde e Sociedade Brasileira de Imunizações.</string>
+
 
 </resources>

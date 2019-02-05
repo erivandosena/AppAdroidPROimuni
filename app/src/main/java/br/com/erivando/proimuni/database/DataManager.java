@@ -592,4 +592,14 @@ public class DataManager implements IDataManager {
         preferencesHelper.setRedeVacinas(valor);
     }
 
+    @Override
+    public void setFirstLaunch(boolean isFirst) {
+        preferencesHelper.setFirstLaunch(isFirst);
+    }
+
+    @Override
+    public boolean isFirstLaunch() {
+        return preferencesHelper.isFirstLaunch();
+    }
+
 }

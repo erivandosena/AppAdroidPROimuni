@@ -14,10 +14,11 @@ import br.com.erivando.proimuni.ui.activity.curiosidade.CuriosidadeActivity;
 import br.com.erivando.proimuni.ui.activity.dose.DoseActivity;
 import br.com.erivando.proimuni.ui.activity.idade.IdadeActivity;
 import br.com.erivando.proimuni.ui.activity.imunizacao.ImunizacaoActivity;
+import br.com.erivando.proimuni.ui.activity.introducao.IntroducaoActivity;
 import br.com.erivando.proimuni.ui.activity.login.LoginActivity;
 import br.com.erivando.proimuni.ui.activity.main.MainActivity;
 import br.com.erivando.proimuni.ui.activity.mapa.MapaActivity;
-import br.com.erivando.proimuni.ui.activity.sobre.Sobre;
+import br.com.erivando.proimuni.ui.activity.sobre.SobreActivity;
 import br.com.erivando.proimuni.ui.activity.splash.SplashActivity;
 import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioActivity;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaActivity;
@@ -46,7 +47,7 @@ public interface ActivityComponent {
 
     void inject(CadastroUsuarioActivity activityInject);
 
-    void inject(Sobre fragmentInject);
+    void inject(SobreActivity fragmentInject);
 
     void inject(CriancaActivity activityInject);
 
@@ -81,4 +82,6 @@ public interface ActivityComponent {
     void inject(CriancaListaImunizacao activityInject);
 
     void inject(CuriosidadeActivity activityInject);
+
+    void inject(IntroducaoActivity activityInject);
 }

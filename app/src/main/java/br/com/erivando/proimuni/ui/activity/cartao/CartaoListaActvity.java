@@ -3,6 +3,7 @@ package br.com.erivando.proimuni.ui.activity.cartao;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,8 +17,8 @@ import javax.inject.Inject;
 
 import br.com.erivando.proimuni.R;
 import br.com.erivando.proimuni.database.model.Cartao;
-import br.com.erivando.proimuni.database.model.Crianca;
 import br.com.erivando.proimuni.mvp.base.BaseActivity;
+import br.com.erivando.proimuni.ui.activity.crianca.CriancaActivity;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaListaActvity;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.crianca.CriancaMvpView;
@@ -44,6 +45,9 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
 
     @Inject
     CriancaMvpPresenter<CriancaMvpView> presenterCrianca;
+
+    @BindView(R.id.fab_crianca_add)
+    FloatingActionButton fabFloatingActionButton;
 
     @BindView(R.id.cartao_recyclerView)
     RecyclerView cartao_recycler_view;
@@ -88,6 +92,13 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
         resizeCustomizedToobar(linearLayoutToobar);
     }
 
+    @OnClick(R.id.fab_crianca_add)
+    public void onClick(View view) {
+        if (view == fabFloatingActionButton) {
+            openCriancaActivity();
+        }
+    }
+
     @OnClick(R.id.btn_nav_voltar)
     public void onClickVoltar(View v) {
         onBackPressed();
@@ -117,6 +128,13 @@ public class CartaoListaActvity extends BaseActivity implements CartaoMvpView {
 
     public void openCriancaListaActivity() {
         startActivity(CriancaListaActvity.getStartIntent(this));
+        finish();
+    }
+
+    public void openCriancaActivity() {
+        Intent intent = CriancaActivity.getStartIntent(CartaoListaActvity.this);
+        intent.putExtra("cartaoLista", "edita");
+        startActivity(intent);
         finish();
     }
 

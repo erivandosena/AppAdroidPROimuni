@@ -17,6 +17,8 @@ public interface LoginMvpView extends MvpView {
 
     void openMainActivity();
 
+    void onOpenIntroducaoActivity();
+
     void getStartActivityForResult(Intent intent, int i);
 
     Activity getContextActivity();

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+~ Copyright [2018] [Erivando Sena]
+~
+~ Licenciado sob a Licença Apache, Versão 2.0 (a "Licença");
+~ você não pode usar este arquivo, exceto em conformidade com a Licença.
+~ Você pode obter uma cópia da Licença em
+~
+~ http://www.apache.org/licenses/LICENSE-2.0
+~
+~ A menos que exigido pela lei aplicável ou acordado por escrito, o software
+~ distribuído sob a Licença é distribuído em uma base "COMO ESTÁ",
+~ SEM GARANTIAS OU CONDIÇÕES DE QUALQUER TIPO, expressas ou implícitas.
+~ Veja a Licença para o idioma específico que governa as permissões e
+~ limitações sob a licença.
+-->
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_screen1">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25dp"
+            android:src="@drawable/ic_launcher_splash" />
+
+        <TextView
+            android:id="@+id/text_titulo_intro_slide_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tit_intro_slide_1"
+            style="@style/TextStyle.TextView.Titulo.Introducao" />
+
+        <TextView
+            android:id="@+id/text_descricao_intro_slide_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextStyle.TextView.Descricao.Introducao"
+            android:text="@string/tit_intro_slide_1_desc" />
+
+    </LinearLayout>
+</RelativeLayout>
