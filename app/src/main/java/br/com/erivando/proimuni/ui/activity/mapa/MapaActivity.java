@@ -165,8 +165,8 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
             googlePlacesUrl.append("&keyword=" + Uri.encode(pesquisa));
             googlePlacesUrl.append("&fields=photos,formatted_address,name,opening_hours,rating");
             googlePlacesUrl.append("&key=" + GOOGLE_API_KEY);
-            //googlePlacesUrl.append("&hasNextPage=true");
             //googlePlacesUrl.append("&nextPage()=true");
+            //googlePlacesUrl.append("&hasNextPage=true");
 
             GooglePlacesReadTask googlePlacesReadTask = new GooglePlacesReadTask();
             Object[] toPass = new Object[2];
@@ -188,14 +188,14 @@ public class MapaActivity extends BaseActivity implements MapaMvpView, OnMapRead
             googlePlacesUrl.append("&keyword=" + Uri.encode(pesquisa));
             googlePlacesUrl.append("&fields=photos,formatted_address,name,opening_hours,rating");
             googlePlacesUrl.append("&key=" + GOOGLE_API_KEY);
-            //googlePlacesUrl.append("&hasNextPage=true");
             //googlePlacesUrl.append("&nextPage()=true");
+            //googlePlacesUrl.append("&hasNextPage=true");
 
             GooglePlacesReadTask googlePlacesReadTask = new GooglePlacesReadTask();
             Object[] toPass = new Object[2];
             toPass[0] = mGoogleMap;
             toPass[1] = googlePlacesUrl.toString();
-            Log.e("toPass[1]", googlePlacesUrl.toString());
+            //Log.e("toPass[1]", googlePlacesUrl.toString());
             googlePlacesReadTask.execute(toPass);
         }
 

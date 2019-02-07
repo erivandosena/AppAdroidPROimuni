@@ -463,7 +463,7 @@ public class VacinaRVA extends RecyclerView.Adapter<VacinaRVA.SingleItemRowHolde
         int vacinaVermelhoVencido = mContext.getResources().getColor((R.color.colorRedGoogleLight));
 
         cardView.setCardBackgroundColor(vacinaCinzaAvencer);
-        holder.textStatus.setText("Aguardando prazo");
+        holder.textStatus.setText("Aguardando prazo para aplicação");
 
         if (mesesIdadeCrianca == null && semanas == null) {
             if (!imunizacaoList.isEmpty()) {

@@ -22,8 +22,7 @@
 
 #-keepattributes *Annotation*
 #-keepclassmembers class br.com.erivando.proimuni.** { *; }
--keepattributes Signature
 -keepattributes *Annotation*
--keepattributes AnnotationDefault
--keepattributes Exceptions, InnerClasses, MethodParameters, Signature, EnclosingMethod, RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+-keepclassmembers class * {@com.google.api.client.util.Key <fields>;}
+-keepattributes Signature, AnnotationDefault, RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations, InnerClasses, MethodParameters, EnclosingMethod, Exceptions
 -ignorewarnings

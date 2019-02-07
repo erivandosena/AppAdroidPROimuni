@@ -165,31 +165,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
     }
 
-    public Usuario onObtemLocalLogin(String login, String senha) {
-        //validando login do usuário
-        if (login == null || login.isEmpty()) {
-            getMvpView().onError(R.string.text_valida_login);
-            return null;
-        }
-        if (senha == null || senha.isEmpty()) {
-            getMvpView().onError(R.string.text_valida_senha);
-            return null;
-        }
-        getMvpView().showLoading();
-
-        try {
-            if (getIDataManager().validaLoginUsuario(login, senha)) {
-                usuario = getIDataManager().obtemUsuario(new String[]{"usuaLogin", login, "usuaSenha", senha});
-                return usuario;
-            } else {
-                getMvpView().onError(R.string.text_valida_usuario);
-                return null;
-            }
-        } finally {
-            getMvpView().hideLoading();
-        }
-    }
-
     @Override
     public void onCreateFacebookLogin() {
         callbackManager = CallbackManager.Factory.create();
@@ -205,7 +180,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         isLoggedIn = accessToken != null && !accessToken.isExpired();
 
         if (isLoggedIn) {
-           // getMvpView().openMainActivity();
+            // getMvpView().openMainActivity();
             onOpenMainActivity();
         } else {
             LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -265,7 +240,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
                 @Override
                 public void onCancel() {
-                    Toast.makeText(AppAplicacao.contextApp, R.string.facebook_cancel_login, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AppAplicacao.contextApp, R.string.api_erro_login, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -391,7 +366,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             // O código de status ApiException indica o motivo detalhado da falha.
             // Por favor, consulte a referência da classe GoogleSignInStatusCodes para
             // mais informações. e.getStatusCode()
-            Toast.makeText(AppAplicacao.contextApp, R.string.google_cancel_login, Toast.LENGTH_SHORT).show();
+            Toast.makeText(AppAplicacao.contextApp, R.string.api_erro_login, Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } finally {
             // getMvpView().hideLoading();
@@ -425,16 +400,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                 return;
             }
             getResultsFromApi(view);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void enviaBackupPorEmail(View view) {
-        try {
-            getResultsFromApi(view);
-            Log.e("enviaBackupPorEmail", String.valueOf(view));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -577,7 +542,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             String subject = AppAplicacao.contextApp.getResources().getString(R.string.texto_email_assunto) + " " + getMvpView().getContextActivity().getString(R.string.app_name);
             String body = AppAplicacao.contextApp.getResources().getString(R.string.texto_email_senha) + " " + (usuario.getUsuaNome() != null ? usuario.getUsuaNome() : getCapitalizeNome(usuario.getUsuaLogin())) + "\n\n" + AppAplicacao.contextApp.getResources().getString(R.string.texto_envio_senha) + " " + usuario.getUsuaSenha() + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + AppAplicacao.contextApp.getResources().getString(R.string.app_name) + "\n\n";
             MimeMessage mimeMessage;
-            String response = "";
+            String response = null;
             try {
                 mimeMessage = createEmail(to, from, subject, body, null);
                 response = sendMessage(service, user, mimeMessage);
@@ -587,69 +552,36 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             return response;
         }
 
-        private String getDataFromApi(String attach, String usuario, String email) throws java.io.IOException {
-            // Obtendo valores para, email, assunto, mensagem e anexo
-            String user = "me";
-            String from = googleAccountCredential.getSelectedAccountName();
-            String subject = getMvpView().getContextActivity().getResources().getString(R.string.texto_email_anexo_backup) + " " + getMvpView().getContextActivity().getString(R.string.app_name);
-            String body = getMvpView().getContextActivity().getResources().getString(R.string.texto_email_senha) + " " + getCapitalizeNome(usuario) + "\n\n" + getMvpView().getContextActivity().getResources().getString(R.string.texto_envio_anexo) + "\n\n© " + Calendar.getInstance().get(Calendar.YEAR) + " " + getMvpView().getContextActivity().getResources().getString(R.string.app_name) + "\n\n";
-            File anexo = new File(attach);
-            MimeMessage mimeMessage;
-            String response = "";
-            try {
-                mimeMessage = createEmail(email, from, subject, body, anexo);
-                response = sendMessage(service, user, mimeMessage);
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
-            return response;
-        }
-
         // Método para criar e-mails Params
         private MimeMessage createEmail(String to, String from, String subject, String bodyText, File anexo) throws MessagingException {
+
             Properties props = new Properties();
             Session session = Session.getDefaultInstance(props, null);
-
             MimeMessage email = new MimeMessage(session);
-            InternetAddress tAddress = new InternetAddress(to);
-            InternetAddress fAddress = new InternetAddress(from);
-
-            email.setFrom(fAddress);
-            email.addRecipient(javax.mail.Message.RecipientType.TO, tAddress);
+            email.setFrom(new InternetAddress(from));
+            email.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(to));
             email.setSubject(subject);
 
-            // Crie o objeto Multipart e adicione objetos MimeBodyPart a este objeto
-            Multipart multipart = new MimeMultipart();
-
-            BodyPart textBody = new MimeBodyPart();
-            textBody.setText(bodyText);
-            multipart.addBodyPart(textBody);
-
             if (anexo != null) {
+                BodyPart mimeBodyPart = new MimeBodyPart();
+                mimeBodyPart.setContent(bodyText, "text/plain");
+                Multipart multipart = new MimeMultipart();
+                multipart.addBodyPart(mimeBodyPart);
+
                 DataSource ds = new FileDataSource(anexo) {
                     public String getContentType() {
                         return "application/octet-stream";
                     }
                 };
-                BodyPart mbp = new MimeBodyPart();
-                mbp.setDataHandler(new DataHandler(ds));
-                mbp.setFileName(anexo.getName());
-                mbp.setDisposition(Part.ATTACHMENT);
-                multipart.addBodyPart(mbp);
+                mimeBodyPart.setDataHandler(new DataHandler(ds));
+                mimeBodyPart.setFileName(anexo.getName());
+                mimeBodyPart.setDisposition(Part.ATTACHMENT);
+                email.setContent(multipart);
+            } else {
+                email.setText(bodyText);
             }
 
-            //Definir o objeto multipart para o objeto de mensagem
-            email.setContent(multipart);
-
             return email;
-        }
-
-        // Método para envio do e-mail
-        private String sendMessage(Gmail service, String userId, MimeMessage email) throws MessagingException, IOException {
-            Message message = createMessageWithEmail(email);
-            // Método oficial do GMail para enviar e-mail com OAuth 2.0
-            message = service.users().messages().send(userId, message).execute();
-            return message.getId();
         }
 
         private Message createMessageWithEmail(MimeMessage email) throws MessagingException, IOException {
@@ -659,6 +591,14 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
             Message message = new Message();
             message.setRaw(encodedEmail);
             return message;
+        }
+
+        // Método para envio do e-mail
+        private String sendMessage(Gmail service, String userId, MimeMessage email) throws MessagingException, IOException {
+            Message message = createMessageWithEmail(email);
+            // Método oficial do GMail para enviar e-mail com OAuth 2.0
+            message = service.users().messages().send(userId, message).execute();
+            return message.getId();
         }
 
         @Override
@@ -699,7 +639,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                 } else if (lastError instanceof UserRecoverableAuthIOException) {
                     getMvpView().getStartActivityForResult(((UserRecoverableAuthIOException) lastError).getIntent(), REQUEST_AUTHORIZATION);
                 } else {
-                    showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_google_oauth) + "\n" + lastError);
+                    showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_google_oauth)+"\n"+lastError.getMessage());
                 }
             } else {
                 showMessage(view, AppAplicacao.contextApp.getResources().getString(R.string.erro_request));

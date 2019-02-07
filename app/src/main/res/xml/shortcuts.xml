@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+~ Copyright [2018] [Erivando Sena]
+~
+~ Licenciado sob a Licença Apache, Versão 2.0 (a "Licença");
+~ você não pode usar este arquivo, exceto em conformidade com a Licença.
+~ Você pode obter uma cópia da Licença em
+~
+~ http://www.apache.org/licenses/LICENSE-2.0
+~
+~ A menos que exigido pela lei aplicável ou acordado por escrito, o software
+~ distribuído sob a Licença é distribuído em uma base "COMO ESTÁ",
+~ SEM GARANTIAS OU CONDIÇÕES DE QUALQUER TIPO, expressas ou implícitas.
+~ Veja a Licença para o idioma específico que governa as permissões e
+~ limitações sob a licença.
+-->
+
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_cartao"
+        android:shortcutDisabledMessage="@string/menu_cartao"
+        android:shortcutId="cartao"
+        android:shortcutLongLabel="@string/menu_cartao"
+        android:shortcutShortLabel="@string/menu_shortcut_cartao">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="br.com.erivando.proimuni.ui.activity.cartao.CartaoListaActvity"
+            android:targetPackage="br.com.erivando.proimuni" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_vacina"
+        android:shortcutDisabledMessage="@string/menu_vacina"
+        android:shortcutId="vacina"
+        android:shortcutLongLabel="@string/menu_vacina"
+        android:shortcutShortLabel="@string/menu_shortcut_vacina">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="br.com.erivando.proimuni.ui.activity.vacina.VacinaActivity"
+            android:targetPackage="br.com.erivando.proimuni" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_calendario"
+        android:shortcutDisabledMessage="@string/menu_calendario"
+        android:shortcutId="calendario"
+        android:shortcutLongLabel="@string/menu_calendario"
+        android:shortcutShortLabel="@string/menu_shortcut_calendario">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="br.com.erivando.proimuni.ui.activity.calendario.CalendarioActivity"
+            android:targetPackage="br.com.erivando.proimuni" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_posto"
+        android:shortcutDisabledMessage="@string/menu_posto"
+        android:shortcutId="posto"
+        android:shortcutLongLabel="@string/menu_posto"
+        android:shortcutShortLabel="@string/menu_shortcut_posto">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="br.com.erivando.proimuni.ui.activity.mapa.MapaActivity"
+            android:targetPackage="br.com.erivando.proimuni" />
+    </shortcut>
+</shortcuts>

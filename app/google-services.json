@@ -15,15 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "914055822445-5av0qsd0mcdrgnqe1fpc6d0k8djf5el9.apps.googleusercontent.com",
+          "client_id": "914055822445-v4qgl04ucqae98t0m5j5qb66lug4miuk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "br.com.erivando.proimuni",
-            "certificate_hash": "4b1640e9e5a5ca6f108694e19672e41549cd2b3f"
+            "certificate_hash": "e53f6a455bb0961e7a50321aa30d67b8e47213ca"
           }
         },
         {
-          "client_id": "914055822445-q005214i5qk8vcfjkk7gd3ffgcilg7q1.apps.googleusercontent.com",
+          "client_id": "914055822445-17fkqrtnm67bsng3qrsscjopdqqq3os1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "914055822445-q005214i5qk8vcfjkk7gd3ffgcilg7q1.apps.googleusercontent.com",
+              "client_id": "914055822445-17fkqrtnm67bsng3qrsscjopdqqq3os1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

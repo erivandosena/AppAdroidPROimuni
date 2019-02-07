@@ -49,8 +49,6 @@ public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<
 
     void enviaSenhaPorEmail(View view, String login);
 
-    void enviaBackupPorEmail(View view);
-
     void getRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults);
 
     void chooseAccount(View view);

@@ -18,8 +18,7 @@
 
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -59,7 +58,10 @@
                     android:padding="5dp"
                     android:textColor="@color/colorBlack"
 
-                    android:theme="@style/Base.TextAppearance.AppCompat.Title" />
+                    android:theme="@style/Base.TextAppearance.AppCompat.Title"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="50dp" tools:targetApi="lollipop" />
 
                 <ImageButton
                     android:id="@+id/btn_pesquisa_posto"
@@ -73,7 +75,9 @@
                     android:background="@color/colorWhite"
                     android:contentDescription="@null"
                     android:tint="@color/colorGrayLight"
-                    app:srcCompat="@drawable/ic_pesquisa" />
+                    app:srcCompat="@drawable/ic_pesquisa"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp" />
 
             </RelativeLayout>
         </android.support.design.widget.AppBarLayout>
@@ -91,8 +95,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:context=".ui.activity.mapa.MapaActivity" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
 

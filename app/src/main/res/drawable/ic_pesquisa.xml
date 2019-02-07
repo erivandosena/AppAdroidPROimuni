@@ -1,3 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+~ Copyright [2018] [Erivando Sena]
+~
+~ Licenciado sob a Licença Apache, Versão 2.0 (a "Licença");
+~ você não pode usar este arquivo, exceto em conformidade com a Licença.
+~ Você pode obter uma cópia da Licença em
+~
+~ http://www.apache.org/licenses/LICENSE-2.0
+~
+~ A menos que exigido pela lei aplicável ou acordado por escrito, o software
+~ distribuído sob a Licença é distribuído em uma base "COMO ESTÁ",
+~ SEM GARANTIAS OU CONDIÇÕES DE QUALQUER TIPO, expressas ou implícitas.
+~ Veja a Licença para o idioma específico que governa as permissões e
+~ limitações sob a licença.
+-->
+
 <vector android:height="24dp" android:viewportHeight="21.782"
     android:viewportWidth="22" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
     <path android:fillColor="#fff" android:pathData="M8.679,17.431A8.722,8.722 0,1 1,14.868 2.538h0a8.755,8.755 0,0 1,0 12.33A8.878,8.878 0,0 1,8.679 17.431ZM8.679,2.442A6.34,6.34 0,0 0,4.231 4.279a6.291,6.291 0,1 0,8.9 0h0A6.425,6.425 0,0 0,8.679 2.442Z"/>
