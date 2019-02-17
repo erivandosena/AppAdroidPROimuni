@@ -39,11 +39,6 @@ public abstract class BaseViewExtra extends ViewGroup implements MvpViewExtra {
     }
 
     @Override
-    public void attachParentMvpView(MvpView mvpView) {
-        parentMvpView = mvpView;
-    }
-
-    @Override
     public void showLoading() {
         if (parentMvpView != null) {
             parentMvpView.showLoading();
@@ -104,8 +99,5 @@ public abstract class BaseViewExtra extends ViewGroup implements MvpViewExtra {
         }
     }
 
-    protected abstract void bindViewsAndSetOnClickListeners();
-
     protected abstract void setUp();
-
 }

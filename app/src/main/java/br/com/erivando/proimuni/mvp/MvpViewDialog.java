@@ -10,6 +10,4 @@ package br.com.erivando.proimuni.mvp;
 
 public interface MvpViewDialog extends MvpView {
 
-    void dismissDialog(String tag);
-
 }

@@ -13,7 +13,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -83,8 +82,6 @@ import br.com.erivando.proimuni.database.model.Usuario;
 import br.com.erivando.proimuni.mvp.base.BasePresenter;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import br.com.erivando.proimuni.util.InternetDetector;
-import br.com.erivando.proimuni.util.rx.SchedulerProvider;
-import io.reactivex.disposables.CompositeDisposable;
 
 import static android.app.Activity.RESULT_OK;
 import static br.com.erivando.proimuni.util.Uteis.base64ParaBitmap;
@@ -126,8 +123,8 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
     private AlertDialog.Builder alertDialogBuilder;
 
     @Inject
-    public LoginPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
-        super(iDataManager, schedulerProvider, compositeDisposable);
+    public LoginPresenter(IDataManager iDataManager) {
+        super(iDataManager);
     }
 
     @Override

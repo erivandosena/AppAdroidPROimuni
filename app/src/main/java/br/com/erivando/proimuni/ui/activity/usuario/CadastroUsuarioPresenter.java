@@ -28,8 +28,6 @@ import br.com.erivando.proimuni.mvp.base.BasePresenter;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import br.com.erivando.proimuni.util.CommonUtils;
 import br.com.erivando.proimuni.util.ConverteBase64Task;
-import br.com.erivando.proimuni.util.rx.SchedulerProvider;
-import io.reactivex.disposables.CompositeDisposable;
 
 import static android.app.Activity.RESULT_OK;
 import static br.com.erivando.proimuni.util.Uteis.REQUEST_IMG_CAMERA;
@@ -51,8 +49,8 @@ public class CadastroUsuarioPresenter<V extends CadastroUsuarioMvpView> extends 
     private File arquivoImagem;
 
     @Inject
-    public CadastroUsuarioPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
-        super(iDataManager, schedulerProvider, compositeDisposable);
+    public CadastroUsuarioPresenter(IDataManager iDataManager) {
+        super(iDataManager);
     }
 
     @Override

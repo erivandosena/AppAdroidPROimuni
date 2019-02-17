@@ -11,8 +11,6 @@ import javax.inject.Inject;
 import br.com.erivando.proimuni.broadcast.Notificacao;
 import br.com.erivando.proimuni.database.IDataManager;
 import br.com.erivando.proimuni.mvp.base.BasePresenter;
-import br.com.erivando.proimuni.util.rx.SchedulerProvider;
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Projeto:     VacinasKIDS
@@ -30,8 +28,8 @@ public class ConfiguracaoPresenter<V extends ConfiguracaoMvpView> extends BasePr
     private AlarmManager alarmManager;
 
     @Inject
-    public ConfiguracaoPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
-        super(iDataManager, schedulerProvider, compositeDisposable);
+    public ConfiguracaoPresenter(IDataManager iDataManager) {
+        super(iDataManager);
     }
 
     @Override

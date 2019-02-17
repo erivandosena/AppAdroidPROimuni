@@ -4,8 +4,6 @@ import javax.inject.Inject;
 
 import br.com.erivando.proimuni.database.IDataManager;
 import br.com.erivando.proimuni.mvp.base.BasePresenter;
-import br.com.erivando.proimuni.util.rx.SchedulerProvider;
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Projeto:     PROIMUNI
@@ -18,8 +16,8 @@ import io.reactivex.disposables.CompositeDisposable;
 public class CuriosidadePresenter<V extends CuriosidadeMvpView> extends BasePresenter<V> implements CuriosidadeMvpPresenter<V> {
 
     @Inject
-    public CuriosidadePresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
-        super(iDataManager, schedulerProvider, compositeDisposable);
+    public CuriosidadePresenter(IDataManager iDataManager) {
+        super(iDataManager);
     }
 
 }

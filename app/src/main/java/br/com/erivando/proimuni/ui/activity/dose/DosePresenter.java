@@ -7,8 +7,6 @@ import javax.inject.Inject;
 import br.com.erivando.proimuni.database.IDataManager;
 import br.com.erivando.proimuni.database.model.Dose;
 import br.com.erivando.proimuni.mvp.base.BasePresenter;
-import br.com.erivando.proimuni.util.rx.SchedulerProvider;
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Projeto:     VacinasKIDS
@@ -21,8 +19,8 @@ import io.reactivex.disposables.CompositeDisposable;
 public class DosePresenter<V extends DoseMvpView> extends BasePresenter<V> implements DoseMvpPresenter<V> {
 
     @Inject
-    public DosePresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
-        super(iDataManager, schedulerProvider, compositeDisposable);
+    public DosePresenter(IDataManager iDataManager) {
+        super(iDataManager);
     }
 
 

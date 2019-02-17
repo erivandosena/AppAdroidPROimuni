@@ -10,7 +10,6 @@ package br.com.erivando.proimuni.mvp;
 
 public interface MvpViewExtra extends MvpView {
 
-
     void onCreate();
 
     void onStart();
@@ -22,7 +21,5 @@ public interface MvpViewExtra extends MvpView {
     void onStop();
 
     void onDestroy();
-
-    void attachParentMvpView(MvpView mvpView);
 
 }

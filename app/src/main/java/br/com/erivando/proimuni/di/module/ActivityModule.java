@@ -54,11 +54,8 @@ import br.com.erivando.proimuni.ui.activity.usuario.CadastroUsuarioPresenter;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaMvpPresenter;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaMvpView;
 import br.com.erivando.proimuni.ui.activity.vacina.VacinaPresenter;
-import br.com.erivando.proimuni.util.rx.AppSchedulerProvider;
-import br.com.erivando.proimuni.util.rx.SchedulerProvider;
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Projeto:     VacinasKIDS
@@ -86,16 +83,6 @@ public class ActivityModule {
     @Provides
     AppCompatActivity provideActivity() {
         return activity;
-    }
-
-    @Provides
-    CompositeDisposable provideCompositeDisposable() {
-        return new CompositeDisposable();
-    }
-
-    @Provides
-    SchedulerProvider provideSchedulerProvider() {
-        return new AppSchedulerProvider();
     }
 
     @Provides

@@ -3,14 +3,11 @@ package br.com.erivando.proimuni.ui.application;
 import android.content.Context;
 import android.support.multidex.MultiDexApplication;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
 import javax.inject.Inject;
 
-import br.com.erivando.proimuni.BuildConfig;
 import br.com.erivando.proimuni.di.component.ApplicationComponent;
 import br.com.erivando.proimuni.di.component.DaggerApplicationComponent;
 import br.com.erivando.proimuni.di.module.ApplicationModule;
@@ -46,11 +43,6 @@ public class AppAplicacao extends MultiDexApplication {
 
         applicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
         applicationComponent.inject(this);
-
-        AndroidNetworking.initialize(getApplicationContext());
-        if (BuildConfig.DEBUG) {
-            AndroidNetworking.enableLogging(HttpLoggingInterceptor.Level.BODY);
-        }
 
         CalligraphyConfig.initDefault(calligraphyConfig);
 

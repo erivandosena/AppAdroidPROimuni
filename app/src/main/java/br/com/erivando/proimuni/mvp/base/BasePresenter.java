@@ -13,8 +13,6 @@ import javax.inject.Inject;
 import br.com.erivando.proimuni.database.IDataManager;
 import br.com.erivando.proimuni.mvp.MvpPresenter;
 import br.com.erivando.proimuni.mvp.MvpView;
-import br.com.erivando.proimuni.util.rx.SchedulerProvider;
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Classe base que implementa a interface do Presenter e fornece uma implementação básica para
@@ -24,16 +22,12 @@ import io.reactivex.disposables.CompositeDisposable;
 public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     private final IDataManager iDataManager;
-    private final SchedulerProvider schedulerProvider;
-    private final CompositeDisposable compositeDisposable;
 
     private V mvpView;
 
     @Inject
-    public BasePresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
+    public BasePresenter(IDataManager iDataManager) {
         this.iDataManager = iDataManager;
-        this.schedulerProvider = schedulerProvider;
-        this.compositeDisposable = compositeDisposable;
     }
 
     @Override
@@ -43,7 +37,6 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     @Override
     public void onDetach() {
-        compositeDisposable.dispose();
         mvpView = null;
     }
 
@@ -55,33 +48,8 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
         return mvpView;
     }
 
-    public void checkViewAttached() {
-        if (!isViewAttached()) throw new MvpViewNotAttachedException();
-    }
-
     protected IDataManager getIDataManager() {
         return iDataManager;
     }
-
-    public SchedulerProvider getSchedulerProvider() {
-        return schedulerProvider;
-    }
-
-    public CompositeDisposable getCompositeDisposable() {
-        return compositeDisposable;
-    }
-
-    @Override
-    public void setUserAsLoggedOut() {
-        getIDataManager().setAccessToken(null);
-    }
-
-    static class MvpViewNotAttachedException extends RuntimeException {
-        MvpViewNotAttachedException() {
-            super("Por favor, ligue ao Presenter.onAttach (MvpView) antes de" +
-                    "solicitar dados ao apresentador");
-        }
-    }
-
 
 }

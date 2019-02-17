@@ -9,8 +9,6 @@ import br.com.erivando.proimuni.database.IDataManager;
 import br.com.erivando.proimuni.database.model.Cartao;
 import br.com.erivando.proimuni.database.model.Crianca;
 import br.com.erivando.proimuni.mvp.base.BasePresenter;
-import br.com.erivando.proimuni.util.rx.SchedulerProvider;
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Projeto:     VacinasKIDS
@@ -23,8 +21,8 @@ import io.reactivex.disposables.CompositeDisposable;
 public class CartaoPresenter<V extends CartaoMvpView> extends BasePresenter<V> implements CartaoMvpPresenter<V> {
 
     @Inject
-    public CartaoPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
-        super(iDataManager, schedulerProvider, compositeDisposable);
+    public CartaoPresenter(IDataManager iDataManager) {
+        super(iDataManager);
     }
 
     @Override

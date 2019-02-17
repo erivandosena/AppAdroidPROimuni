@@ -6,8 +6,6 @@ import javax.inject.Inject;
 
 import br.com.erivando.proimuni.database.IDataManager;
 import br.com.erivando.proimuni.mvp.base.BasePresenter;
-import br.com.erivando.proimuni.util.rx.SchedulerProvider;
-import io.reactivex.disposables.CompositeDisposable;
 
 import static br.com.erivando.proimuni.database.IDataManager.LoggedInMode.LOGGED_IN_MODE_LOCAL;
 
@@ -22,8 +20,8 @@ import static br.com.erivando.proimuni.database.IDataManager.LoggedInMode.LOGGED
 public class SplashPresenter<V extends SplashMvpView> extends BasePresenter<V> implements SplashMvpPresenter<V>, Runnable {
 
     @Inject
-    public SplashPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
-        super(iDataManager, schedulerProvider, compositeDisposable);
+    public SplashPresenter(IDataManager iDataManager) {
+        super(iDataManager);
     }
 
     @Override

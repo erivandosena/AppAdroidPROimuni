@@ -168,12 +168,6 @@ public abstract class BaseDialog extends DialogFragment implements MvpViewDialog
     }
 
     @Override
-    public void dismissDialog(String tag) {
-        dismiss();
-        getBaseActivity().onFragmentDetached(tag);
-    }
-
-    @Override
     public void onDestroy() {
         if (unBinder != null) {
             unBinder.unbind();

@@ -172,7 +172,6 @@ public class IntroducaoActivity extends BaseActivity implements IntroducaoMvpVie
 
     @Override
     protected void setUp() {
-        //resizeCustomizedToobar(linearLayoutToobar);
     }
 
     @Override
@@ -184,7 +183,6 @@ public class IntroducaoActivity extends BaseActivity implements IntroducaoMvpVie
     @Override
     public void onBackPressed() {
         return;
-       // super.onBackPressed();
     }
 
     private void openMainActivity() {

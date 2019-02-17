@@ -2,8 +2,6 @@ package br.com.erivando.proimuni.ui.activity.classificacao;
 
 import br.com.erivando.proimuni.database.IDataManager;
 import br.com.erivando.proimuni.mvp.base.BasePresenter;
-import br.com.erivando.proimuni.util.rx.SchedulerProvider;
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Projeto:     VacinasKIDS
@@ -14,7 +12,7 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 
 public class ClassificacaoPresenter<V extends ClassificacaoMvpView> extends BasePresenter<V> implements ClassificacaoMvpPresenter<V> {
-    public ClassificacaoPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
-        super(iDataManager, schedulerProvider, compositeDisposable);
+    public ClassificacaoPresenter(IDataManager iDataManager) {
+        super(iDataManager);
     }
 }

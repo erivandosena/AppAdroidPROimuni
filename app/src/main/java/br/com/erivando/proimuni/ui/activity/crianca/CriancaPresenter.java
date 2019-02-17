@@ -30,8 +30,6 @@ import br.com.erivando.proimuni.database.model.Usuario;
 import br.com.erivando.proimuni.mvp.base.BasePresenter;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
 import br.com.erivando.proimuni.util.ConverteBase64Task;
-import br.com.erivando.proimuni.util.rx.SchedulerProvider;
-import io.reactivex.disposables.CompositeDisposable;
 
 import static android.app.Activity.RESULT_OK;
 import static br.com.erivando.proimuni.util.Uteis.REQUEST_IMG_CAMERA;
@@ -55,8 +53,8 @@ public class CriancaPresenter<V extends CriancaMvpView> extends BasePresenter<V>
     private File arquivoImagem;
 
     @Inject
-    public CriancaPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
-        super(iDataManager, schedulerProvider, compositeDisposable);
+    public CriancaPresenter(IDataManager iDataManager) {
+        super(iDataManager);
     }
 
     @Override

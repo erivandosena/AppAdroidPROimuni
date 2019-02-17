@@ -16,8 +16,6 @@ import br.com.erivando.proimuni.database.model.Imunizacao;
 import br.com.erivando.proimuni.database.model.Vacina;
 import br.com.erivando.proimuni.mvp.base.BasePresenter;
 import br.com.erivando.proimuni.ui.application.AppAplicacao;
-import br.com.erivando.proimuni.util.rx.SchedulerProvider;
-import io.reactivex.disposables.CompositeDisposable;
 
 import static br.com.erivando.proimuni.util.Uteis.getCapitalizeNome;
 import static br.com.erivando.proimuni.util.Uteis.getCurrentTimeStamp;
@@ -33,8 +31,8 @@ import static br.com.erivando.proimuni.util.Uteis.getParseDateString;
 public class ImunizacaoPresenter<V extends ImunizacaoMvpView> extends BasePresenter<V> implements ImunizacaoMvpPresenter<V> {
 
     @Inject
-    public ImunizacaoPresenter(IDataManager iDataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
-        super(iDataManager, schedulerProvider, compositeDisposable);
+    public ImunizacaoPresenter(IDataManager iDataManager) {
+        super(iDataManager);
     }
 
     @Override
