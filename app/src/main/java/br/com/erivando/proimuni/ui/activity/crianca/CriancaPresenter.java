@@ -39,6 +39,7 @@ import static br.com.erivando.proimuni.util.Uteis.criaArquivoImagem;
 import static br.com.erivando.proimuni.util.Uteis.getCapitalizeNome;
 import static br.com.erivando.proimuni.util.Uteis.getParseDateString;
 import static br.com.erivando.proimuni.util.Uteis.isDataValida;
+import static br.com.erivando.proimuni.util.Uteis.obtemIdadeEmAnos;
 
 /**
  * Projeto:     VacinasKIDS
@@ -66,6 +67,11 @@ public class CriancaPresenter<V extends CriancaMvpView> extends BasePresenter<V>
 
         if (!isDataValida(nascimento)) {
             getMvpView().onError(R.string.erro_text_data);
+            return;
+        }
+
+        if (obtemIdadeEmAnos(nascimento) > 14) {
+            getMvpView().onError(R.string.erro_text_idade_incompativel);
             return;
         }
 

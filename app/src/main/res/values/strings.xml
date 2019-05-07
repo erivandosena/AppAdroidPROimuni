@@ -117,7 +117,7 @@
     <string name="proj_titulo">Projeto</string>
     <string name="proj_info">O PROIMUNI é produto da dissertação de mestrado do Programa de Pós-graduação em Enfermagem da Universidade Federal do Ceará. \nO objetivo do app é o gerenciamento de vacinas infantis oferecidas na rede pública e privada. \nO app permite gerenciar mais de um cartão, incluir fotos de perfil, registrar as doses das vacinas, receber notificações com lembretes das datas e doses,  ter acesso a informações detalhadas de cada vacina, exportar a carteira de vacinação para PDF e compartilhar seus registros. \nO PROIMUNI disponibiza a função de geolocalizacao para pesquisa de unidades de saúde que ofereçam o serviço de vacinação. \nMatenha seu calendário vacinal em dia. Comece a usufruir do PROIMUNI!</string>
     <string name="tecn_titulo">Tecnologia</string>
-    <string name="tecn_info">Desenvolvido em plataforma nativa Android, compatível com dispositivos que utilizam Android entre versão 4.0.3 IceCreamSandwich(API 15) e versão 9.0 Pie(API 28). Utiliza linguagem de programação Java 8. Implementa arquitetura MVP na codificação das regras de negócio, aplica frameworks Dagger 2 para injeção de dependência e Realm 3 para persistência dos dados.</string>
+    <string name="tecn_info">Desenvolvido em plataforma nativa Android, compatível com dispositivos que utilizam Android entre versão 4.0.3 IceCreamSandwich (API 15) e versão 8.1 Oreo (API 27). Utiliza linguagem de programação Java 8. Implementa arquitetura MVP na codificação das regras de negócio, aplica frameworks Dagger 2 para injeção de dependência e Realm 3 para persistência dos dados.</string>
     <string name="cont_titulo">Contato ou Suporte técnico</string>
     <string name="cont_info">proimuni@gmail.com</string>
     <string name="auto_titulo">Desenvolvedor</string>
@@ -159,6 +159,7 @@
     <string name="text_nome_responsavel">Responsável</string>
     <string name="text_sexo">Gênero</string>
     <string name="erro_text_data">Informe uma data válida</string>
+    <string name="erro_text_idade_incompativel">A data informada não é de uma criança! Informe outra.</string>
     <string name="text_crianca_titulo">Perfil da criança</string>
     <string name="text_crianca_add">Adicionar criança</string>
     <string name="text_cartao_titulo">Cartão de vacina</string>
@@ -248,7 +249,7 @@
     <!-- Slide introdução -->
 
     <string name="tit_intro_next">PRÓXIMO</string>
-    <string name="tit_intro_skip">INGNORAR</string>
+    <string name="tit_intro_skip">IGNORAR</string>
     <string name="tit_intro_start">FINALIZAR</string>
 
     <string name="tit_intro_slide_1">Bem vindo \nao</string>

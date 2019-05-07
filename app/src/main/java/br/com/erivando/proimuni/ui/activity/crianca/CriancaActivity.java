@@ -130,7 +130,7 @@ public class CriancaActivity extends BaseActivity implements CriancaMvpView {
                 String[] separaData;
                 int dia = 0, mes = 0, ano = 0;
                 try {
-                    convertedDate = dateFormat.parse((nascimentoEditText.getText().toString().length() > 0) ? nascimentoEditText.getText().toString() : "01/01/2000");
+                    convertedDate = dateFormat.parse((nascimentoEditText.getText().toString().length() > 0) ? nascimentoEditText.getText().toString() : "01/01/2019");
                     separaData = dateFormat.format(convertedDate).split("/");
                     dia = Integer.valueOf(separaData[0]);
                     mes = Integer.valueOf(separaData[1]);

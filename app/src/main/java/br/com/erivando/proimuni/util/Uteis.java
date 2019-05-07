@@ -450,6 +450,28 @@ public class Uteis {
         return (!"0 Ano".equals(ano)) ? ano : ((!"0 Mês".equals(mes)) ? mes : dia);
     }
 
+    public static int obtemIdadeEmAnos(String dataNascimento) {
+        Calendar calendarioHoje = GregorianCalendar.getInstance();
+        int anoHoje = calendarioHoje.get(Calendar.YEAR);
+
+        // Data do nascimento.
+        String[] separaDN = dataNascimento.split("/");
+        int diaNasc = Integer.valueOf(separaDN[0]);
+        int mesNasc = Integer.valueOf(separaDN[1]);
+        int anoNasc = Integer.valueOf(separaDN[2]);
+
+        String strAniv = anoHoje + "-" + mesNasc + "-" + diaNasc;
+        Calendar calAniv = Calendar.getInstance();
+        try {
+            calAniv.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(strAniv));
+        } catch (ParseException ex) {
+            ex.getStackTrace();
+        }
+
+        int anos = (calendarioHoje.getTimeInMillis() < calAniv.getTimeInMillis()) ? (anoHoje - anoNasc - 1) : anoHoje - anoNasc;
+        return anos;
+    }
+
     public static int getToolbarHeight(Context context) {
         final TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(
                 new int[]{R.attr.actionBarSize});
