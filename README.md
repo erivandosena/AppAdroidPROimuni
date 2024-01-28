@@ -1,57 +1,57 @@
-# Sobre o PROJETO do Aplicativo #
+# Sobre o PROJETO do Aplicativo PROimuni
 
-O aplicativo PROIMUNI È desenvolvido nativamente para uso em dispositivos moveis que utilizem a plataforma Android compatÌvel apenas com o sistema operacional Android vers„o 4.0.3 IceCreamSandwich (API 15) ou superiores atÈ vers„o 8.1.0 Oreo (API 27).  
+O aplicativo PROIMUNI √© desenvolvido nativamente para uso em dispositivos moveis que utilizem a plataforma Android compat√≠vel apenas com o sistema operacional Android vers√£o 4.0.3 IceCreamSandwich (API 15) ou superiores at√© vers√£o 8.1.0 Oreo (API 27).  
 
-Projeto seguir· padrıes de desenvolvimento de software e metodologias ·geis, durante a fase de preparaÁ„o do ambiente de desenvolvimento utilizando os recursos da IDE Android Studio vers„o 3.1.3 instalado em um computador desktop com configuraÁ„o de hardware contendo processador Intel Core i5, 2.00GHz, 8.0GB de memÛria RAM e sistema operacional com licenÁa Windows 10 Professional 64Bits com suporte a tecnologia de virtualizaÁ„o Intel Virtualization Technology (VT-x).  
+Projeto seguir√° padr√µes de desenvolvimento de software e metodologias √°geis, durante a fase de prepara√ß√£o do ambiente de desenvolvimento utilizando os recursos da IDE Android Studio vers√£o 3.1.3 instalado em um computador desktop com configura√ß√£o de hardware contendo processador Intel Core i5, 2.00GHz, 8.0GB de mem√≥ria RAM e sistema operacional com licen√ßa Windows 10 Professional 64Bits com suporte a tecnologia de virtualiza√ß√£o Intel Virtualization Technology (VT-x).  
 
-A linguagem de programaÁ„o utilizada durante toda fase de desenvolvimento ser· o Java vers„o 8 utilizando recursos da JDK vers„o 1.8.0_141.  
-Na fase de codificaÁ„o com base nos requisitos fornecidos conforme projeto, ser„o aplicadas boas praticas de programaÁ„o incluindo o padr„o MVP (Model View Presenter) para Android.  
+A linguagem de programa√ß√£o utilizada durante toda fase de desenvolvimento ser√° o Java vers√£o 8 utilizando recursos da JDK vers√£o 1.8.0_141.  
+Na fase de codifica√ß√£o com base nos requisitos fornecidos conforme projeto, ser√£o aplicadas boas praticas de programa√ß√£o incluindo o padr√£o MVP (Model View Presenter) para Android.  
 
-Na fase de testes do aplicativo ser„o utilizados dispositivos virtuais atravÈs da ferramenta AVD da IDE Android Studio.  
-ApÛs compilaÁ„o do cÛdigo fonte È gerado um arquivo com extens„o APK(Android Package) em formato padr„o para publicaÁ„o no Google Play Store.  
+Na fase de testes do aplicativo ser√£o utilizados dispositivos virtuais atrav√©s da ferramenta AVD da IDE Android Studio.  
+Ap√≥s compila√ß√£o do c√≥digo fonte √© gerado um arquivo com extens√£o APK(Android Package) em formato padr√£o para publica√ß√£o no Google Play Store.  
 
 -
 NOTAS: 
-Android È um sistema operacional (SO) baseado no n˙cleo Linux e atualmente desenvolvido pela empresa de tecnologia Google. Com uma interface de usu·rio baseada na manipulaÁ„o direta, o Android È projetado principalmente para dispositivos mÛveis com tela sensÌvel ao toque como smartphones e tablets; com interface especÌfica para TV (Android TV), carro (Android Auto) e relÛgio de pulso (Android Wear).
-Android Studio È um ambiente de desenvolvimento integrado (IDE) para desenvolver para a plataforma Android. Foi anunciado em 16 de Maio de 2013 na conferÍncia Google I/O. Android Studio È disponibilizado gratuitamente sob a LicenÁa Apache 2.0.  
+Android √© um sistema operacional (SO) baseado no n√∫cleo Linux e atualmente desenvolvido pela empresa de tecnologia Google. Com uma interface de usu√°rio baseada na manipula√ß√£o direta, o Android √© projetado principalmente para dispositivos m√≥veis com tela sens√≠vel ao toque como smartphones e tablets; com interface espec√≠fica para TV (Android TV), carro (Android Auto) e rel√≥gio de pulso (Android Wear).
+Android Studio √© um ambiente de desenvolvimento integrado (IDE) para desenvolver para a plataforma Android. Foi anunciado em 16 de Maio de 2013 na confer√™ncia Google I/O. Android Studio √© disponibilizado gratuitamente sob a Licen√ßa Apache 2.0.  
 
-### Responsabilidade Sobre A Confidencialidade Do CÛdigo Fonte ### 
+### Responsabilidade Sobre A Confidencialidade Do C√≥digo Fonte ### 
 
-* RESPONSABILIDADE SOBRE A CONFIDENCIALIDADE DO C”DIGO FONTE DO APLICATIVO: 
-* O direito de uso do cÛdigo fonte est· restrito ao time de desenvolvedores e designers na condiÁ„o de ediÁ„o para uso exclusivo durante o desenvolvimento do projeto VacinasKIds, n„o podendo o mesmo ser copiado para uso pessoal, compartilhado em repositÛrio p˙blico, ter todo ou partes copiadas para outras mÌdias ou repassado a terceiros, o cÛdigo fonte È de propriedade do desenvolvedor autor do mesmo.
-* O programador/designer assume que manter· sigilo com relaÁ„o ao conte˙do do cÛdigo fonte, manter e mencionar os direitos autorais de outros autores que o projeto do aplicativo possa conter seja partes de cÛdigo fontes ou bibliotecas.
-* Ao realizar clone do cÛdigo a partir da branch master ou de outras branches o programador/designer estar· automaticamente assumindo os termos de RESPONSABILIDADE de CONFIDENCIALIDADE do C”DIGO FONTE.
+* RESPONSABILIDADE SOBRE A CONFIDENCIALIDADE DO C√ìDIGO FONTE DO APLICATIVO: 
+* O direito de uso do c√≥digo fonte est√° restrito ao time de desenvolvedores e designers na condi√ß√£o de edi√ß√£o para uso exclusivo durante o desenvolvimento do projeto VacinasKIds, n√£o podendo o mesmo ser copiado para uso pessoal, compartilhado em reposit√≥rio p√∫blico, ter todo ou partes copiadas para outras m√≠dias ou repassado a terceiros, o c√≥digo fonte √© de propriedade do desenvolvedor autor do mesmo.
+* O programador/designer assume que manter√° sigilo com rela√ß√£o ao conte√∫do do c√≥digo fonte, manter e mencionar os direitos autorais de outros autores que o projeto do aplicativo possa conter seja partes de c√≥digo fontes ou bibliotecas.
+* Ao realizar clone do c√≥digo a partir da branch master ou de outras branches o programador/designer estar√° automaticamente assumindo os termos de RESPONSABILIDADE de CONFIDENCIALIDADE do C√ìDIGO FONTE.
 
-ReferÍncias:  
+Refer√™ncias:  
 https://pt.wikipedia.org/wiki/Android  
 https://pt.wikipedia.org/wiki/Android_Studio  
 
-### Para que È esse repositÛrio? ###
+### Para que √© esse reposit√≥rio? ###
 
-* Especificar detalhes tÈcnicos do aplicativo VacinasKids e suas principais caracterÌsticas e configuraÁıes para instalaÁ„o e utilizaÁ„o.
-* Vers„o inicial 1.0.0 , ˙ltima release 1.0.XXX (a definir)
+* Especificar detalhes t√©cnicos do aplicativo VacinasKids e suas principais caracter√≠sticas e configura√ß√µes para instala√ß√£o e utiliza√ß√£o.
+* Vers√£o inicial 1.0.0 , √∫ltima release 1.0.XXX (a definir)
 * [Learning Markdown] (https://bitbucket.org/tutorials/markdowndemo)
 
-### Como faÁo para configurar? ###
+### Como fa√ßo para configurar? ###
 
-* Aplicativo compatÌvel com sistema operacional Android 4.0.3 ou superior.
-* ConfiguraÁ„o mÌnima exigida: API 15 (Android 4)
-* Requer autorizaÁ„o obrigatÛria da c‚mera e acesso a memÛria interna, armazenamento externo do dispositivo e de localizaÁ„o(GPS).
-* Banco de dados SQLite com informaÁıes criptografadas.
-* Testes n„o realizados em dispositivos com Android P.
-* InstalaÁ„o n„o gerenciada para testes atravÈs do endereÁo: https://goo.gl/aXpXcF
+* Aplicativo compat√≠vel com sistema operacional Android 4.0.3 ou superior.
+* Configura√ß√£o m√≠nima exigida: API 15 (Android 4)
+* Requer autoriza√ß√£o obrigat√≥ria da c√¢mera e acesso a mem√≥ria interna, armazenamento externo do dispositivo e de localiza√ß√£o(GPS).
+* Banco de dados SQLite com informa√ß√µes criptografadas.
+* Testes n√£o realizados em dispositivos com Android P.
+* Instala√ß√£o n√£o gerenciada para testes atrav√©s do endere√ßo: https://goo.gl/aXpXcF
 
-### Diretrizes de contribuiÁ„o ###
+### Diretrizes de contribui√ß√£o ###
 
-* Sem testes de redaÁ„o.
-* Revis„o de cÛdigo ainda n„o realizada.
+* Sem testes de reda√ß√£o.
+* Revis√£o de c√≥digo ainda n√£o realizada.
 * Sem outras diretrizes a especificar.
 
 ### Com quem eu falo? ###
 
-* Propriet·rio do repositÛrio ou administrador: 
+* Propriet√°rio do reposit√≥rio ou administrador: 
 	Erivando Sena, E-mail: erivandoramos@bol.com.br
 * Outros contatos da comunidade ou da equipe: 
-	ThaÌs, ThaisPaula73@gmail.com
-	Prof™. Nirla, nirlagomes@hotmail.com
+	Tha√≠s, ThaisPaula73@gmail.com
+	Prof¬™. Nirla, nirlagomes@hotmail.com
 	Prof. John, jhsfelix@gmail.com 
